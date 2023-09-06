@@ -31,7 +31,8 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSuccess = (result: any) => {
-    navigate(result.payload.payload.user.isOnBoarded ? '/dashboard' : '/on-board');
+    navigate(result.payload.payload.user ? '/' : '/haris');
+    // navigate(result.payload.payload.user.isOnBoarded ? '/dashboard' : '/on-board');
     // router.push(result.payload.payload.user.isOnBoarded ? '/dashboard' : "/on-board");
     Toast.fire({
       icon: "success",
