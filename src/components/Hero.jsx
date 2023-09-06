@@ -8,7 +8,7 @@ const Hero = () => {
         src="/pharmacy.jpg"
         alt="pharmacy"
       />
-      <div className="container w-full -mt-[650px] h-screen px-4 sm:px-8 md:px-16 relative z-10 bg-gradient-to-r from-red-950 to-maroon bg-opacity-70 p-8">
+      <div className="container w-full -mt-[642px] h-screen px-4 sm:px-8 md:px-16 relative z-10 bg-gradient-to-r from-red-950 to-maroon bg-opacity-70 p-8">
         <h1 className="text-4xl sm:text-5xl md:text-6xl text-white font-bold mt-16 sm:mt-32 md:mt-40 ml-6 sm:ml-36">
           Get in touch with <br /> medical products TEESTSTSTST
         </h1>
