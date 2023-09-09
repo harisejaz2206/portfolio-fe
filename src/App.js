@@ -23,6 +23,9 @@ import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 import Terms from "./components/pages/Terms";
 import RequestEmail from "./components/pages/request-email";
 import ResetPassword from "./components/pages/reset-password";
+import SuperAdminLogin from "./components/pages/SuperAdminLogin";
+import MultiAdminLogin from "./components/pages/MultiAdminLogin";
+import SoleAdminLogin from "./components/pages/SoleAdminLogin";
 
 function App() {
   return (
@@ -52,6 +55,9 @@ function App() {
           <Route path="/orderDetails" element={<OrderDetails />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/conditions" element={<Terms />} />
+          <Route path="/superlogin" element={<SuperAdminLogin/>} />
+          <Route path="/multilogin" element={<MultiAdminLogin/>} />
+          <Route path="/solelogin" element={<SoleAdminLogin/>} />
         </Routes>
         <Footer />
       </div>
