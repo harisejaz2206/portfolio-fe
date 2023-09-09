@@ -3,14 +3,14 @@ import { AiFillEyeInvisible } from "react-icons/ai";
 import { TiTick } from "react-icons/ti";
 import { FaFacebook, FaGoogle, FaPhone } from "react-icons/fa";
 import * as Yup from 'yup';
-import { Toast } from '../../utils/toast';
+import { Toast } from '../utils/toast';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { AppThunkDispatch } from '../../store/rootReducer';
-import { login, signup } from '../../app/features/auth/auth.thunk';
-import { handleApiResponse } from '../../utils/handleApiResponse';
-import { handleError } from '../../utils/catchErrorToast';
-import InputField from '../globals/inputField';
+import { AppThunkDispatch } from '../store/rootReducer';
+import { login, signup } from '../app/features/auth/auth.thunk';
+import { handleApiResponse } from '../utils/handleApiResponse';
+import { handleError } from '../utils/catchErrorToast';
+import InputField from '../components/globals/inputField';
 import { useFormik } from "formik";
 
 type FormData = {

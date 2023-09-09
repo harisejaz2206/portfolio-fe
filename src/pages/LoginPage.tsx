@@ -4,19 +4,22 @@ import { TiTick } from 'react-icons/ti';
 import { FaFacebook, FaGoogle, FaPhone } from 'react-icons/fa';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Toast } from '../../utils/toast';
+import { Toast } from '../utils/toast';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { AppThunkDispatch } from '../../store/rootReducer';
-import { login } from '../../app/features/auth/auth.thunk';
-import { handleApiResponse } from '../../utils/handleApiResponse';
-import { handleError } from '../../utils/catchErrorToast';
-import InputField from '../globals/inputField';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppThunkDispatch } from '../store/rootReducer';
+import { login } from '../app/features/auth/auth.thunk';
+import { handleApiResponse } from '../utils/handleApiResponse';
+import { handleError } from '../utils/catchErrorToast';
+import InputField from '../components/globals/inputField';
+import { selectLoading } from '../app/features/auth/auth.selector';
+import { HttpService } from '../app/services/base.service';
 
 
 type FormData = {
   email: string;
   password: string;
+  role: string;
 }
 
 const LoginSchema = Yup.object().shape({
@@ -29,11 +32,16 @@ const LoginPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('login');
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
+  const loading = useSelector(selectLoading);
 
   const handleSuccess = (result: any) => {
+    console.log("result", result);
+    const token = result.payload.payload.token.accessToken;
+    console.log("token", token);
+    HttpService.setToken(token);
+    localStorage.setItem('token', token);
+
     navigate(result.payload.payload.user ? '/' : '/haris');
-    // navigate(result.payload.payload.user.isOnBoarded ? '/dashboard' : '/on-board');
-    // router.push(result.payload.payload.user.isOnBoarded ? '/dashboard' : "/on-board");
     Toast.fire({
       icon: "success",
       title: "Logged In Successfully",
@@ -43,7 +51,8 @@ const LoginPage: React.FC = () => {
   const formik = useFormik<FormData>({
     initialValues: {
       email: '',
-      password: ''
+      password: '',
+      role: 'user',
     },
     validationSchema: LoginSchema,
     validateOnBlur: true,
@@ -59,7 +68,7 @@ const LoginPage: React.FC = () => {
       <div className='bg-white rounded-lg shadow-md flex w-full max-w-4xl'>
         <div className='w-1/3 bg-red-900'>
           <img src="/marijuana.png" alt="marijuana" className='ml-56' />
-          <h1 className='text-4xl text-yellow-400 font-bold text-center'>DotBrand</h1>
+          <h1 className='text-4xl text-yellow-400 font-bold text-center'>Dotbrand</h1>
           <img src="/Frame 20.png" alt='pharmacy' className='w-auto h-auto ' />
           <div className='text-white'>
             <h2 className='text-xl ml-6 mb-2'>Login to</h2>
@@ -93,21 +102,8 @@ const LoginPage: React.FC = () => {
         </div>
 
         <div className='w-2/3 p-14 bg-gray-100'>
-          <h1 className='text-4xl font-bold mb-4 text-red-900 text-center'>DotBrand</h1>
-          <div className='grid grid-cols-2 bg-white border border-gray-200 rounded p-1 mb-2'>
-            <button
-              className={`rounded p-1 ${activeTab === 'login' ? 'bg-red-900 text-white' : 'text-black'}`}
-              onClick={() => setActiveTab('login')}>
-              Login
-            </button>
-            <button
-              className={`rounded p-1 ${activeTab === 'signup' ? 'bg-red-900 text-white' : 'text-black'}`}
-              onClick={() => setActiveTab('signup')}>
-              Sign Up
-            </button>
-          </div>
+          <h1 className='text-4xl font-bold mb-4 text-red-900 text-center'>Dotbrand</h1>
           <form className="space-y-2 md:space-y-4 mt-14" onSubmit={formik.handleSubmit}>
-            {/* TODO: Add submit handler */}
             <div className="flex flex-col space-y-1">
               <label
                 htmlFor="email"
@@ -149,8 +145,13 @@ const LoginPage: React.FC = () => {
               <button
                 type="submit"
                 className="w-full bg-red-900 text-white font-medium rounded-lg text-sm px-4 py-2.5 mt-4 text-center">
-                Login
+                {loading ? (
+                  "Loading..."
+                ) : (
+                  "Login"
+                )}
               </button>
+
             </a>
             <div className='text-center'>
               <p>OR</p>

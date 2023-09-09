@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import InputField from '../globals/inputField';
+import InputField from '../components/globals/inputField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Toast } from '../../utils/toast';
-import DynamicModal from '../globals/modal/DynamicModal';
+import { Toast } from '../utils/toast';
+import DynamicModal from '../components/globals/modal/DynamicModal';
 
 const RequestEmailSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),

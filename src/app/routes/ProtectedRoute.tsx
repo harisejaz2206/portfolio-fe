@@ -1,21 +1,28 @@
-// import React, { FC } from 'react';
-// import { useAuth } from '../hooks/useAuth'; // Make sure to update the import path
-// import { Navigate } from 'react-router-dom';
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { selectToken } from '../features/auth/auth.selector';
+import { Navigate, useLocation } from 'react-router-dom';
 
-// interface IProtectedRouteProps {
-//   children: React.ReactNode;
-// }
+interface Props {
+    component: FC;
+    [key: string]: any;
+}
 
-// const ProtectedRoute: FC<IProtectedRouteProps> = ({ children }) => {
-//   const { isAuthenticated } = useAuth();
+const ProtectedRoute: FC<Props> = ({ component: Component, ...rest }) => {
+    const token = useSelector(selectToken);
+    const location = useLocation();
+    const publicPaths = ['/', '/login', '/superlogin', '/multilogin', '/solelogin', '/signUp'];
+    const noAuthRedirectPaths = ['/login', '/superlogin', '/multilogin', '/solelogin', '/signUp'];
 
-//   if (!isAuthenticated) {
-//     return <Navigate to="/login" replace />;
-//   }
+    if (token && noAuthRedirectPaths.includes(location.pathname)) {
+        return <Navigate to="/" />;
+    }
 
-//   return <>{children}</>;
-// };
+    if (!token && !publicPaths.includes(location.pathname)) {
+        return <Navigate to="/login" />;
+    }
 
-// export default ProtectedRoute;
+    return <Component {...rest} />;
+};
 
-export { }
+export default ProtectedRoute;
