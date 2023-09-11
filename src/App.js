@@ -1,5 +1,4 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
 import Wishlist from "./pages/Wishlist";
@@ -12,7 +11,6 @@ import Contact from "./pages/Contact";
 import Shop from "./pages/Shop";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
@@ -26,6 +24,16 @@ import ResetPassword from "./pages/reset-password";
 import SuperAdminLogin from "./pages/SuperAdminLogin";
 import MultiAdminLogin from "./pages/MultiAdminLogin";
 import SoleAdminLogin from "./pages/SoleAdminLogin";
+import AddProductForm from "./pages/AddProductForm";
+import BillingAndInventoryForm from "./pages/BillingAndInventory";
+import Catalog from "./pages/Catalog";
+import CreateOutletForm from "./pages/CreateOutletForm";
+import Dashboard from "./pages/Dashboard";
+import EditOutletForm from "./pages/EditOutletForm";
+import ManageInventory from "./pages/ManageInventory";
+import ManageOutlets from "./pages/ManageOutlets";
+import Sidebar from "./pages/Sidebar";
+import Layout from "./pages/Layout";
 import { HttpService } from "./app/services/base.service";
 import { useSelector } from "react-redux";
 import { selectToken } from "./app/features/auth/auth.selector";
@@ -40,43 +48,56 @@ function App() {
     }
   }, [token]);
 
-  const hideNavFooter = ["/superlogin", "/multilogin", "/solelogin"].includes(
-    window.location.pathname
-  );
-
   return (
     <BrowserRouter>
-      <div>
-        {!hideNavFooter && <Navbar />}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/emptyWishlist" element={<EmptyWishlist />} />
-          <Route path="/emptyCart" element={<EmptyCart />} />
-          <Route path="/emptyDeal" element={<EmptyDeal />} />
-          <Route path="/deals" element={<Deals />} />
-          <Route path="/brands" element={<Brands />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signUp" element={<SignUpPage />} />
-          <Route path="/request-email" element={<RequestEmail />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/editProfile" element={<EditProfile />} />
-          <Route path="/loyaltyPoints" element={<LoyaltyPoints />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/orderDetails" element={<OrderDetails />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/conditions" element={<Terms />} />
+          {/* Routes that should have the layout */}
+          
+          <Route path="/" element={<Layout><Home /></Layout>} />
+          <Route path="/categories" element= {<Layout><Categories/></Layout>} />
+          <Route path="/wishlist" element={<Layout><Wishlist /></Layout>} />
+          <Route path="/emptyWishlist" element={<Layout><EmptyWishlist /></Layout>} />
+              <Route path="/emptyCart" element={<Layout><EmptyCart /></Layout>} />
+              <Route path="/emptyDeal" element={<Layout><EmptyDeal /></Layout>} />
+              <Route path="/deals" element={<Layout><Deals /></Layout>} />
+              <Route path="/brands" element={<Layout><Brands /></Layout>} />
+              <Route path="/contact" element={<Layout><Contact /></Layout>} />
+              <Route path="/shop" element={<Layout><Shop /></Layout>} />
+              <Route path="/cart" element={<Layout><Cart /></Layout>} />
+              <Route path="/login" element={<Layout><LoginPage /></Layout>} />
+              <Route path="/signUp" element={<Layout><SignUpPage /></Layout>} />
+              <Route path="/request-email" element={<Layout><RequestEmail /></Layout>} />
+              <Route path="/reset-password" element={<Layout><ResetPassword /></Layout>} />
+              <Route path="/profile" element={<Layout><Profile /></Layout>} />
+              <Route path="/editProfile" element={<Layout><EditProfile /></Layout>} />
+              <Route path="/loyaltyPoints" element={<Layout><LoyaltyPoints /></Layout>} />
+              <Route path="/orders" element={<Layout><Orders /></Layout>} />
+              <Route path="/orderDetails" element={<Layout><OrderDetails /></Layout>} />
+              <Route path="/privacy" element={<Layout><PrivacyPolicy /></Layout>} />
+              <Route path="/conditions" element={<Layout><Terms /></Layout>} />
+            {/* Routes Without Layout */}
           <Route path="/superlogin" element={<SuperAdminLogin />} />
           <Route path="/multilogin" element={<MultiAdminLogin />} />
-          <Route path="/solelogin" element={<SoleAdminLogin />} />
-        </Routes>
-        {!hideNavFooter && <Footer />}
-      </div>
+          <Route path="/solelogin"  element={<SoleAdminLogin />} />
+
+          {/* Admin Dashboard Routes*/}
+          <Route path="/admin/*"    element={ 
+          <div className="flex">
+             <Sidebar />
+             <div className="flex-1">
+               <Routes>
+               <Route path="/" element={<Dashboard />} />
+               <Route path="/outlets" element={<ManageOutlets />} />
+               <Route path="/create-outlet" element={<CreateOutletForm />} />
+               <Route path="/edit-outlet/:outletId" element={<EditOutletForm />} />
+               <Route path="/products" element={<ManageInventory />} />
+               <Route path="/create-product" element={<AddProductForm />} />
+               <Route path="/billing-and-inventory" element={<BillingAndInventoryForm />} />
+               <Route path="/catalogue" element={<Catalog />} />
+               </Routes>
+            </div>
+          </div> } />
+       </Routes>
     </BrowserRouter>
   );
 }
