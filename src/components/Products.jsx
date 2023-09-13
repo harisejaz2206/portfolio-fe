@@ -1,5 +1,5 @@
-import React from 'react';
-import ProductCard from './ProductCard';
+import React from "react";
+import ProductCard from "./ProductCard";
 
 const Products = () => {
   const featuredProducts = [
@@ -35,11 +35,13 @@ const Products = () => {
 
   return (
     <div className="bg-white py-8">
-      <div className='container mx-auto px-16 py-4 flex items-center justify-between'>
-        <h3 className='text-xl font-bold text-gray-800'>Products</h3>
-        <button className='text-red-950 font-semibold hover:underline'>View All</button>
+      <div className="container mx-auto px-16 py-4 flex items-center justify-between">
+        <h3 className="text-xl font-bold text-gray-800">Products</h3>
+        <button className="text-red-950 font-semibold hover:underline">
+          View All
+        </button>
       </div>
-      <hr className='mx-24 border-gray-300 mb-10'/>
+      <hr className="mx-24 border-gray-300 mb-10" />
 
       <div className="container mx-auto px-24 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
         {featuredProducts.map((product, index) => (

@@ -1,5 +1,5 @@
-import React from 'react';
-import CategoryCard from './CategoryCard';
+import React from "react";
+import CategoryCard from "./CategoryCard";
 
 const Category = () => {
   const featuredProducts = [
@@ -22,23 +22,27 @@ const Category = () => {
       imageSrc: "/antineoplastics.png",
       category: "Antineoplastics",
       items: "950 items",
-    }
-  ]
+    },
+  ];
   return (
-    <div className='py-8'>
-      <div className='container mx-auto px-4 sm:px-8 md:px-16 py-4 flex items-center justify-between'>
-        <h3 className='text-xl font-bold text-gray-800'>Categories</h3>
-        <button className='text-red-950 font-semibold hover:underline'>View All</button>
+    <div className="py-8">
+      <div className="container mx-auto px-4 sm:px-8 md:px-16 py-4 flex items-center justify-between">
+        {/* Increased text size */}
+        <h3 className="text-2xl font-bold text-gray-800">Categories</h3>
+        {/* Added hover effect */}
+        <button className="text-red-600 font-semibold hover:underline hover:text-red-800">
+          View All
+        </button>
       </div>
-      <hr className='mx-4 sm:mx-8 md:mx-16 border-gray-300 mb-10' />
-      
+      <hr className="mx-4 sm:mx-8 md:mx-16 border-gray-300 mb-10" />
       <div className="container mx-auto px-4 sm:px-8 md:px-16 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
-      {featuredProducts.map((product, index) => (
-          <CategoryCard key={index} product={product} />
+        {/* Used unique identifier as a key */}
+        {featuredProducts.map((product) => (
+          <CategoryCard key={product.id} product={product} />
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default Category;

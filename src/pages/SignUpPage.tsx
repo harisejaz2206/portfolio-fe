@@ -12,6 +12,8 @@ import { handleApiResponse } from '../utils/handleApiResponse';
 import { handleError } from '../utils/catchErrorToast';
 import InputField from '../components/globals/inputField';
 import { useFormik } from "formik";
+import { HttpService } from "../app/services/base.service";
+import DynamicModal from "../components/globals/modal/DynamicModal";
 
 type FormData = {
   name: string;
@@ -35,12 +37,18 @@ const SignUpSchema = Yup.object().shape({
 const SignUpPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("signup");
   const [isModalOpen, setModalOpen] = useState(false);
-  const [signupPayload, setSignupPayload] = useState<any>()
+  // const [signupPayload, setSignupPayload] = useState<any>()
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
 
   const handleSuccess = (result: any) => {
-    setSignupPayload(result.payload.payload);
+    console.log("result", result);
+    const token = result.payload.payload.token.accessToken;
+    console.log("token", token);
+    HttpService.setToken(token);
+    localStorage.setItem('token', token);
+    navigate(result.payload.payload.user ? '/' : '/haris');
+    // setSignupPayload(result.payload.payload);
     setModalOpen(true);
   };
   const formik = useFormik<FormData>({
@@ -194,8 +202,20 @@ const SignUpPage: React.FC = () => {
                 type="submit"
                 className="w-full bg-red-900 text-white font-medium rounded-lg text-sm px-4 py-2.5 mt-4 text-center"
               >
-                Login
+                Sign up
               </button>
+              {isModalOpen && (
+                <DynamicModal
+                  title="Email Sent!"
+                  description="You have successfully signed up!."
+                  action="Close"
+                  btnWidth={true}
+                  open={isModalOpen}
+                  setOpen={setModalOpen}
+                  successIcon={true}
+                  routerPath="/login"  // or wherever you want to navigate
+                />
+              )}
             </a>
             <div className="text-center">
               <p>OR</p>

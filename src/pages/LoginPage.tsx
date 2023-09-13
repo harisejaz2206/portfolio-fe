@@ -103,6 +103,7 @@ const LoginPage: React.FC = () => {
 
         <div className='w-2/3 p-14 bg-gray-100'>
           <h1 className='text-4xl font-bold mb-4 text-red-900 text-center'>Dotbrand</h1>
+          <h1 className='text-2xl font-bold mb-4 text-red-900 text-center'>Engineering Your E-Pharmacy Revolution</h1>
           <form className="space-y-2 md:space-y-4 mt-14" onSubmit={formik.handleSubmit}>
             <div className="flex flex-col space-y-1">
               <label

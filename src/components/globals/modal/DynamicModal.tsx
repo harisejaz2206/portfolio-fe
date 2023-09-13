@@ -24,7 +24,7 @@ const DynamicModal = ({ title, btnWidth, description, action, routerPath, open, 
                 {
                     successIcon &&
                     <figure>
-                        <img src='/public/assets/images/forgot_password.gif' alt='Password Change' height={150} width={150} />
+                        <img src='/assets/images/forgot_password.gif' alt='Password Change' height={150} width={150} />
                     </figure>
                 }
                 <h1 className='font-bold text-2xl'>{title}</h1>
