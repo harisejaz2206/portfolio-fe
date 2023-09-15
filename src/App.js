@@ -38,6 +38,13 @@ import { HttpService } from "./app/services/base.service";
 import { useSelector } from "react-redux";
 import { selectToken } from "./app/features/auth/auth.selector";
 import { useEffect } from "react";
+import AddToInventoryForm from "./pages/AddToInventory";
+import InventoryBilling from "./pages/InventoryBilling";
+import ProductDetails from "./pages/ProductDetails";
+import ManageCategories from "./pages/ManageCategories";
+import User from "./pages/Users";
+import UserDetails from "./pages/UserDetails";
+import ViewOrders from "./pages/ViewOrders";
 
 function App() {
   const token = useSelector(selectToken);
@@ -94,6 +101,13 @@ function App() {
                <Route path="/create-product" element={<AddProductForm />} />
                <Route path="/billing-and-inventory" element={<BillingAndInventoryForm />} />
                <Route path="/catalogue" element={<Catalog />} />
+               <Route path="/add-to-inventory-1" element={<AddToInventoryForm/>} />
+               <Route path="/add-to-inventory-2" element={<InventoryBilling/>} />
+               <Route path="/view-product/:productId" element={<ProductDetails/>} />
+               <Route path="/categories" element={<ManageCategories/>} />
+               <Route path="/users" element={<User/>} />
+               <Route path="/view-account/:userId" element={<UserDetails/>} />
+               <Route path="/orders" element={<ViewOrders/>} />
                </Routes>
             </div>
           </div> } />

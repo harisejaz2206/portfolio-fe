@@ -21,6 +21,69 @@ function Catalog() {
       brand: 'Brand B',
       category: 'Category 2',
     },
+    {
+      id: 3,
+      name: 'Product 3',
+      price: 24.99,
+      brand: 'Brand C',
+      category: 'Category 1',
+    },
+    {
+      id: 4,
+      name: 'Product 4',
+      price: 39.99,
+      brand: 'Brand D',
+      category: 'Category 3',
+    },
+    {
+      id: 5,
+      name: 'Product 5',
+      price: 14.99,
+      brand: 'Brand A',
+      category: 'Category 2',
+    },
+    {
+      id: 6,
+      name: 'Product 6',
+      price: 34.99,
+      brand: 'Brand B',
+      category: 'Category 3',
+    },
+    {
+      id: 7,
+      name: 'Product 7',
+      price: 21.99,
+      brand: 'Brand C',
+      category: 'Category 2',
+    },
+    {
+      id: 8,
+      name: 'Product 8',
+      price: 27.99,
+      brand: 'Brand D',
+      category: 'Category 1',
+    },
+    {
+      id: 9,
+      name: 'Product 9',
+      price: 18.99,
+      brand: 'Brand A',
+      category: 'Category 3',
+    },
+    {
+      id: 10,
+      name: 'Product 10',
+      price: 32.99,
+      brand: 'Brand B',
+      category: 'Category 1',
+    },
+    {
+      id: 11,
+      name: 'Product 11',
+      price: 22.99,
+      brand: 'Brand C',
+      category: 'Category 2',
+    },
     // Add more catalog items as needed
   ];
 
@@ -89,33 +152,32 @@ function Catalog() {
 
 
           <tbody className="bg-white divide-y divide-gray-200">
-  {currentItems.map((product) => (
-    <tr key={product.id}>
-      <td className="px-4 py-2 whitespace-no-wrap">{product.name}</td>
-      <td className="px-4 py-2 whitespace-no-wrap">${product.price.toFixed(2)}</td>
-      <td className="px-4 py-2 whitespace-no-wrap">{product.brand}</td>
-      <td className="px-4 py-2 whitespace-no-wrap">{product.category}</td>
-      <td className="px-4 py-2 whitespace-no-wrap text-right">
-        <div className="flex items-center ml-[23%]">
-        <Link
-  to={`/admin/view-product/${product.id}`}
-  className="flex items-center justify-center px-2 py-1 rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:underline text-sm"
->
-  <FaEye className="mr-1 text-sm" />
-  View Product
-</Link>
+          {currentItems.map((product) => (
+            <tr key={product.id}>
+              <td className="px-4 py-2 whitespace-no-wrap">{product.name}</td>
+              <td className="px-4 py-2 whitespace-no-wrap">${product.price.toFixed(2)}</td>
+              <td className="px-4 py-2 whitespace-no-wrap">{product.brand}</td>
+              <td className="px-4 py-2 whitespace-no-wrap">{product.category}</td>
+              <td className="px-4 py-2 whitespace-no-wrap text-right">
+              <div className="flex items-center ml-[23%]">
+                <Link
+                  to={`/admin/view-product/${product.id}`}
+                  className="flex items-center justify-center px-2 py-1 rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:underline text-sm"
+                >
+                  <FaEye className="mr-1 text-sm" />
+                  View Product
+                </Link>
 
-<button
-  className="flex items-center justify-center px-2 py-1 rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:underline ml-4 text-sm"
->
-  <FaPlusCircle className="mr-1 text-sm" />
-  Add to Inventory
-</button>
-
-        </div>
-      </td>
-    </tr>
-  ))}
+                <Link to={"/admin/add-to-inventory-1"}
+                  className="flex items-center justify-center px-2 py-1 rounded-md text-indigo-600 bg-white border border-indigo-600 hover:bg-indigo-700 hover:text-white focus:outline-none focus:underline ml-4 text-sm"
+                >
+                  <FaPlusCircle className="mr-1 text-sm" />
+                  Add to Inventory
+                </Link>
+              </div>
+              </td>
+            </tr>
+          ))}
 </tbody>
 
 
@@ -123,22 +185,22 @@ function Catalog() {
         </table>
 
         <div className="mt-4 flex justify-center">
-          <ul className="flex space-x-2">
-            {Array.from({ length: totalPages }, (_, i) => (
-              <li key={i}>
-                <button
-                  className={`px-2 py-1 ${
-                    i === currentPage
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-gray-300 hover:bg-gray-400 text-gray-600'
-                  } rounded-full`}
-                  onClick={() => handlePageChange(i)}
-                >
-                  {i + 1}
-                </button>
-              </li>
-            ))}
-          </ul>
+            <ul className="flex space-x-2">
+              {Array.from({ length: totalPages }, (_, i) => (
+                <li key={i}>
+                  <button
+                    className={`px-3 py-1 ${
+                      i === currentPage
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-gray-300 hover:bg-gray-400 text-gray-600'
+                    } rounded-md`}
+                    onClick={() => handlePageChange(i)}
+                  >
+                    {i + 1}
+                  </button>
+                </li>
+              ))}
+            </ul>
         </div>
       </div>
     </div>

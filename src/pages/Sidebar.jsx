@@ -32,8 +32,8 @@ const Sidebar = () => {
               <Link to="/admin/manufacturers"><SidebarSubItem text="Manufacturers" /></Link>
             </div>
           )}
-          <SidebarItem icon={<FaLifeRing />} text="Users" />
-          <SidebarItem icon={<FaCog />} text="Orders" />
+          <Link to={"/admin/users"}><SidebarItem icon={<FaUsers />} text="Users" /></Link>
+          <Link to={"/admin/orders"}><SidebarItem icon={<FaUsers />} text="Orders" /></Link>
           <SidebarItem icon={<FaUsers />} text="Promotions" />
           <SidebarItem icon={<FaUsers />} text="Pages" />
           <SidebarItem icon={<FaUsers />} text="Loyalty Points" />

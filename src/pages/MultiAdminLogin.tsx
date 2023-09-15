@@ -35,7 +35,7 @@ const MultiAdminLogin: React.FC = () => {
     console.log("token", token);
     HttpService.setToken(token);
     localStorage.setItem('token', token);
-    navigate(result.payload.payload.user ? '/' : '/haris');
+    navigate(result.payload.payload.user ? '/admin/' : '/haris');
     Toast.fire({
       icon: "success",
       title: "Logged In Successfully",

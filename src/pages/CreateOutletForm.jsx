@@ -50,43 +50,6 @@ function CreateOutletForm() {
             />
           </div>
 
-          {/* Owner Details */}
-          <div>
-            <h2 className="text-lg font-semibold text-gray-800 mb-2">Outlet Owner Details</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {/* Owner Name */}
-              <div>
-                <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700">
-                  Owner Name
-                </label>
-                <input
-                  type="text"
-                  id="ownerName"
-                  name="ownerName"
-                  value={formData.ownerName}
-                  onChange={handleChange}
-                  className="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
-                  placeholder="Enter owner name"
-                />
-              </div>
-
-              {/* Owner Email */}
-              <div>
-                <label htmlFor="ownerEmail" className="block text-sm font-medium text-gray-700">
-                  Owner Email
-                </label>
-                <input
-                  type="text"
-                  id="ownerEmail"
-                  name="ownerEmail"
-                  value={formData.ownerEmail}
-                  onChange={handleChange}
-                  className="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
-                  placeholder="Enter owner email"
-                />
-              </div>
-            </div>
-          </div>
 
           {/* Admin Details */}
           <div>
@@ -191,6 +154,58 @@ function CreateOutletForm() {
               <option value="3-year">3 Year</option>
             </select>
           </div>
+
+          {/* Tax Details */}
+<div>
+  <h2 className="text-lg font-semibold text-gray-800 mb-2">Tax Details</h2>
+  <div className="grid grid-cols-2 gap-4">
+    {/* Tax Type */}
+    <div>
+      <label htmlFor="taxType" className="block text-sm font-medium text-gray-700">
+        Tax Type
+      </label>
+      <select
+        id="taxType"
+        name="taxType"
+        value={formData.taxType}
+        onChange={handleChange}
+        className="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
+      >
+        <option value="gst">GST</option>
+        <option value="vat">VAT</option>
+        <option value="sales">Sales Tax</option>
+      </select>
+    </div>
+
+    {/* Tax Details */}
+    <div>
+      <label htmlFor="taxDetails" className="block text-sm font-medium text-gray-700">
+        Tax Details
+      </label>
+      <select
+        id="taxDetails"
+        name="taxDetails"
+        value={formData.taxDetails}
+        onChange={handleChange}
+        className="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
+      >
+        <option value="tax1">Tax 1</option>
+        <option value="tax2">Tax 2</option>
+        <option value="tax3">Tax 3</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+{/* Add Tax Button */}
+<div className="mt-4">
+  <button
+    type="button"
+    className="text-indigo-600 bg-white hover:underline hover:text-indigo-700 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center flex items-center"
+  >
+    <FaPlusCircle className="mr-1" /> Add Tax
+  </button>
+</div>
 
           {/* Submit Button */}
           <div className="mt-6">
