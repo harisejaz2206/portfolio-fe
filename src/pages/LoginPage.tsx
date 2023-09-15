@@ -64,8 +64,8 @@ const LoginPage: React.FC = () => {
   });
 
   return (
-    <div className='flex justify-center items-center h-screen bg-gray-100'>
-      <div className='bg-white rounded-lg shadow-md flex w-full max-w-4xl'>
+    <div className='flex justify-center items-center  h-screen bg-gray-100'>
+      <div className='bg-white rounded-lg shadow-md mt-8 flex w-full max-w-4xl'>
         <div className='w-1/3 bg-red-900'>
           <img src="/marijuana.png" alt="marijuana" className='ml-56' />
           <h1 className='text-4xl text-yellow-400 font-bold text-center'>Dotbrand</h1>
