@@ -47,13 +47,12 @@ const Navbar = () => {
           <>
            <button
               onClick={toggleLoginOptions}
-              className="font-bold text-red-900 mr-3 ml-3 "
+              className="font-bold text-red-900 mr-3 ml-3 z-10"
             >
               Log in
             </button>
             {showLoginOptions && (
-              <div className="flex flex-col absolute top-12 right-0 bg-white border border-gray-300 rounded-md shadow-lg
-              ">
+              <div className="flex flex-col absolute top-12 right-0 bg-white border border-gray-300 rounded-md shadow-lg z-20 ">
                 <a href="/login" className="px-4 py-2 hover:bg-red-800 hover:text-white">
                   User Login
                 </a>
