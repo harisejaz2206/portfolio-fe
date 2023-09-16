@@ -26,6 +26,10 @@ export const handleApiResponse = ({
 
       case HttpStatusCode.Created:
         handleSuccess();
+        Toast.fire({
+          icon: "success",
+          title: result.payload.message,
+        });
         break;
 
       case HttpStatusCode.BadRequest:

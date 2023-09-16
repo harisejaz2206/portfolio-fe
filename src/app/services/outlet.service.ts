@@ -16,7 +16,7 @@ import { ISocialAuthInterface } from "../features/auth/interfaces/socialauth-int
 import { IOutlet } from "../features/outlet/interfaces/outlet.interface";
 
 class OutletService extends HttpService {
-  private readonly prefix: string = "api/v1";
+  private readonly prefix: string = "api/v1/multiadmin";
 
   addOutletHander = (
     data: IOutlet

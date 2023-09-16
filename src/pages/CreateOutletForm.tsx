@@ -6,11 +6,12 @@ import { Formik, useFormik } from "formik";
 import { HttpService } from "../app/services/base.service";
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
-import { selectLoading } from "../app/features/auth/auth.selector";
 import { Toast } from "../utils/toast";
 import * as Yup from 'yup';
 import { handleApiResponse } from "../utils/handleApiResponse";
 import { handleError } from "../utils/catchErrorToast";
+import { selectOutletLoading } from "../app/features/outlet/outlet.selector";
+import { addOutlet } from "../app/features/outlet/outlet.thunk";
 
 type FormData = {
   outletName: string;
@@ -66,7 +67,7 @@ const CreateOutletSchema = Yup.object().shape({
 const CreateOutletForm: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
-  // const loading = useSelector(selectLoading);
+  const loading = useSelector(selectOutletLoading);
 
   const handleSuccess = (result: any) => {
     console.log("result", result);
@@ -75,10 +76,10 @@ const CreateOutletForm: React.FC = () => {
     HttpService.setToken(token);
     localStorage.setItem('token', token);
 
-    navigate(result.payload.payload.user ? '/' : '/haris');
+    navigate(result.payload.payload.user ? '/admin/outlets' : '/haris');
     Toast.fire({
       icon: "success",
-      title: "Logged In Successfully",
+      title: "Outlet created successfully",
     });
   };
 
@@ -90,7 +91,6 @@ const CreateOutletForm: React.FC = () => {
       adminPassword: '',
       adminNumber: '',
       address: '',
-
       latitude: '',
       longitude: '',
       taxType: '',
@@ -99,9 +99,20 @@ const CreateOutletForm: React.FC = () => {
     validationSchema: CreateOutletSchema,
     validateOnBlur: true,
     onSubmit: values => {
-      // dispatch(login(values))
-      //   .then((result) => handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik }))
-      //   .catch(handleError)
+      console.log("Submitting form with values: ", values);  // Debug line 1
+      dispatch(addOutlet(values))
+        .then((result) => {
+          console.log('API call successful', result);  // Debug line
+          Toast.fire({
+            icon: "success",
+            title: "Outlet successfully created",
+          });
+          handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik })
+        })
+        .catch((error) => {
+          console.log('API call failed', error);  // Debug line
+          // handleError(error);
+        })
     },
   });
 
@@ -311,15 +322,19 @@ const CreateOutletForm: React.FC = () => {
 
           {/* Submit Button */}
           <div className="mt-6">
-            <Link to="/admin/outlets">
-              <button
-                type="submit"
-                className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 flex items-center"
-              >
-                {/* <FaPlusCircle icon={FaPlusCircle} className="text-lg" /> */}
-                <span className="ml-2">Create Outlet</span>
-              </button>
-            </Link>
+            {/* <Link to="/admin/outlets"> */}
+            <button
+              type="submit"
+              disabled={!formik.isValid || loading!} // Disable button if form is not valid or loading
+              className={`text-indigo-600 bg-white hover:underline hover:text-indigo-700 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center flex items-center ${!formik.isValid || loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              {loading ? (
+                <div className="loader">Loading...</div>  // Replace with your loading indicator
+              ) : (
+                "Create Outlet"
+              )}
+            </button>
+            {/* </Link> */}
           </div>
         </form>
       </div>
