@@ -1,16 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "../../../store/rootReducer";
 import { ILogInInterface } from "./interfaces/login.interface";
 import { ISignUpInterface } from "./interfaces/sign-up.interface";
-import { IResponseInterface } from "../../interfaces/api-response.interface";
 import { authService } from "../../services/auth.service";
-import { IOnboard } from "./interfaces/onboard.interface";
 import { IForgotPasswordInterface } from "./interfaces/forgot-password.interface";
-import { userService } from "../../services/user.service";
-import { selectToken } from "./auth.selector";
-import { useSelector } from "react-redux";
 import { IResetPasswordInterface } from "./interfaces/reset-password.interface";
-import { IUser } from "../../interfaces/user.interface";
+
 import { ISocialAuthInterface } from "./interfaces/socialauth-interface";
 
 export const signup = createAsyncThunk(

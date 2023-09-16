@@ -79,7 +79,7 @@ const InputField = ({
                 </label>
             )}
             <div className={`relative ${className ? className : ""}`}>
-                <div className="flex w-full items-end gap-3">
+                <div className="mb-4 flex w-full items-end gap-3">
                     <input
                         ref={ref}
                         type={

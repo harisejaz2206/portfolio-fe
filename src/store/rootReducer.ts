@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 import authSlice from "../app/features/auth/auth.slice";
+import outletSlice from "../app/features/outlet/outlet.slice";
 import { ThunkDispatch, AnyAction, Store } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
   auth: authSlice,
+  outlet: outletSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
