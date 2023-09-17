@@ -75,8 +75,15 @@ function ViewOrders() {
         purchasedOn: '2023-09-02',
         status: 'Processing',
       },
+      {
+        id: 11,
+        customer: 'Customer 11',
+        price: 75.0,
+        purchasedOn: '2023-09-02',
+        status: 'Processing',
+      },
       
-    // Add more orders as needed
+    
   ];
 
   // Number of items to display per page
@@ -104,6 +111,7 @@ function ViewOrders() {
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
+       {currentItems.length > 0 ? (
       <div className="bg-white rounded-lg shadow p-6">
         <h1 className="text-base text-indigo-600 font-semibold mb-4">Orders</h1>
 
@@ -167,7 +175,7 @@ function ViewOrders() {
                 <td className="px-6 py-4 whitespace-no-wrap">{order.status}</td>
                 <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
                 <div className="flex items-center -ml-4 ">
-                    <Link to={`/admin/view-account`}
+                    <Link to={`/admin/view-orderdetails/${order.id}`}
                     className="ml-20 flex items-center justify-center px-2 py-1 rounded-md text-indigo-600 hover:underline focus:outline-none focus:underline text-sm"
                     > <FaEye className="mr-1 text-sm text-indigo-600" />
                     View Details
@@ -198,8 +206,23 @@ function ViewOrders() {
           </ul>
         </div>
       </div>
-    </div>
-  );
+     ) : (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <img
+          src="/Empty Wishlist.png" // Replace with your no user image path
+          alt="No Users"
+          className="w-32 h-32 mb-4"
+        />
+        <p className="text-gray-600 text-lg font-semibold mb-4">
+          Whoops! There are no current users present.
+        </p>
+        <Link to="/admin/" className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
+          Back to Dashboard
+        </Link>
+      </div>
+    )}
+  </div>
+);
 }
 
 export default ViewOrders;

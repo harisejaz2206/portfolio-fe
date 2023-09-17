@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Toggle from 'react-toggle';
+import 'react-toggle/style.css'; // Import the react-toggle styles
 
 function AddProductForm() {
   const [formData, setFormData] = useState({
-    selectedStore: '', // Store selection
-    selectedProduct: '', // Product selection
+    selectedStore: '',
+    selectedProduct: '',
+    name: '',
+    quantity: '',
+    price: '',
+    brand: '',
+    category: '',
+    showProduct: false,
+    images: [],
   });
 
-  const handleStoreChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -16,42 +25,36 @@ function AddProductForm() {
     });
   };
 
-  const handleProductChange = (e) => {
-    const { name, value } = e.target;
+  const handleToggleChange = () => {
     setFormData({
       ...formData,
-      [name]: value,
+      showProduct: !formData.showProduct,
     });
   };
 
-  // Define a list of stores and products (replace with your data)
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    setFormData({
+      ...formData,
+      images: [...formData.images, ...files],
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your form submission logic here
+  };
+
   const stores = ['Store 1', 'Store 2', 'Store 3'];
   const products = ['Product A', 'Product B', 'Product C'];
+  const brands = ['Brand X', 'Brand Y', 'Brand Z'];
+  const categories = ['Category 1', 'Category 2', 'Category 3'];
 
   return (
     <div className="bg-gray-100 min-h-screen flex justify-center items-center">
-      <div className="bg-white rounded-lg shadow-md p-8 w-[98%]">
+      <div className="bg-white rounded-lg shadow-md p-8 w-[98%] max-w-3xl mt-2 mb-2">
         <h1 className="text-2xl font-semibold text-gray-800 mb-6">Add Product</h1>
-        <div className="mb-6">
-          {/* Steps Bar */}
-        <div className="mb-6 flex items-center justify-center">
-          {/* Left Content */}
-          <div className="flex-grow">
-            {/* Step 1 */}
-            <div className="text-sm text-indigo-600">Step 1</div>
-            {/* Step Description */}
-            <div className="text-md font-semibold text-gray-800">Select Product</div>
-          </div>
-          {/* Right Content */}
-          <div className="flex-grow">
-            {/* Step 2 */}
-            <div className="text-sm text-gray-600">Step 2</div>
-            {/* Step Description */}
-            <div className="text-md font-semibold text-gray-800">Add Details</div>
-          </div>
-        </div>
-
-          {/* Select Store Dropdown */}
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="selectedStore" className="block text-sm font-medium text-gray-700">
               Select Store
@@ -60,7 +63,7 @@ function AddProductForm() {
               id="selectedStore"
               name="selectedStore"
               value={formData.selectedStore}
-              onChange={handleStoreChange}
+              onChange={handleInputChange}
               className="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
             >
               <option value="" disabled>
@@ -74,56 +77,134 @@ function AddProductForm() {
             </select>
           </div>
 
-          {/* Product Selection */}
           <div className="mb-4">
-            <label htmlFor="selectedProduct" className="block text-sm font-medium text-gray-700">
-              Search and Select Product
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+              Quantity
+            </label>
+            <input
+              type="text"
+              id="quantity"
+              name="quantity"
+              value={formData.quantity}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+              Price
+            </label>
+            <input
+              type="text"
+              id="price"
+              name="price"
+              value={formData.price}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="brand" className="block text-sm font-medium text-gray-700">
+              Brand
             </label>
             <select
-              id="selectedProduct"
-              name="selectedProduct"
-              value={formData.selectedProduct}
-              onChange={handleProductChange}
+              id="brand"
+              name="brand"
+              value={formData.brand}
+              onChange={handleInputChange}
               className="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
             >
               <option value="" disabled>
-                Select a Product
+                Select a Brand
               </option>
-              {products.map((product) => (
-                <option key={product} value={product}>
-                  {product}
+              {brands.map((brand) => (
+                <option key={brand} value={brand}>
+                  {brand}
                 </option>
               ))}
             </select>
           </div>
-        </div>
 
-        {/* Display Selected Product Card */}
-        {formData.selectedProduct && (
-          <div className="mb-6">
-            <div className="bg-gray-200 p-4 rounded-md">
-              {/* You can customize the card layout here */}
-              <div className="text-lg font-semibold mb-2">{formData.selectedProduct}</div>
-              {/* Add product image */}
-              {/* Add additional product details */}
-            </div>
+          <div className="mb-4">
+            <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+              Category
+            </label>
+            <select
+              id="category"
+              name="category"
+              value={formData.category}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
+            >
+              <option value="" disabled>
+                Select a Category
+              </option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
           </div>
-        )}
 
-        {/* Buttons */}
-        <div className="flex justify-between">
-          <Link to="/admin/products">
-            <button className="text-gray-600 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
-              Cancel
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Show Product</label>
+            <Toggle
+              id="showProduct"
+              name="showProduct"
+              value={formData.showProduct}
+              onChange={handleToggleChange}
+              icons={false} // Use custom icons
+              className="react-toggle"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="images" className="block text-sm font-medium text-gray-700">
+              Add Image(s)
+            </label>
+            <input
+              type="file"
+              id="images"
+              name="images"
+              accept="image/*"
+              multiple
+              onChange={handleImageUpload}
+              className="mt-1 block w-full p-2 border-gray-300 rounded-md shadow-sm sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+
+          <div className="flex justify-between">
+            <Link to="/admin/products">
+              <button className="text-gray-600 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
+                Cancel
+              </button>
+            </Link>
+            <button
+              type="submit"
+              className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-2"
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
+              Next <FaArrowRight className="ml-2" />
             </button>
-          </Link>
-          <Link to="/admin/billing-and-inventory">
-  <button className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-2" style={{ display: 'flex', alignItems: 'center' }}>
-    Next <FaArrowRight className="ml-2" />
-  </button>
-</Link>
-
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaSearch, FaEdit, FaTrash, FaPlusCircle, FaDownload, FaUpload, FaFilter } from 'react-icons/fa';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
+import Pagination from '../components/Pagination';
 
 function ManageInventory() {
   // Dummy data for inventory (replace with your actual data)
@@ -27,6 +28,96 @@ function ManageInventory() {
       isFeatured: false,
       isPublished: false,
     },
+    {
+      id: 3,
+      name: 'Product 3',
+      stock: 42,
+      price: 15.49,
+      brand: 'Brand C',
+      category: 'Category 3',
+      isFeatured: true,
+      isPublished: true,
+    },
+    {
+      id: 4,
+      name: 'Product 4',
+      stock: 18,
+      price: 49.99,
+      brand: 'Brand A',
+      category: 'Category 1',
+      isFeatured: true,
+      isPublished: true,
+    },
+    {
+      id: 5,
+      name: 'Product 5',
+      stock: 63,
+      price: 22.99,
+      brand: 'Brand B',
+      category: 'Category 2',
+      isFeatured: false,
+      isPublished: true,
+    },
+    {
+      id: 6,
+      name: 'Product 6',
+      stock: 33,
+      price: 12.99,
+      brand: 'Brand C',
+      category: 'Category 3',
+      isFeatured: false,
+      isPublished: false,
+    },
+    {
+      id: 7,
+      name: 'Product 7',
+      stock: 75,
+      price: 18.99,
+      brand: 'Brand A',
+      category: 'Category 1',
+      isFeatured: true,
+      isPublished: true,
+    },
+    {
+      id: 8,
+      name: 'Product 8',
+      stock: 10,
+      price: 35.99,
+      brand: 'Brand B',
+      category: 'Category 2',
+      isFeatured: false,
+      isPublished: true,
+    },
+    {
+      id: 9,
+      name: 'Product 9',
+      stock: 27,
+      price: 9.99,
+      brand: 'Brand C',
+      category: 'Category 3',
+      isFeatured: true,
+      isPublished: false,
+    },
+    {
+      id: 10,
+      name: 'Product 10',
+      stock: 38,
+      price: 14.99,
+      brand: 'Brand A',
+      category: 'Category 1',
+      isFeatured: false,
+      isPublished: true,
+    },
+    {
+      id: 11,
+      name: 'Product 11',
+      stock: 20,
+      price: 32.99,
+      brand: 'Brand B',
+      category: 'Category 2',
+      isFeatured: true,
+      isPublished: true,
+    },
     // Add more inventory items as needed
   ];
 
@@ -36,6 +127,9 @@ function ManageInventory() {
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
+
+  const itemsPerPage = 10; // Set the number of products to display per page
+  const [currentPage, setCurrentPage] = useState(0);
 
   const handleFileSelect = (e) => {
     const files = e.target.files;
@@ -96,6 +190,15 @@ function ManageInventory() {
   
     // Clear the selected files
     setSelectedFiles([]);
+  };
+
+  const totalPages = Math.ceil(filteredInventory.length / itemsPerPage);
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentInventory = filteredInventory.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
   
 
@@ -216,7 +319,8 @@ function ManageInventory() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {filteredInventory.map((product) => (
+
+            {currentInventory.map((product) => (
               <tr key={product.id}>
                 <td className="px-6 py-4 whitespace-no-wrap">{product.name}</td>
                 <td className="px-6 py-4 whitespace-no-wrap">{product.stock}</td>
@@ -254,6 +358,11 @@ function ManageInventory() {
             ))}
           </tbody>
         </table>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );

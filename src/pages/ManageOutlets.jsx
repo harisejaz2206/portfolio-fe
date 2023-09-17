@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaSearch, FaPlusCircle, FaEdit, FaTrash } from 'react-icons/fa'; // Import the FaEdit and FaTrash icons
+import { FaSearch, FaPlusCircle, FaEdit, FaTrash } from 'react-icons/fa'; 
+import Pagination from '../components/Pagination';
 
 function ManageOutlets() {
   // Dummy data for outlets (replace with your actual data)
@@ -8,10 +9,21 @@ function ManageOutlets() {
     { id: 1, name: 'Outlet 1', location: 'Location 1', isActive: true },
     { id: 2, name: 'Outlet 2', location: 'Location 2', isActive: true },
     { id: 3, name: 'Outlet 3', location: 'Location 3', isActive: true },
+    { id: 4, name: 'Outlet 4', location: 'Location 4', isActive: true },
+    { id: 5, name: 'Outlet 5', location: 'Location 5', isActive: true },
+    { id: 6, name: 'Outlet 6', location: 'Location 6', isActive: true },
+    { id: 7, name: 'Outlet 7', location: 'Location 7', isActive: true },
+    { id: 8, name: 'Outlet 8', location: 'Location 8', isActive: true },
+    { id: 9, name: 'Outlet 9', location: 'Location 9', isActive: true },
+    { id: 10, name: 'Outlet 10', location: 'Location 10', isActive: true },
+    { id: 11, name: 'Outlet 11', location: 'Location 11', isActive: true },
+    { id: 12, name: 'Outlet 12', location: 'Location 12', isActive: true },
   ];
 
   const [outlets, setOutlets] = useState(initialOutlets);
   const [searchQuery, setSearchQuery] = useState('');
+  const itemsPerPage = 10; // Set the number of products to display per page
+  const [currentPage, setCurrentPage] = useState(0);
   
 
   // Function to deactivate an outlet
@@ -42,6 +54,15 @@ function ManageOutlets() {
       outlet.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       outlet.location.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const totalPages = Math.ceil(filteredOutlets.length / itemsPerPage);
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentOutlet = filteredOutlets.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
@@ -88,7 +109,7 @@ function ManageOutlets() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200 text-sm">
-            {filteredOutlets.map((outlet) => (
+            {currentOutlet.map((outlet) => (
               <tr key={outlet.id}>
                 <td className="px-6 py-4 whitespace-no-wrap">{outlet.name}</td>
                 <td className="px-6 py-4 whitespace-no-wrap">{outlet.location}</td>
@@ -129,6 +150,11 @@ function ManageOutlets() {
             ))}
           </tbody>
         </table>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );
