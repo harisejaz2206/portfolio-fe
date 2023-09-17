@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSearch, FaEdit, FaFilter, FaPlusCircle, FaDownload, FaUpload } from 'react-icons/fa';
+import Pagination from '../components/Pagination';
 
 function ManageManufacturers() {
   // Dummy data for manufacturers (replace with your actual data)
@@ -26,6 +27,9 @@ function ManageManufacturers() {
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
+
+  const itemsPerPage = 10; // Set the number of products to display per page
+  const [currentPage, setCurrentPage] = useState(0);
 
   const handleFileSelect = (e) => {
     const files = e.target.files;
@@ -62,6 +66,15 @@ function ManageManufacturers() {
 
     // Clear the selected files
     setSelectedFiles([]);
+  };
+
+  const totalPages = Math.ceil(filteredManufacturers.length / itemsPerPage);
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentManufacturer = filteredManufacturers.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -172,7 +185,7 @@ function ManageManufacturers() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {filteredManufacturers.map((manufacturer) => (
+            {currentManufacturer.map((manufacturer) => (
               <tr key={manufacturer.id}>
                 <td className="px-6 py-4 whitespace-no-wrap">{manufacturer.name}</td>
                 <td className="px-6 py-4 whitespace-no-wrap">{manufacturer.products}</td>
@@ -190,6 +203,11 @@ function ManageManufacturers() {
             ))}
           </tbody>
         </table>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );

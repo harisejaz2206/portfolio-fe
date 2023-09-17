@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaHome, FaStore, FaChartBar, FaLifeRing, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
+import { FaHome, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -33,12 +33,11 @@ const Sidebar = () => {
             </div>
           )}
           <Link to={"/admin/users"}><SidebarItem icon={<FaUsers />} text="Users" /></Link>
-          <Link to={"/admin/orders"}><SidebarItem icon={<FaUsers />} text="Orders" /></Link>
-          <SidebarItem icon={<FaUsers />} text="Promotions" />
-          <SidebarItem icon={<FaUsers />} text="Pages" />
-          <SidebarItem icon={<FaUsers />} text="Loyalty Points" />
-          <SidebarItem icon={<FaUsers />} text="Chat" />
-          <SidebarItem icon={<FaUsers />} text="Settings" />
+          <Link to={"/admin/orders"}><SidebarItem icon={<FaShoppingCart />} text="Orders" /></Link>
+          <Link to={"/admin/banners"}><SidebarItem icon={<FaStar />} text="Banners" /></Link>
+          <SidebarItem icon={<FaBook />} text="Pages" />
+          <Link to={"/admin/chat"}><SidebarItem icon={<FaInbox />} text="Chat" /> </Link>
+          <SidebarItem icon={<FaCog />} text="Settings" />
         </div>
       </div>
       <div>

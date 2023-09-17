@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSearch, FaEdit, FaFilter, FaPlusCircle, FaDownload, FaUpload } from 'react-icons/fa';
+import Pagination from '../components/Pagination';
 
 function ManageCategories() {
   // Dummy data for categories (replace with your actual data)
@@ -17,6 +18,66 @@ function ManageCategories() {
       products: 5,
       parentCategory: 'Parent Category B',
     },
+    {
+      id: 3,
+      name: 'Category 3',
+      products: 5,
+      parentCategory: 'Parent Category B',
+    },
+    {
+      id: 4,
+      name: 'Category 4',
+      products: 5,
+      parentCategory: 'Parent Category B',
+    },
+    {
+      id: 5,
+      name: 'Category 5',
+      products: 5,
+      parentCategory: 'Parent Category B',
+    },
+    {
+      id: 6,
+      name: 'Category 6',
+      products: 5,
+      parentCategory: 'Parent Category B',
+    },
+    {
+      id: 7,
+      name: 'Category 7',
+      products: 5,
+      parentCategory: 'Parent Category B',
+    },
+    {
+      id: 8,
+      name: 'Category 8',
+      products: 5,
+      parentCategory: 'Parent Category B',
+    },
+    {
+      id: 9,
+      name: 'Category 9',
+      products: 5,
+      parentCategory: 'Parent Category B',
+    },
+    {
+      id: 10,
+      name: 'Category 10',
+      products: 5,
+      parentCategory: 'Parent Category B',
+    },
+    {
+      id: 11,
+      name: 'Category 11',
+      products: 5,
+      parentCategory: 'Parent Category B',
+    },
+    {
+      id: 12,
+      name: 'Category 12',
+      products: 5,
+      parentCategory: 'Parent Category B',
+    },
     // Add more categories as needed
   ];
 
@@ -26,6 +87,9 @@ function ManageCategories() {
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
+
+  const itemsPerPage = 10; // Set the number of products to display per page
+  const [currentPage, setCurrentPage] = useState(0);
 
   const handleFileSelect = (e) => {
     const files = e.target.files;
@@ -62,6 +126,15 @@ function ManageCategories() {
 
     // Clear the selected files
     setSelectedFiles([]);
+  };
+
+  const totalPages = Math.ceil(filteredCategories.length / itemsPerPage);
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentCategory = filteredCategories.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -172,7 +245,7 @@ function ManageCategories() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {filteredCategories.map((category) => (
+            {currentCategory.map((category) => (
               <tr key={category.id}>
                 <td className="px-6 py-4 whitespace-no-wrap">{category.name}</td>
                 <td className="px-6 py-4 whitespace-no-wrap">{category.products}</td>
@@ -190,6 +263,11 @@ function ManageCategories() {
             ))}
           </tbody>
         </table>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );

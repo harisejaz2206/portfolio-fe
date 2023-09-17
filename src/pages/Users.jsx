@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSearch, FaFilter, FaEye } from 'react-icons/fa';
+import Pagination from '../components/Pagination';
 
 function User() {
   // Dummy data for users (replace with your actual data)
@@ -84,6 +85,14 @@ function User() {
         createdDate: '2022-08-17',
         lastActivity: '2023-09-02 13:15:00',
         status: 'Inactive',
+      },
+      {
+        id: 11,
+        name: 'Noah White',
+        email: 'noah@example.com',
+        createdDate: '2023-04-09',
+        lastActivity: '2023-09-01 10:05:00',
+        status: 'Active',
       },
       {
         id: 11,
@@ -192,29 +201,16 @@ function User() {
             </tbody>
           </table>
 
-          <div className="mt-4 flex justify-center">
-            <ul className="flex space-x-2">
-              {Array.from({ length: totalPages }, (_, i) => (
-                <li key={i}>
-                  <button
-                    className={`px-3 py-1 ${
-                      i === currentPage
-                        ? 'bg-indigo-600 text-white'
-                        : 'bg-gray-300 hover:bg-gray-400 text-gray-600'
-                    } rounded-md`}
-                    onClick={() => handlePageChange(i)}
-                  >
-                    {i + 1}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-screen">
           <img
-            src="/no-users-image.png" // Replace with your no user image path
+            src="/Empty Wishlist.png" // Replace with your no user image path
             alt="No Users"
             className="w-32 h-32 mb-4"
           />
