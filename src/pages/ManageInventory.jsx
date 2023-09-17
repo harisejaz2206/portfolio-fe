@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { FaSearch, FaEdit, FaTrash, FaPlusCircle } from 'react-icons/fa';
-import Toggle from 'react-toggle'; // Import the Toggle component
-import 'react-toggle/style.css'; // Import the styles for the Toggle component
+import { FaSearch, FaEdit, FaTrash, FaPlusCircle, FaDownload, FaUpload, FaFilter } from 'react-icons/fa';
+import Toggle from 'react-toggle';
+import 'react-toggle/style.css';
 
 function ManageInventory() {
   // Dummy data for inventory (replace with your actual data)
@@ -32,6 +32,29 @@ function ManageInventory() {
 
   const [inventory, setInventory] = useState(initialInventory);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchProductQuery, setSearchProductQuery] = useState('');
+  const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const fileInputRef = useRef(null);
+
+  const handleFileSelect = (e) => {
+    const files = e.target.files;
+    setSelectedFiles(files);
+  };
+
+  const toggleFilterOptions = () => {
+    setFilterOptionsVisible(!filterOptionsVisible);
+  };
+
+  // Function to handle filter option selection
+  const handleFilterOptionSelect = (option) => {
+    // Implement filtering logic based on the selected option
+    console.log('Selected filter option:', option);
+    // Close the filter dropdown after selecting an option
+    setFilterOptionsVisible(false);
+  };
+
+  
 
   // Function to toggle featured status
   const toggleFeatured = (productId) => {
@@ -62,31 +85,107 @@ function ManageInventory() {
       product.brand.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const uploadSelectedFiles = () => {
+    // Check if files were selected
+    if (selectedFiles.length === 0) {
+      alert('Please select one or more files.');
+      return;
+    }
+  
+    // Process the selected files here (e.g., upload to the server)
+  
+    // Clear the selected files
+    setSelectedFiles([]);
+  };
+  
+
   return (
     <div className="bg-gray-100 min-h-screen p-4">
       <div className="bg-white rounded-lg shadow p-6">
         <h1 className="text-xl font-semibold text-gray-800 mb-4">Manage Inventory</h1>
 
         <div className="flex justify-between items-center mb-4">
-          <div className="relative flex items-center">
+          <div className="flex items-center space-x-4 text-sm">
+          <div className="relative">
             <span className="absolute left-3 top-2 text-gray-400">
               <FaSearch />
             </span>
             <input
               type="text"
               placeholder="Search products..."
-              className="border rounded-md pl-10 pr-4 py-1 w-64 focus:outline-none focus:ring focus:border-indigo-300"
+              className="border rounded-md pl-10 pr-4 py-1 w-36 focus:outline-none focus:ring focus:border-indigo-300"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
+          <div className="relative">
+              <span className="absolute left-3 top-2 text-gray-400">
+                <FaSearch className='text-sm' />
+              </span>
+              <input
+                type="text"
+                placeholder="Select Store..."
+                className="border text-sm rounded-md pl-10 pr-4 py-1 px-4 w-36 focus:outline-none focus:ring focus:border-indigo-300"
+                value={searchProductQuery}
+                onChange={(e) => setSearchProductQuery(e.target.value)}
+              />
+          </div>
+          <div className="relative ml-4 text-sm">
+              <button
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-2 rounded-md focus:outline-none flex items-center"
+                onClick={toggleFilterOptions}
+              >
+                <FaFilter className="mr-1" />
+              </button>
+              {filterOptionsVisible && (
+                <div className="absolute mt-2 p-2 border rounded-lg bg-white text-sm">
+                  {/* Your filter options here */}
+                </div>
+              )}
+            </div>
+          </div>
 
-          <Link
-            to="/admin/create-product"
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
-          >
-            <FaPlusCircle className="mr-2" /> Add Product
-          </Link>
+          <div className="flex space-x-4 text-sm"> {/* Add this div for the new buttons */}
+            <Link
+              to="/admin/create-product"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
+            >
+              <FaPlusCircle className="mr-2" /> Add Product
+            </Link>
+             <button
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
+              onClick={() => {
+                fileInputRef.current.click();
+              }}
+            >
+              <FaPlusCircle className="mr-2" /> Add Multiple Products
+            </button>
+            <input
+              type="file"
+              ref={fileInputRef}
+              accept=".csv, .xlsx"
+              multiple
+              style={{ display: 'none' }}
+              onChange={handleFileSelect}
+            />
+            {selectedFiles.length > 0 && ( // Only render the "Upload" button when files are selected
+              <button
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
+                onClick={uploadSelectedFiles}
+              >
+                <FaUpload className='mr-2'/> Upload
+              </button>
+            )}
+            <Link to={"/path-to-sample-sheet/sample-sheet.xlsx"}>
+              <button
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
+                download
+              >
+                <FaDownload className="mr-2" /> Download Sample Sheet
+              </button>
+            </Link>
+          </div>
+          
         </div>
 
         <table className="min-w-full divide-y divide-gray-200 mt-8 text-sm">

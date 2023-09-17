@@ -2,26 +2,26 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSearch, FaEdit, FaFilter, FaPlusCircle, FaDownload, FaUpload } from 'react-icons/fa';
 
-function ManageCategories() {
-  // Dummy data for categories (replace with your actual data)
-  const initialCategories = [
+function ManageManufacturers() {
+  // Dummy data for manufacturers (replace with your actual data)
+  const initialManufacturers = [
     {
       id: 1,
-      name: 'Category 1',
-      products: 10,
-      parentCategory: 'Parent Category A',
+      name: 'Manufacturer 1',
+      products: 20,
+      store: 'Store A',
     },
     {
       id: 2,
-      name: 'Category 2',
-      products: 5,
-      parentCategory: 'Parent Category B',
+      name: 'Manufacturer 2',
+      products: 15,
+      store: 'Store B',
     },
-    // Add more categories as needed
+    // Add more manufacturers as needed
   ];
 
-  const [categories, setCategories] = useState(initialCategories);
-  const [searchCategoryNameQuery, setSearchCategoryNameQuery] = useState('');
+  const [manufacturers, setManufacturers] = useState(initialManufacturers);
+  const [searchStoreQuery, setSearchStoreQuery] = useState('');
   const [searchProductQuery, setSearchProductQuery] = useState('');
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -45,10 +45,10 @@ function ManageCategories() {
     setFilterOptionsVisible(false);
   };
 
-  // Function to filter categories based on search queries
-  const filteredCategories = categories.filter((category) =>
-    category.name.toLowerCase().includes(searchCategoryNameQuery.toLowerCase()) &&
-    category.products.toString().includes(searchProductQuery)
+  // Function to filter manufacturers based on search queries
+  const filteredManufacturers = manufacturers.filter((manufacturer) =>
+    manufacturer.store.toLowerCase().includes(searchStoreQuery.toLowerCase()) &&
+    manufacturer.products.toString().includes(searchProductQuery)
   );
 
   const uploadSelectedFiles = () => {
@@ -67,7 +67,7 @@ function ManageCategories() {
   return (
     <div className="bg-gray-100 min-h-screen p-4">
       <div className="bg-white rounded-lg shadow p-6">
-        <h1 className="text-xl font-semibold text-gray-800 mb-4">Manage Categories</h1>
+        <h1 className="text-xl font-semibold text-gray-800 mb-4">Manage Manufacturers</h1>
 
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center space-x-4">
@@ -77,10 +77,10 @@ function ManageCategories() {
               </span>
               <input
                 type="text"
-                placeholder="Select Category..."
+                placeholder="Select Store..."
                 className="border text-sm rounded-md pl-10 pr-4 py-1 px-4 w-36 focus:outline-none focus:ring focus:border-indigo-300"
-                value={searchCategoryNameQuery}
-                onChange={(e) => setSearchCategoryNameQuery(e.target.value)}
+                value={searchStoreQuery}
+                onChange={(e) => setSearchStoreQuery(e.target.value)}
               />
             </div>
             <div className="relative">
@@ -89,7 +89,7 @@ function ManageCategories() {
               </span>
               <input
                 type="text"
-                placeholder="Select Store..."
+                placeholder="Select Product..."
                 className="border text-sm rounded-md pl-10 pr-4 py-1 px-4 w-36 focus:outline-none focus:ring focus:border-indigo-300"
                 value={searchProductQuery}
                 onChange={(e) => setSearchProductQuery(e.target.value)}
@@ -153,7 +153,7 @@ function ManageCategories() {
           </div>
         </div>
 
-        {/* Table and category listing */}
+        {/* Table and manufacturer listing */}
         <table className="min-w-full divide-y divide-gray-200 mt-8 text-sm">
           <thead>
             <tr>
@@ -164,7 +164,7 @@ function ManageCategories() {
                 Products
               </th>
               <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                Parent Category
+                Store
               </th>
               <th className="px-6 py-3 bg-gray-50 font-medium text-xs text-gray-500 uppercase tracking-wider">
                 Action
@@ -172,13 +172,13 @@ function ManageCategories() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {filteredCategories.map((category) => (
-              <tr key={category.id}>
-                <td className="px-6 py-4 whitespace-no-wrap">{category.name}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{category.products}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{category.parentCategory}</td>
+            {filteredManufacturers.map((manufacturer) => (
+              <tr key={manufacturer.id}>
+                <td className="px-6 py-4 whitespace-no-wrap">{manufacturer.name}</td>
+                <td className="px-6 py-4 whitespace-no-wrap">{manufacturer.products}</td>
+                <td className="px-6 py-4 whitespace-no-wrap">{manufacturer.store}</td>
                 <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
-                  <Link to={`/admin/edit-category/${category.id}`}>
+                  <Link to={`/admin/edit-manufacturer/${manufacturer.id}`}>
                     <button
                       className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline"
                     >
@@ -195,4 +195,4 @@ function ManageCategories() {
   );
 }
 
-export default ManageCategories;
+export default ManageManufacturers;

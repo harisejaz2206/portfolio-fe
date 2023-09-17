@@ -27,7 +27,7 @@ const Sidebar = () => {
           {isInventoryOpen && (
             <div className="pl-6">
               <Link to="/admin/products"><SidebarSubItem text="Products" /></Link>
-              <Link to="/admin/catalogue"><SidebarSubItem text="Catalogue" /></Link>
+             {/* <Link to="/admin/catalogue"><SidebarSubItem text="Catalogue" /></Link> */}
               <Link to="/admin/categories"><SidebarSubItem text="Categories" /></Link>
               <Link to="/admin/manufacturers"><SidebarSubItem text="Manufacturers" /></Link>
             </div>
