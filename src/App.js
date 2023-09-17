@@ -45,6 +45,7 @@ import ManageCategories from "./pages/ManageCategories";
 import User from "./pages/Users";
 import UserDetails from "./pages/UserDetails";
 import ViewOrders from "./pages/ViewOrders";
+import ManageManufacturers from "./pages/ManageManufacturers";
 
 function App() {
   const token = useSelector(selectToken);
@@ -100,7 +101,7 @@ function App() {
                <Route path="/products" element={<ManageInventory />} />
                <Route path="/create-product" element={<AddProductForm />} />
                <Route path="/billing-and-inventory" element={<BillingAndInventoryForm />} />
-               <Route path="/catalogue" element={<Catalog />} />
+             { /* <Route path="/catalogue" element={<Catalog />} /> */ }
                <Route path="/add-to-inventory-1" element={<AddToInventoryForm/>} />
                <Route path="/add-to-inventory-2" element={<InventoryBilling/>} />
                <Route path="/view-product/:productId" element={<ProductDetails/>} />
@@ -108,6 +109,7 @@ function App() {
                <Route path="/users" element={<User/>} />
                <Route path="/view-account/:userId" element={<UserDetails/>} />
                <Route path="/orders" element={<ViewOrders/>} />
+               <Route path="/manufacturers" element={<ManageManufacturers/>} />
                </Routes>
             </div>
           </div> } />
