@@ -83,11 +83,11 @@ function AddToInventoryForm() {
               Cancel
             </button>
           </Link>
-          <Link to="/admin/add-to-inventory-2">
-  <button className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-2" style={{ display: 'flex', alignItems: 'center' }}>
-    Next <FaArrowRight className="ml-2" />
-  </button>
-</Link>
+          <Link to="/admin/products">
+            <button className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-2" style={{ display: 'flex', alignItems: 'center' }}>
+              Next <FaArrowRight className="ml-2" />
+            </button>
+          </Link>
         </div>
       </div>
     </div>
