@@ -6,7 +6,11 @@ import { addOutlet, getOutlets } from "./outlet.thunk";
 const outletSlice = createSlice({
   name: "outlet",
   initialState: initialOutletState,
-  reducers: {},
+  reducers: {
+    clearOutletData: (state) => {
+      return initialOutletState;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(addOutlet.pending, (state) => {
       state.loading = true;
@@ -40,4 +44,5 @@ const outletSlice = createSlice({
   },
 });
 
+export const { clearOutletData } = outletSlice.actions;
 export default outletSlice.reducer;
