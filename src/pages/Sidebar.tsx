@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD:src/pages/Sidebar.tsx
 // import { FaHome, FaStore, FaChartBar, FaLifeRing, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { AppThunkDispatch } from "../store/rootReducer";
 import { logout } from '../app/features/auth/auth.slice';
 import { clearOutletData } from "../app/features/outlet/outlet.slice"
-import { FaHome, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
 // import { Link } from 'react-router-dom';
-=======
 import { FaHome, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
->>>>>>> a1afaca0ef2953e26f251a190786dabaa3a1094c:src/pages/Sidebar.jsx
 
 interface SidebarItemProps {
   icon: JSX.Element;
   text: string;
-  to?: string;  // Note the "?" which means it's optional
+  to?: string;
 }
 
 interface SidebarSubItemProps {
@@ -56,11 +51,7 @@ const Sidebar: React.FC = () => {
           {isInventoryOpen && (
             <div className="pl-6">
               <Link to="/admin/products"><SidebarSubItem text="Products" /></Link>
-<<<<<<< HEAD:src/pages/Sidebar.tsx
               {/* <Link to="/admin/catalogue"><SidebarSubItem text="Catalogue" /></Link> */}
-=======
-             {/* <Link to="/admin/catalogue"><SidebarSubItem text="Catalogue" /></Link> */}
->>>>>>> a1afaca0ef2953e26f251a190786dabaa3a1094c:src/pages/Sidebar.jsx
               <Link to="/admin/categories"><SidebarSubItem text="Categories" /></Link>
               <Link to="/admin/manufacturers"><SidebarSubItem text="Manufacturers" /></Link>
             </div>

@@ -23,17 +23,17 @@ const ManageOutlets: React.FC = () => {
   const [outlets, setOutlets] = useState(outletData);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       await dispatch(getOutlets()); // Using await with dispatch here
-  //     } catch (error) {
-  //       console.error("An error occurred while fetching data: ", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(getOutlets()); // Using await with dispatch here
+      } catch (error) {
+        console.error("An error occurred while fetching data: ", error);
+      }
+    };
 
-  //   fetchData();
-  // }, [dispatch]);
+    fetchData();
+  }, [dispatch]);
 
   // // Function to deactivate an outlet
   // const deactivateOutlet = (outletId: any) => {
