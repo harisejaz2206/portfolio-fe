@@ -10,7 +10,8 @@ export interface IOutlet {
   longitude: string;
   taxType: string;
   taxValue: string;
-  inventory?: string[]; // Add this line if you're storing IDs
+  inventory?: string[];
+  // inventory?: IProduct[];
   createdAt?: string;
   updatedAt?: string;
 }

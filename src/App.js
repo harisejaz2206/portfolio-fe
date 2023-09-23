@@ -49,6 +49,7 @@ import ManageManufacturers from "./pages/ManageManufacturers";
 import ViewOrderDetails from "./pages/ViewOrderDetails";
 import Chat from "./pages/Chat";
 import BannerManagement from "./pages/BannerManagement";
+import AddCategoryForm from "./pages/AddCategoryForm";
 
 function App() {
   const token = useSelector(selectToken);
@@ -262,6 +263,10 @@ function App() {
                   />
                   <Route path="/products" element={<ManageInventory />} />
                   <Route path="/create-product" element={<AddProductForm />} />
+                  <Route
+                    path="/create-category"
+                    element={<AddCategoryForm />}
+                  />
                   {/*<Route path="/billing-and-inventory" element={<BillingAndInventoryForm />} />*/}
                   {/*<Route path="/catalogue" element={<Catalog />} /> */}
                   {/*<Route path="/add-to-inventory-1" element={<AddToInventoryForm/>} /> */}

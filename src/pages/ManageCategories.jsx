@@ -1,89 +1,96 @@
-import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { FaSearch, FaEdit, FaFilter, FaPlusCircle, FaDownload, FaUpload } from 'react-icons/fa';
-import Pagination from '../components/Pagination';
+import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import {
+  FaSearch,
+  FaEdit,
+  FaFilter,
+  FaPlusCircle,
+  FaDownload,
+  FaUpload,
+} from "react-icons/fa";
+import Pagination from "../components/Pagination";
 
 function ManageCategories() {
   // Dummy data for categories (replace with your actual data)
   const initialCategories = [
     {
       id: 1,
-      name: 'Category 1',
+      name: "Category 1",
       products: 10,
-      parentCategory: 'Parent Category A',
+      parentCategory: "Parent Category A",
     },
     {
       id: 2,
-      name: 'Category 2',
+      name: "Category 2",
       products: 5,
-      parentCategory: 'Parent Category B',
+      parentCategory: "Parent Category B",
     },
     {
       id: 3,
-      name: 'Category 3',
+      name: "Category 3",
       products: 5,
-      parentCategory: 'Parent Category B',
+      parentCategory: "Parent Category B",
     },
     {
       id: 4,
-      name: 'Category 4',
+      name: "Category 4",
       products: 5,
-      parentCategory: 'Parent Category B',
+      parentCategory: "Parent Category B",
     },
     {
       id: 5,
-      name: 'Category 5',
+      name: "Category 5",
       products: 5,
-      parentCategory: 'Parent Category B',
+      parentCategory: "Parent Category B",
     },
     {
       id: 6,
-      name: 'Category 6',
+      name: "Category 6",
       products: 5,
-      parentCategory: 'Parent Category B',
+      parentCategory: "Parent Category B",
     },
     {
       id: 7,
-      name: 'Category 7',
+      name: "Category 7",
       products: 5,
-      parentCategory: 'Parent Category B',
+      parentCategory: "Parent Category B",
     },
     {
       id: 8,
-      name: 'Category 8',
+      name: "Category 8",
       products: 5,
-      parentCategory: 'Parent Category B',
+      parentCategory: "Parent Category B",
     },
     {
       id: 9,
-      name: 'Category 9',
+      name: "Category 9",
       products: 5,
-      parentCategory: 'Parent Category B',
+      parentCategory: "Parent Category B",
     },
     {
       id: 10,
-      name: 'Category 10',
+      name: "Category 10",
       products: 5,
-      parentCategory: 'Parent Category B',
+      parentCategory: "Parent Category B",
     },
     {
       id: 11,
-      name: 'Category 11',
+      name: "Category 11",
       products: 5,
-      parentCategory: 'Parent Category B',
+      parentCategory: "Parent Category B",
     },
     {
       id: 12,
-      name: 'Category 12',
+      name: "Category 12",
       products: 5,
-      parentCategory: 'Parent Category B',
+      parentCategory: "Parent Category B",
     },
     // Add more categories as needed
   ];
 
   const [categories, setCategories] = useState(initialCategories);
-  const [searchCategoryNameQuery, setSearchCategoryNameQuery] = useState('');
-  const [searchProductQuery, setSearchProductQuery] = useState('');
+  const [searchCategoryNameQuery, setSearchCategoryNameQuery] = useState("");
+  const [searchProductQuery, setSearchProductQuery] = useState("");
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
@@ -104,21 +111,24 @@ function ManageCategories() {
   // Function to handle filter option selection
   const handleFilterOptionSelect = (option) => {
     // Implement filtering logic based on the selected option
-    console.log('Selected filter option:', option);
+    console.log("Selected filter option:", option);
     // Close the filter dropdown after selecting an option
     setFilterOptionsVisible(false);
   };
 
   // Function to filter categories based on search queries
-  const filteredCategories = categories.filter((category) =>
-    category.name.toLowerCase().includes(searchCategoryNameQuery.toLowerCase()) &&
-    category.products.toString().includes(searchProductQuery)
+  const filteredCategories = categories.filter(
+    (category) =>
+      category.name
+        .toLowerCase()
+        .includes(searchCategoryNameQuery.toLowerCase()) &&
+      category.products.toString().includes(searchProductQuery)
   );
 
   const uploadSelectedFiles = () => {
     // Check if files were selected
     if (selectedFiles.length === 0) {
-      alert('Please select one or more files.');
+      alert("Please select one or more files.");
       return;
     }
 
@@ -140,13 +150,15 @@ function ManageCategories() {
   return (
     <div className="bg-gray-100 min-h-screen p-4">
       <div className="bg-white rounded-lg shadow p-6">
-        <h1 className="text-xl font-semibold text-gray-800 mb-4">Manage Categories</h1>
+        <h1 className="text-xl font-semibold text-gray-800 mb-4">
+          Manage Categories
+        </h1>
 
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center space-x-4">
             <div className="relative">
               <span className="absolute left-3 top-2 text-gray-400">
-                <FaSearch className='text-sm' />
+                <FaSearch className="text-sm" />
               </span>
               <input
                 type="text"
@@ -158,7 +170,7 @@ function ManageCategories() {
             </div>
             <div className="relative">
               <span className="absolute left-3 top-2 text-gray-400">
-                <FaSearch className='text-sm' />
+                <FaSearch className="text-sm" />
               </span>
               <input
                 type="text"
@@ -184,8 +196,8 @@ function ManageCategories() {
           </div>
 
           <div className="flex items-center space-x-2 text-sm">
-          <Link
-              to="/admin/create-product"
+            <Link
+              to="/admin/create-category"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
             >
               <FaPlusCircle className="mr-2" /> Add Category
@@ -204,7 +216,7 @@ function ManageCategories() {
               ref={fileInputRef}
               accept=".csv, .xlsx"
               multiple
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
               onChange={handleFileSelect}
             />
             {selectedFiles.length > 0 && (
@@ -212,7 +224,7 @@ function ManageCategories() {
                 className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
                 onClick={uploadSelectedFiles}
               >
-                <FaUpload className='mr-2'/> Upload
+                <FaUpload className="mr-2" /> Upload
               </button>
             )}
             <Link to={"/path-to-sample-sheet/sample-sheet.xlsx"}>
@@ -247,15 +259,19 @@ function ManageCategories() {
           <tbody className="bg-white divide-y divide-gray-200">
             {currentCategory.map((category) => (
               <tr key={category.id}>
-                <td className="px-6 py-4 whitespace-no-wrap">{category.name}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{category.products}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{category.parentCategory}</td>
+                <td className="px-6 py-4 whitespace-no-wrap">
+                  {category.name}
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap">
+                  {category.products}
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap">
+                  {category.parentCategory}
+                </td>
                 <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
                   <Link to={`/admin/edit-category/${category.id}`}>
-                    <button
-                      className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline"
-                    >
-                      <FaEdit className='-ml-20' />
+                    <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
+                      <FaEdit className="-ml-20" />
                     </button>
                   </Link>
                 </td>

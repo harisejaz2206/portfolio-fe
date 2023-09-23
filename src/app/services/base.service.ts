@@ -6,6 +6,7 @@ import { store } from "../../store/store";
 // const Config = process.env.NEXT_PUBLIC_APP_BASE_URL;
 
 const Config = "http://localhost:8081";
+// const Config = "https://dotbrand-api.onrender.com";
 console.log(Config);
 export class HttpService {
   CancelToken: CancelTokenStatic;
