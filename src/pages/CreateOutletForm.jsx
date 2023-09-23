@@ -198,27 +198,26 @@ function CreateOutletForm() {
 </div>
 
 {/* Add Tax Button */}
-<div className="mt-4">
-  <button
-    type="button"
-    className="text-indigo-600 bg-white hover:underline hover:text-indigo-700 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center flex items-center"
-  >
-    <FaPlusCircle className="mr-1" /> Add Tax
-  </button>
-</div>
+          <div className="mt-4">
+                  <button
+                    type="button"
+                    className="text-indigo-600 bg-white hover:underline hover:text-indigo-700 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center flex items-center"
+                  >
+                    <FaPlusCircle className="mr-1" /> Add Tax
+                  </button>
+          </div>
 
           {/* Submit Button */}
           <div className="mt-6">
             <Link to="/admin/outlets">
-          <button
-  type="submit"
-  className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 flex items-center"
->
-  <FaPlusCircle icon={FaPlusCircle} className="text-lg" />
-  <span className="ml-2">Create Outlet</span>
-</button>
-</Link>
-
+             <button
+                type="submit"
+                className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 flex items-center"
+                >
+                <FaPlusCircle icon={FaPlusCircle} className="text-lg" />
+                <span className="ml-2">Create Outlet</span>
+             </button>
+           </Link>
           </div>
         </form>
       </div>

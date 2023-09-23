@@ -49,6 +49,7 @@ import ManageManufacturers from "./pages/ManageManufacturers";
 import ViewOrderDetails from "./pages/ViewOrderDetails";
 import Chat from "./pages/Chat";
 import BannerManagement from "./pages/BannerManagement";
+import AddBanner from "./pages/AddBanner";
 
 function App() {
   const token = useSelector(selectToken);
@@ -113,6 +114,7 @@ function App() {
                <Route path="/view-account/:userId" element={<UserDetails/>} />
                <Route path="/orders" element={<ViewOrders/>} />
                <Route path="/banners" element={<BannerManagement/>} />
+               <Route path="/add-banner" element={<AddBanner/>} />
                <Route path="/manufacturers" element={<ManageManufacturers/>} />
                <Route path="/view-orderdetails/:orderId" element={<ViewOrderDetails/>} />
                <Route path="/chat" element={<Chat/>} />
