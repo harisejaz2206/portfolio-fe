@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaSearch, FaFilter, FaPlusCircle, FaEdit, FaTrash } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Pagination from '../components/Pagination';
 
 function BannerManagement() {
@@ -151,11 +152,11 @@ function BannerManagement() {
           </div>
 
           <div className="flex items-center space-x-2">
-            <button
+            <Link to="/admin/add-banner"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
             >
               <FaPlusCircle className="mr-2" /> Add Banner
-            </button>
+            </Link>
           </div>
         </div>
 
