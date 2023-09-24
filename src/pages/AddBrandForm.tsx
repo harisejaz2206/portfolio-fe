@@ -14,6 +14,7 @@ import InputField from "../components/globals/inputField";
 import { addBrand } from "../app/features/brand/brand.thunk";
 import { handleApiResponse } from "../utils/handleApiResponse";
 import { handleError } from "../utils/catchErrorToast";
+import { ClipLoader } from "react-spinners";
 
 interface BrandData {
     name: string;
@@ -35,7 +36,6 @@ const AddBrandForm: React.FC = () => {
     const loading = useSelector(selectBrandLoading);
     const [previewImage, setPreviewImage] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
-
 
     const handleSuccess = (result: any) => {
         const status = result.meta.requestStatus == "fulfilled" ? true : false;
@@ -204,11 +204,12 @@ const AddBrandForm: React.FC = () => {
                         </Link>
                         <button
                             type="submit"
-                            disabled={isUploading}
-                            className={`text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-2 ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            disabled={isUploading || loading!}
+                            className={`text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-2 ${isUploading || loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                             style={{ display: "flex", alignItems: "center" }}
                         >
-                            {isUploading ? 'Uploading...' : 'Next'} <FaArrowRight className="ml-2" />
+                            {isUploading ? 'Uploading...' : loading ? <ClipLoader color="#ffffff" /> : 'Next'}
+                            {!isUploading && !loading && <FaArrowRight className="ml-2" />}
                         </button>
 
                     </div>

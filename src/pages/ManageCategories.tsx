@@ -8,26 +8,26 @@ import {
   FaDownload,
   FaUpload,
 } from "react-icons/fa";
-import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
-import { selectBrandData } from "../app/features/brand/brand.selector";
-import { getBrands } from "../app/features/brand/brand.thunk";
+import { selectCategoryData, selectCategoryLoading } from "../app/features/category/category.selector";
+import { getCategories } from "../app/features/category/category.thunk";
+import Loader from "react-loader-spinner";
 import { BeatLoader, ClipLoader, PacmanLoader, ClimbingBoxLoader } from "react-spinners";
-import { selectCategoryLoading } from "../app/features/category/category.selector";
 
 
-const ManageBrands: React.FC = () => {
+
+const ManageCategories: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
-  const brandState = useSelector(selectBrandData) || [];
+  const categoryState = useSelector(selectCategoryData) || [];
   const loading = useSelector(selectCategoryLoading);
-  console.log("brand state:", brandState)
+  // const loading = true
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(getBrands()); // Using await with dispatch here
+        await dispatch(getCategories()); // Using await with dispatch here
       } catch (error) {
         console.error("An error occurred while fetching data: ", error);
       }
@@ -35,7 +35,8 @@ const ManageBrands: React.FC = () => {
     fetchData()
   }, [dispatch]);
 
-  const [searchStoreQuery, setSearchStoreQuery] = useState("");
+  // const [categories, setCategories] = useState(initialCategories);
+  const [searchCategoryNameQuery, setSearchCategoryNameQuery] = useState("");
   const [searchProductQuery, setSearchProductQuery] = useState("");
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -51,15 +52,12 @@ const ManageBrands: React.FC = () => {
     setFilterOptionsVisible(!filterOptionsVisible);
   };
 
-
   const uploadSelectedFiles = () => {
     // Check if files were selected
     if (selectedFiles.length === 0) {
       alert("Please select one or more files.");
       return;
     }
-
-    // Clear the selected files
     setSelectedFiles([]);
   };
 
@@ -67,7 +65,7 @@ const ManageBrands: React.FC = () => {
     <div className="bg-gray-100 min-h-screen p-4">
       <div className="bg-white rounded-lg shadow p-6">
         <h1 className="text-xl font-semibold text-gray-800 mb-4">
-          Manage Brands
+          Manage Categories
         </h1>
         {loading ? (
           <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-black">
@@ -83,10 +81,10 @@ const ManageBrands: React.FC = () => {
                   </span>
                   <input
                     type="text"
-                    placeholder="Select Store..."
+                    placeholder="Select Category..."
                     className="border text-sm rounded-md pl-10 pr-4 py-1 px-4 w-36 focus:outline-none focus:ring focus:border-indigo-300"
-                    value={searchStoreQuery}
-                    onChange={(e) => setSearchStoreQuery(e.target.value)}
+                    value={searchCategoryNameQuery}
+                    onChange={(e) => setSearchCategoryNameQuery(e.target.value)}
                   />
                 </div>
                 <div className="relative">
@@ -95,7 +93,7 @@ const ManageBrands: React.FC = () => {
                   </span>
                   <input
                     type="text"
-                    placeholder="Select Product..."
+                    placeholder="Select Store..."
                     className="border text-sm rounded-md pl-10 pr-4 py-1 px-4 w-36 focus:outline-none focus:ring focus:border-indigo-300"
                     value={searchProductQuery}
                     onChange={(e) => setSearchProductQuery(e.target.value)}
@@ -118,19 +116,19 @@ const ManageBrands: React.FC = () => {
 
               <div className="flex items-center space-x-2 text-sm">
                 <Link
-                  to="/admin/create-brand"
+                  to="/admin/create-category"
                   className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
                 >
-                  <FaPlusCircle className="mr-2" /> Add Brands
+                  <FaPlusCircle className="mr-2" /> Add Category
                 </Link>
 
                 <button
                   className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
-                  onClick={() => {
-                    // fileInputRef.current.click();
-                  }}
+                // onClick={() => {
+                //   fileInputRef.current!.click();
+                // }}
                 >
-                  <FaPlusCircle className="mr-2" /> Add Multiple Brands
+                  <FaPlusCircle className="mr-2" /> Add Multiple Categories
                 </button>
                 <input
                   type="file"
@@ -159,8 +157,6 @@ const ManageBrands: React.FC = () => {
               </div>
             </div>
 
-
-            {/* Table and manufacturer listing */}
             <table className="min-w-full divide-y divide-gray-200 mt-8 text-sm">
               <thead>
                 <tr>
@@ -179,20 +175,19 @@ const ManageBrands: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {brandState && brandState.filter(Boolean).map((brand) => (
-                  <tr key={brand._id}>
+                {categoryState && categoryState.filter(Boolean).map((category) => (
+                  <tr key={category._id}>
                     <td className="px-6 py-4 whitespace-no-wrap">
-                      {brand.name}
+                      {category.name}
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap">
-                      {brand.status ? 'Active' : 'Inactive'}
+                      {category.status ? 'Active' : 'Inactive'}
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap">
-                      <img src={brand.image} alt={brand.name} width="120" height="120" />
+                      <img src={category.image} alt={category.name} width="150" height="150" />
                     </td>
-
                     <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
-                      <Link to={`/admin/edit-manufacturer/${brand._id}`}>
+                      <Link to={`/admin/edit-category/${category._id}`}>
                         <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
                           <FaEdit className="-ml-20" />
                         </button>
@@ -205,9 +200,12 @@ const ManageBrands: React.FC = () => {
           </>
         )}
 
+
+        {/* Table and category listing */}
+
       </div>
     </div>
   );
 }
 
-export default ManageBrands;
+export default ManageCategories;

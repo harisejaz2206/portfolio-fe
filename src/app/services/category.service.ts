@@ -15,9 +15,8 @@ class CategoryService extends HttpService {
   ): Promise<IResponseInterface<{ category: ICategory }>> =>
     this.post(`${this.prefix}/category`, data);
 
-  getAllCategoriesHandler = (): Promise<
-    IResponseInterface<{ categories: ICategory[] }>
-  > => this.get(`${this.prefix}/category`);
+  getAllCategoriesHandler = (): Promise<IResponseInterface<ICategory[]>> =>
+    this.get(`${this.prefix}/category`);
 }
 
 export const categoryService = new CategoryService();

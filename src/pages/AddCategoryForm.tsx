@@ -14,6 +14,7 @@ import InputField from "../components/globals/inputField";
 import { addBrand } from "../app/features/brand/brand.thunk";
 import { handleApiResponse } from "../utils/handleApiResponse";
 import { addCategory } from "../app/features/category/category.thunk";
+import { ClipLoader } from "react-spinners";
 
 interface CategoryData {
   name: string;
@@ -37,7 +38,7 @@ const AddCategoryForm: React.FC = () => {
   const [isUploading, setIsUploading] = useState(false);
 
   const handleSuccess = (result: any) => {
-    const status = result.meta.status == "fulfilled" ? true : false;
+    const status = result.meta.requestStatus == "fulfilled" ? true : false;
     navigate(status ? '/admin/categories' : '/haris');
     Toast.fire({
       icon: "success",
@@ -215,11 +216,12 @@ const AddCategoryForm: React.FC = () => {
             </Link>
             <button
               type="submit"
-              disabled={isUploading}
-              className={`text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-2 ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={isUploading || loading!}
+              className={`text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-2 ${isUploading || loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               style={{ display: "flex", alignItems: "center" }}
             >
-              {isUploading ? 'Uploading...' : 'Next'} <FaArrowRight className="ml-2" />
+              {isUploading ? 'Uploading...' : loading ? <ClipLoader color="#ffffff" /> : 'Next'}
+              {!isUploading && !loading && <FaArrowRight className="ml-2" />}
             </button>
           </div>
         </form>

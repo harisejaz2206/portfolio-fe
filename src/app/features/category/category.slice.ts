@@ -33,7 +33,7 @@ const categorySlice = createSlice({
 
     builder.addCase(getCategories.fulfilled, (state, action) => {
       state.loading = false;
-      state.category = action.payload.payload?.categories;
+      state.category = action.payload.payload;
       state.message = action.payload.message;
     });
 
