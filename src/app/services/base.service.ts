@@ -43,7 +43,7 @@ export class HttpService {
       withCredentials: true,
       cancelToken: this.source.token,
     });
-    console.log("base service response:", res);
+    // console.log("base service response:", res);
     return res.data;
   };
 

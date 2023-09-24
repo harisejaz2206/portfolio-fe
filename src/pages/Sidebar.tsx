@@ -53,7 +53,7 @@ const Sidebar: React.FC = () => {
               <Link to="/admin/products"><SidebarSubItem text="Products" /></Link>
               {/* <Link to="/admin/catalogue"><SidebarSubItem text="Catalogue" /></Link> */}
               <Link to="/admin/categories"><SidebarSubItem text="Categories" /></Link>
-              <Link to="/admin/manufacturers"><SidebarSubItem text="Manufacturers" /></Link>
+              <Link to="/admin/brands"><SidebarSubItem text="Brands" /></Link>
             </div>
           )}
           <Link to={"/admin/users"}><SidebarItem icon={<FaUsers />} text="Users" /></Link>

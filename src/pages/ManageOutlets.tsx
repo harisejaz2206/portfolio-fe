@@ -19,7 +19,6 @@ const ManageOutlets: React.FC = () => {
   const outletData = useSelector(selectOutletData);
   console.log(outletData)
 
-
   const [outlets, setOutlets] = useState(outletData);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -34,28 +33,6 @@ const ManageOutlets: React.FC = () => {
 
     fetchData();
   }, [dispatch]);
-
-  // // Function to deactivate an outlet
-  // const deactivateOutlet = (outletId: any) => {
-  //   const updatedOutlets = outlets.map((outlet) =>
-  //     outlet.id === outletId ? { ...outlet, isActive: false } : outlet
-  //   );
-  //   setOutlets(updatedOutlets);
-  // };
-
-  // // Function to activate an outlet
-  // const activateOutlet = (outletId: any) => {
-  //   const updatedOutlets = outlets.map((outlet) =>
-  //     outlet.id === outletId ? { ...outlet, isActive: true } : outlet
-  //   );
-  //   setOutlets(updatedOutlets);
-  // };
-
-  // Function to remove an outlet
-  // const removeOutlet = (outletId: any) => {
-  //   const updatedOutlets = outlets.filter((outlet) => outlet.id !== outletId);
-  //   setOutlets(updatedOutlets);
-  // };
 
   // Function to filter outlets based on search query
   const filteredOutlets = outletData!.filter(

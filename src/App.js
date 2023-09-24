@@ -45,11 +45,12 @@ import ManageCategories from "./pages/ManageCategories";
 import User from "./pages/Users";
 import UserDetails from "./pages/UserDetails";
 import ViewOrders from "./pages/ViewOrders";
-import ManageManufacturers from "./pages/ManageManufacturers";
 import ViewOrderDetails from "./pages/ViewOrderDetails";
 import Chat from "./pages/Chat";
 import BannerManagement from "./pages/BannerManagement";
 import AddCategoryForm from "./pages/AddCategoryForm";
+import AddBrandForm from "./pages/AddBrandForm";
+import ManageBrands from "./pages/ManageBrands";
 
 function App() {
   const token = useSelector(selectToken);
@@ -263,6 +264,7 @@ function App() {
                   />
                   <Route path="/products" element={<ManageInventory />} />
                   <Route path="/create-product" element={<AddProductForm />} />
+                  <Route path="/create-brand" element={<AddBrandForm />} />
                   <Route
                     path="/create-category"
                     element={<AddCategoryForm />}
@@ -283,10 +285,7 @@ function App() {
                   />
                   <Route path="/orders" element={<ViewOrders />} />
                   <Route path="/banners" element={<BannerManagement />} />
-                  <Route
-                    path="/manufacturers"
-                    element={<ManageManufacturers />}
-                  />
+                  <Route path="/brands" element={<ManageBrands />} />
                   <Route
                     path="/view-orderdetails/:orderId"
                     element={<ViewOrderDetails />}
