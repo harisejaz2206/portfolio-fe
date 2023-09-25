@@ -48,6 +48,7 @@ const AddBrandForm: React.FC = () => {
 
     // Function to handle image upload
     const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+        formik.setFieldValue('image', URL.createObjectURL(e.target!.files![0]));
         setIsUploading(true);
         const files = Array.from(e.target.files || []);
         if (files.length === 0) {

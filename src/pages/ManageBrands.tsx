@@ -7,14 +7,16 @@ import {
   FaPlusCircle,
   FaDownload,
   FaUpload,
+  FaTrash
 } from "react-icons/fa";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
 import { selectBrandData } from "../app/features/brand/brand.selector";
-import { getBrands } from "../app/features/brand/brand.thunk";
+import { deleteBrand, getBrands } from "../app/features/brand/brand.thunk";
 import { BeatLoader, ClipLoader, PacmanLoader, ClimbingBoxLoader } from "react-spinners";
 import { selectCategoryLoading } from "../app/features/category/category.selector";
+import Modal from 'react-modal';
 
 
 const ManageBrands: React.FC = () => {
@@ -22,6 +24,8 @@ const ManageBrands: React.FC = () => {
   const navigate = useNavigate();
   const brandState = useSelector(selectBrandData) || [];
   const loading = useSelector(selectCategoryLoading);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [brandToDelete, setBrandToDelete] = useState<string | null>(null);
   console.log("brand state:", brandState)
 
   useEffect(() => {
@@ -51,7 +55,6 @@ const ManageBrands: React.FC = () => {
     setFilterOptionsVisible(!filterOptionsVisible);
   };
 
-
   const uploadSelectedFiles = () => {
     // Check if files were selected
     if (selectedFiles.length === 0) {
@@ -62,6 +65,16 @@ const ManageBrands: React.FC = () => {
     // Clear the selected files
     setSelectedFiles([]);
   };
+
+  const handleDeleteBrand = async (id: string) => {
+    try {
+      await dispatch(deleteBrand(id));
+      await dispatch(getBrands());
+    } catch (error) {
+      console.error("An error occurred while deleting the brand: ", error);
+    }
+  };
+
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
@@ -197,6 +210,12 @@ const ManageBrands: React.FC = () => {
                           <FaEdit className="-ml-20" />
                         </button>
                       </Link>
+                      <button
+                        className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
+                        onClick={() => handleDeleteBrand(brand._id!)}
+                      >
+                        <FaTrash />
+                      </button>
                     </td>
                   </tr>
                 ))}

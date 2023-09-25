@@ -30,3 +30,17 @@ export const getCategories = createAsyncThunk(
     }
   }
 );
+
+export const deleteCategory = createAsyncThunk(
+  "brand/deleteCategory",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const response = await categoryService.deleteCategoryHandler(id);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data || "An error occurred while deleting the brand"
+      );
+    }
+  }
+);

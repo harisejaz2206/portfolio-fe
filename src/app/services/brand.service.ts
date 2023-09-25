@@ -17,6 +17,11 @@ class BrandService extends HttpService {
 
   getAllBrandsHandler = (): Promise<IResponseInterface<IBrand[]>> =>
     this.get(`${this.prefix}/brand`);
+
+  deleteBrandHandler = (
+    id: string
+  ): Promise<IResponseInterface<{ id: string }>> =>
+    this.delete(`${this.prefix}/brand/${id}`);
 }
 
 export const brandService = new BrandService();

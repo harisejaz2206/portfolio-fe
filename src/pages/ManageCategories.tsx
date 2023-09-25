@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
 import { selectCategoryData, selectCategoryLoading } from "../app/features/category/category.selector";
-import { getCategories } from "../app/features/category/category.thunk";
+import { deleteCategory, getCategories } from "../app/features/category/category.thunk";
 import Loader from "react-loader-spinner";
 import { BeatLoader, ClipLoader, PacmanLoader, ClimbingBoxLoader } from "react-spinners";
 
@@ -59,6 +59,15 @@ const ManageCategories: React.FC = () => {
       return;
     }
     setSelectedFiles([]);
+  };
+
+  const handleDelete = async (categoryId: string) => {
+    try {
+      await dispatch(deleteCategory(categoryId));
+      await dispatch(getCategories());
+    } catch (error) {
+      console.error("An error occurred while deleting the category: ", error);
+    }
   };
 
   return (
@@ -192,6 +201,13 @@ const ManageCategories: React.FC = () => {
                           <FaEdit className="-ml-20" />
                         </button>
                       </Link>
+                      {/* Delete Button (new) */}
+                      <button
+                        className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
+                        onClick={() => handleDelete(category._id!)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}

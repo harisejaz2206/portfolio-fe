@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store/rootReducer";
 import initialBrandState from "./brand.initialstate";
-import { addBrand, getBrands } from "./brand.thunk";
+import { addBrand, deleteBrand, getBrands } from "./brand.thunk";
 
 const brandSlice = createSlice({
   name: "brand",
@@ -40,6 +40,24 @@ const brandSlice = createSlice({
     });
 
     builder.addCase(getBrands.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
+    builder.addCase(deleteBrand.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(deleteBrand.fulfilled, (state, action) => {
+      state.loading = false;
+      // Remove the brand by its ID
+      const id = action.payload.payload?.id!;
+      console.log(id);
+      state.brand = state.brand?.filter((brand) => brand._id !== id);
+      state.message = action.payload.message;
+    });
+
+    builder.addCase(deleteBrand.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });

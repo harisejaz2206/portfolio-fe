@@ -127,12 +127,12 @@ const AddCategoryForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex justify-center items-center">
-      <div className="bg-white rounded-lg shadow-md p-8 w-[98%] max-w-3xl mt-2 mb-2">
+    <div className="bg-gray-100 min-h-screen flex justify-center items-center space-y-8">
+      <div className="bg-white rounded-lg shadow-md p-8 w-[98%] max-w-3xl mt-2 mb-2 space-y-6">
         <h1 className="text-2xl font-semibold text-gray-800 mb-6">
           Add Category
         </h1>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="mb-4">
             <label
               htmlFor="name"
@@ -149,8 +149,8 @@ const AddCategoryForm: React.FC = () => {
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
+          <div className="mb-4 flex items-center space-x-2">
+            <label className="text-sm font-medium text-gray-700">
               Status
             </label>
             <Toggle
@@ -161,7 +161,6 @@ const AddCategoryForm: React.FC = () => {
               icons={false}
               className="react-toggle"
             />
-
           </div>
 
           <div className="mb-4">

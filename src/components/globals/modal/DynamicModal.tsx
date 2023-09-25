@@ -13,6 +13,8 @@ type Props = {
     setOpen?: any
     successIcon?: any
     btnWidth?: any
+    children?: React.ReactNode;
+    onConfirm?: () => void;
 }
 
 const DynamicModal = ({ title, btnWidth, description, action, routerPath, open, setOpen, successIcon }: Props) => {

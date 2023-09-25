@@ -31,3 +31,17 @@ export const getBrands = createAsyncThunk(
     }
   }
 );
+
+export const deleteBrand = createAsyncThunk(
+  "brand/deleteBrand",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const response = await brandService.deleteBrandHandler(id);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data || "An error occurred while deleting the brand"
+      );
+    }
+  }
+);

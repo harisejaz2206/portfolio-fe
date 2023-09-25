@@ -17,6 +17,11 @@ class CategoryService extends HttpService {
 
   getAllCategoriesHandler = (): Promise<IResponseInterface<ICategory[]>> =>
     this.get(`${this.prefix}/category`);
+
+  deleteCategoryHandler = (
+    id: string
+  ): Promise<IResponseInterface<{ id: string }>> =>
+    this.delete(`${this.prefix}/category/${id}`);
 }
 
 export const categoryService = new CategoryService();
