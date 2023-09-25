@@ -49,11 +49,8 @@ import ManageManufacturers from "./pages/ManageManufacturers";
 import ViewOrderDetails from "./pages/ViewOrderDetails";
 import Chat from "./pages/Chat";
 import BannerManagement from "./pages/BannerManagement";
-<<<<<<< HEAD
-import AddCategoryForm from "./pages/AddCategoryForm";
-=======
 import AddBanner from "./pages/AddBanner";
->>>>>>> burhan
+import AddCategoryForm from "./pages/AddCategoryForm";
 
 function App() {
   const token = useSelector(selectToken);
@@ -69,7 +66,6 @@ function App() {
       <Routes>
         {/* Routes that should have the layout */}
 
-<<<<<<< HEAD
         <Route
           path="/"
           element={
@@ -299,35 +295,6 @@ function App() {
                   <Route path="/chat" element={<Chat />} />
                 </Routes>
               </div>
-=======
-          {/* Admin Dashboard Routes*/}
-          <Route path="/admin/*"    element={ 
-          <div className="flex">
-             <Sidebar />
-             <div className="flex-1">
-               <Routes>
-               <Route path="/" element={<Dashboard />} />
-               <Route path="/outlets" element={<ManageOutlets />} />
-               <Route path="/create-outlet" element={<CreateOutletForm />} />
-               <Route path="/edit-outlet/:outletId" element={<EditOutletForm />} />
-               <Route path="/products" element={<ManageInventory />} />
-               <Route path="/create-product" element={<AddProductForm />} />
-            {/*<Route path="/billing-and-inventory" element={<BillingAndInventoryForm />} />*/}
-            {/*<Route path="/catalogue" element={<Catalog />} /> */ }
-            {/*<Route path="/add-to-inventory-1" element={<AddToInventoryForm/>} /> */}
-            {/*<Route path="/add-to-inventory-2" element={<InventoryBilling/>} /> */}
-               <Route path="/view-product/:productId" element={<ProductDetails/>} />
-               <Route path="/categories" element={<ManageCategories/>} />
-               <Route path="/users" element={<User/>} />
-               <Route path="/view-account/:userId" element={<UserDetails/>} />
-               <Route path="/orders" element={<ViewOrders/>} />
-               <Route path="/banners" element={<BannerManagement/>} />
-               <Route path="/add-banner" element={<AddBanner/>} />
-               <Route path="/manufacturers" element={<ManageManufacturers/>} />
-               <Route path="/view-orderdetails/:orderId" element={<ViewOrderDetails/>} />
-               <Route path="/chat" element={<Chat/>} />
-               </Routes>
->>>>>>> burhan
             </div>
           }
         />
