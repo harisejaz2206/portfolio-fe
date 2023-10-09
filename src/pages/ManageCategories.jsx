@@ -197,7 +197,7 @@ function ManageCategories() {
 
           <div className="flex items-center space-x-2 text-sm">
             <Link
-              to="/admin/create-category"
+              to="/multi-admin/create-category"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
             >
               <FaPlusCircle className="mr-2" /> Add Category
@@ -269,7 +269,7 @@ function ManageCategories() {
                   {category.parentCategory}
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
-                  <Link to={`/admin/edit-category/${category.id}`}>
+                  <Link to={`/multi-admin/edit-category/${category.id}`}>
                     <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
                       <FaEdit className="-ml-20" />
                     </button>

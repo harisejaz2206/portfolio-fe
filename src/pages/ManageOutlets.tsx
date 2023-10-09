@@ -88,7 +88,7 @@ const ManageOutlets: React.FC = () => {
           </div>
 
           <Link
-            to="/admin/create-outlet"
+            to="/multi-admin/create-outlet"
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center" // Add flex to the button
           >
             <FaPlusCircle className="mr-2" /> Add Outlet{" "}
@@ -146,7 +146,7 @@ const ManageOutlets: React.FC = () => {
                   >
                     {outlet.isActive ? "Deactivate" : "Activate"}
                   </button> */}
-                  <Link to={`/admin/edit-outlet/${outlet._id}`}>
+                  <Link to={`/multi-admin/edit-outlet/${outlet._id}`}>
                     <button
                       className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline ml-4"
                     // Add onClick handler for editing outlet details

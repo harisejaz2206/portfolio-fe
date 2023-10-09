@@ -76,7 +76,7 @@ const CreateOutletForm: React.FC = () => {
     HttpService.setToken(token);
     localStorage.setItem('token', token);
 
-    navigate(result.payload.payload.user ? '/admin/outlets' : '/haris');
+    navigate(result.payload.payload.user ? '/multi-admin/outlets' : '/haris');
     Toast.fire({
       icon: "success",
       title: "Outlet created successfully",
@@ -322,7 +322,7 @@ const CreateOutletForm: React.FC = () => {
 
           {/* Submit Button */}
           <div className="mt-6">
-            {/* <Link to="/admin/outlets"> */}
+            {/* <Link to="/multi-admin/outlets"> */}
             <button
               type="submit"
               disabled={!formik.isValid || loading!} // Disable button if form is not valid or loading

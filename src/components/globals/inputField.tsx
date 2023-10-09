@@ -1,4 +1,3 @@
-import React from "react";
 import InputError from "./inputError";
 import { useState } from "react";
 import { Eye, EyeOff } from "./svgsIcons/svgIcons";

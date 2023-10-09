@@ -125,7 +125,7 @@ function ManageManufacturers() {
 
           <div className="flex items-center space-x-2 text-sm">
           <Link
-              to="/admin/create-product"
+              to="/multi-admin/create-product"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
             >
               <FaPlusCircle className="mr-2" /> Add Category
@@ -191,7 +191,7 @@ function ManageManufacturers() {
                 <td className="px-6 py-4 whitespace-no-wrap">{manufacturer.products}</td>
                 <td className="px-6 py-4 whitespace-no-wrap">{manufacturer.store}</td>
                 <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
-                  <Link to={`/admin/edit-manufacturer/${manufacturer.id}`}>
+                  <Link to={`/multi-admin/edit-manufacturer/${manufacturer.id}`}>
                     <button
                       className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline"
                     >

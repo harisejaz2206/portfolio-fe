@@ -51,6 +51,12 @@ import Chat from "./pages/Chat";
 import BannerManagement from "./pages/BannerManagement";
 import AddBanner from "./pages/AddBanner";
 import AddCategoryForm from "./pages/AddCategoryForm";
+import SoleChainSidebar from "./pages/SoleChainSidebar";
+import SoleChainDashboard from "./pages/SoleChainDashboard";
+import SuperAdminDashboard from "./pages/SuperAdminDashboard";
+import SuperAdminSidebar from "./pages/SuperAdminSidebar";
+import ManageStores from "./pages/ManageStores";
+import AddStore from "./pages/AddStore";
 
 function App() {
   const token = useSelector(selectToken);
@@ -249,7 +255,7 @@ function App() {
 
         {/* Admin Dashboard Routes*/}
         <Route
-          path="/admin/*"
+          path="/multi-admin/*"
           element={
             <div className="flex">
               <Sidebar />
@@ -268,10 +274,10 @@ function App() {
                     path="/create-category"
                     element={<AddCategoryForm />}
                   />
-                  {/*<Route path="/billing-and-inventory" element={<BillingAndInventoryForm />} />*/}
-                  {/*<Route path="/catalogue" element={<Catalog />} /> */}
-                  {/*<Route path="/add-to-inventory-1" element={<AddToInventoryForm/>} /> */}
-                  {/*<Route path="/add-to-inventory-2" element={<InventoryBilling/>} /> */}
+                  <Route path="/billing-and-inventory" element={<BillingAndInventoryForm />} />
+                  <Route path="/catalogue" element={<Catalog />} />
+                  <Route path="/add-to-inventory-1" element={<AddToInventoryForm/>} /> 
+                  <Route path="/add-to-inventory-2" element={<InventoryBilling/>} /> 
                   <Route
                     path="/view-product/:productId"
                     element={<ProductDetails />}
@@ -296,6 +302,33 @@ function App() {
                 </Routes>
               </div>
             </div>
+          }
+        />
+        <Route
+          path="/sole-admin/*"
+          element={ <div className="flex">
+          <SoleChainSidebar/>
+          <div className="flex-1">
+            <Routes>
+            <Route path="/" element={<SoleChainDashboard/>} />
+            </Routes>
+          </div>
+          </div>
+          }
+        />
+
+       <Route
+          path="/super-admin/*"
+          element={ <div className="flex">
+          <SuperAdminSidebar/>
+          <div className="flex-1">
+            <Routes>
+            <Route path="/" element={<SuperAdminDashboard/>} />
+            <Route path="/stores" element={<ManageStores />} />
+            <Route path="/add-store" element={<AddStore/>}/>
+            </Routes>
+          </div>
+          </div>
           }
         />
       </Routes>

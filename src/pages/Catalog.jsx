@@ -161,14 +161,14 @@ function Catalog() {
               <td className="px-4 py-2 whitespace-no-wrap text-right">
               <div className="flex items-center ml-[23%]">
                 <Link
-                  to={`/admin/view-product/${product.id}`}
+                  to={`/multi-admin/view-product/${product.id}`}
                   className="flex items-center justify-center px-2 py-1 rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:underline text-sm"
                 >
                   <FaEye className="mr-1 text-sm" />
                   View Product
                 </Link>
 
-                <Link to={"/admin/add-to-inventory-1"}
+                <Link to={"/multi-admin/add-to-inventory-1"}
                   className="flex items-center justify-center px-2 py-1 rounded-md text-indigo-600 bg-white border border-indigo-600 hover:bg-indigo-700 hover:text-white focus:outline-none focus:underline ml-4 text-sm"
                 >
                   <FaPlusCircle className="mr-1 text-sm" />

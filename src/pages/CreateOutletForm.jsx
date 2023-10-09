@@ -209,7 +209,7 @@ function CreateOutletForm() {
 
           {/* Submit Button */}
           <div className="mt-6">
-            <Link to="/admin/outlets">
+            <Link to="/multi-admin/outlets">
              <button
                 type="submit"
                 className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 flex items-center"

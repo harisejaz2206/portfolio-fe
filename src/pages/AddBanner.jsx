@@ -144,7 +144,7 @@ function AddBanner() {
 
       {/* Cancel and Create Buttons */}
       <div className="flex justify-end space-x-2">
-        <Link to={"/admin/banners"}>
+        <Link to={"/multi-admin/banners"}>
         <button
           className="text-white bg-gradient-to-br from-gray-400 to-gray-600 hover:bg-gradient-to-bl  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 flex items-center"
           onClick={() => {
@@ -154,7 +154,7 @@ function AddBanner() {
           Cancel
         </button>
         </Link>
-        <Link to={"/admin/banners"}>
+        <Link to={"/multi-admin/banners"}>
         <button
           className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 flex items-center"
           onClick={handleCreateBanner}

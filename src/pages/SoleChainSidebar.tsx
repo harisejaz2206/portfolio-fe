@@ -8,17 +8,17 @@ import { clearOutletData } from "../app/features/outlet/outlet.slice"
 // import { Link } from 'react-router-dom';
 import { FaHome, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
 
-interface SidebarItemProps {
+interface SoleChainSidebarItemProps {
   icon: JSX.Element;
   text: string;
   to?: string;
 }
 
-interface SidebarSubItemProps {
+interface SoleChainSidebarSubItemProps {
   text: string;
 }
 
-const Sidebar: React.FC = () => {
+const SoleChainSidebar: React.FC = () => {
   const [isInventoryOpen, setInventoryOpen] = useState(false);
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
@@ -41,8 +41,8 @@ const Sidebar: React.FC = () => {
           <span className="text-gray-800 text-lg font-bold ml-2">DOT BRAND</span>
         </div>
         <div className="space-y-4 mt-8">
-          <Link to={"/multi-admin/"}><SidebarItem icon={<FaHome />} text="Dashboard" /></Link>
-          <Link to={"/multi-admin/outlets"}><SidebarItem icon={<FaStore />} text="Outlets" to="/outlets" /></Link>
+          <Link to={"/sole-admin/"}><SoleChainSidebarItem icon={<FaHome />} text="Dashboard" /></Link>
+          <Link to={"/sole-admin/outlets"}><SoleChainSidebarItem icon={<FaStore />} text="Outlets" to="/outlets" /></Link>
           <div className="group flex items-center justify-between py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg hover:bg-orange-500 hover:rounded-md hover:text-white " onClick={toggleInventory}>
             <FaChartBar />
             <span className="text-xs -ml-14">Inventory</span>
@@ -50,18 +50,15 @@ const Sidebar: React.FC = () => {
           </div>
           {isInventoryOpen && (
             <div className="pl-6">
-              <Link to="/multi-admin/products"><SidebarSubItem text="Products" /></Link>
-              <Link to="/multi-admin/catalogue"><SidebarSubItem text="Catalogue" /></Link> 
-              <Link to="/multi-admin/categories"><SidebarSubItem text="Categories" /></Link>
-              <Link to="/multi-admin/manufacturers"><SidebarSubItem text="Manufacturers" /></Link>
+              <Link to="/sole-admin/products"><SoleChainSidebarSubItem text="Products" /></Link>
+              <Link to="/sole-admin/catalogue"><SoleChainSidebarSubItem text="Catalogue" /></Link> 
+              <Link to="/sole-admin/categories"><SoleChainSidebarSubItem text="Categories" /></Link>
+              <Link to="/sole-admin/manufacturers"><SoleChainSidebarSubItem text="Brands" /></Link>
             </div>
           )}
-          <Link to={"/multi-admin/users"}><SidebarItem icon={<FaUsers />} text="Users" /></Link>
-          <Link to={"/multi-admin/orders"}><SidebarItem icon={<FaShoppingCart />} text="Orders" /></Link>
-          <Link to={"/multi-admin/banners"}><SidebarItem icon={<FaStar />} text="Banners" /></Link>
-          <SidebarItem icon={<FaBook />} text="Pages" />
-          <Link to={"/multi-admin/chat"}><SidebarItem icon={<FaInbox />} text="Chat" /> </Link>
-          <SidebarItem icon={<FaCog />} text="Settings" />
+          <Link to={"/sole-admin/users"}><SoleChainSidebarItem icon={<FaUsers />} text="Users" /></Link>
+          <Link to={"/sole-admin/orders"}><SoleChainSidebarItem icon={<FaShoppingCart />} text="Orders" /></Link>
+          <SoleChainSidebarItem icon={<FaCog />} text="Settings" />
         </div>
       </div>
       <div>
@@ -74,7 +71,7 @@ const Sidebar: React.FC = () => {
   );
 };
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ icon, text }) => {
+const SoleChainSidebarItem: React.FC<SoleChainSidebarItemProps> = ({ icon, text }) => {
   return (
     <div className="group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg hover:bg-orange-500 hover:rounded-md hover:text-white " title={text}>
       {icon}
@@ -83,7 +80,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ icon, text }) => {
   );
 };
 
-const SidebarSubItem: React.FC<SidebarSubItemProps> = ({ text }) => {
+const SoleChainSidebarSubItem: React.FC<SoleChainSidebarSubItemProps> = ({ text }) => {
   return (
     <div className="group flex items-center py-1 pl-2 mt-1 text-gray-600 cursor-pointer transition-bg hover:bg-orange-500 hover:rounded-md hover:text-white">
       <span className="text-xs">{text}</span>
@@ -91,4 +88,4 @@ const SidebarSubItem: React.FC<SidebarSubItemProps> = ({ text }) => {
   );
 };
 
-export default Sidebar;
+export default SoleChainSidebar;

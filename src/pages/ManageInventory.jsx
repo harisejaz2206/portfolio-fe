@@ -250,7 +250,7 @@ function ManageInventory() {
 
           <div className="flex space-x-4 text-sm"> {/* Add this div for the new buttons */}
             <Link
-              to="/admin/create-product"
+              to="/multi-admin/create-product"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
             >
               <FaPlusCircle className="mr-2" /> Add Product
@@ -340,7 +340,7 @@ function ManageInventory() {
                   />
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
-                  <Link to={`/admin/edit-product/${product.id}`}>
+                  <Link to={`/multi-admin/edit-product/${product.id}`}>
                     <button
                       className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline ml-4"
                     >

@@ -84,7 +84,7 @@ function ProductDetails() {
           ))}
         </div>
         <div className="flex justify-end">
-          <Link to="/admin/catalogue">
+          <Link to="/multi-admin/catalogue">
             <button className="text-white bg-indigo-600 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
               Back
             </button>

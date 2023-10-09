@@ -152,7 +152,7 @@ function BannerManagement() {
           </div>
 
           <div className="flex items-center space-x-2">
-            <Link to="/admin/add-banner"
+            <Link to="/multi-admin/add-banner"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
             >
               <FaPlusCircle className="mr-2" /> Add Banner
