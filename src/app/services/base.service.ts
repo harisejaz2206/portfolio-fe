@@ -7,6 +7,7 @@ import { store } from "../../store/store";
 
 const Config = "http://localhost:8081";
 // const Config = "https://dotbrand-api.onrender.com";
+// const Config = "https://dotbrand-api.onrender.com";
 console.log(Config);
 export class HttpService {
   CancelToken: CancelTokenStatic;

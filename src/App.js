@@ -52,6 +52,25 @@ import AddCategoryForm from "./pages/AddCategoryForm";
 import AddBrandForm from "./pages/AddBrandForm";
 import ManageBrands from "./pages/ManageBrands";
 
+const routes = [
+  {
+    path: "/",
+    element: (
+      <Layout>
+        <Home />
+      </Layout>
+    ),
+  },
+  {
+    path: "/categories",
+    element: (
+      <Layout>
+        <Categories />
+      </Layout>
+    ),
+  },
+];
+
 function App() {
   const token = useSelector(selectToken);
 
@@ -60,28 +79,31 @@ function App() {
       HttpService.setToken(token);
     }
   }, [token]);
-
   return (
     <BrowserRouter>
       <Routes>
         {/* Routes that should have the layout */}
-
-        <Route
+        <>
+          {routes.map((r) => (
+            <Route path={r.path} element={r.element} />
+          ))}
+        </>
+        {/* <Route
           path="/"
           element={
             <Layout>
               <Home />
             </Layout>
           }
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/categories"
           element={
             <Layout>
               <Categories />
             </Layout>
           }
-        />
+        /> */}
         <Route
           path="/wishlist"
           element={
