@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import Toggle from 'react-toggle';
-import 'react-toggle/style.css'; // Import the react-toggle styles
+import React, { useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import Toggle from "react-toggle";
+import "react-toggle/style.css";
 
 function AddProductForm() {
   const [formData, setFormData] = useState({
-    selectedStore: '',
-    selectedProduct: '',
-    name: '',
-    quantity: '',
-    price: '',
-    brand: '',
-    category: '',
+    selectedStore: "",
+    selectedProduct: "",
+    name: "",
+    quantity: "",
+    price: "",
+    brand: "",
+    category: "",
     showProduct: false,
     images: [],
   });
@@ -45,18 +45,23 @@ function AddProductForm() {
     // Add your form submission logic here
   };
 
-  const stores = ['Store 1', 'Store 2', 'Store 3'];
-  const products = ['Product A', 'Product B', 'Product C'];
-  const brands = ['Brand X', 'Brand Y', 'Brand Z'];
-  const categories = ['Category 1', 'Category 2', 'Category 3'];
+  const stores = ["Store 1", "Store 2", "Store 3"];
+  const products = ["Product A", "Product B", "Product C"];
+  const brands = ["Brand X", "Brand Y", "Brand Z"];
+  const categories = ["Category 1", "Category 2", "Category 3"];
 
   return (
     <div className="bg-gray-100 min-h-screen flex justify-center items-center">
       <div className="bg-white rounded-lg shadow-md p-8 w-[98%] max-w-3xl mt-2 mb-2">
-        <h1 className="text-2xl font-semibold text-gray-800 mb-6">Add Product</h1>
+        <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+          Add Product
+        </h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="selectedStore" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="selectedStore"
+              className="block text-sm font-medium text-gray-700"
+            >
               Select Store
             </label>
             <select
@@ -78,7 +83,10 @@ function AddProductForm() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
               Name
             </label>
             <input
@@ -92,7 +100,10 @@ function AddProductForm() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="quantity"
+              className="block text-sm font-medium text-gray-700"
+            >
               Quantity
             </label>
             <input
@@ -106,7 +117,10 @@ function AddProductForm() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="price"
+              className="block text-sm font-medium text-gray-700"
+            >
               Price
             </label>
             <input
@@ -120,7 +134,10 @@ function AddProductForm() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="brand" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="brand"
+              className="block text-sm font-medium text-gray-700"
+            >
               Brand
             </label>
             <select
@@ -142,7 +159,10 @@ function AddProductForm() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="category"
+              className="block text-sm font-medium text-gray-700"
+            >
               Category
             </label>
             <select
@@ -164,7 +184,9 @@ function AddProductForm() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Show Product</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Show Product
+            </label>
             <Toggle
               id="showProduct"
               name="showProduct"
@@ -176,7 +198,10 @@ function AddProductForm() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="images" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="images"
+              className="block text-sm font-medium text-gray-700"
+            >
               Add Image(s)
             </label>
             <input
@@ -199,7 +224,7 @@ function AddProductForm() {
             <button
               type="submit"
               className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-2"
-              style={{ display: 'flex', alignItems: 'center' }}
+              style={{ display: "flex", alignItems: "center" }}
             >
               Next <FaArrowRight className="ml-2" />
             </button>

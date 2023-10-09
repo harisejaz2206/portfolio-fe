@@ -45,7 +45,6 @@ import ManageCategories from "./pages/ManageCategories";
 import User from "./pages/Users";
 import UserDetails from "./pages/UserDetails";
 import ViewOrders from "./pages/ViewOrders";
-import ManageManufacturers from "./pages/ManageManufacturers";
 import ViewOrderDetails from "./pages/ViewOrderDetails";
 import Chat from "./pages/Chat";
 import BannerManagement from "./pages/BannerManagement";
@@ -66,28 +65,31 @@ function App() {
       HttpService.setToken(token);
     }
   }, [token]);
-
   return (
     <BrowserRouter>
       <Routes>
         {/* Routes that should have the layout */}
-
-        <Route
+        <>
+          {routes.map((r) => (
+            <Route path={r.path} element={r.element} />
+          ))}
+        </>
+        {/* <Route
           path="/"
           element={
             <Layout>
               <Home />
             </Layout>
           }
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/categories"
           element={
             <Layout>
               <Categories />
             </Layout>
           }
-        />
+        /> */}
         <Route
           path="/wishlist"
           element={
@@ -270,6 +272,7 @@ function App() {
                   />
                   <Route path="/products" element={<ManageInventory />} />
                   <Route path="/create-product" element={<AddProductForm />} />
+                  <Route path="/create-brand" element={<AddBrandForm />} />
                   <Route
                     path="/create-category"
                     element={<AddCategoryForm />}
@@ -290,10 +293,7 @@ function App() {
                   />
                   <Route path="/orders" element={<ViewOrders />} />
                   <Route path="/banners" element={<BannerManagement />} />
-                  <Route
-                    path="/manufacturers"
-                    element={<ManageManufacturers />}
-                  />
+                  <Route path="/brands" element={<ManageBrands />} />
                   <Route
                     path="/view-orderdetails/:orderId"
                     element={<ViewOrderDetails />}

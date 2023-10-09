@@ -19,43 +19,20 @@ const ManageOutlets: React.FC = () => {
   const outletData = useSelector(selectOutletData);
   console.log(outletData)
 
-
   const [outlets, setOutlets] = useState(outletData);
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(getOutlets()); // Using await with dispatch here
-      } catch (error) {
-        console.error("An error occurred while fetching data: ", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       await dispatch(getOutlets()); // Using await with dispatch here
+  //     } catch (error) {
+  //       console.error("An error occurred while fetching data: ", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [dispatch]);
-
-  // // Function to deactivate an outlet
-  // const deactivateOutlet = (outletId: any) => {
-  //   const updatedOutlets = outlets.map((outlet) =>
-  //     outlet.id === outletId ? { ...outlet, isActive: false } : outlet
-  //   );
-  //   setOutlets(updatedOutlets);
-  // };
-
-  // // Function to activate an outlet
-  // const activateOutlet = (outletId: any) => {
-  //   const updatedOutlets = outlets.map((outlet) =>
-  //     outlet.id === outletId ? { ...outlet, isActive: true } : outlet
-  //   );
-  //   setOutlets(updatedOutlets);
-  // };
-
-  // Function to remove an outlet
-  // const removeOutlet = (outletId: any) => {
-  //   const updatedOutlets = outlets.filter((outlet) => outlet.id !== outletId);
-  //   setOutlets(updatedOutlets);
-  // };
+  //   fetchData();
+  // }, [dispatch]);
 
   // Function to filter outlets based on search query
   const filteredOutlets = outletData!.filter(

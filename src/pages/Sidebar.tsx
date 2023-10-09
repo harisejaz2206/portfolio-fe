@@ -38,7 +38,7 @@ const Sidebar: React.FC = () => {
       <div>
         <div className="flex items-center justify-start mt-4">
           <img src="/logo192.png" alt="Brand Logo" className="h-10 w-10" />
-          <span className="text-gray-800 text-lg font-bold ml-2">DOT BRAND</span>
+          <span className="text-gray-800 text-lg font-bold ml-2">Dotbrand Admin</span>
         </div>
         <div className="space-y-4 mt-8">
           <Link to={"/multi-admin/"}><SidebarItem icon={<FaHome />} text="Dashboard" /></Link>

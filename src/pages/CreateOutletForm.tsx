@@ -70,13 +70,8 @@ const CreateOutletForm: React.FC = () => {
   const loading = useSelector(selectOutletLoading);
 
   const handleSuccess = (result: any) => {
-    console.log("result", result);
-    const token = result.payload.payload.token.accessToken;
-    console.log("token", token);
-    HttpService.setToken(token);
-    localStorage.setItem('token', token);
-
-    navigate(result.payload.payload.user ? '/multi-admin/outlets' : '/haris');
+    const status = result.meta.status == "fulfilled" ? true : false;
+    navigate(status ? '/admin/outlets' : '/haris');
     Toast.fire({
       icon: "success",
       title: "Outlet created successfully",
