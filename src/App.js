@@ -48,6 +48,7 @@ import ViewOrders from "./pages/ViewOrders";
 import ViewOrderDetails from "./pages/ViewOrderDetails";
 import Chat from "./pages/Chat";
 import BannerManagement from "./pages/BannerManagement";
+import AddBanner from "./pages/AddBanner";
 import AddCategoryForm from "./pages/AddCategoryForm";
 import AddBrandForm from "./pages/AddBrandForm";
 import ManageBrands from "./pages/ManageBrands";
