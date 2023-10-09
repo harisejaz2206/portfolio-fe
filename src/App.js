@@ -56,6 +56,8 @@ import SuperAdminDashboard from "./pages/SuperAdminDashboard";
 import SuperAdminSidebar from "./pages/SuperAdminSidebar";
 import ManageStores from "./pages/ManageStores";
 import AddStore from "./pages/AddStore";
+import AddBrandForm from "./pages/AddBrandForm";
+import ManageBrands from "./pages/ManageBrands";
 
 function App() {
   const token = useSelector(selectToken);
@@ -69,27 +71,23 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Routes that should have the layout */}
-        <>
-          {routes.map((r) => (
-            <Route path={r.path} element={r.element} />
-          ))}
-        </>
-        {/* <Route
+        
+         <Route
           path="/"
           element={
             <Layout>
               <Home />
             </Layout>
           }
-        /> */}
-        {/* <Route
+         />
+         <Route
           path="/categories"
           element={
             <Layout>
               <Categories />
             </Layout>
           }
-        /> */}
+        />
         <Route
           path="/wishlist"
           element={

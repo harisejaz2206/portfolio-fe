@@ -62,7 +62,7 @@ const UserDetails = () => {
       <div className="bg-white rounded-lg p-4 shadow-md w-1/3">
         {/* Back Button */}
         <div className="flex items-center justify-between mb-4 text-sm">
-          <Link to="/admin/users">
+          <Link to="/multi-admin/users">
           <button className="text-indigo-600 hover:underline focus:outline-none flex items-center">
             <FaArrowLeft className="mr-1" /> Back
           </button>

@@ -71,7 +71,7 @@ const CreateOutletForm: React.FC = () => {
 
   const handleSuccess = (result: any) => {
     const status = result.meta.status == "fulfilled" ? true : false;
-    navigate(status ? '/admin/outlets' : '/haris');
+    navigate(status ? '/multi-admin/outlets' : '/haris');
     Toast.fire({
       icon: "success",
       title: "Outlet created successfully",

@@ -189,7 +189,7 @@ function User() {
                   <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
                    
                   <div className="flex items-center -ml-2 ">
-                    <Link to={`/admin/view-account/${user.id}`}
+                    <Link to={`/multi-admin/view-account/${user.id}`}
                     className="flex items-center justify-center px-2 py-1 rounded-md text-indigo-600 hover:underline focus:outline-none focus:underline text-sm"
                     > <FaEye className="mr-1 text-sm text-indigo-600" />
                     View Details
@@ -217,7 +217,7 @@ function User() {
           <p className="text-gray-600 text-lg font-semibold mb-4">
             Whoops! There are no current users present.
           </p>
-          <Link to="/admin/" className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
+          <Link to="/multi-admin/" className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
             Back to Dashboard
           </Link>
         </div>

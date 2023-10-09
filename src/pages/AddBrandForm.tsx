@@ -39,7 +39,7 @@ const AddBrandForm: React.FC = () => {
 
     const handleSuccess = (result: any) => {
         const status = result.meta.requestStatus == "fulfilled" ? true : false;
-        navigate(status ? '/admin/brands' : '/haris');
+        navigate(status ? '/multi-admin/brands' : '/haris');
         Toast.fire({
             icon: "success",
             title: "Brand created successfully",
@@ -198,7 +198,7 @@ const AddBrandForm: React.FC = () => {
                     </div>
 
                     <div className="flex justify-between">
-                        <Link to="/admin/categories">
+                        <Link to="/multi-admin/categories">
                             <button className="text-gray-600 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
                                 Cancel
                             </button>

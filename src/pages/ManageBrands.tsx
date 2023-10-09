@@ -131,7 +131,7 @@ const ManageBrands: React.FC = () => {
 
               <div className="flex items-center space-x-2 text-sm">
                 <Link
-                  to="/admin/create-brand"
+                  to="/multi-admin/create-brand"
                   className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
                 >
                   <FaPlusCircle className="mr-2" /> Add Brands
@@ -205,7 +205,7 @@ const ManageBrands: React.FC = () => {
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
-                      <Link to={`/admin/edit-manufacturer/${brand._id}`}>
+                      <Link to={`/multi-admin/edit-manufacturer/${brand._id}`}>
                         <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
                           <FaEdit className="-ml-20" />
                         </button>
