@@ -38,7 +38,7 @@ const SuperAdminLogin: React.FC = () => {
     console.log("token", token);
     HttpService.setToken(token);
     localStorage.setItem('token', token);
-    navigate(result.payload.payload.user ? '/' : '/haris');
+    navigate(result.payload.payload.user ? '/super-admin' : '/haris');
 
     Toast.fire({
       icon: "success",

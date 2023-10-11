@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
   outlet: outletSlice,
   brand: brandSlice,
   category: categorySlice,
+  // store: storeSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
