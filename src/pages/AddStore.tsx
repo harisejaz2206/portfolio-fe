@@ -1,18 +1,26 @@
 import React from "react";
 import { FaPlusCircle } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link, useNavigate } from "react-router-dom"; // Import Link for navigation
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import InputField from "../components/globals/inputField"; // Import the InputField component
+import { useDispatch, useSelector } from "react-redux";
+import { AppThunkDispatch } from "../store/rootReducer";
+import { selectStoreLoading } from "../app/features/store/store.selector";
+import { Toast } from "../utils/toast";
+import { addStore } from "../app/features/store/store.thunk";
+import { handleApiResponse } from "../utils/handleApiResponse";
+import { handleError } from "../utils/catchErrorToast";
+import { ClipLoader } from "react-spinners";
 
-type FormData = {
+interface StoreData {
   storeName: string;
   multiAdminName: string;
   multiAdminEmail: string;
   multiAdminPassword: string;
 }
 
-const AddStoreSchema = Yup.object().shape({
+const CreateStoreSchema = Yup.object().shape({
   storeName: Yup.string()
     .required('Store Name is required'),
   multiAdminName: Yup.string()
@@ -29,17 +37,40 @@ const AddStoreSchema = Yup.object().shape({
 });
 
 const AddStore: React.FC = () => {
-  const formik = useFormik<FormData>({
+  const dispatch = useDispatch<AppThunkDispatch>();
+  const navigate = useNavigate();
+  const loading = useSelector(selectStoreLoading);
+
+  const handleSuccess = (result: any) => {
+    const status = result.meta.requestStatus == "fulfilled" ? true : false;
+    navigate(status ? '/super-admin/stores' : '/haris');
+    Toast.fire({
+      icon: "success",
+      title: "Store created successfully",
+    });
+  };
+  const formik = useFormik<StoreData>({
     initialValues: {
       storeName: '',
       multiAdminName: '',
       multiAdminEmail: '',
       multiAdminPassword: '',
     },
-    validationSchema: AddStoreSchema,
-    onSubmit: values => {
-      console.log("Submitting form with values: ", values);
-      // Handle form submission here
+    validationSchema: CreateStoreSchema,
+    onSubmit: async (values) => {
+      await dispatch(addStore(values))
+        .then((result) => {
+          Toast.fire({
+            icon: "success",
+            title: "Store successfully created",
+          });
+          console.log(result.meta.requestStatus == "fulfilled");
+          handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik })
+        })
+        .catch((error) => {
+          console.log('API call failed', error);
+          handleError(error);
+        })
     },
   });
 
@@ -136,15 +167,16 @@ const AddStore: React.FC = () => {
             </Link>
             <button
               type="submit"
-              disabled={!formik.isValid}
-              className={`text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center flex items-center ${!formik.isValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={!formik.isValid || loading!}
+              className={`text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center flex items-center ${!formik.isValid || loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              {formik.isSubmitting ? (
-                <div className="loader">Loading...</div>
+              {loading ? (
+                <ClipLoader color="#ffffff" loading={true} size={15} />
               ) : (
                 <><FaPlusCircle className="mr-1" /> Add Store</>
               )}
             </button>
+
           </div>
         </form>
       </div>
