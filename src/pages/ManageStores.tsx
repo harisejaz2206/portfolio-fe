@@ -1,9 +1,22 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaEdit, FaTrash, FaPlusCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppThunkDispatch } from '../store/rootReducer';
+import { selectStoreData, selectStoreLoading } from '../app/features/store/store.selector';
+import { getStores } from '../app/features/store/store.thunk';
+
+// Define a type for a single store
+interface Store {
+  id: number;
+  name: string;
+  adminName: string;
+  adminEmail: string;
+  adminPassword: string;
+}
 
 // Dummy data for stores (replace with your actual data)
-const initialStores = [
+const initialStores: Store[] = [
   {
     id: 1,
     name: 'Store 1',
@@ -21,20 +34,23 @@ const initialStores = [
   // Add more store items as needed
 ];
 
-function ManageStores() {
-  const [stores, setStores] = useState(initialStores);
-  const [searchQuery, setSearchQuery] = useState('');
+const ManageStores: React.FC = () => {
+  const dispatch = useDispatch<AppThunkDispatch>();
+  const navigate = useNavigate();
+  const stores = useSelector(selectStoreData) || [];
+  const loading = useSelector(selectStoreLoading);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const removeStore = (storeId) => {
-    const updatedStores = stores.filter((store) => store.id !== storeId);
-    setStores(updatedStores);
-  };
+  useEffect(() => {
+    dispatch(getStores());
+  }, [dispatch]);
+
   // Function to filter stores based on search query
   const filteredStores = stores.filter(
     (store) =>
-      store.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      store.adminName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      store.adminEmail.toLowerCase().includes(searchQuery.toLowerCase())
+      store.storeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      store.multiAdminName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      store.multiAdminEmail.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -80,9 +96,7 @@ function ManageStores() {
               <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Admin Email
               </th>
-              <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                Admin Password
-              </th>
+
               <th className="px-6 py-3 bg-gray-50 font-medium text-xs text-gray-500 uppercase tracking-wider">
                 Actions
               </th>
@@ -90,20 +104,19 @@ function ManageStores() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {filteredStores.map((store) => (
-              <tr key={store.id}>
-                <td className="px-6 py-4 whitespace-no-wrap">{store.name}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{store.adminName}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{store.adminEmail}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{store.adminPassword}</td>
+              <tr key={store._id}>
+                <td className="px-6 py-4 whitespace-no-wrap">{store.storeName}</td>
+                <td className="px-6 py-4 whitespace-no-wrap">{store.multiAdminName}</td>
+                <td className="px-6 py-4 whitespace-no-wrap">{store.multiAdminEmail}</td>
                 <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium ">
-                  <Link to={`/path-to-edit-store/${store.id}`}>
+                  <Link to={`/path-to-edit-store/${store._id}`}>
                     <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline ml-4">
                       <FaEdit />
                     </button>
                   </Link>
                   <button
                     className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
-                    onClick={() => removeStore(store.id)}
+                  // onClick={() => removeStore(store.id)}
                   >
                     <FaTrash />
                   </button>

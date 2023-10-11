@@ -11,7 +11,7 @@ import { Toast } from "../utils/toast";
 import { addStore } from "../app/features/store/store.thunk";
 import { handleApiResponse } from "../utils/handleApiResponse";
 import { handleError } from "../utils/catchErrorToast";
-import { ClipLoader } from "react-spinners";
+import { ClipLoader, ClockLoader } from "react-spinners";
 
 interface StoreData {
   storeName: string;
@@ -171,7 +171,7 @@ const AddStore: React.FC = () => {
               className={`text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center flex items-center ${!formik.isValid || loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {loading ? (
-                <ClipLoader color="#ffffff" loading={true} size={15} />
+                <ClockLoader color="#ffffff" loading={true} size={15} />
               ) : (
                 <><FaPlusCircle className="mr-1" /> Add Store</>
               )}
