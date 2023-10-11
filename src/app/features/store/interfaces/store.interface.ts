@@ -4,4 +4,6 @@ export interface IStore {
   multiAdminName: string;
   multiAdminEmail: string;
   multiAdminPassword: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

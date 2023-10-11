@@ -3,10 +3,10 @@ import { HttpService } from "./base.service";
 
 // Importing interfaces
 import { IResponseInterface } from "../interfaces/api-response.interface";
-import { IStore } from "../features/store/store.interface";
+import { IStore } from "../features/store/interfaces/store.interface";
 import { IUser } from "../interfaces/user.interface";
 
-class OutletService extends HttpService {
+class StoreService extends HttpService {
   private readonly prefix: string = "api/v1/superadmin";
 
   addStoreHandler = (
@@ -18,4 +18,4 @@ class OutletService extends HttpService {
     this.get(`${this.prefix}/store`);
 }
 
-export const outletService = new OutletService();
+export const storeService = new StoreService();
