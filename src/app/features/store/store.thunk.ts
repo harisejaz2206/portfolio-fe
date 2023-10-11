@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { outletService } from "../../services/outlet.service";
 import { IStore } from "./interfaces/store.interface";
 import { storeService } from "../../services/store.service";
 

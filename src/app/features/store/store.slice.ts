@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../store/rootReducer";
+import { createSlice } from "@reduxjs/toolkit";
 import initialStoreState from "./store.initialstate";
 import { addStore, getStores } from "./store.thunk";
 

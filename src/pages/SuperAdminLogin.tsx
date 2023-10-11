@@ -1,10 +1,9 @@
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { AppThunkDispatch } from '../store/rootReducer';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Toast } from '../utils/toast';
 import { login } from '../app/features/auth/auth.thunk';
 import { handleApiResponse } from '../utils/handleApiResponse';
@@ -26,7 +25,6 @@ const LoginSchema = Yup.object().shape({
 });
 
 const SuperAdminLogin: React.FC = () => {
-  const [rememberMe, setRememberMe] = useState<boolean>(false);
 
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
@@ -65,10 +63,10 @@ const SuperAdminLogin: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full bg-white p-6 rounded-lg shadow-lg">
         <div className="mb-4 text-center">
-          <h1 className="text-2xl font-semibold">Admin Login</h1>
+          <h1 className="text-2xl font-semibold">Superadmin Login</h1>
         </div>
         <form onSubmit={formik.handleSubmit}>
-          <div className="mb-4">
+          <div>
             <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email Address:</label>
             <InputField
               formik={formik}

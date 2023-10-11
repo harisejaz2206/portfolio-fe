@@ -1,4 +1,3 @@
-import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../../../store/rootReducer";
 
 // Selectors to get parts of the state for the store feature

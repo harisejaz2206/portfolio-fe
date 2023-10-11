@@ -7,6 +7,7 @@ import { logout } from '../app/features/auth/auth.slice';
 import { clearOutletData } from "../app/features/outlet/outlet.slice"
 // import { Link } from 'react-router-dom';
 import { FaHome, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
+import { clearStoreData } from '../app/features/store/store.slice';
 
 interface SidebarItemProps {
   icon: JSX.Element;
@@ -30,6 +31,7 @@ const Sidebar: React.FC = () => {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(clearOutletData())
+    dispatch(clearStoreData())
     navigate('/');
   };
 
@@ -51,7 +53,7 @@ const Sidebar: React.FC = () => {
           {isInventoryOpen && (
             <div className="pl-6">
               <Link to="/multi-admin/products"><SidebarSubItem text="Products" /></Link>
-              <Link to="/multi-admin/catalogue"><SidebarSubItem text="Catalogue" /></Link> 
+              <Link to="/multi-admin/catalogue"><SidebarSubItem text="Catalogue" /></Link>
               <Link to="/multi-admin/categories"><SidebarSubItem text="Categories" /></Link>
               <Link to="/multi-admin/manufacturers"><SidebarSubItem text="Manufacturers" /></Link>
             </div>

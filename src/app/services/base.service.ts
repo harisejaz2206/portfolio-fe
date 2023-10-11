@@ -1,12 +1,9 @@
 // base.service.ts
 
 import axios, { CancelTokenStatic, CancelTokenSource } from "axios";
-import { selectToken } from "../features/auth/auth.selector";
-import { store } from "../../store/store";
 // const Config = process.env.NEXT_PUBLIC_APP_BASE_URL;
 
 const Config = "http://localhost:8081";
-// const Config = "https://dotbrand-api.onrender.com";
 // const Config = "https://dotbrand-api.onrender.com";
 console.log(Config);
 export class HttpService {
@@ -17,7 +14,7 @@ export class HttpService {
     this.CancelToken = axios.CancelToken;
     this.source = this.CancelToken.source();
     axios.interceptors.response.use(undefined, function (error) {
-      if (error?.response?.status == 401) {
+      if (error?.response?.status === 401) {
         localStorage.clear();
         window.location.reload();
       }

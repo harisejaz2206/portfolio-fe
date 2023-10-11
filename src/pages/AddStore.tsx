@@ -11,7 +11,7 @@ import { Toast } from "../utils/toast";
 import { addStore } from "../app/features/store/store.thunk";
 import { handleApiResponse } from "../utils/handleApiResponse";
 import { handleError } from "../utils/catchErrorToast";
-import { ClipLoader, ClockLoader } from "react-spinners";
+import { ClockLoader } from "react-spinners";
 
 interface StoreData {
   storeName: string;
@@ -42,7 +42,7 @@ const AddStore: React.FC = () => {
   const loading = useSelector(selectStoreLoading);
 
   const handleSuccess = (result: any) => {
-    const status = result.meta.requestStatus == "fulfilled" ? true : false;
+    const status = result.meta.requestStatus === "fulfilled" ? true : false;
     navigate(status ? '/super-admin/stores' : '/haris');
     Toast.fire({
       icon: "success",
@@ -64,7 +64,7 @@ const AddStore: React.FC = () => {
             icon: "success",
             title: "Store successfully created",
           });
-          console.log(result.meta.requestStatus == "fulfilled");
+          console.log(result.meta.requestStatus === "fulfilled");
           handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik })
         })
         .catch((error) => {

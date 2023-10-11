@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import { FaHome, FaStore, FaChartBar, FaLifeRing, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { AppThunkDispatch } from "../store/rootReducer";
 import { logout } from '../app/features/auth/auth.slice';
-import { clearOutletData } from "../app/features/outlet/outlet.slice"
 // import { Link } from 'react-router-dom';
-import { FaHome, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
+import { FaHome, FaStore, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt } from 'react-icons/fa';
+import { clearStoreData } from '../app/features/store/store.slice';
 
 interface SuperAdminSidebarItemProps {
   icon: JSX.Element;
@@ -14,22 +14,21 @@ interface SuperAdminSidebarItemProps {
   to?: string;
 }
 
-interface SuperAdminSidebarSubItemProps {
-  text: string;
-}
+// interface SuperAdminSidebarSubItemProps {
+//   text: string;
+// }
 
 const SuperAdminSidebar: React.FC = () => {
-  const [isInventoryOpen, setInventoryOpen] = useState(false);
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
 
-  const toggleInventory = () => {
-    setInventoryOpen(!isInventoryOpen);
-  };
+  // const toggleInventory = () => {
+  //   setInventoryOpen(!isInventoryOpen);
+  // };
 
   const handleLogout = () => {
     dispatch(logout());
-    dispatch(clearOutletData())
+    dispatch(clearStoreData())
     navigate('/');
   };
 
@@ -67,12 +66,12 @@ const SuperAdminSidebarItem: React.FC<SuperAdminSidebarItemProps> = ({ icon, tex
   );
 };
 
-const SuperAdminSidebarSubItem: React.FC<SuperAdminSidebarSubItemProps> = ({ text }) => {
-  return (
-    <div className="group flex items-center py-1 pl-2 mt-1 text-gray-600 cursor-pointer transition-bg hover:bg-orange-500 hover:rounded-md hover:text-white">
-      <span className="text-xs">{text}</span>
-    </div>
-  );
-};
+// const SuperAdminSidebarSubItem: React.FC<SuperAdminSidebarSubItemProps> = ({ text }) => {
+//   return (
+//     <div className="group flex items-center py-1 pl-2 mt-1 text-gray-600 cursor-pointer transition-bg hover:bg-orange-500 hover:rounded-md hover:text-white">
+//       <span className="text-xs">{text}</span>
+//     </div>
+//   );
+// };
 
 export default SuperAdminSidebar;
