@@ -28,7 +28,7 @@ const SuperAdminSidebar: React.FC = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    // dispatch(clearStoreData())
+    dispatch(clearStoreData())
     navigate('/');
   };
 

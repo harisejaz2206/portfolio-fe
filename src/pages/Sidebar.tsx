@@ -31,7 +31,7 @@ const Sidebar: React.FC = () => {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(clearOutletData())
-    // dispatch(clearStoreData())
+    dispatch(clearStoreData())
     navigate('/');
   };
 
