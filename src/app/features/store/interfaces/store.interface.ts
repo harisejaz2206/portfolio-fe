@@ -6,4 +6,5 @@ export interface IStore {
   multiAdminPassword: string;
   createdAt?: string;
   updatedAt?: string;
+  isActive?:boolean;
 }

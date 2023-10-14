@@ -6,6 +6,10 @@ import { AppThunkDispatch } from '../store/rootReducer';
 import { selectStoreData, selectStoreLoading } from '../app/features/store/store.selector';
 import { getStores } from '../app/features/store/store.thunk';
 import { PropagateLoader } from 'react-spinners';
+import Toggle from 'react-toggle';
+import ToggleModal from '../components/globals/modal/ToggleModal'; // Replace 'path-to-DynamicModal' with the actual path to your DynamicModal component.
+
+import 'react-toggle/style.css';
 
 
 const ManageStores: React.FC = () => {
@@ -14,6 +18,10 @@ const ManageStores: React.FC = () => {
   const stores = useSelector(selectStoreData) || [];
   const loading = useSelector(selectStoreLoading);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeStoreId, setActiveStoreId] = useState<string | null>(null); // Ensure it allows null
+
+
 
   useEffect(() => {
     dispatch(getStores());
@@ -26,6 +34,23 @@ const ManageStores: React.FC = () => {
       store.multiAdminName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       store.multiAdminEmail.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const openToggleModal = (storeID: string) => {
+    setActiveStoreId(storeID);
+    setIsModalOpen(true);
+  };
+
+  const closeToggleModal = () => {
+    setIsModalOpen(false);
+    setActiveStoreId(null);
+  };
+
+  const toggleStoreStatus = () => {
+    // Implement your store status toggle logic here
+    // You can make an API call or update the store status in your state
+    // After toggling, you can close the modal
+    closeToggleModal();
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen p-4 relative">
@@ -87,48 +112,72 @@ const ManageStores: React.FC = () => {
             </div>
 
             <table className="min-w-full divide-y divide-gray-200 mt-8 text-sm">
-              <thead>
-                <tr>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                    Store Name
-                  </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                    Admin Name
-                  </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                    Admin Email
-                  </th>
-
-                  <th className="px-6 py-3 bg-gray-50 font-medium text-xs text-gray-500 uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {filteredStores.map((store) => (
-                  <tr key={store._id}>
-                    <td className="px-6 py-4 whitespace-no-wrap">{store.storeName}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap">{store.multiAdminName}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap">{store.multiAdminEmail}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium ">
-                      <Link to={`/path-to-edit-store/${store._id}`}>
-                        <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline ml-4">
-                          <FaEdit />
-                        </button>
-                      </Link>
-                      <button
-                        className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
-                      // onClick={() => removeStore(store.id)}
-                      >
-                        <FaTrash />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <thead>
+  <tr>
+    <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      Store Name
+    </th>
+    <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      Admin Name
+    </th>
+    <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      Admin Email
+    </th>
+    <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      Current Status
+    </th>
+    <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      Active
+    </th>
+    <th className="px-6 py-3 bg-gray-50 font-medium text-xs text-gray-500 uppercase tracking-wider">
+      Actions
+    </th>
+  </tr>
+</thead>
+<tbody className="bg-white divide-y divide-gray-200">
+  {filteredStores.map((store) => (
+    <tr key={store._id}>
+      <td className="px-6 py-4 whitespace-no-wrap">{store.storeName}</td>
+      <td className="px-6 py-4 whitespace-no-wrap">{store.multiAdminName}</td>
+      <td className="px-6 py-4 whitespace-no-wrap">{store.multiAdminEmail}</td>
+      <td className="px-6 py-4 whitespace-no-wrap">
+        {Math.random() < 0.5 ? "Active" : "Inactive"}
+      </td>
+      <td className="px-6 py-4 whitespace-no-wrap">
+        <Toggle
+          defaultChecked={store.isActive}
+          icons={false}
+          onChange={() => {
+            setIsModalOpen(true);
+             // Store the active store ID in state
+          }}
+        />
+      </td>
+      <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
+        <Link to={`/path-to-edit-store/${store._id}`}>
+          <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline ml-4">
+            <FaEdit />
+          </button>
+        </Link>
+        <button className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4">
+          <FaTrash />
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+</table>
           </div>
         </div>
+        {/* Modal for toggling store status */}
+        {isModalOpen && (
+      <ToggleModal
+        title="Warning: Change Store Status"
+        description="Are you sure you want to change the status of this store?"
+        onConfirm={toggleStoreStatus}
+        onCancel={closeToggleModal}
+      />
+    )}
       </div>
     </div>
 
