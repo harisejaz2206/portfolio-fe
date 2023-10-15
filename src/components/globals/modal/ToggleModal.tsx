@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from './modal';
 import Button from '../button'; // Replace with the actual path to your Button component
-import { useNavigate } from 'react-router-dom';
 
 type Props = {
   title: string;
@@ -11,7 +10,6 @@ type Props = {
 };
 
 const ToggleModal: React.FC<Props> = ({ title, description, onConfirm, onCancel }) => {
-  const navigate = useNavigate();
 
   return (
     <Modal className="modal sm:min-w-[430px] sm:max-w-[430px]" open={true} setOpen={onCancel}>

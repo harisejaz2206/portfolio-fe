@@ -16,6 +16,11 @@ class StoreService extends HttpService {
 
   getAllStoresHandler = (): Promise<IResponseInterface<{ stores: IStore[] }>> =>
     this.get(`${this.prefix}/store`);
+
+  toggleStoreStatusHandler = (
+    storeId: string
+  ): Promise<IResponseInterface<void>> =>
+    this.patch(`${this.prefix}/storeToggle/${storeId}`);
 }
 
 export const storeService = new StoreService();

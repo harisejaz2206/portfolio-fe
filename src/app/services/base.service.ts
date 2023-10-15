@@ -107,4 +107,23 @@ export class HttpService {
     this.source.cancel("Explicitly cancelled HTTP request");
     this.updateCancelToken();
   };
+
+  /**
+   * Update specific fields on the server
+   * @param url Endpoint link
+   * @param body Data to send over server
+   * @param params Embed as query params
+   * @return Promise
+   */
+  protected patch = async (
+    url: string,
+    body?: any,
+    params?: any
+  ): Promise<any> => {
+    const res = await axios.patch(`${Config}/${url}`, body, {
+      ...params,
+      cancelToken: this.source.token,
+    });
+    return res.data;
+  };
 }

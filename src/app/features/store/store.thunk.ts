@@ -30,3 +30,18 @@ export const getStores = createAsyncThunk(
     }
   }
 );
+
+export const toggleStoreStatus = createAsyncThunk(
+  "store/toggleStoreStatus",
+  async (storeId: string, { rejectWithValue }) => {
+    try {
+      const response = await storeService.toggleStoreStatusHandler(storeId); // Pass storeId if necessary
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data ||
+          "An error occurred while toggling the store status"
+      );
+    }
+  }
+);
