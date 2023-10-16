@@ -113,7 +113,7 @@ const InputField = ({
 
                             <Eye
                                 onClick={() => setShowPassword(true)}
-                                className="cursor-pointer absolute top-[22px] right-[17px] h-5 w-5"
+                                className="cursor-pointer absolute top-[15px] right-[13px] h-5 w-5"
                             />
                         ) : (
                             <EyeOff

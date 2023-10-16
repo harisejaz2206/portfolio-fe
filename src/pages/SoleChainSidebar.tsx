@@ -36,9 +36,9 @@ const SoleChainSidebar: React.FC = () => {
   return (
     <div className="bg-white h-auto w-1/5 p-4 md:w-1/6 flex flex-col justify-between">
       <div>
-        <div className="flex items-center justify-start mt-4">
-          <img src="/logo192.png" alt="Brand Logo" className="h-10 w-10" />
-          <span className="text-gray-800 text-lg font-bold ml-2">DOT BRAND</span>
+        <div className="flex items-center justify-center mt-4">
+          
+          <span className="text-gray-800 text-lg font-bold ml-2">Dot Brand</span>
         </div>
         <div className="space-y-4 mt-8">
           <Link to={"/sole-admin/"}><SoleChainSidebarItem icon={<FaHome />} text="Dashboard" /></Link>

@@ -116,8 +116,8 @@ const CreateOutletForm: React.FC = () => {
 
   return (
     <div className="bg-gray-100 h-auto flex justify-center items-center">
-      <div className="bg-white rounded-lg shadow-md p-8 w-[98%]">
-        <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+      <div className="bg-white rounded-lg shadow-md p-8 w-[70%] mt-2 mb-2">
+      <h1 className="text-2xl font-semibold text-gray-800 mb-6">
           Add Outlet
         </h1>
         <form onSubmit={formik.handleSubmit} className="space-y-6">
@@ -134,14 +134,14 @@ const CreateOutletForm: React.FC = () => {
               placeholder="Enter outlet name"
               name="outletName"
               type="text"
-              className="mt-2 sm:mt-0"
+              className="mt-2 sm:mt-0 w-[60%]"
             />
           </div>
 
-          {/* Admin Details */}
-          <div>
+          {/* Outlet Admin Details */}
+          <div className="border p-4 rounded-lg shadow-lg bg-slate-50">
             <h2 className="text-lg font-semibold text-gray-800 mb-2">
-              Outlet Admin Details
+               Multi Admin Details
             </h2>
             <div className="grid grid-cols-2 gap-4">
               {/* Admin Name */}
@@ -152,13 +152,12 @@ const CreateOutletForm: React.FC = () => {
                 >
                   Admin Name
                 </label>
-
                 <InputField
                   formik={formik}
                   placeholder="Enter admin name"
                   name="adminName"
                   type="text"
-                  className="mt-2 sm:mt-0"
+                  className="mt-2 sm:mt-0 w-[80%]"
                 />
               </div>
 
@@ -175,9 +174,8 @@ const CreateOutletForm: React.FC = () => {
                   placeholder="Enter admin email"
                   name="adminEmail"
                   type="text"
-                  className="mt-2 sm:mt-0"
+                  className="mt-2 sm:mt-0 w-[80%]"
                 />
-
               </div>
 
               {/* Admin Password */}
@@ -193,7 +191,7 @@ const CreateOutletForm: React.FC = () => {
                   placeholder="Enter admin password"
                   name="adminPassword"
                   type="password"
-                  className="mt-2 sm:mt-0"
+                  className="mt-2 sm:mt-0 w-[80%]"
                 />
               </div>
 
@@ -210,7 +208,7 @@ const CreateOutletForm: React.FC = () => {
                   placeholder="Enter admin phone number"
                   name="adminNumber"
                   type="text"
-                  className="mt-2 sm:mt-0"
+                  className="mt-2 sm:mt-0 w-[80%]"
                 />
               </div>
             </div>
@@ -234,40 +232,41 @@ const CreateOutletForm: React.FC = () => {
           </div>
 
           {/* Location */}
-          <div>
-            <label
-              htmlFor="longitude"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Longitude
-            </label>
-            <InputField
-              formik={formik}
-              placeholder="Enter longitude"
-              name="longitude"
-              type="text"
-              className="mt-2 sm:mt-0"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="latitude"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Latitude
-            </label>
-            <InputField
-              formik={formik}
-              placeholder="Enter latitude"
-              name="latitude"
-              type="text"
-              className="mt-2 sm:mt-0"
-            />
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                htmlFor="longitude"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Longitude
+              </label>
+              <InputField
+                formik={formik}
+                placeholder="Enter longitude"
+                name="longitude"
+                type="text"
+                className="mt-2 sm:mt-0 w-[60%]"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="latitude"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Latitude
+              </label>
+              <InputField
+                formik={formik}
+                placeholder="Enter latitude"
+                name="latitude"
+                type="text"
+                className="mt-2 sm:mt-0 w-[60%]"
+              />
+            </div>
           </div>
 
           {/* Tax Details */}
-          <div>
+          <div className="border p-4 rounded-lg shadow-lg bg-slate-50">
             <h2 className="text-lg font-semibold text-gray-800 mb-2">
               Tax Details
             </h2>
@@ -285,7 +284,7 @@ const CreateOutletForm: React.FC = () => {
                   placeholder="Enter tax type"
                   name="taxType"
                   type="text"
-                  className="mt-2 sm:mt-0"
+                  className="mt-2 sm:mt-0 w-[80%]"
                 />
               </div>
 
@@ -302,13 +301,13 @@ const CreateOutletForm: React.FC = () => {
                   placeholder="Enter tax details"
                   name="taxValue"
                   type="text"
-                  className="mt-2 sm:mt-0"
+                  className="mt-2 sm:mt-0 w-[80%]"
                 />
               </div>
             </div>
           </div>
 
-          {/* Add Tax Button */}
+         {/* 
           <div className="mt-4">
             <button
               type="submit"
@@ -316,14 +315,13 @@ const CreateOutletForm: React.FC = () => {
             >
               <FaPlusCircle className="mr-1" /> Add Tax
             </button>
-          </div>
+          </div> */}
 
           {/* Submit Button */}
           <div className="mt-6">
-            {/* <Link to="/multi-admin/outlets"> */}
             <button
               type="submit"
-              disabled={!formik.isValid || loading!} // Disable button if form is not valid or loading
+              disabled={!formik.isValid || loading!}
               className={`text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center flex items-center ${!formik.isValid || loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {loading ? (
@@ -332,7 +330,6 @@ const CreateOutletForm: React.FC = () => {
                 <><FaPlusCircle className="mr-1" /> Add Store</>
               )}
             </button>
-            {/* </Link> */}
           </div>
         </form>
       </div>

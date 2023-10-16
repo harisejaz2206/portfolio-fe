@@ -7,7 +7,8 @@ import { selectStoreData, selectStoreLoading } from '../app/features/store/store
 import { getStores, toggleStoreStatus } from '../app/features/store/store.thunk';
 import { PropagateLoader } from 'react-spinners';
 import Toggle from 'react-toggle';
-import ToggleModal from '../components/globals/modal/ToggleModal'; // Replace 'path-to-DynamicModal' with the actual path to your DynamicModal component.
+import ToggleModal from '../components/globals/modal/ToggleModal'; 
+import Pagination from '../components/Pagination';// Replace 'path-to-DynamicModal' with the actual path to your DynamicModal component.
 
 import 'react-toggle/style.css';
 import { toggleActiveStatus } from '../app/features/store/store.slice';
@@ -22,7 +23,9 @@ const ManageStores: React.FC = () => {
   const loading = useSelector(selectStoreLoading);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeStoreId, setActiveStoreId] = useState<string | null>(null); // Ensure it allows null
+  const [activeStoreId, setActiveStoreId] = useState<string | null>(null); 
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 10;
 
 
 
@@ -35,7 +38,12 @@ const ManageStores: React.FC = () => {
       store.storeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       store.multiAdminName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       store.multiAdminEmail.toLowerCase().includes(searchQuery.toLowerCase())
+      
   );
+
+  const start = currentPage * itemsPerPage;
+  const end = (currentPage + 1) * itemsPerPage;
+  const displayedStores = filteredStores.slice(start, end);
 
   // const openToggleModal = (storeID: string) => {
   //   setActiveStoreId(storeID);
@@ -45,6 +53,10 @@ const ManageStores: React.FC = () => {
   const closeToggleModal = () => {
     setIsModalOpen(false);
     setActiveStoreId(null);
+  };
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   const toggleStore = async () => {
@@ -131,31 +143,31 @@ const ManageStores: React.FC = () => {
             <table className="min-w-full divide-y divide-gray-200 mt-8 text-sm">
               <thead>
                 <tr>
-                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider ">
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider ">
                     Store Name
                   </th>
-                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Admin Name
                   </th>
-                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Admin Email
                   </th>
-                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Created At
                   </th>
-                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Current Status
                   </th>
-                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Active
                   </th>
-                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredStores.map((store) => (
+                {displayedStores.map((store) => (
                   <tr key={store._id} className="bg-white">
                     <td className="px-6 py-3 whitespace-no-wrap w-[30%]">{store.storeName}</td>
                     <td className="px-6 py-3 whitespace-no-wrap w-[25%]">{store.multiAdminName}</td>
@@ -194,9 +206,16 @@ const ManageStores: React.FC = () => {
                 ))}
               </tbody>
             </table>
-
           </div>
         </div>
+
+        {/* Pagination component */}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(filteredStores.length / itemsPerPage)}
+          onPageChange={onPageChange}
+        />
+
         {/* Modal for toggling store status */}
         {isModalOpen && (
           <ToggleModal

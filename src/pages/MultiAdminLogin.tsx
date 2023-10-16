@@ -61,9 +61,9 @@ const MultiAdminLogin: React.FC = () => {
      <div className="bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-600 via-red-900 to-red-900 w-1/3 min-h-screen flex flex-col items-center justify-center text-white">
      <div className="text-center  mb-4">
         <img
-          src="/logo192.png"
+          src="/logo.png"
           alt="Company Logo"
-          className="w-20 h-20  rounded-full mx-auto"
+          className="w-20 h-20 rounded-full mx-auto"
         />
       </div>
         <div className="text-center">
