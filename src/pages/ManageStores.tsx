@@ -103,14 +103,14 @@ const ManageStores: React.FC = () => {
 
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center space-x-4 text-sm">
-                <div className="relative">
-                  <span className="absolute left-3 top-2 text-gray-400">
+                <div className="relative text-base">
+                  <span className="absolute left-3 top-[30%] text-gray-600 ">
                     <FaSearch />
                   </span>
                   <input
                     type="text"
                     placeholder="Search stores..."
-                    className="border rounded-md pl-10 pr-4 py-1 w-36 focus:outline-none focus:ring focus:border-indigo-300"
+                    className="border border-gray-600 rounded-md pl-10 pr-4 py-[5%] w-52 focus:outline-none focus:ring focus:border-indigo-300"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
@@ -120,7 +120,7 @@ const ManageStores: React.FC = () => {
               <div className="flex space-x-4 text-sm">
                 <Link
                   to="/super-admin/add-store"
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 text-base rounded-lg flex items-center"
                 >
                   <FaPlusCircle className="mr-2" /> Add Store
                 </Link>
@@ -130,41 +130,44 @@ const ManageStores: React.FC = () => {
             <table className="min-w-full divide-y divide-gray-200 mt-8 text-sm">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider ">
                     Store Name
                   </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Admin Name
                   </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Admin Email
                   </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Created At
                   </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Current Status
                   </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Active
                   </th>
-                  <th className="px-6 py-3 bg-gray-50 font-medium text-xs text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredStores.map((store) => (
-                  <tr key={store._id}>
-                    <td className="px-6 py-4 whitespace-no-wrap">{store.storeName}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap">{store.multiAdminName}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap">{store.multiAdminEmail}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap">
-                      {new Date(store.createdAt!).toLocaleString()} {/* <-- This line converts the timestamp to a localized string */}
+                  <tr key={store._id} className="bg-white">
+                    <td className="px-6 py-3 whitespace-no-wrap w-[30%]">{store.storeName}</td>
+                    <td className="px-6 py-3 whitespace-no-wrap w-[25%]">{store.multiAdminName}</td>
+                    <td className="px-6 py-3 whitespace-no-wrap w-1/6">{store.multiAdminEmail}</td>
+                    <td className="px-6 py-3 whitespace-no-wrap w-[25%]">
+                      {new Date(store.createdAt!).toLocaleString()}
                     </td>
-                    <td className="px-6 py-4 whitespace-no-wrap">{store.isActive ? "Active" : "Inactive"}</td> {/* <-- This line */}
-
-                    <td className="px-6 py-4 whitespace-no-wrap">
+                    <td className="px-6 py-3 whitespace-no-wrap [30%]">
+                    <span className={` py-1 px-2 rounded ${store.isActive ? 'bg-green-500 text-white font-semibold px-3.5' : 'bg-red-500 text-white font-semibold '}`}>
+                      {store.isActive ? 'Active' : 'Inactive'}
+                    </span>
+                    </td>
+                    <td className="px-6 py-3 whitespace-no-wrap w-1/6">
                       <Toggle
                         defaultChecked={store.isActive}
                         icons={false}
@@ -174,20 +177,23 @@ const ManageStores: React.FC = () => {
                         }}
                       />
                     </td>
-                    <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
-                      <Link to={`/path-to-edit-store/${store._id}`}>
-                        <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline ml-4">
-                          <FaEdit />
+                    <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium w-1/6">
+                      <div className="flex space-x-4">
+                        <Link to={`/path-to-edit-store/${store._id}`}>
+                          <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
+                            <FaEdit />
+                          </button>
+                        </Link>
+                        <button className="text-red-600 hover:text-red-900 focus:outline-none focus:underline">
+                          <FaTrash />
                         </button>
-                      </Link>
-                      <button className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4">
-                        <FaTrash />
-                      </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+
           </div>
         </div>
         {/* Modal for toggling store status */}

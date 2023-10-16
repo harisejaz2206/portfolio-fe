@@ -58,20 +58,20 @@ const MultiAdminLogin: React.FC = () => {
 
   return (
     <div className="flex h-screen">
-      <div className="bg-gradient-to-br from-indigo-700 via-indigo-800 to-indigo-950 w-1/3 min-h-screen flex flex-col items-center justify-center text-white">
-        <div className="text-center mb-8">
-          <img
-            src="/logo192.png" // Replace with your logo image source
-            alt="Company Logo"
-            className="w-16 h-16 mb-2 -mt-8"
-          />
-        </div>
+     <div className="bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-600 via-red-900 to-red-900 w-1/3 min-h-screen flex flex-col items-center justify-center text-white">
+     <div className="text-center  mb-4">
+        <img
+          src="/logo192.png"
+          alt="Company Logo"
+          className="w-20 h-20  rounded-full mx-auto"
+        />
+      </div>
         <div className="text-center">
           <h1 className="text-3xl font-bold text-white mb-2">
             <span className="text-white">
               <Typewriter
                 options={{
-                  strings: ['Welcome Back!', 'Multi-Chain Admin'],
+                  strings: ['Dot Brand ©', 'Multi-Chain Admin'],
                   autoStart: true, // Start typing automatically
                   loop: true, // Loop the animation
                   delay: 100, // Delay between each character typing
@@ -80,7 +80,7 @@ const MultiAdminLogin: React.FC = () => {
               />
             </span>
           </h1>
-          <div className="text-md text-gray-200 mb-8 mt-auto">
+          <div className="text-md text-white mb-8 mt-auto">
             <p>
               <span className="ml-2 block">
                 Seamless Multi-Chain Pharmacy Management.
@@ -92,6 +92,11 @@ const MultiAdminLogin: React.FC = () => {
       {/* Right-side login form */}
       <div className="w-3/5 bg-white flex items-center justify-center">
         <div className="max-w-md w-full p-6">
+        <div className="text-center -mt-[30%]">
+            <h2 className="text-2xl font-bold text-red-800 mb-20">
+             Welcome, Multi Chain Admin
+            </h2>
+          </div>
           <form onSubmit={formik.handleSubmit}>
             <div className="-mb-2">
               <label htmlFor="email" className="block text-gray-700 text-sm font-bold">
@@ -102,7 +107,7 @@ const MultiAdminLogin: React.FC = () => {
                 placeholder="Email"
                 name="email"
                 type="email"
-                className="rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full p-2"
+                className="rounded-md border-gray-300 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 w-full p-2"
               />
             </div>
             <div className="-mb-4">
@@ -114,11 +119,11 @@ const MultiAdminLogin: React.FC = () => {
                 placeholder="Password"
                 name="password"
                 type="password"
-                className="rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full p-2"
+                className="rounded-md border-gray-300 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 w-full p-2"
               />
             </div>
             <div className="mb-4 text-right mr-1 text-sm">
-              <a className="text-indigo-600 underline" href="/forgot-password">
+              <a className="text-red-700 underline" href="/forgot-password">
                 Forgot your password?
               </a>
             </div>
@@ -131,7 +136,7 @@ const MultiAdminLogin: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading!} // Disable button while loading
-                  className={`bg-indigo-600 text-white rounded-lg py-2 hover:bg-indigo-700 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 w-full transition-colors duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className={`bg-red-800 text-white rounded-lg py-2 hover:bg-red-600 focus:ring focus:ring-red-600 focus:ring-opacity-50 w-full transition-colors duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   Log In
                 </button>

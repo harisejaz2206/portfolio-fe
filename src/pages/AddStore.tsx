@@ -3,7 +3,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom"; // Import Link for navigation
 import { useFormik } from "formik";
 import * as Yup from 'yup';
-import InputField from "../components/globals/inputField"; // Import the InputField component
+import InputField from "../components/globals/inputFieldStore"; // Import the InputField component
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
 import { selectStoreLoading } from "../app/features/store/store.selector";
@@ -76,17 +76,14 @@ const AddStore: React.FC = () => {
 
   return (
     <div className="bg-gray-100 h-screen flex justify-center items-center">
-      <div className="bg-white rounded-lg shadow-md p-8 w-[90%] mt-2">
-        <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+      <div className="bg-white rounded-lg shadow-md p-8 w-[70%] mt-2 mb-2">
+        <h1 className="text-2xl font-semibold text-gray-800 mb-2">
           Add Store
         </h1>
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           {/* Store Name */}
           <div>
-            <label
-              htmlFor="storeName"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="storeName" className="block text-sm font-medium text-gray-700">
               Store Name
             </label>
             <InputField
@@ -94,21 +91,19 @@ const AddStore: React.FC = () => {
               placeholder="Enter store name"
               name="storeName"
               type="text"
-              className="mt-2 sm:mt-0"
+              className="mt-2 sm:mt-0 w-[60%]"
             />
           </div>
 
-          {/* Multi Admin Details */}
-          <div>
+          {/* Multi Admin Details (Grouping) */}
+          <div className="border p-4 rounded-lg shadow-lg">
             <h2 className="text-lg font-semibold text-gray-800 mb-2">
               Multi Admin Details
             </h2>
+
             {/* Multi Admin Name */}
             <div>
-              <label
-                htmlFor="multiAdminName"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="multiAdminName" className="block text-sm font-medium text-gray-700">
                 Multi Admin Name
               </label>
               <InputField
@@ -116,16 +111,13 @@ const AddStore: React.FC = () => {
                 placeholder="Enter multi admin name"
                 name="multiAdminName"
                 type="text"
-                className="mt-2 sm:mt-0"
+                className="mt-2 sm:mt-0 w-[50%]"
               />
             </div>
 
             {/* Multi Admin Email */}
             <div>
-              <label
-                htmlFor="multiAdminEmail"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="multiAdminEmail" className="block text-sm font-medium text-gray-700">
                 Multi Admin Email
               </label>
               <InputField
@@ -133,16 +125,13 @@ const AddStore: React.FC = () => {
                 placeholder="Enter multi admin email"
                 name="multiAdminEmail"
                 type="text"
-                className="mt-2 sm:mt-0"
+                className="mt-2 sm:mt-0 w-[50%]"
               />
             </div>
 
             {/* Multi Admin Password */}
             <div>
-              <label
-                htmlFor="multiAdminPassword"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="multiAdminPassword" className="block text-sm font-medium text-gray-700">
                 Multi Admin Password
               </label>
               <InputField
@@ -150,7 +139,7 @@ const AddStore: React.FC = () => {
                 placeholder="Enter multi admin password"
                 name="multiAdminPassword"
                 type="password"
-                className="mt-2 sm:mt-0"
+                className="mt-2 sm:mt-0 w-[50%]"
               />
             </div>
           </div>
@@ -176,7 +165,6 @@ const AddStore: React.FC = () => {
                 <><FaPlusCircle className="mr-1" /> Add Store</>
               )}
             </button>
-
           </div>
         </form>
       </div>

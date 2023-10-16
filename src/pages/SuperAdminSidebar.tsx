@@ -1,30 +1,22 @@
 import React from 'react';
-// import { FaHome, FaStore, FaChartBar, FaLifeRing, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { AppThunkDispatch } from "../store/rootReducer";
 import { logout } from '../app/features/auth/auth.slice';
-// import { Link } from 'react-router-dom';
-import { FaHome, FaStore, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaStore, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import { clearStoreData } from '../app/features/store/store.slice';
 
 interface SuperAdminSidebarItemProps {
   icon: JSX.Element;
   text: string;
+  isActive: boolean; 
   to?: string;
 }
-
-// interface SuperAdminSidebarSubItemProps {
-//   text: string;
-// }
 
 const SuperAdminSidebar: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
-
-  // const toggleInventory = () => {
-  //   setInventoryOpen(!isInventoryOpen);
-  // };
+  const location = useLocation();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -40,38 +32,46 @@ const SuperAdminSidebar: React.FC = () => {
           <span className="text-gray-800 text-lg font-bold ml-2">DOT BRAND</span>
         </div>
         <div className="space-y-4 mt-8">
-          <Link to={"/super-admin/"}><SuperAdminSidebarItem icon={<FaHome />} text="Dashboard" /></Link>
-          <Link to={"/super-admin/stores"}><SuperAdminSidebarItem icon={<FaStore />} text="Stores" to="/stores" /></Link>
-          <Link to={"/super-admin/users"}><SuperAdminSidebarItem icon={<FaUsers />} text="Users" /></Link>
-          <Link to={"/super-admin/orders"}><SuperAdminSidebarItem icon={<FaShoppingCart />} text="Orders" /></Link>
-          <SuperAdminSidebarItem icon={<FaCog />} text="Settings" />
-        </div>
-      </div>
-      <div>
-        <button className="flex text-xs items-center text-white cursor-pointer bg-red-600 rounded-md py-2 px-2 w-40 mt-[10%]" onClick={handleLogout}>
+          <Link to="/super-admin/">
+            <SuperAdminSidebarItem
+              icon={<FaHome />}
+              text="Dashboard"
+              isActive={location.pathname === '/super-admin/'}
+            />
+          </Link>
+          <Link to="/super-admin/stores">
+            <SuperAdminSidebarItem
+              icon={<FaStore />}
+              text="Stores"
+              to="/stores"
+              isActive={location.pathname === '/super-admin/stores'}
+            />
+          </Link>
+          <SuperAdminSidebarItem
+            icon={<FaCog />}
+            text="Settings"
+            isActive={location.pathname === '/super-admin/settings'}
+          />
+          <div>
+        <button className="flex text-xs items-center text-white cursor-pointer bg-red-600 rounded-md py-2 px-2 w-40 mt-10" onClick={handleLogout}>
           <FaSignOutAlt className="mr-2" />
           Log Out
         </button>
       </div>
+        </div>
+      </div>
+      
     </div>
   );
 };
 
-const SuperAdminSidebarItem: React.FC<SuperAdminSidebarItemProps> = ({ icon, text }) => {
+const SuperAdminSidebarItem: React.FC<SuperAdminSidebarItemProps> = ({ icon, text, isActive }) => {
   return (
-    <div className="group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg hover:bg-orange-500 hover:rounded-md hover:text-white " title={text}>
+    <div className={`group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${isActive ? 'bg-indigo-500 text-white' : ''}`} title={text}>
       {icon}
       <span className="ml-2 text-xs">{text}</span>
     </div>
   );
 };
-
-// const SuperAdminSidebarSubItem: React.FC<SuperAdminSidebarSubItemProps> = ({ text }) => {
-//   return (
-//     <div className="group flex items-center py-1 pl-2 mt-1 text-gray-600 cursor-pointer transition-bg hover:bg-orange-500 hover:rounded-md hover:text-white">
-//       <span className="text-xs">{text}</span>
-//     </div>
-//   );
-// };
 
 export default SuperAdminSidebar;
