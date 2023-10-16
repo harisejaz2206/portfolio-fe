@@ -12,6 +12,7 @@ import { handleApiResponse } from "../utils/handleApiResponse";
 import { handleError } from "../utils/catchErrorToast";
 import { selectOutletLoading } from "../app/features/outlet/outlet.selector";
 import { addOutlet } from "../app/features/outlet/outlet.thunk";
+import { ClockLoader } from "react-spinners";
 
 type FormData = {
   outletName: string;
@@ -70,7 +71,8 @@ const CreateOutletForm: React.FC = () => {
   const loading = useSelector(selectOutletLoading);
 
   const handleSuccess = (result: any) => {
-    const status = result.meta.status == "fulfilled" ? true : false;
+    const status = result.meta.requestStatus == "fulfilled" ? true : false;
+    console.log("status", status);
     navigate(status ? '/multi-admin/outlets' : '/haris');
     Toast.fire({
       icon: "success",
@@ -97,6 +99,7 @@ const CreateOutletForm: React.FC = () => {
       console.log("Submitting form with values: ", values);  // Debug line 1
       dispatch(addOutlet(values))
         .then((result) => {
+          console.log("result: ", result);
           console.log('API call successful', result);  // Debug line
           Toast.fire({
             icon: "success",
@@ -321,12 +324,12 @@ const CreateOutletForm: React.FC = () => {
             <button
               type="submit"
               disabled={!formik.isValid || loading!} // Disable button if form is not valid or loading
-              className={`text-indigo-600 bg-white hover:underline hover:text-indigo-700 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center flex items-center ${!formik.isValid || loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center flex items-center ${!formik.isValid || loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {loading ? (
-                <div className="loader">Loading...</div>  // Replace with your loading indicator
+                <ClockLoader color="#ffffff" loading={true} size={15} />
               ) : (
-                "Create Outlet"
+                <><FaPlusCircle className="mr-1" /> Add Store</>
               )}
             </button>
             {/* </Link> */}

@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../store/rootReducer";
+import { createSlice } from "@reduxjs/toolkit";
 import initialOutletState from "./outlet.initialstate";
 import { addOutlet, getOutlets } from "./outlet.thunk";
 
@@ -18,7 +17,7 @@ const outletSlice = createSlice({
 
     builder.addCase(addOutlet.fulfilled, (state, action) => {
       state.loading = false;
-      state.outlet!.push(action.payload.payload?.outlet!);
+      // state.outlet!.push(action.payload.payload?.outlet!);
       state.message = action.payload.message;
     });
 

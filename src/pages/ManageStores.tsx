@@ -12,6 +12,7 @@ import ToggleModal from '../components/globals/modal/ToggleModal'; // Replace 'p
 import 'react-toggle/style.css';
 import { toggleActiveStatus } from '../app/features/store/store.slice';
 import { Toast } from '../utils/toast';
+import { selectToken } from '../app/features/auth/auth.selector';
 
 
 const ManageStores: React.FC = () => {
@@ -163,9 +164,9 @@ const ManageStores: React.FC = () => {
                       {new Date(store.createdAt!).toLocaleString()}
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap [30%]">
-                    <span className={` py-1 px-2 rounded ${store.isActive ? 'bg-green-500 text-white font-semibold px-3.5' : 'bg-red-500 text-white font-semibold '}`}>
-                      {store.isActive ? 'Active' : 'Inactive'}
-                    </span>
+                      <span className={` py-1 px-2 rounded ${store.isActive ? 'bg-green-500 text-white font-semibold px-3.5' : 'bg-red-500 text-white font-semibold '}`}>
+                        {store.isActive ? 'Active' : 'Inactive'}
+                      </span>
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap w-1/6">
                       <Toggle
