@@ -107,7 +107,7 @@ const ManageStores: React.FC = () => {
       <div className={`bg-gray-100 min-h-screen p-4 ${loading ? 'blur' : ''}`}>
         {loading && (
           <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-black bg-opacity-50">
-            <PropagateLoader color={"#123abc"} loading={true} size={15} />
+            <PropagateLoader color={"#000000"} loading={true} size={15} />
           </div>
         )}
         <div className="bg-white rounded-lg shadow p-6">
