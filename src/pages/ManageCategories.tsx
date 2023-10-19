@@ -30,8 +30,6 @@ const ManageCategories: React.FC = () => {
     const fetchData = async () => {
       try {
         await dispatch(getCategories()).then((result: any) => {
-          console.log("result:", result)
-          console.log("message:", result.payload.message)
           Toast.fire({
             icon: "success",
             title: result.payload.message,

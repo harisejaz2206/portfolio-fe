@@ -56,15 +56,11 @@ const AddCategoryForm: React.FC = () => {
     }
     const formData = new FormData();
 
-    // Debugging: log the file object
-    console.log("File to be uploaded: ", files[0]);
-
     // Append 'file' since Cloudinary API is expecting that key
     formData.append('file', files[0]);
     formData.append('upload_preset', 'dotbrand-cloudinary');
 
     try {
-      console.log("formData:", formData)
       const response = await fetch("https://api.cloudinary.com/v1_1/dr7eczdms/image/upload", {
         method: "POST",
         body: formData,
@@ -75,10 +71,8 @@ const AddCategoryForm: React.FC = () => {
         formik.setFieldValue('image', data.secure_url);
       } else {
         const data = await response.json();
-        console.error('Cloudinary upload failed:', data);
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
     } finally {
       setIsUploading(false);
     }
@@ -100,11 +94,8 @@ const AddCategoryForm: React.FC = () => {
     },
     validationSchema: CreateBrandSchema,
     onSubmit: async (values) => {
-      console.log("Formik errors:", formik.errors);  // Debug line to show Formik errors
-      console.log("Submitting form with values: ", values);  // Debug line 1
       await dispatch(addCategory(values))
         .then((result) => {
-          console.log('API call successful', result);  // Debug line
           Toast.fire({
             icon: "success",
             title: "Category successfully created",
@@ -117,9 +108,6 @@ const AddCategoryForm: React.FC = () => {
     },
   });
 
-  useEffect(() => {
-    console.log("Formik errors:", formik.errors);
-  }, [formik.errors]);
 
   // Function to handle the toggle change
   const handleToggleChange = (e: ChangeEvent<HTMLInputElement>) => {
