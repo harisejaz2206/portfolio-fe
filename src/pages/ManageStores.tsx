@@ -7,7 +7,7 @@ import { selectStoreData, selectStoreLoading } from '../app/features/store/store
 import { getStores, toggleStoreStatus } from '../app/features/store/store.thunk';
 import { PropagateLoader } from 'react-spinners';
 import Toggle from 'react-toggle';
-import ToggleModal from '../components/globals/modal/ToggleModal'; 
+import ToggleModal from '../components/globals/modal/ToggleModal';
 import Pagination from '../components/Pagination';// Replace 'path-to-DynamicModal' with the actual path to your DynamicModal component.
 
 import 'react-toggle/style.css';
@@ -23,10 +23,9 @@ const ManageStores: React.FC = () => {
   const loading = useSelector(selectStoreLoading);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeStoreId, setActiveStoreId] = useState<string | null>(null); 
+  const [activeStoreId, setActiveStoreId] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
-
 
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const ManageStores: React.FC = () => {
       store.storeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       store.multiAdminName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       store.multiAdminEmail.toLowerCase().includes(searchQuery.toLowerCase())
-      
+
   );
 
   const start = currentPage * itemsPerPage;

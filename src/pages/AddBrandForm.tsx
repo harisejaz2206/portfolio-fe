@@ -37,14 +37,15 @@ const AddBrandForm: React.FC = () => {
     const [previewImage, setPreviewImage] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
 
-    const handleSuccess = (result: any) => {
+    const handleSuccess = async (result: any) => {
         const status = result.meta.requestStatus == "fulfilled" ? true : false;
-        navigate(status ? '/multi-admin/brands' : '/haris');
         Toast.fire({
             icon: "success",
             title: "Brand created successfully",
         });
+        navigate(status ? '/multi-admin/brands' : '/haris');
     };
+
 
     // Function to handle image upload
     const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
