@@ -12,22 +12,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
 import { selectCategoryData, selectCategoryLoading } from "../app/features/category/category.selector";
 import { deleteCategory, getCategories } from "../app/features/category/category.thunk";
-import Loader from "react-loader-spinner";
-import { BeatLoader, ClipLoader, PacmanLoader, ClimbingBoxLoader } from "react-spinners";
+import { PropagateLoader } from "react-spinners";
+import { Toast } from "../utils/toast";
 
-
+interface ResponsePayload {
+  message: string;
+  // ... other expected properties
+}
 
 const ManageCategories: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
-  const categoryState = useSelector(selectCategoryData) || [];
+  const categories = useSelector(selectCategoryData) || [];
   const loading = useSelector(selectCategoryLoading);
-  // const loading = true
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(getCategories()); // Using await with dispatch here
+        await dispatch(getCategories()).then((result: any) => {
+          console.log("result:", result)
+          console.log("message:", result.payload.message)
+          Toast.fire({
+            icon: "success",
+            title: result.payload.message,
+          });
+        }); // Using await with dispatch here
       } catch (error) {
         console.error("An error occurred while fetching data: ", error);
       }
@@ -35,7 +44,7 @@ const ManageCategories: React.FC = () => {
     fetchData()
   }, [dispatch]);
 
-  // const [categories, setCategories] = useState(initialCategories);
+
   const [searchCategoryNameQuery, setSearchCategoryNameQuery] = useState("");
   const [searchProductQuery, setSearchProductQuery] = useState("");
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
@@ -63,7 +72,13 @@ const ManageCategories: React.FC = () => {
 
   const handleDelete = async (categoryId: string) => {
     try {
-      await dispatch(deleteCategory(categoryId));
+      await dispatch(deleteCategory(categoryId)).then((result: any) => {
+
+        Toast.fire({
+          icon: "success",
+          title: result.payload.message
+        })
+      });
       await dispatch(getCategories());
     } catch (error) {
       console.error("An error occurred while deleting the category: ", error);
@@ -78,7 +93,7 @@ const ManageCategories: React.FC = () => {
         </h1>
         {loading ? (
           <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-black">
-            <PacmanLoader color={"#123123"} loading={true} size={15} />
+            <PropagateLoader color={"#123123"} loading={true} size={15} />
           </div>
         ) : (
           <>
@@ -133,9 +148,6 @@ const ManageCategories: React.FC = () => {
 
                 <button
                   className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
-                // onClick={() => {
-                //   fileInputRef.current!.click();
-                // }}
                 >
                   <FaPlusCircle className="mr-2" /> Add Multiple Categories
                 </button>
@@ -184,7 +196,7 @@ const ManageCategories: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {categoryState && categoryState.filter(Boolean).map((category) => (
+                {categories && categories.filter(Boolean).map((category) => (
                   <tr key={category._id}>
                     <td className="px-6 py-4 whitespace-no-wrap">
                       {category.name}
@@ -193,7 +205,7 @@ const ManageCategories: React.FC = () => {
                       {category.status ? 'Active' : 'Inactive'}
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap">
-                      <img src={category.image} alt={category.name} width="150" height="150" />
+                      <img src={category.image} alt={category.name} width="80" height="80" />
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
                       <Link to={`/multi-admin/edit-category/${category._id}`}>

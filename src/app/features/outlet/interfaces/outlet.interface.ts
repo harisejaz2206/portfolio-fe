@@ -12,6 +12,7 @@ export interface IOutlet {
   taxValue: string;
   inventory?: string[];
   status?: boolean;
+  isActive?: boolean;
   // inventory?: IProduct[];
   createdAt?: string;
   updatedAt?: string;

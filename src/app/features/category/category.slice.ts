@@ -18,7 +18,7 @@ const categorySlice = createSlice({
 
     builder.addCase(addCategory.fulfilled, (state, action) => {
       state.loading = false;
-      state.category!.push(action.payload.payload?.category!);
+      // state.category = [...state.category, action.payload.payload?.category];
       state.message = action.payload.message;
     });
 
@@ -33,8 +33,9 @@ const categorySlice = createSlice({
 
     builder.addCase(getCategories.fulfilled, (state, action) => {
       state.loading = false;
-      state.category = action.payload.payload;
       state.message = action.payload.message;
+      state.category = action.payload.payload?.categories;
+      console.log("state.category:", state.category);
     });
 
     builder.addCase(getCategories.rejected, (state, action) => {

@@ -17,7 +17,7 @@ const outletSlice = createSlice({
 
     builder.addCase(addOutlet.fulfilled, (state, action) => {
       state.loading = false;
-      // state.outlet!.push(action.payload.payload?.outlet!);
+      // state.outlet = [...state.outlet, action.payload.payload?.outlet!];
       state.message = action.payload.message;
     });
 
