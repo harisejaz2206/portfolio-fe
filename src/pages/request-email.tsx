@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { ClockLoader } from 'react-spinners';
+import DynamicModal from '../components/globals/modal/DynamicModal';
 
 import Typewriter from 'typewriter-effect';
 
@@ -95,6 +96,18 @@ const RequestEmail = () => {
           >
             Back to <span className="text-red-700 font-bold hover:underline">Login</span>
           </button>
+          {isModalOpen && (
+                <DynamicModal
+                    title="Email Sent!"
+                    description="Check your email to reset your password."
+                    action="Close"
+                    btnWidth={true}
+                    open={isModalOpen}
+                    setOpen={setModalOpen}
+                    successIcon={true}
+                    routerPath="/login"
+                />
+            )}
         </div>
       </div>
 

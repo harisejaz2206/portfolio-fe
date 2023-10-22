@@ -204,27 +204,27 @@ const ManageBrands: React.FC = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {brandState && brandState.filter(Boolean).map((brand) => (
                   <tr key={brand._id}>
-                    <td className="px-6 py-4 whitespace-no-wrap">
+                    <td className="px-6 py-3 whitespace-no-wrap">
                       {brand.name}
                     </td>
-                    <td className="px-6 py-4 whitespace-no-wrap">
+                    <td className="px-6 py-3 whitespace-no-wrap">
                       {brand.status ? 'Active' : 'Inactive'}
                     </td>
-                    <td className="px-6 py-4 whitespace-no-wrap">
+                    <td className="px-6 py-3 whitespace-no-wrap">
                       <img src={brand.image} alt={brand.name} width="120" height="120" />
                     </td>
 
-                    <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
+                    <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium">
                       <Link to={`/admin/edit-manufacturer/${brand._id}`}>
                         <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
-                          <FaEdit className="-ml-20" />
+                          <FaEdit className="-ml-24" />
                         </button>
                       </Link>
                       <button
                         className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
                         onClick={() => handleDeleteBrand(brand._id!)}
                       >
-                        <FaTrash />
+                        <FaTrash className="-ml-20" />
                       </button>
                     </td>
                   </tr>
