@@ -71,7 +71,6 @@ const ManageCategories: React.FC = () => {
   const handleDelete = async (categoryId: string) => {
     try {
       await dispatch(deleteCategory(categoryId)).then((result: any) => {
-
         Toast.fire({
           icon: "success",
           title: result.payload.message

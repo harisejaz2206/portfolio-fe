@@ -33,7 +33,7 @@ const brandSlice = createSlice({
 
     builder.addCase(getBrands.fulfilled, (state, action) => {
       state.loading = false;
-      state.brand = action.payload.payload;
+      state.brand = action.payload.payload?.brands;
       // console.log(action.payload.payload);
       state.message = action.payload.message;
       console.log(state.brand);

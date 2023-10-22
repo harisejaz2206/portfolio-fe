@@ -12,26 +12,31 @@ import {
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
-import { selectBrandData } from "../app/features/brand/brand.selector";
+import { selectBrandData, selectBrandLoading } from "../app/features/brand/brand.selector";
 import { deleteBrand, getBrands } from "../app/features/brand/brand.thunk";
-import { BeatLoader, ClipLoader, PacmanLoader, ClimbingBoxLoader } from "react-spinners";
+import { BeatLoader, ClipLoader, PacmanLoader, ClimbingBoxLoader, PropagateLoader } from "react-spinners";
 import { selectCategoryLoading } from "../app/features/category/category.selector";
 import Modal from 'react-modal';
+import { Toast } from "../utils/toast";
 
 
 const ManageBrands: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
   const brandState = useSelector(selectBrandData) || [];
-  const loading = useSelector(selectCategoryLoading);
+  const loading = useSelector(selectBrandLoading);
+  console.log("Loading", loading);
   const [isModalOpen, setModalOpen] = useState(false);
-  const [brandToDelete, setBrandToDelete] = useState<string | null>(null);
-  console.log("brand state:", brandState)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(getBrands()); // Using await with dispatch here
+        await dispatch(getBrands()).then((result: any) => {
+          Toast.fire({
+            icon: "success",
+            title: result.payload.message
+          })
+        }); // Using await with dispatch here
       } catch (error) {
         console.error("An error occurred while fetching data: ", error);
       }
@@ -68,7 +73,12 @@ const ManageBrands: React.FC = () => {
 
   const handleDeleteBrand = async (id: string) => {
     try {
-      await dispatch(deleteBrand(id));
+      await dispatch(deleteBrand(id)).then((result: any) => {
+        Toast.fire({
+          icon: "success",
+          title: result.payload.message
+        })
+      });
       await dispatch(getBrands());
     } catch (error) {
       console.error("An error occurred while deleting the brand: ", error);
@@ -84,7 +94,7 @@ const ManageBrands: React.FC = () => {
         </h1>
         {loading ? (
           <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-black">
-            <PacmanLoader color={"#123123"} loading={true} size={15} />
+            <PropagateLoader color={"#123123"} loading={true} size={15} />
           </div>
         ) : (
           <>

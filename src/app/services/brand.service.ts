@@ -15,7 +15,7 @@ class BrandService extends HttpService {
   ): Promise<IResponseInterface<{ brand: IBrand }>> =>
     this.post(`${this.prefix}/brand`, data);
 
-  getAllBrandsHandler = (): Promise<IResponseInterface<IBrand[]>> =>
+  getAllBrandsHandler = (): Promise<IResponseInterface<{ brands: IBrand[] }>> =>
     this.get(`${this.prefix}/brand`);
 
   deleteBrandHandler = (

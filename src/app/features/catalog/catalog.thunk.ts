@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ICategory } from "./interfaces/category.interface";
-import { categoryService } from "../../services/category.service";
+import { ICatalog } from "./interfaces/catalog.interface";
+import { catalogService } from "../../services/catalog.service";
 
-export const addCategory = createAsyncThunk(
-  "category/addCategory",
-  async (credentials: ICategory, { rejectWithValue }) => {
+export const addCatalog = createAsyncThunk(
+  "catalog/addCatalog",
+  async (credentials: ICatalog, { rejectWithValue }) => {
     try {
       console.log("inside");
-      const response = await categoryService.addCategoryHandler(credentials);
+      const response = await catalogService.addCatalogHander(credentials);
       return response;
     } catch (error: any) {
       return rejectWithValue(
@@ -17,11 +17,12 @@ export const addCategory = createAsyncThunk(
   }
 );
 
-export const getCategories = createAsyncThunk(
-  "category/getCategories",
+export const getCatalogs = createAsyncThunk(
+  "catalog/getCatalogs",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await categoryService.getAllCategoriesHandler();
+      const response = await catalogService.getAllCatalogsHandler();
+      console.log("response", response);
       return response;
     } catch (error: any) {
       return rejectWithValue(
@@ -31,11 +32,11 @@ export const getCategories = createAsyncThunk(
   }
 );
 
-export const deleteCategory = createAsyncThunk(
-  "brand/deleteCategory",
+export const deleteCatalog = createAsyncThunk(
+  "catalog/deleteCatalog",
   async (id: string, { rejectWithValue }) => {
     try {
-      const response = await categoryService.deleteCategoryHandler(id);
+      const response = await catalogService.deleteCatalogHandler(id);
       return response;
     } catch (error: any) {
       return rejectWithValue(
