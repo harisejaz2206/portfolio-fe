@@ -182,8 +182,8 @@ const ManageOutlets: React.FC = () => {
                       <div className="truncate max-w-xs">{outlet.address}</div>
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap [30%]">
-                      <span className={` py-1 px-2 rounded ${outlet.isActive ? 'bg-green-500 text-white font-semibold px-3.5' : 'bg-red-500 text-white font-semibold '}`}>
-                        {outlet.status ? 'Active' : 'Inactive'}
+                    <span className={` py-1 px-2 rounded ${outlet.isActive ? 'bg-green-500 text-white font-semibold px-3.5' : 'bg-red-500 text-white font-semibold '}`}>
+                        {outlet.isActive ? 'Active' : 'Inactive'}
                       </span>
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium w-1/6">

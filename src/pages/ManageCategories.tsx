@@ -7,6 +7,7 @@ import {
   FaPlusCircle,
   FaDownload,
   FaUpload,
+  FaTrash,
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
@@ -14,6 +15,7 @@ import { selectCategoryData, selectCategoryLoading } from "../app/features/categ
 import { deleteCategory, getCategories } from "../app/features/category/category.thunk";
 import { PropagateLoader } from "react-spinners";
 import { Toast } from "../utils/toast";
+import DeleteModal from "../components/globals/modal/DeleteModal";
 
 interface ResponsePayload {
   message: string;
@@ -25,6 +27,11 @@ const ManageCategories: React.FC = () => {
   const navigate = useNavigate();
   const categories = useSelector(selectCategoryData) || [];
   const loading = useSelector(selectCategoryLoading);
+
+  // State variables for DeleteModal
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [categoryToDelete, setCategoryToDelete] = useState<string | null>(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,6 +73,11 @@ const ManageCategories: React.FC = () => {
       return;
     }
     setSelectedFiles([]);
+  };
+
+  const handleDeleteClick = (categoryId: string) => {
+    setCategoryToDelete(categoryId);
+    setDeleteModalOpen(true);
   };
 
   const handleDelete = async (categoryId: string) => {
@@ -207,15 +219,15 @@ const ManageCategories: React.FC = () => {
                     <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
                       <Link to={`/multi-admin/edit-category/${category._id}`}>
                         <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
-                          <FaEdit className="-ml-20" />
+                          <FaEdit className=" -ml-20" />
                         </button>
                       </Link>
-                      {/* Delete Button (new) */}
+                      
                       <button
                         className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
-                        onClick={() => handleDelete(category._id!)}
+                        onClick={() => handleDeleteClick(category._id!)}
                       >
-                        Delete
+                        <FaTrash className="-ml-16"/>
                       </button>
                     </td>
                   </tr>
@@ -225,6 +237,20 @@ const ManageCategories: React.FC = () => {
           </>
         )}
 
+        {/* DeleteModal */}
+        {deleteModalOpen && (
+          <DeleteModal
+            title="Delete Category"
+            description="Are you sure you want to delete this category?"
+            onConfirm={() => {
+              if (categoryToDelete) {
+                handleDelete(categoryToDelete);
+                setDeleteModalOpen(false);
+              }
+            }}
+            onCancel={() => setDeleteModalOpen(false)}
+          />
+        )}
 
         {/* Table and category listing */}
 

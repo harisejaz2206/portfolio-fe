@@ -2,82 +2,105 @@ import React, { useState } from 'react';
 import InputField from '../components/globals/inputField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Toast } from '../utils/toast';
-import DynamicModal from '../components/globals/modal/DynamicModal';
+import { useNavigate } from 'react-router-dom';
+import { ClockLoader } from 'react-spinners';
+
+import Typewriter from 'typewriter-effect';
 
 const RequestEmailSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Email is required'),
+  email: Yup.string().email('Invalid email').required('Email is required'),
 });
 
+const LeftSideDiv = () => (
+  <div className="bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-600 via-red-900 to-red-900 w-[25%] min-h-screen flex flex-col items-center justify-center text-white">
+    <div className="text-center  mb-4">
+      <img src="/logo.png" alt="Company Logo" className="w-20 h-20  rounded-full mx-auto" />
+    </div>
+    <div className="text-center">
+      <h1 className="text-3xl font-bold text-white mb-2">
+      <span className="text-white">
+              <Typewriter
+                options={{
+                  strings: ['Dot Brand ©', 'Hi there!'],
+                  autoStart: true, // Start typing automatically
+                  loop: true, // Loop the animation
+                  delay: 100, // Delay between each character typing
+                  deleteSpeed: 50, // Speed of character deletion
+                }}
+              />
+            </span>
+      </h1>
+      <div className="text-md text-white mb-8 mt-auto">
+        <p>
+          <span className="ml-2 block">
+          Prescriptions, Delivered Your Way
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+);
+
 const RequestEmail = () => {
-    const [isModalOpen, setModalOpen] = useState(false);
-    const navigate = useNavigate();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
 
-    const formik = useFormik({
-        initialValues: { email: '' },
-        validationSchema: RequestEmailSchema,
-        onSubmit: (values) => {
-            console.log(values);
-            setModalOpen(true);
-            // Toast.fire({
-            //     icon: "success",
-            //     title: "Email sent! Check your email to reset your password.",
-            // });
-        },
-    });
+  const formik = useFormik({
+    initialValues: { email: '' },
+    validationSchema: RequestEmailSchema,
+    onSubmit: (values) => {
+      console.log(values);
+      setModalOpen(true);
+    },
+  });
 
-    return (
-        <div className="flex flex-col justify-center items-center bg-white h-screen">
-            {/* Logo */}
-            {/* <img src="https://img.freepik.com/free-vector/supermarket-logo-concept_23-2148467758.jpg?w=1380&t=st=1693562833~exp=1693563433~hmac=7000d89d804c1aa7a8e1aa8d1911d7d22f97238838f14519cf53d5bc795aeeef" alt="Logo" className="mb-4" /> */}
+  return (
+    <div className="flex h-screen">
+      <LeftSideDiv />
 
-            <h2 className="text-4xl text-gray-700 mb-2 font-semibold tracking-wide">Forgot Your Password?</h2>
-            <h3 className="text-xl text-gray-600 mb-6 font-medium tracking-wide">Enter your registered email to reset your password</h3>
-
-            <form
-                className="w-1/4 p-6 rounded-lg shadow-lg"
-                onSubmit={formik.handleSubmit}
-            >
-                <div className="mb-6 w-full">
-                    <InputField
-                        size="sm"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        formik={formik}
-                        className="rounded-full w-full"
-                    />
-                </div>
-                <button
-                    className=" bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-4 rounded-full w-full"
-                    type="submit"
-                >
-                    Reset Password
-                </button>
-            </form>
-
-            {/* Back to Login Button */}
+      <div className="w-2/3 bg-white flex items-center justify-center">
+        <div className="max-w-md w-full p-6">
+          <div className="text-center -mt-[30%]">
+            <h2 className="text-2xl font-bold text-red-800 mb-2 ">
+              Forgot your password?
+            </h2>
+            <h4 className="text-lg  text-gray-600 mb-12 font-semibold">
+              Please enter you registered email below
+            </h4>
+          </div>
+          <form onSubmit={formik.handleSubmit}>
+            <div className="-mb-2">
+              <label htmlFor="email" className="block text-red-800 text-sm font-bold">
+                Email Address:
+              </label>
+              <InputField
+                size="sm"
+                type="email"
+                name="email"
+                placeholder="Email"
+                formik={formik}
+                className="rounded-md border-gray-300 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 w-full p-2"
+              />
+            </div>
             <button
-                className="text-sm text-gray-500 mt-4"
-                onClick={() => navigate('/login')}
+              className={`bg-red-800 text-white rounded-lg py-2 hover:bg-red-600 focus:ring focus:ring-red-600 focus:ring-opacity-50 w-full transition-colors duration-300`}
+              type="submit"
             >
-                Back to <span className="text-blue-500 font-bold">Login</span>
+              Reset Password
             </button>
-            {isModalOpen && (
-                <DynamicModal
-                    title="Email Sent!"
-                    description="Check your email to reset your password."
-                    action="Close"
-                    btnWidth={true}
-                    open={isModalOpen}
-                    setOpen={setModalOpen}
-                    successIcon={true}
-                    routerPath="/login"  // or wherever you want to navigate
-                />
-            )}
+          </form>
+          <button
+            className="text-sm text-gray-500 mt-4  cursor-pointer"
+            onClick={() => navigate('/login')}
+          >
+            Back to <span className="text-red-700 font-bold hover:underline">Login</span>
+          </button>
         </div>
-    );
+      </div>
+
+      
+    </div>
+  );
 };
 
 export default RequestEmail;

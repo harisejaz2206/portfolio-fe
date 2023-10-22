@@ -215,7 +215,7 @@ const ManageBrands: React.FC = () => {
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
-                      <Link to={`/multi-admin/edit-manufacturer/${brand._id}`}>
+                      <Link to={`/admin/edit-manufacturer/${brand._id}`}>
                         <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
                           <FaEdit className="-ml-20" />
                         </button>

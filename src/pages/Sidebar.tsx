@@ -85,9 +85,10 @@ const Sidebar: React.FC = () => {
                 />
               </Link>
               <Link to="/multi-admin/brands">
-                <SidebarSubItem
-                  text="Brands"
-                  isActive={location.pathname === '/multi-admin/manufacturers'}
+
+                <SidebarSubItem 
+                text="Brands" 
+                isActive={location.pathname === '/multi-admin/brands'}
                 />
               </Link>
             </div>
