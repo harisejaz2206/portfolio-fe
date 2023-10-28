@@ -117,7 +117,7 @@ const CreateOutletForm: React.FC = () => {
   return (
     <div className="bg-gray-100 h-auto flex justify-center items-center">
       <div className="bg-white rounded-lg shadow-md p-8 w-[70%] mt-2 mb-2">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+        <h1 className="text-2xl font-semibold text-gray-800 mb-6">
           Add Outlet
         </h1>
         <form onSubmit={formik.handleSubmit} className="space-y-6">
@@ -141,7 +141,7 @@ const CreateOutletForm: React.FC = () => {
           {/* Outlet Admin Details */}
           <div className="border p-4 rounded-lg shadow-lg bg-slate-50">
             <h2 className="text-lg font-semibold text-gray-800 mb-2">
-               Multi Admin Details
+              Multi Admin Details
             </h2>
             <div className="grid grid-cols-2 gap-4">
               {/* Admin Name */}
@@ -307,7 +307,7 @@ const CreateOutletForm: React.FC = () => {
             </div>
           </div>
 
-         {/* 
+          {/* 
           <div className="mt-4">
             <button
               type="submit"

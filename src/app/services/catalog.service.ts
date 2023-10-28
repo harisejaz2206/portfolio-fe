@@ -6,7 +6,10 @@ import { HttpService } from "./base.service";
 // Importing interfaces
 import { IResponseInterface } from "../interfaces/api-response.interface";
 import { IBrand } from "../features/brand/interfaces/brand.interface";
-import { ICatalog } from "../features/catalog/interfaces/catalog.interface";
+import {
+  ICatalog,
+  IGetCatalog,
+} from "../features/catalog/interfaces/catalog.interface";
 
 class CatalogService extends HttpService {
   private readonly prefix: string = "api/v1/multiadmin";
@@ -17,7 +20,7 @@ class CatalogService extends HttpService {
     this.post(`${this.prefix}/catalog`, data);
 
   getAllCatalogsHandler = (): Promise<
-    IResponseInterface<{ catalogItems: ICatalog[] }>
+    IResponseInterface<{ catalogItems: IGetCatalog[] }>
   > => this.get(`${this.prefix}/catalog`);
 
   deleteCatalogHandler = (

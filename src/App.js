@@ -26,7 +26,6 @@ import MultiAdminLogin from "./pages/MultiAdminLogin";
 import SoleAdminLogin from "./pages/SoleAdminLogin";
 import AddProductForm from "./pages/AddProductForm";
 import BillingAndInventoryForm from "./pages/BillingAndInventory";
-import Catalog from "./pages/Catalog";
 import CreateOutletForm from "./pages/CreateOutletForm";
 import Dashboard from "./pages/Dashboard";
 import EditOutletForm from "./pages/EditOutletForm";
@@ -58,6 +57,8 @@ import ManageStores from "./pages/ManageStores";
 import AddStore from "./pages/AddStore";
 import AddBrandForm from "./pages/AddBrandForm";
 import ManageBrands from "./pages/ManageBrands";
+import AddCatalogForm from "./pages/AddCatalogForm";
+import ManageCatalog from "./pages/ManageCatalog";
 
 function App() {
   const token = useSelector(selectToken);
@@ -71,16 +72,16 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Routes that should have the layout */}
-        
-         <Route
+
+        <Route
           path="/"
           element={
             <Layout>
               <Home />
             </Layout>
           }
-         />
-         <Route
+        />
+        <Route
           path="/categories"
           element={
             <Layout>
@@ -275,10 +276,23 @@ function App() {
                     path="/create-category"
                     element={<AddCategoryForm />}
                   />
-                  <Route path="/billing-and-inventory" element={<BillingAndInventoryForm />} />
-                  <Route path="/catalogue" element={<Catalog />} />
-                  <Route path="/add-to-inventory-1" element={<AddToInventoryForm/>} /> 
-                  <Route path="/add-to-inventory-2" element={<InventoryBilling/>} /> 
+                  <Route
+                    path="/billing-and-inventory"
+                    element={<BillingAndInventoryForm />}
+                  />
+                  <Route path="/catalogue" element={<ManageCatalog />} />
+                  <Route
+                    path="/create-catalogue"
+                    element={<AddCatalogForm />}
+                  />
+                  <Route
+                    path="/add-to-inventory-1"
+                    element={<AddToInventoryForm />}
+                  />
+                  <Route
+                    path="/add-to-inventory-2"
+                    element={<InventoryBilling />}
+                  />
                   <Route
                     path="/view-product/:productId"
                     element={<ProductDetails />}
@@ -304,29 +318,31 @@ function App() {
         />
         <Route
           path="/sole-admin/*"
-          element={ <div className="flex">
-          <SoleChainSidebar/>
-          <div className="flex-1">
-            <Routes>
-            <Route path="/" element={<SoleChainDashboard/>} />
-            </Routes>
-          </div>
-          </div>
+          element={
+            <div className="flex">
+              <SoleChainSidebar />
+              <div className="flex-1">
+                <Routes>
+                  <Route path="/" element={<SoleChainDashboard />} />
+                </Routes>
+              </div>
+            </div>
           }
         />
 
-       <Route
+        <Route
           path="/super-admin/*"
-          element={ <div className="flex">
-          <SuperAdminSidebar/>
-          <div className="flex-1">
-            <Routes>
-            <Route path="/" element={<SuperAdminDashboard/>} />
-            <Route path="/stores" element={<ManageStores />} />
-            <Route path="/add-store" element={<AddStore/>}/>
-            </Routes>
-          </div>
-          </div>
+          element={
+            <div className="flex">
+              <SuperAdminSidebar />
+              <div className="flex-1">
+                <Routes>
+                  <Route path="/" element={<SuperAdminDashboard />} />
+                  <Route path="/stores" element={<ManageStores />} />
+                  <Route path="/add-store" element={<AddStore />} />
+                </Routes>
+              </div>
+            </div>
           }
         />
       </Routes>

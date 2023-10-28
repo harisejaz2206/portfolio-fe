@@ -32,9 +32,9 @@ const catalogSlice = createSlice({
 
     builder.addCase(getCatalogs.fulfilled, (state, action) => {
       state.loading = false;
-      state.catalog = action.payload.payload?.catalogItems;
+      state.getCatalog = action.payload.payload?.catalogItems;
       state.message = action.payload.message;
-      console.log(state.catalog);
+      console.log(state.getCatalog);
     });
 
     builder.addCase(getCatalogs.rejected, (state, action) => {
