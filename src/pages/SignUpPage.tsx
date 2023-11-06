@@ -14,6 +14,7 @@ import InputField from '../components/globals/inputField';
 import { useFormik } from "formik";
 import { HttpService } from "../app/services/base.service";
 import DynamicModal from "../components/globals/modal/DynamicModal";
+import TypeWriter from "typewriter-effect";
 
 type FormData = {
   name: string;
@@ -69,51 +70,40 @@ const SignUpPage: React.FC = () => {
 
 
   return (
-    <div className="flex justify-center items-center h-screen ">
-      <div className="bg-white rounded-lg shadow-md flex w-full max-w-4xl">
-        <div className="w-1/3 bg-red-900">
+    <div className="flex justify-center items-center h-max ">
+      <div className="bg-white rounded-lg mt-auto shadow-md flex w-full max-w-4xl mb-2 ">
+        <div className="w-1/3 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-600 via-red-900 to-red-900">
           <img src="/marijuana.png" alt="marijuana" className="ml-56" />
           <h1 className="text-4xl text-yellow-400 font-bold text-center">
             DotBrand
           </h1>
-          <img src="/Frame 20.png" alt="pharmacy" className="w-auto h-auto " />
-          <div className="text-white">
-            <h2 className="text-xl ml-6 mb-2">Login to</h2>
-            <p className="relative left-6">
+          <img src="/Frame 20.png" alt="" className="w-auto h-auto" />
+          <div className="text-white ">
+            <p className="relative left-6 flex items-center">
               <span className="absolute top-1/2 transform -translate-y-1/2">
-                <div className="bg-yellow-400 w-4 h-4 rounded-full flex items-center justify-center">
+                <div className="bg-yellow-400 w-4 h-4 -ml-2 rounded-full flex items-center justify-center">
                   <TiTick className="text-white" />
                 </div>
               </span>
-              <span className="ml-6 text-sm">Manage your orders</span>
-            </p>
-            <p className="relative left-6">
-              <span className="absolute top-1/2 transform -translate-y-1/2">
-                <div className="bg-yellow-400 w-4 h-4 rounded-full flex items-center justify-center">
-                  <TiTick className="text-white" />
-                </div>
+              <span className="ml-4 text-md">
+              <TypeWriter
+        options={{
+          strings: [
+            "Manage your orders",
+            "Get Exclusive Deals and Offers",
+            "Get Personalized Recommendations",
+          ],
+          autoStart: true,
+          loop: true,
+          cursor: "|", // Use an underscore as the cursor
+          delay: 75, // Delay between typing each character
+          deleteSpeed: 20, // Speed of deleting characters
+        }}
+      />
               </span>
-              <span className="ml-6 text-sm">
-                Get Exclusive Deals and Offers
-              </span>
-            </p>
-            <p className="relative left-6">
-              <span className="absolute top-1/2 transform -translate-y-1/2">
-                <div className="bg-yellow-400 w-4 h-4 rounded-full flex items-center justify-center">
-                  <TiTick className="text-white" />
-                </div>
-              </span>
-              <span className="ml-6 text-sm">
-                Get Personalized Recommendations
-              </span>
+           
             </p>
           </div>
-
-          <img
-            src="/Group 253.png"
-            alt="bottle"
-            className="h-auto w-auto ml-24"
-          />
         </div>
 
         <div className="w-2/3 p-14 bg-gray-100">

@@ -41,11 +41,16 @@ const ManageCatalog: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(0);
 
     // Function to filter products based on search query
-    const filteredCatalog = catalogState!.filter(
+   {/* const filteredCatalog = catalogState!.filter(
         (catalog) =>
             catalog.name.toLowerCase().includes(searchQuery.toLowerCase())
         // catalog.brand!.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+   ); */}
+    const filteredCatalog = catalogState
+  ? catalogState.filter((catalog) =>
+      catalog.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  : [];
 
     // Function to handle pagination
     const totalPages = Math.ceil(filteredCatalog.length / itemsPerPage);
@@ -83,7 +88,7 @@ const ManageCatalog: React.FC = () => {
                             </div>
                             <Link
                                 to="/multi-admin/create-catalogue"
-                                className="bg-indigo-600 text-white px-3 py-1 text-sm rounded-md"
+                                className="bg-indigo-600 text-white ml-2 px-3 py-2 text-sm rounded-md"
                             >
                                 Add Catalog
                             </Link>
@@ -97,6 +102,9 @@ const ManageCatalog: React.FC = () => {
                                     </th>
                                     <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Original Price
+                                    </th>
+                                    <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Sale Price
                                     </th>
                                     <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Brand
@@ -118,29 +126,18 @@ const ManageCatalog: React.FC = () => {
                                             ${catalog.originalPrice}
                                         </td>
                                         <td className="px-4 py-2 whitespace-no-wrap">
+                                            ${catalog.salePrice}
+                                        </td>
+                                        <td className="px-4 py-2 whitespace-no-wrap">
                                             {catalog.brand ? catalog.brand.name : 'N/A'}
                                         </td>
                                         <td className="px-4 py-2 whitespace-no-wrap">
                                             {catalog.category ? catalog.category.name : 'N/A'}
                                         </td>
-
+                                       
                                         <td className="px-4 py-2 whitespace-no-wrap text-right">
                                             <div className="flex items-center ml-[23%]">
-                                                <Link
-                                                    to={`/multi-admin/view-product/${catalog._id}`}
-                                                    className="flex items-center justify-center px-2 py-1 rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:underline text-sm"
-                                                >
-                                                    <FaEye className="mr-1 text-sm" />
-                                                    View Product
-                                                </Link>
-
-                                                <Link
-                                                    to={"/multi-admin/add-to-inventory-1"}
-                                                    className="flex items-center justify-center px-2 py-1 rounded-md text-indigo-600 bg-white border border-indigo-600 hover:bg-indigo-700 hover:text-white focus:outline-none focus:underline ml-4 text-sm"
-                                                >
-                                                    <FaPlusCircle className="mr-1 text-sm" />
-                                                    Add to Inventory
-                                                </Link>
+                                               
                                             </div>
                                         </td>
                                     </tr>
