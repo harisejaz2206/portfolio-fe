@@ -10,7 +10,7 @@ import { selectError, selectLoading, selectMessage, selectUser } from "../app/fe
 import { resetpassword, forgotpassword } from '../app/features/auth/auth.thunk';
 import { handleApiResponse } from '../utils/handleApiResponse';
 import { handleError } from '../utils/catchErrorToast';
-import { Link, useNavigate, useParams } from 'react-router-dom';  // Importing from React Router
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';  // Importing from React Router
 import DynamicModal from '../components/globals/modal/DynamicModal';
 
 
@@ -29,17 +29,14 @@ const ResetPasswordSchema = Yup.object().shape({
 
 const ResetPassword = () => {
     const navigate = useNavigate();  // Replacing useRouter
-    const { token } = useParams();  // If token is a URL parameter
+    // const { token } = useSearchParams();  // If token is a URL parameter
+    const [searchParams] = useSearchParams();
     const dispatch = useDispatch<AppThunkDispatch>();
     const message = useSelector(selectMessage);
     const userObject = useSelector(selectUser);
     const error = useSelector(selectError);
     const loading = useSelector(selectLoading);
-    console.log("token", token)
-
-    useEffect(() => {
-        console.log("Inside useEffect: token", token);
-    }, [token]);
+    // console.log(searchParams.get('token'));
 
 
     const [isModalOpen, setModalOpen] = useState(false);
@@ -62,8 +59,7 @@ const ResetPassword = () => {
         validateOnBlur: true,
         onSubmit: async (values) => {
             try {
-                console.log("token", token)
-                const result = await dispatch(resetpassword({ password: values.password, token }));
+                const result = await dispatch(resetpassword({ password: values.password, token: searchParams.get('token')! }));
                 if (result.meta.requestStatus === "fulfilled") {
                     setModalOpen(true);
                 }
@@ -87,7 +83,7 @@ const ResetPassword = () => {
                 <div className="flex flex-grow items-center justify-center">
                     <ThemeBox className="lg:max-w-[920px] lg:min-w-[920px] p-8 m-3 md:m-0 bg-red-100">
                         <figure className="mx-auto text-center mb-4 sm:mb-6">
-                            <img className="mx-auto w-[130px] sm:w-[180px]" src="/assets/images/logo.svg" alt="Logo" width={180} height={48} />
+                            {/* <img className="mx-auto w-[130px] sm:w-[180px]" src="/assets/images/logo.svg" alt="Logo" width={180} height={48} /> */}
                         </figure>
                         <div className="w-full mb-6">
                             <h1 className="text-center font-bold text-black text-xl md:text-2xl mb-2">
