@@ -41,6 +41,9 @@ const MultiAdminLogin: React.FC = () => {
     });
   };
 
+  const handleForgotPasswordClick = () => {
+    navigate('/multilogin-forgotpassword'); // Replace with the correct route for the "request-email.tsx" component
+  };
   const formik = useFormik<FormData>({
     initialValues: {
       email: '',
@@ -123,9 +126,9 @@ const MultiAdminLogin: React.FC = () => {
               />
             </div>
             <div className="mb-4 text-right mr-1 text-sm">
-              <a className="text-red-700 underline" href="/forgot-password">
-                Forgot your password?
-              </a>
+            <a className="text-red-700 underline" href="/multilogin-forgotpassword" >
+              Forgot your password?
+            </a>
             </div>
             <div className="mb-1">
               {loading ? (

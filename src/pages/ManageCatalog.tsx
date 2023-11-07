@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSearch, FaPlusCircle, FaShoppingCart, FaEye } from "react-icons/fa"; // Import icons
+import { FaSearch, FaPlusCircle, FaShoppingCart, FaEye, FaTrash } from "react-icons/fa"; // Import icons
 import Toggle from "react-toggle"; // Import the Toggle component
 import "react-toggle/style.css"; // Import the styles for the Toggle component
 import { useDispatch, useSelector } from "react-redux";
@@ -67,7 +67,7 @@ const ManageCatalog: React.FC = () => {
                     <div className="bg-white rounded-lg shadow p-6">
                         <h1 className="text-xl font-semibold text-gray-800 mb-4">Catalog</h1>
 
-                        <div className="flex items-center mb-4">
+                        <div className="flex items-center justify-between mb-4">
                             <div className="relative flex items-center">
                                 <span className="absolute left-3 top-2 text-gray-400">
                                     <FaSearch />
@@ -82,12 +82,11 @@ const ManageCatalog: React.FC = () => {
                             </div>
                             <Link
                                 to="/multi-admin/create-catalogue"
-                                className="bg-indigo-600 text-white ml-2 px-3 py-2 text-sm rounded-md"
+                                className="bg-indigo-600 text-white px-3 py-2 text-sm rounded-md"
                             >
                                 Add Catalog
                             </Link>
                         </div>
-
                         <table className="min-w-full divide-y divide-gray-200 text-sm">
                             <thead>
                                 <tr>
@@ -129,11 +128,17 @@ const ManageCatalog: React.FC = () => {
                                             {catalog.category ? catalog.category.name : 'N/A'}
                                         </td>
                                        
-                                        <td className="px-4 py-2 whitespace-no-wrap text-right">
-                                            <div className="flex items-center ml-[23%]">
-                                               
+                                        <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
+                                             {/* Flex container for "Action" and trash icon */}
+                                             <div className="flex justify-between items-center">
+                                                <button
+                                                    className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-14"
+                                                    onClick={() => {}}
+                                                >
+                                                    <FaTrash />
+                                                </button>
                                             </div>
-                                        </td>
+                                      </td>
                                     </tr>
                                 ))}
                             </tbody>

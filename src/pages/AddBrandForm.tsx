@@ -132,7 +132,7 @@ const AddBrandForm: React.FC = () => {
                         </label>
                         <InputField
                             formik={formik}
-                            placeholder="Enter outlet name"
+                            placeholder="Enter brand name"
                             name="name"
                             type="text"
                             className="mt-2 sm:mt-0"

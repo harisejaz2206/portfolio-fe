@@ -60,6 +60,11 @@ import ManageBrands from "./pages/ManageBrands";
 import AddCatalogForm from "./pages/AddCatalogForm";
 import ManageCatalog from "./pages/ManageCatalog";
 import SoleAdminManageCatalogue from "./pages/SoleAdminManageCatalogue"
+import SoleAdminManageCategories from "./pages/SoleAdminManageCategories";
+import SoleAdminManageBrands from "./pages/SoleAdminManageBrands";
+import SoleAdminUser from "./pages/SoleAdminUsers";
+import SoleAdminManageOrders from "./pages/SoleAdminManageOrders";
+import SoleAdminViewOrderDetails from "./pages/SoleAdminViewOrderDetails";
 
 function App() {
   const token = useSelector(selectToken);
@@ -252,8 +257,11 @@ function App() {
         />
         {/* Routes Without Layout */}
         <Route path="/superlogin" element={<SuperAdminLogin />} />
+        <Route path="/superlogin-forgotpassword" element={<RequestEmail />} />
         <Route path="/multilogin" element={<MultiAdminLogin />} />
+        <Route path="/multilogin-forgotpassword" element={<RequestEmail />} />
         <Route path="/solelogin" element={<SoleAdminLogin />} />
+        <Route path="/solelogin-forgotpassword" element={<RequestEmail />} />
 
         {/* Admin Dashboard Routes*/}
         <Route
@@ -326,6 +334,18 @@ function App() {
                 <Routes>
                   <Route path="/" element={<SoleChainDashboard />} />
                   <Route path="/catalogue" element={<SoleAdminManageCatalogue />} />
+                  <Route path="/brands" element={<SoleAdminManageBrands />} />
+                  <Route path="/categories" element={<SoleAdminManageCategories />} />
+                  <Route path="/users" element={<SoleAdminUser/>} />
+                  <Route path="/orders" element={<SoleAdminManageOrders/>} />
+                  <Route
+                    path="/view-orderdetails/:orderId"
+                    element={<SoleAdminViewOrderDetails />}
+                  />
+                   <Route
+                    path="/view-account/:userId"
+                    element={<UserDetails />}
+                  />
                 </Routes>
               </div>
             </div>

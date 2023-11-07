@@ -66,12 +66,12 @@ const Sidebar: React.FC = () => {
           </div>
           {isInventoryOpen && (
             <div className="pl-6">
-              <Link to="/multi-admin/products">
+             {/* <Link to="/multi-admin/products">
                 <SidebarSubItem
                   text="Products"
                   isActive={location.pathname === '/multi-admin/products'}
                 />
-              </Link>
+          </Link> */}
               <Link to="/multi-admin/catalogue">
                 <SidebarSubItem
                   text="Catalogue"

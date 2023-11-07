@@ -27,11 +27,14 @@ const ManageCategories: React.FC = () => {
   const navigate = useNavigate();
   const categories = useSelector(selectCategoryData) || [];
   const loading = useSelector(selectCategoryLoading);
+  const categoryState = useSelector(selectCategoryData);
+  console.log("catalogState", categoryState)
 
   // State variables for DeleteModal
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState<string | null>(null);
 
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,6 +68,10 @@ const ManageCategories: React.FC = () => {
   const toggleFilterOptions = () => {
     setFilterOptionsVisible(!filterOptionsVisible);
   };
+
+  const filteredCategories = categories.filter((category) =>
+  category.name.toLowerCase().includes(searchCategoryNameQuery.toLowerCase())
+);
 
   const uploadSelectedFiles = () => {
     // Check if files were selected
@@ -114,13 +121,13 @@ const ManageCategories: React.FC = () => {
                   </span>
                   <input
                     type="text"
-                    placeholder="Select Category..."
-                    className="border text-sm rounded-md pl-10 pr-4 py-1 px-4 w-36 focus:outline-none focus:ring focus:border-indigo-300"
+                    placeholder="Search Category..."
+                    className="border text-sm rounded-md pl-10 pr-4 py-1 px-4 w-48 focus:outline-none focus:ring focus:border-indigo-300"
                     value={searchCategoryNameQuery}
                     onChange={(e) => setSearchCategoryNameQuery(e.target.value)}
                   />
                 </div>
-                <div className="relative">
+                {/*<div className="relative">
                   <span className="absolute left-3 top-2 text-gray-400">
                     <FaSearch className="text-sm" />
                   </span>
@@ -131,7 +138,8 @@ const ManageCategories: React.FC = () => {
                     value={searchProductQuery}
                     onChange={(e) => setSearchProductQuery(e.target.value)}
                   />
-                </div>
+                 </div> */
+                 }
                 <div className="relative ml-4 text-sm">
                   <button
                     className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-2 rounded-md focus:outline-none flex items-center"
@@ -205,7 +213,7 @@ const ManageCategories: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {categories && categories.filter(Boolean).map((category) => (
+              {filteredCategories.map((category) => (
                   <tr key={category._id}>
                     <td className="px-6 py-4 whitespace-no-wrap">
                       {category.name}

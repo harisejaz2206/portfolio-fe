@@ -20,7 +20,7 @@ import Modal from 'react-modal';
 import { Toast } from "../utils/toast";
 
 
-const ManageBrands: React.FC = () => {
+const SoleAdminManageBrands: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
   const brandState = useSelector(selectBrandData) || [];
@@ -148,37 +148,6 @@ const ManageBrands: React.FC = () => {
               </div>
 
               <div className="flex items-center space-x-2 text-sm">
-                <Link
-                  to="/multi-admin/create-brand"
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
-                >
-                  <FaPlusCircle className="mr-2" /> Add Brands
-                </Link>
-
-                <button
-                  className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
-                  onClick={() => {
-                    // fileInputRef.current.click();
-                  }}
-                >
-                  <FaPlusCircle className="mr-2" /> Add Multiple Brands
-                </button>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  accept=".csv, .xlsx"
-                  multiple
-                  style={{ display: "none" }}
-                  onChange={handleFileSelect}
-                />
-                {selectedFiles.length > 0 && (
-                  <button
-                    className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
-                    onClick={uploadSelectedFiles}
-                  >
-                    <FaUpload className="mr-2" /> Upload
-                  </button>
-                )}
                 <Link to={"/path-to-sample-sheet/sample-sheet.xlsx"}>
                   <button
                     className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
@@ -247,4 +216,4 @@ const ManageBrands: React.FC = () => {
   );
 }
 
-export default ManageBrands;
+export default SoleAdminManageBrands;

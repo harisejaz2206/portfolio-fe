@@ -25,12 +25,14 @@ const Navbar = () => {
     <div className="flex items-center py-2 px-4">
       <div className="flex items-center">
         {/* Logo */}
+        <a href='/' className='cursor-pointer'>
         <img
           src="/logo.png"
           alt="Dot Brand Logo"
           className="w-12 h-12 "
         />
-        <h1 className="text-xl font-bold text-red-700">DotBrand</h1>
+        </a>
+        <a href='/' className='cursor-pointer'><h1 className="text-xl font-bold text-red-700">DotBrand</h1></a>
       </div>
       <div className="relative flex-grow ml-72 flex items-center">
         <div className="absolute inset-y-0 left-5 flex items-center text-gray-400">

@@ -123,7 +123,7 @@ const SoleAdminLogin: React.FC = () => {
               />
             </div>
             <div className="mb-4 text-right mr-1 text-sm">
-              <a className="text-red-700 underline" href="/forgot-password">
+              <a className="text-red-700 underline" href="/solelogin-forgotpassword">
                 Forgot your password?
               </a>
             </div>

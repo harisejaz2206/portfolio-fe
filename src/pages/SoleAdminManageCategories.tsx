@@ -7,36 +7,43 @@ import {
   FaPlusCircle,
   FaDownload,
   FaUpload,
-  FaTrash
+  FaTrash,
 } from "react-icons/fa";
-import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
-import { selectBrandData, selectBrandLoading } from "../app/features/brand/brand.selector";
-import { deleteBrand, getBrands } from "../app/features/brand/brand.thunk";
-import { BeatLoader, ClipLoader, PacmanLoader, ClimbingBoxLoader, PropagateLoader } from "react-spinners";
-import { selectCategoryLoading } from "../app/features/category/category.selector";
-import Modal from 'react-modal';
+import { selectCategoryData, selectCategoryLoading } from "../app/features/category/category.selector";
+import { deleteCategory, getCategories } from "../app/features/category/category.thunk";
+import { PropagateLoader } from "react-spinners";
 import { Toast } from "../utils/toast";
+import DeleteModal from "../components/globals/modal/DeleteModal";
 
+interface ResponsePayload {
+  message: string;
+  // ... other expected properties
+}
 
-const ManageBrands: React.FC = () => {
+const SoleAdminManageCategories: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
-  const brandState = useSelector(selectBrandData) || [];
-  const loading = useSelector(selectBrandLoading);
-  console.log("Loading", loading);
-  const [isModalOpen, setModalOpen] = useState(false);
-  console.log("brand state:", brandState);
+  const categories = useSelector(selectCategoryData) || [];
+  const loading = useSelector(selectCategoryLoading);
+  const categoryState = useSelector(selectCategoryData);
+  console.log("catalogState", categoryState)
+
+  // State variables for DeleteModal
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [categoryToDelete, setCategoryToDelete] = useState<string | null>(null);
+
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(getBrands()).then((result: any) => {
+        await dispatch(getCategories()).then((result: any) => {
           Toast.fire({
             icon: "success",
-            title: result.payload.message
-          })
+            title: result.payload.message,
+          });
         }); // Using await with dispatch here
       } catch (error) {
         console.error("An error occurred while fetching data: ", error);
@@ -45,18 +52,12 @@ const ManageBrands: React.FC = () => {
     fetchData()
   }, [dispatch]);
 
-  console.log("brand state:", brandState);
 
-  const [searchBrandQuery, setSearchBrandQuery] = useState("");
+  const [searchCategoryNameQuery, setSearchCategoryNameQuery] = useState("");
   const [searchProductQuery, setSearchProductQuery] = useState("");
-  
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
-
-  const filteredBrands = brandState.filter((brand) =>
-  brand.name.toLowerCase().includes(searchBrandQuery.toLowerCase())
-);
 
   const handleFileSelect = (e: any) => {
     const files = e.target.files;
@@ -68,37 +69,43 @@ const ManageBrands: React.FC = () => {
     setFilterOptionsVisible(!filterOptionsVisible);
   };
 
+  const filteredCategories = categories.filter((category) =>
+  category.name.toLowerCase().includes(searchCategoryNameQuery.toLowerCase())
+);
+
   const uploadSelectedFiles = () => {
     // Check if files were selected
     if (selectedFiles.length === 0) {
       alert("Please select one or more files.");
       return;
     }
-
-    // Clear the selected files
     setSelectedFiles([]);
   };
 
-  const handleDeleteBrand = async (id: string) => {
+  const handleDeleteClick = (categoryId: string) => {
+    setCategoryToDelete(categoryId);
+    setDeleteModalOpen(true);
+  };
+
+  const handleDelete = async (categoryId: string) => {
     try {
-      await dispatch(deleteBrand(id)).then((result: any) => {
+      await dispatch(deleteCategory(categoryId)).then((result: any) => {
         Toast.fire({
           icon: "success",
           title: result.payload.message
         })
       });
-      await dispatch(getBrands());
+      await dispatch(getCategories());
     } catch (error) {
-      console.error("An error occurred while deleting the brand: ", error);
+      console.error("An error occurred while deleting the category: ", error);
     }
   };
-
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
       <div className="bg-white rounded-lg shadow p-6">
         <h1 className="text-xl font-semibold text-gray-800 mb-4">
-          Manage Brands
+          Manage Categories
         </h1>
         {loading ? (
           <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-black">
@@ -114,10 +121,10 @@ const ManageBrands: React.FC = () => {
                   </span>
                   <input
                     type="text"
-                    placeholder="Select Brand..."
-                    className="border text-sm rounded-md pl-10 pr-4 py-1 px-4 w-36 focus:outline-none focus:ring focus:border-indigo-300"
-                    value={searchBrandQuery}
-                    onChange={(e) => setSearchBrandQuery(e.target.value)}
+                    placeholder="Search Category..."
+                    className="border text-sm rounded-md pl-10 pr-4 py-1 px-4 w-48 focus:outline-none focus:ring focus:border-indigo-300"
+                    value={searchCategoryNameQuery}
+                    onChange={(e) => setSearchCategoryNameQuery(e.target.value)}
                   />
                 </div>
                 {/*<div className="relative">
@@ -126,12 +133,13 @@ const ManageBrands: React.FC = () => {
                   </span>
                   <input
                     type="text"
-                    placeholder="Select Product..."
+                    placeholder="Select Store..."
                     className="border text-sm rounded-md pl-10 pr-4 py-1 px-4 w-36 focus:outline-none focus:ring focus:border-indigo-300"
                     value={searchProductQuery}
                     onChange={(e) => setSearchProductQuery(e.target.value)}
                   />
-        </div> */}
+                 </div> */
+                 }
                 <div className="relative ml-4 text-sm">
                   <button
                     className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-2 rounded-md focus:outline-none flex items-center"
@@ -148,37 +156,6 @@ const ManageBrands: React.FC = () => {
               </div>
 
               <div className="flex items-center space-x-2 text-sm">
-                <Link
-                  to="/multi-admin/create-brand"
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
-                >
-                  <FaPlusCircle className="mr-2" /> Add Brands
-                </Link>
-
-                <button
-                  className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
-                  onClick={() => {
-                    // fileInputRef.current.click();
-                  }}
-                >
-                  <FaPlusCircle className="mr-2" /> Add Multiple Brands
-                </button>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  accept=".csv, .xlsx"
-                  multiple
-                  style={{ display: "none" }}
-                  onChange={handleFileSelect}
-                />
-                {selectedFiles.length > 0 && (
-                  <button
-                    className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
-                    onClick={uploadSelectedFiles}
-                  >
-                    <FaUpload className="mr-2" /> Upload
-                  </button>
-                )}
                 <Link to={"/path-to-sample-sheet/sample-sheet.xlsx"}>
                   <button
                     className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
@@ -190,8 +167,6 @@ const ManageBrands: React.FC = () => {
               </div>
             </div>
 
-
-            {/* Table and manufacturer listing */}
             <table className="min-w-full divide-y divide-gray-200 mt-8 text-sm">
               <thead>
                 <tr>
@@ -210,29 +185,29 @@ const ManageBrands: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-              {brandState && filteredBrands.filter(Boolean).map((brand) => (
-                  <tr key={brand._id}>
-                    <td className="px-6 py-3 whitespace-no-wrap">
-                      {brand.name}
+              {filteredCategories.map((category) => (
+                  <tr key={category._id}>
+                    <td className="px-6 py-4 whitespace-no-wrap">
+                      {category.name}
                     </td>
-                    <td className="px-6 py-3 whitespace-no-wrap">
-                      {brand.status ? 'Active' : 'Inactive'}
+                    <td className="px-6 py-4 whitespace-no-wrap">
+                      {category.status ? 'Active' : 'Inactive'}
                     </td>
-                    <td className="px-6 py-3 whitespace-no-wrap">
-                      <img src={brand.image} alt={brand.name} width="120" height="120" />
+                    <td className="px-6 py-4 whitespace-no-wrap">
+                      <img src={category.image} alt={category.name} width="80" height="80" />
                     </td>
-
-                    <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium">
-                      <Link to={`/admin/edit-manufacturer/${brand._id}`}>
+                    <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
+                      <Link to={`/multi-admin/edit-category/${category._id}`}>
                         <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
-                          <FaEdit className="-ml-24" />
+                          <FaEdit className=" -ml-20" />
                         </button>
                       </Link>
+                      
                       <button
                         className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
-                        onClick={() => handleDeleteBrand(brand._id!)}
+                        onClick={() => handleDeleteClick(category._id!)}
                       >
-                        <FaTrash className="-ml-20" />
+                        <FaTrash className="-ml-16"/>
                       </button>
                     </td>
                   </tr>
@@ -242,9 +217,26 @@ const ManageBrands: React.FC = () => {
           </>
         )}
 
+        {/* DeleteModal */}
+        {deleteModalOpen && (
+          <DeleteModal
+            title="Delete Category"
+            description="Are you sure you want to delete this category?"
+            onConfirm={() => {
+              if (categoryToDelete) {
+                handleDelete(categoryToDelete);
+                setDeleteModalOpen(false);
+              }
+            }}
+            onCancel={() => setDeleteModalOpen(false)}
+          />
+        )}
+
+        {/* Table and category listing */}
+
       </div>
     </div>
   );
 }
 
-export default ManageBrands;
+export default SoleAdminManageCategories;

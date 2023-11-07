@@ -42,7 +42,6 @@ const SoleChainSidebar: React.FC = () => {
         </div>
         <div className="space-y-4 mt-8">
           <Link to={"/sole-admin/"}><SoleChainSidebarItem icon={<FaHome />} text="Dashboard" /></Link>
-          <Link to={"/sole-admin/outlets"}><SoleChainSidebarItem icon={<FaStore />} text="Outlets" to="/outlets" /></Link>
           <div className="group flex items-center justify-between py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg hover:bg-orange-500 hover:rounded-md hover:text-white " onClick={toggleInventory}>
             <FaChartBar />
             <span className="text-xs -ml-14">Inventory</span>
@@ -50,10 +49,9 @@ const SoleChainSidebar: React.FC = () => {
           </div>
           {isInventoryOpen && (
             <div className="pl-6">
-              <Link to="/sole-admin/products"><SoleChainSidebarSubItem text="Products" /></Link>
               <Link to="/sole-admin/catalogue"><SoleChainSidebarSubItem text="Catalogue" /></Link> 
               <Link to="/sole-admin/categories"><SoleChainSidebarSubItem text="Categories" /></Link>
-              <Link to="/sole-admin/manufacturers"><SoleChainSidebarSubItem text="Brands" /></Link>
+              <Link to="/sole-admin/brands"><SoleChainSidebarSubItem text="Brands" /></Link>
             </div>
           )}
           <Link to={"/sole-admin/users"}><SoleChainSidebarItem icon={<FaUsers />} text="Users" /></Link>
