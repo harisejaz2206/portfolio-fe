@@ -14,10 +14,8 @@ const Footer = () => {
         DotBrand
       </h1>
       <p className='py-4'>
-        Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit. Mattis tellus laoreet urna
-        nunc, nec et. Et sit erat arcu amet morbi
-        cursus eget odio elit.
+      Your Trusted Partner for White-Label Pharmacy Applications
+      Revolutionize Your Pharmacy Experience with Tailored Solutions
       </p>
       <div className='flex text-yellow-400 md:w-[75%] my-4'>
             <FaTwitter size={20} className='ml-4' />
@@ -54,11 +52,11 @@ const Footer = () => {
         </ul>
     </div>
     <div>
-        <h6 className='font-medium text-white'>Download Our App</h6>
+        <h6 className='font-medium text-white '>Login as Admin</h6>
         <ul>
-            <li className='py-2 text-sm'>Claims</li>
-            <li className='py-2 text-sm'>Policy</li>
-            <li className='py-2 text-sm'>Terms</li>
+            <li className='py-2 text-sm'><a href='/superlogin'> Super Admin</a></li>
+            <li className='py-2 text-sm'><a href='/multilogin'> Multi Admin</a></li>
+            <li className='py-2 text-sm'><a href='/solelogin'> Sole Admin</a></li>
         </ul>
     </div>
     </div>  

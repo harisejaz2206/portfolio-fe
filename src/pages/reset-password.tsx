@@ -85,8 +85,10 @@ const ResetPassword = () => {
                     <h1 className="font-anton text-medium sm:text-2xl text-xl uppercase">Experience the persuasive magic of ai ads</h1>
                 </div> */}
                 <div className="flex flex-grow items-center justify-center">
-                    <ThemeBox className="lg:max-w-[920px] lg:min-w-[920px] p-8 m-3 md:m-0">
-
+                    <ThemeBox className="lg:max-w-[920px] lg:min-w-[920px] p-8 m-3 md:m-0 bg-red-100">
+                        <figure className="mx-auto text-center mb-4 sm:mb-6">
+                            <img className="mx-auto w-[130px] sm:w-[180px]" src="/assets/images/logo.svg" alt="Logo" width={180} height={48} />
+                        </figure>
                         <div className="w-full mb-6">
                             <h1 className="text-center font-bold text-black text-xl md:text-2xl mb-2">
                                 Password</h1>
