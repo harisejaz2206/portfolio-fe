@@ -41,22 +41,9 @@ const ManageCatalog: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(0);
 
     // Function to filter products based on search query
-<<<<<<< HEAD
-   {/* const filteredCatalog = catalogState!.filter(
-        (catalog) =>
-            catalog.name.toLowerCase().includes(searchQuery.toLowerCase())
-        // catalog.brand!.toLowerCase().includes(searchQuery.toLowerCase())
-   ); */}
-    const filteredCatalog = catalogState
-  ? catalogState.filter((catalog) =>
-      catalog.name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  : [];
-=======
     const filteredCatalog = (catalogState || []).filter(
         (catalog) => catalog.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
->>>>>>> f55f436ccee0bc03ae7e99a8d23f516a5ac89065
 
 
     // Function to handle pagination
