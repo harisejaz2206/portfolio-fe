@@ -59,6 +59,7 @@ import AddBrandForm from "./pages/AddBrandForm";
 import ManageBrands from "./pages/ManageBrands";
 import AddCatalogForm from "./pages/AddCatalogForm";
 import ManageCatalog from "./pages/ManageCatalog";
+import SoleAdminManageCatalogue from "./pages/SoleAdminManageCatalogue"
 
 function App() {
   const token = useSelector(selectToken);
@@ -324,6 +325,7 @@ function App() {
               <div className="flex-1">
                 <Routes>
                   <Route path="/" element={<SoleChainDashboard />} />
+                  <Route path="/catalogue" element={<SoleAdminManageCatalogue />} />
                 </Routes>
               </div>
             </div>
