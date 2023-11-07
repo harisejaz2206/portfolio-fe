@@ -7,6 +7,13 @@ import { ClockLoader } from 'react-spinners';
 import DynamicModal from '../components/globals/modal/DynamicModal';
 
 import Typewriter from 'typewriter-effect';
+import { Toast } from '../utils/toast';
+import { useDispatch } from 'react-redux';
+import { AppThunkDispatch } from '../store/rootReducer';
+import { forgotpassword } from '../app/features/auth/auth.thunk';
+import { handleApiResponse } from '../utils/handleApiResponse';
+import { handleError } from '../utils/catchErrorToast';
+import { resourceLimits } from 'worker_threads';
 
 const RequestEmailSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
@@ -19,22 +26,22 @@ const LeftSideDiv = () => (
     </div>
     <div className="text-center">
       <h1 className="text-3xl font-bold text-white mb-2">
-      <span className="text-white">
-              <Typewriter
-                options={{
-                  strings: ['Dot Brand ©', 'Hi there!'],
-                  autoStart: true, // Start typing automatically
-                  loop: true, // Loop the animation
-                  delay: 100, // Delay between each character typing
-                  deleteSpeed: 50, // Speed of character deletion
-                }}
-              />
-            </span>
+        <span className="text-white">
+          <Typewriter
+            options={{
+              strings: ['Dot Brand ©', 'Hi there!'],
+              autoStart: true, // Start typing automatically
+              loop: true, // Loop the animation
+              delay: 100, // Delay between each character typing
+              deleteSpeed: 50, // Speed of character deletion
+            }}
+          />
+        </span>
       </h1>
       <div className="text-md text-white mb-8 mt-auto">
         <p>
           <span className="ml-2 block">
-          Prescriptions, Delivered Your Way
+            Prescriptions, Delivered Your Way
           </span>
         </p>
       </div>
@@ -45,13 +52,34 @@ const LeftSideDiv = () => (
 const RequestEmail = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppThunkDispatch>();
+
+  const handleSuccess = (result: any) => {
+    const status = result.meta.requestStatus === "fulfilled" ? true : false;
+    // navigate(status ? '/super-admin/stores' : '/haris');
+    // Toast.fire({
+    //   icon: "success",
+    //   title: "Store created successfully",
+    // });
+  };
 
   const formik = useFormik({
     initialValues: { email: '' },
     validationSchema: RequestEmailSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
-      setModalOpen(true);
+      await dispatch(forgotpassword(values))
+        .then((result) => {
+          if (result.meta.requestStatus === "fulfilled") {
+            setModalOpen(true);
+          }
+          console.log(result.meta.requestStatus === "fulfilled");
+          handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik })
+        })
+        .catch((error) => {
+          console.log('API call failed', error);
+          handleError(error);
+        })
     },
   });
 
@@ -97,21 +125,21 @@ const RequestEmail = () => {
             Back to <span className="text-red-700 font-bold hover:underline">Login</span>
           </button>
           {isModalOpen && (
-                <DynamicModal
-                    title="Email Sent!"
-                    description="Check your email to reset your password."
-                    action="Close"
-                    btnWidth={true}
-                    open={isModalOpen}
-                    setOpen={setModalOpen}
-                    successIcon={true}
-                    routerPath="/login"
-                />
-            )}
+            <DynamicModal
+              title="Email Sent!"
+              description="Check your email to reset your password."
+              action="Close"
+              btnWidth={true}
+              open={isModalOpen}
+              setOpen={setModalOpen}
+              successIcon={true}
+              routerPath="/login"
+            />
+          )}
         </div>
       </div>
 
-      
+
     </div>
   );
 };

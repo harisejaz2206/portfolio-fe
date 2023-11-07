@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import initialAuthState from "./auth.initialstate";
-import { login, signup } from "./auth.thunk";
+import { forgotpassword, login, resetpassword, signup } from "./auth.thunk";
 import { stat } from "fs";
 
 export const authSlice = createSlice({
@@ -52,35 +52,31 @@ export const authSlice = createSlice({
       state.error = action.error.message;
     });
 
-    // builder.addCase(forgotpassword.pending, (state) => {
-    //   state.loading = true;
-    //   state.error = null; // Optionally reset the error when the request starts
-    // });
+    builder.addCase(forgotpassword.pending, (state) => {
+      state.loading = true;
+    });
 
-    // builder.addCase(forgotpassword.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.message = action.payload.message; // Handle success logic, such as updating a success message
-    // });
+    builder.addCase(forgotpassword.fulfilled, (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    });
 
-    // builder.addCase(forgotpassword.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.error.message; // Handle error logic
-    // });
+    builder.addCase(forgotpassword.rejected, (state, action) => {
+      state.loading = false;
+    });
 
-    // builder.addCase(resetpassword.pending, (state) => {
-    //   state.loading = true;
-    //   state.error = null;
-    // });
+    builder.addCase(resetpassword.pending, (state) => {
+      state.loading = true;
+    });
 
-    // builder.addCase(resetpassword.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.message = action.payload.message;
-    // });
+    builder.addCase(resetpassword.fulfilled, (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    });
 
-    // builder.addCase(resetpassword.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.error.message;
-    // });
+    builder.addCase(resetpassword.rejected, (state, action) => {
+      state.loading = false;
+    });
   },
 });
 

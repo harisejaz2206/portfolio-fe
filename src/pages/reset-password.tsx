@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InputField from '../components/globals/inputField';
 import Button from '../components/globals/button';
 import { useFormik } from 'formik';
@@ -8,13 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppThunkDispatch } from '../store/rootReducer';
 import { selectError, selectLoading, selectMessage, selectUser } from "../app/features/auth/auth.selector";
 import { resetpassword, forgotpassword } from '../app/features/auth/auth.thunk';
-import { HttpService } from '../app/services/base.service';
-import { HttpStatusCode } from 'axios';
-import { Toast } from '../utils/toast';
-import DynamicModal from '../components/globals/modal/DynamicModal';
 import { handleApiResponse } from '../utils/handleApiResponse';
 import { handleError } from '../utils/catchErrorToast';
 import { Link, useNavigate, useParams } from 'react-router-dom';  // Importing from React Router
+import DynamicModal from '../components/globals/modal/DynamicModal';
+
 
 const ResetPasswordSchema = Yup.object().shape({
     password: Yup.string()
@@ -37,16 +35,23 @@ const ResetPassword = () => {
     const userObject = useSelector(selectUser);
     const error = useSelector(selectError);
     const loading = useSelector(selectLoading);
+    console.log("token", token)
+
+    useEffect(() => {
+        console.log("Inside useEffect: token", token);
+    }, [token]);
+
 
     const [isModalOpen, setModalOpen] = useState(false);
 
-    const handleSuccess = () => {
-        setModalOpen(true);
+    const handleSuccess = (result: any) => {
+        const status = result.meta.requestStatus === "fulfilled" ? true : false;
+        // navigate(status ? '/super-admin/stores' : '/haris');
+        // Toast.fire({
+        //   icon: "success",
+        //   title: "Store created successfully",
+        // });
     };
-
-    const handleResetPasswordResponse = (result: any) => {
-        handleApiResponse({ result, handleSuccess, formik });
-    }
 
     const formik = useFormik({
         initialValues: {
@@ -55,19 +60,33 @@ const ResetPassword = () => {
         },
         validationSchema: ResetPasswordSchema,
         validateOnBlur: true,
-        onSubmit: (values) => {
-            setModalOpen(true);
+        onSubmit: async (values) => {
+            try {
+                console.log("token", token)
+                const result = await dispatch(resetpassword({ password: values.password, token }));
+                if (result.meta.requestStatus === "fulfilled") {
+                    setModalOpen(true);
+                }
+                console.log(result.meta.requestStatus === "fulfilled");
+                handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik });
+                setModalOpen(true);
+            } catch (error) {
+                console.log('API call failed', error);
+                handleError(error);
+            }
         },
     });
 
+
     return (
         <>
-            <div className="flex flex-col w-full bg-white h-screen">
+            <div className="flex flex-col w-full h-screen">
+                {/* <div className="w-full p-4 sm:py-8 sm:px-6 bg-red-600 text-center text-white">
+                    <h1 className="font-anton text-medium sm:text-2xl text-xl uppercase">Experience the persuasive magic of ai ads</h1>
+                </div> */}
                 <div className="flex flex-grow items-center justify-center">
-                    <ThemeBox className="lg:max-w-[920px] lg:min-w-[920px] p-8 m-3 md:m-0 bg-red-100">
-                        <figure className="mx-auto text-center mb-4 sm:mb-6">
-                            <img className="mx-auto w-[130px] sm:w-[180px]" src="/assets/images/logo.svg" alt="Logo" width={180} height={48} />
-                        </figure>
+                    <ThemeBox className="lg:max-w-[920px] lg:min-w-[920px] p-8 m-3 md:m-0">
+
                         <div className="w-full mb-6">
                             <h1 className="text-center font-bold text-black text-xl md:text-2xl mb-2">
                                 Password</h1>
@@ -105,6 +124,7 @@ const ResetPassword = () => {
                         </div>
                         <div className="w-full mt-4 text-center">
                             <span className="text-sm text-[#808080]">Back to <Link to="/login" className="text-red-600 text-sm font-medium">Log In</Link></span>
+
                         </div>
                     </ThemeBox>
                 </div>
@@ -115,7 +135,7 @@ const ResetPassword = () => {
                 action="OK"
                 open={isModalOpen}
                 setOpen={setModalOpen}
-                routerPath="/login"
+            // routerPath="/login"
             />
         </>
     );
