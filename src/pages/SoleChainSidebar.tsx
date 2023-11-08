@@ -6,7 +6,7 @@ import { AppThunkDispatch } from "../store/rootReducer";
 import { logout } from '../app/features/auth/auth.slice';
 import { clearOutletData } from "../app/features/outlet/outlet.slice"
 // import { Link } from 'react-router-dom';
-import { FaHome, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
+import { FaHome, FaImages, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
 
 interface SoleChainSidebarItemProps {
   icon: JSX.Element;
@@ -56,6 +56,7 @@ const SoleChainSidebar: React.FC = () => {
           )}
           <Link to={"/sole-admin/users"}><SoleChainSidebarItem icon={<FaUsers />} text="Users" /></Link>
           <Link to={"/sole-admin/orders"}><SoleChainSidebarItem icon={<FaShoppingCart />} text="Orders" /></Link>
+          <Link to={"/sole-admin/banners"}><SoleChainSidebarItem icon={<FaImages />} text="Banners" /></Link>
           <SoleChainSidebarItem icon={<FaCog />} text="Settings" />
         </div>
       </div>

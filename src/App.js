@@ -65,6 +65,9 @@ import SoleAdminManageBrands from "./pages/SoleAdminManageBrands";
 import SoleAdminUser from "./pages/SoleAdminUsers";
 import SoleAdminManageOrders from "./pages/SoleAdminManageOrders";
 import SoleAdminViewOrderDetails from "./pages/SoleAdminViewOrderDetails";
+import AddBannerForm from "./pages/AddBannerForm";
+import SoleChainManageBanner from "./pages/SoleChainManageBanner";
+import SoleChainAddBanner from "./pages/SoleChainAddBanner";
 
 function App() {
   const token = useSelector(selectToken);
@@ -314,6 +317,7 @@ function App() {
                   />
                   <Route path="/orders" element={<ViewOrders />} />
                   <Route path="/banners" element={<BannerManagement />} />
+                  <Route path="/add-banner" element={<AddBannerForm />} />
                   <Route path="/brands" element={<ManageBrands />} />
                   <Route
                     path="/view-orderdetails/:orderId"
@@ -338,6 +342,8 @@ function App() {
                   <Route path="/categories" element={<SoleAdminManageCategories />} />
                   <Route path="/users" element={<SoleAdminUser/>} />
                   <Route path="/orders" element={<SoleAdminManageOrders/>} />
+                  <Route path="/banners" element={<SoleChainManageBanner />} />
+                  <Route path="/add-banner" element={<SoleChainAddBanner />} />
                   <Route
                     path="/view-orderdetails/:orderId"
                     element={<SoleAdminViewOrderDetails />}
