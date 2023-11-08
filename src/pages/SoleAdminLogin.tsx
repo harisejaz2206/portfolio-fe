@@ -134,7 +134,7 @@ const SoleAdminLogin: React.FC = () => {
               >
                 Forgot your password?
               </span> */}
-              <a href="/request-email" className="text-sm font-medium text-red-900 hover:underline">Forgot password?</a>
+              <a href="/solelogin-forgotpassword" className="text-sm font-medium text-red-900 hover:underline">Forgot password?</a>
               {/* <a className="text-red-700 underline" href="/request-email">
                 Forgot your password?
               </a> */}
