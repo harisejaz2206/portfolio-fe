@@ -48,11 +48,16 @@ const ManageOutlets: React.FC = () => {
   }, [dispatch]);
 
   // Function to filter outlets based on search query
-  const filteredOutlets = outletData!.filter(
+  // const filteredOutlets = outletData!.filter(
+  //   (outlet) =>
+  //     outlet.outletName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //     outlet.address.toLowerCase().includes(searchQuery.toLowerCase())
+  // );
+  const filteredOutlets = outletData ? outletData.filter(
     (outlet) =>
       outlet.outletName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       outlet.address.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  ) : [];
 
   const start = currentPage * itemsPerPage;
   const end = (currentPage + 1) * itemsPerPage;

@@ -41,6 +41,11 @@ const SoleAdminLogin: React.FC = () => {
     });
   };
 
+  const handleForgotPasswordClick = (e: React.MouseEvent<HTMLSpanElement>) => {
+    e.preventDefault(); // Prevent form submission
+    navigate('/request-email');
+  };
+
   const formik = useFormik<FormData>({
     initialValues: {
       email: '',
@@ -59,14 +64,14 @@ const SoleAdminLogin: React.FC = () => {
   return (
     <div className="flex h-screen">
       <div className="bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-600 via-red-900 to-red-900 w-1/3 min-h-screen flex flex-col items-center justify-center text-white">
-      <div className="text-center  mb-4">
-        <img
-          src="/logo.png"
-          alt="Company Logo"
-          className="w-20 h-20  rounded-full mx-auto"
-        />
-      </div>
-      <div className="text-center">
+        <div className="text-center  mb-4">
+          <img
+            src="/logo.png"
+            alt="Company Logo"
+            className="w-20 h-20  rounded-full mx-auto"
+          />
+        </div>
+        <div className="text-center">
           <h1 className="text-3xl font-bold text-white mb-2">
             <span className="text-white">
               <Typewriter
@@ -92,9 +97,9 @@ const SoleAdminLogin: React.FC = () => {
       {/* Right-side login form */}
       <div className="w-3/5 bg-white flex items-center justify-center">
         <div className="max-w-md w-full p-6">
-        <div className="text-center -mt-[30%]">
+          <div className="text-center -mt-[30%]">
             <h2 className="text-2xl font-bold text-red-800 mb-20">
-             Welcome, Sole Chain Admin
+              Welcome, Sole Chain Admin
             </h2>
           </div>
           <form onSubmit={formik.handleSubmit}>
@@ -123,9 +128,16 @@ const SoleAdminLogin: React.FC = () => {
               />
             </div>
             <div className="mb-4 text-right mr-1 text-sm">
-              <a className="text-md font-medium text-red-900 hover:underline" href="/solelogin-forgotpassword">
+              {/* <span
+                className="text-red-700 underline cursor-pointer"
+                onClick={handleForgotPasswordClick}
+              >
                 Forgot your password?
-              </a>
+              </span> */}
+              <a href="/request-email" className="text-sm font-medium text-red-900 hover:underline">Forgot password?</a>
+              {/* <a className="text-red-700 underline" href="/request-email">
+                Forgot your password?
+              </a> */}
             </div>
             <div className="mb-1">
               {loading ? (

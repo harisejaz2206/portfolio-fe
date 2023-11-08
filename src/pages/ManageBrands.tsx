@@ -49,14 +49,14 @@ const ManageBrands: React.FC = () => {
 
   const [searchBrandQuery, setSearchBrandQuery] = useState("");
   const [searchProductQuery, setSearchProductQuery] = useState("");
-  
+
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
 
-  const filteredBrands = brandState.filter((brand) =>
-  brand.name.toLowerCase().includes(searchBrandQuery.toLowerCase())
-);
+  // const filteredBrands = brandState.filter((brand) =>
+  //   brand.name.toLowerCase().includes(searchBrandQuery.toLowerCase())
+  // );
 
   const handleFileSelect = (e: any) => {
     const files = e.target.files;
@@ -210,16 +210,16 @@ const ManageBrands: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-              {brandState && filteredBrands.filter(Boolean).map((brand) => (
+                {brandState && brandState.filter(Boolean).map((brand) => (
                   <tr key={brand._id}>
                     <td className="px-6 py-3 whitespace-no-wrap">
-                      {brand.name}
+                      {brand.name || "N/A"} {/* Display "N/A" if 'name' is undefined */}
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap">
                       {brand.status ? 'Active' : 'Inactive'}
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap">
-                      <img src={brand.image} alt={brand.name} width="120" height="120" />
+                      <img src={brand.image} alt={brand.name || "No Name"} width="120" height="120" />
                     </td>
 
                     <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium">
