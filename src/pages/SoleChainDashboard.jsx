@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from "react";
 
 const SoleChainDashboard = () => {
   // State to hold system statistics
@@ -15,7 +14,7 @@ const SoleChainDashboard = () => {
     // Fetch data here or set placeholder data
     const fetchData = async () => {
       // Replace with actual API endpoint
-      const response = await fetch('/api/system-stats');
+      const response = await fetch("/api/system-stats");
       const data = await response.json();
 
       // Update the state with fetched data
@@ -29,20 +28,31 @@ const SoleChainDashboard = () => {
     <div className="bg-gray-100 h-screen p-4">
       {/* Greeting and Dashboard title */}
       <div className="mb-4">
-        <h1 className="text-xl font-semibold text-gray-800">Hi Admin! Manage all your tasks on the go.</h1>
+        <h1 className="text-xl font-semibold text-gray-800">
+          Hi Admin! Manage all your tasks on the go.
+        </h1>
         <p className="text-sm text-gray-600">Dashboard</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Total Outlets Card */}
-        <SoleChainDashboardCard title="Total Outlets" value={systemStats.totalOutlets} />  
+        <SoleChainDashboardCard
+          title="Total Outlets"
+          value={systemStats.totalOutlets}
+        />
 
         {/* Total Users Card */}
-        <SoleChainDashboardCard title="Total Users" value={systemStats.totalUsers} />
-        
+        <SoleChainDashboardCard
+          title="Total Users"
+          value={systemStats.totalUsers}
+        />
+
         {/* Total Orders Card */}
-        <SoleChainDashboardCard title="Total Orders" value={systemStats.totalOrders} />
-        
+        <SoleChainDashboardCard
+          title="Total Orders"
+          value={systemStats.totalOrders}
+        />
+
         {/* Add more cards for other metrics */}
       </div>
     </div>

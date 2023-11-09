@@ -1,32 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaSearch, FaEdit, FaTrash, FaPlusCircle } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppThunkDispatch } from '../store/rootReducer';
-import { selectStoreData, selectStoreLoading } from '../app/features/store/store.selector';
-import { getStores, toggleStoreStatus } from '../app/features/store/store.thunk';
-import { PropagateLoader } from 'react-spinners';
-import Toggle from 'react-toggle';
-import ToggleModal from '../components/globals/modal/ToggleModal';
-import Pagination from '../components/Pagination';// Replace 'path-to-DynamicModal' with the actual path to your DynamicModal component.
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FaSearch, FaEdit, FaTrash, FaPlusCircle } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { AppThunkDispatch } from "../store/rootReducer";
+import {
+  selectStoreData,
+  selectStoreLoading,
+} from "../app/features/store/store.selector";
+import {
+  getStores,
+  toggleStoreStatus,
+} from "../app/features/store/store.thunk";
+import { PropagateLoader } from "react-spinners";
+import Toggle from "react-toggle";
+import ToggleModal from "../components/globals/modal/ToggleModal";
+import Pagination from "../components/Pagination"; // Replace 'path-to-DynamicModal' with the actual path to your DynamicModal component.
 
-import 'react-toggle/style.css';
-import { toggleActiveStatus } from '../app/features/store/store.slice';
-import { Toast } from '../utils/toast';
-import { selectToken } from '../app/features/auth/auth.selector';
-
+import "react-toggle/style.css";
+import { toggleActiveStatus } from "../app/features/store/store.slice";
+import { Toast } from "../utils/toast";
+import { selectToken } from "../app/features/auth/auth.selector";
 
 const ManageStores: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   // const navigate = useNavigate();
   const stores = useSelector(selectStoreData) || [];
   const loading = useSelector(selectStoreLoading);
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeStoreId, setActiveStoreId] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
-
 
   useEffect(() => {
     dispatch(getStores());
@@ -37,7 +41,6 @@ const ManageStores: React.FC = () => {
       store.storeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       store.multiAdminName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       store.multiAdminEmail.toLowerCase().includes(searchQuery.toLowerCase())
-
   );
 
   const start = currentPage * itemsPerPage;
@@ -62,7 +65,7 @@ const ManageStores: React.FC = () => {
     if (activeStoreId) {
       try {
         await dispatch(toggleStoreStatus(activeStoreId)).then((result: any) => {
-          if ('message' in result.payload) {
+          if ("message" in result.payload) {
             Toast.fire({
               icon: "success",
               title: result.payload.message,
@@ -77,32 +80,34 @@ const ManageStores: React.FC = () => {
     }
   };
 
-
-
   return (
     <div className="bg-gray-100 min-h-screen p-4 relative">
       {loading && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 9999,
-          backgroundColor: 'rgba(255, 255, 255, 0.8)'
-        }}>
-          <div style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)'
-          }}>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 9999,
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
             <PropagateLoader color="#000000" />
           </div>
         </div>
       )}
       {/* Your existing code goes here */}
-      <div className={`bg-gray-100 min-h-screen p-4 ${loading ? 'blur' : ''}`}>
+      <div className={`bg-gray-100 min-h-screen p-4 ${loading ? "blur" : ""}`}>
         {loading && (
           <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-black bg-opacity-50">
             <PropagateLoader color={"#000000"} loading={true} size={15} />
@@ -110,7 +115,9 @@ const ManageStores: React.FC = () => {
         )}
         <div className="bg-white rounded-lg shadow p-6">
           <div className="bg-white rounded-lg shadow p-6">
-            <h1 className="text-xl font-semibold text-gray-800 mb-4">Manage Stores</h1>
+            <h1 className="text-xl font-semibold text-gray-800 mb-4">
+              Manage Stores
+            </h1>
 
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center space-x-4 text-sm">
@@ -167,15 +174,27 @@ const ManageStores: React.FC = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {displayedStores.map((store) => (
                   <tr key={store._id} className="bg-white">
-                    <td className="px-6 py-3 whitespace-no-wrap w-[30%]">{store.storeName}</td>
-                    <td className="px-6 py-3 whitespace-no-wrap w-[25%]">{store.multiAdminName}</td>
-                    <td className="px-6 py-3 whitespace-no-wrap w-1/6">{store.multiAdminEmail}</td>
+                    <td className="px-6 py-3 whitespace-no-wrap w-[30%]">
+                      {store.storeName}
+                    </td>
+                    <td className="px-6 py-3 whitespace-no-wrap w-[25%]">
+                      {store.multiAdminName}
+                    </td>
+                    <td className="px-6 py-3 whitespace-no-wrap w-1/6">
+                      {store.multiAdminEmail}
+                    </td>
                     <td className="px-6 py-3 whitespace-no-wrap w-[25%]">
                       {new Date(store.createdAt!).toLocaleString()}
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap [30%]">
-                      <span className={` py-1 px-2 rounded ${store.isActive ? 'bg-green-500 text-white font-semibold px-3.5' : 'bg-red-500 text-white font-semibold '}`}>
-                        {store.isActive ? 'Active' : 'Inactive'}
+                      <span
+                        className={` py-1 px-2 rounded ${
+                          store.isActive
+                            ? "bg-green-500 text-white font-semibold px-3.5"
+                            : "bg-red-500 text-white font-semibold "
+                        }`}
+                      >
+                        {store.isActive ? "Active" : "Inactive"}
                       </span>
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap w-1/6">
@@ -226,6 +245,6 @@ const ManageStores: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default ManageStores;

@@ -1,99 +1,105 @@
-import React, { useState } from 'react';
-import { FaSearch, FaFilter, FaPlusCircle, FaEdit, FaTrash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import Pagination from '../components/Pagination';
+import React, { useState } from "react";
+import {
+  FaSearch,
+  FaFilter,
+  FaPlusCircle,
+  FaEdit,
+  FaTrash,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import Pagination from "../components/Pagination";
 
 function SoleChainManageBanner() {
   const initialBanners = [
     {
       id: 1,
-      image: '/Frame 20.png',
-      title: 'Special Offer',
-      promotions: '50% Off',
-      status: 'Published',
+      image: "/Frame 20.png",
+      title: "Special Offer",
+      promotions: "50% Off",
+      status: "Published",
     },
     {
       id: 2,
-      image: '/Frame 38.png',
-      title: 'New Arrivals',
-      promotions: 'Shop Now',
-      status: 'Draft',
+      image: "/Frame 38.png",
+      title: "New Arrivals",
+      promotions: "Shop Now",
+      status: "Draft",
     },
     {
       id: 3,
-      image: '/Frame 36.png',
-      title: 'Limited Time Sale',
-      promotions: 'Save Big',
-      status: 'Published',
+      image: "/Frame 36.png",
+      title: "Limited Time Sale",
+      promotions: "Save Big",
+      status: "Published",
     },
     {
       id: 4,
-      image: '/Frame 37.png',
-      title: 'Summer Collection',
-      promotions: 'New Styles',
-      status: 'Published',
+      image: "/Frame 37.png",
+      title: "Summer Collection",
+      promotions: "New Styles",
+      status: "Published",
     },
     {
       id: 5,
-      image: '/Frame 38.png',
-      title: 'Back to School',
-      promotions: 'Shop Now',
-      status: 'Draft',
+      image: "/Frame 38.png",
+      title: "Back to School",
+      promotions: "Shop Now",
+      status: "Draft",
     },
     {
       id: 6,
-      image: '/Group 253.png',
-      title: 'Fall Fashion',
-      promotions: 'Latest Trends',
-      status: 'Draft',
+      image: "/Group 253.png",
+      title: "Fall Fashion",
+      promotions: "Latest Trends",
+      status: "Draft",
     },
     {
       id: 7,
-      image: '/hyptonics.png',
-      title: 'Winter Sale',
-      promotions: 'Clearance',
-      status: 'Published',
+      image: "/hyptonics.png",
+      title: "Winter Sale",
+      promotions: "Clearance",
+      status: "Published",
     },
     {
       id: 8,
-      image: '/image 15.png',
-      title: 'Holiday Special',
-      promotions: 'Gift Ideas',
-      status: 'Published',
+      image: "/image 15.png",
+      title: "Holiday Special",
+      promotions: "Gift Ideas",
+      status: "Published",
     },
     {
       id: 9,
-      image: '/image 16.png',
-      title: 'Spring Collection',
-      promotions: 'New Arrivals',
-      status: 'Draft',
+      image: "/image 16.png",
+      title: "Spring Collection",
+      promotions: "New Arrivals",
+      status: "Draft",
     },
     {
       id: 10,
-      image: '/Group 253.png',
-      title: 'Easter Sale',
-      promotions: 'Huge Discounts',
-      status: 'Published',
+      image: "/Group 253.png",
+      title: "Easter Sale",
+      promotions: "Huge Discounts",
+      status: "Published",
     },
     {
       id: 11,
-      image: '/hypnotics.png',
-      title: 'Summer Vacation',
-      promotions: 'Travel Deals',
-      status: 'Draft',
+      image: "/hypnotics.png",
+      title: "Summer Vacation",
+      promotions: "Travel Deals",
+      status: "Draft",
     },
     {
       id: 12,
-      image: '/diuretics.png',
-      title: 'Tech Gadgets',
-      promotions: 'Latest Tech',
-      status: 'Published',
+      image: "/diuretics.png",
+      title: "Tech Gadgets",
+      promotions: "Latest Tech",
+      status: "Published",
     },
     // Add more banners as needed
   ];
 
   const [banners, setBanners] = useState(initialBanners);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const itemsPerPage = 10; // Set the number of banners to display per page
   const [currentPage, setCurrentPage] = useState(0);
@@ -120,7 +126,9 @@ function SoleChainManageBanner() {
   return (
     <div className="bg-gray-100 min-h-screen p-4">
       <div className="bg-white rounded-lg shadow p-6">
-        <h1 className="text-xl font-semibold text-gray-800 mb-4">Banner Management</h1>
+        <h1 className="text-xl font-semibold text-gray-800 mb-4">
+          Banner Management
+        </h1>
 
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center">
@@ -152,7 +160,8 @@ function SoleChainManageBanner() {
           </div>
 
           <div className="flex items-center space-x-2">
-            <Link to="/sole-admin/add-banner"
+            <Link
+              to="/sole-admin/add-banner"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
             >
               <FaPlusCircle className="mr-2" /> Add Banner
@@ -191,11 +200,15 @@ function SoleChainManageBanner() {
                   />
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap">{banner.title}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{banner.promotions}</td>
+                <td className="px-6 py-4 whitespace-no-wrap">
+                  {banner.promotions}
+                </td>
                 <td className="px-6 py-4 whitespace-no-wrap">
                   <span
                     className={`px-2 py-1 text-xs rounded-full ${
-                      banner.status === 'Published' ? 'text-green-400' : 'text-yellow-400'
+                      banner.status === "Published"
+                        ? "text-green-400"
+                        : "text-yellow-400"
                     }`}
                   >
                     {banner.status}

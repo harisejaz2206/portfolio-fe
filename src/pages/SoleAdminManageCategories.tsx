@@ -11,8 +11,14 @@ import {
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
-import { selectCategoryData, selectCategoryLoading } from "../app/features/category/category.selector";
-import { deleteCategory, getCategories } from "../app/features/category/category.thunk";
+import {
+  selectCategoryData,
+  selectCategoryLoading,
+} from "../app/features/category/category.selector";
+import {
+  deleteCategory,
+  getCategories,
+} from "../app/features/category/category.thunk";
 import { PropagateLoader } from "react-spinners";
 import { Toast } from "../utils/toast";
 import DeleteModal from "../components/globals/modal/DeleteModal";
@@ -33,8 +39,6 @@ const SoleAdminManageCategories: React.FC = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState<string | null>(null);
 
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,9 +52,8 @@ const SoleAdminManageCategories: React.FC = () => {
         console.error("An error occurred while fetching data: ", error);
       }
     };
-    fetchData()
+    fetchData();
   }, [dispatch]);
-
 
   const [searchCategoryNameQuery, setSearchCategoryNameQuery] = useState("");
   const [searchProductQuery, setSearchProductQuery] = useState("");
@@ -91,8 +94,8 @@ const SoleAdminManageCategories: React.FC = () => {
       await dispatch(deleteCategory(categoryId)).then((result: any) => {
         Toast.fire({
           icon: "success",
-          title: result.payload.message
-        })
+          title: result.payload.message,
+        });
       });
       await dispatch(getCategories());
     } catch (error) {
@@ -137,8 +140,7 @@ const SoleAdminManageCategories: React.FC = () => {
                     value={searchProductQuery}
                     onChange={(e) => setSearchProductQuery(e.target.value)}
                   />
-                 </div> */
-                }
+                 </div> */}
                 <div className="relative ml-4 text-sm">
                   <button
                     className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-2 rounded-md focus:outline-none flex items-center"
@@ -158,7 +160,7 @@ const SoleAdminManageCategories: React.FC = () => {
                 <Link to={"/path-to-sample-sheet/sample-sheet.xlsx"}>
                   <button
                     className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
-                  // download
+                    // download
                   >
                     <FaDownload className="mr-2" /> Download Sample Sheet
                   </button>
@@ -190,10 +192,15 @@ const SoleAdminManageCategories: React.FC = () => {
                       {category.name}
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap">
-                      {category.status ? 'Active' : 'Inactive'}
+                      {category.status ? "Active" : "Inactive"}
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap">
-                      <img src={category.image} alt={category.name} width="80" height="80" />
+                      <img
+                        src={category.image}
+                        alt={category.name}
+                        width="80"
+                        height="80"
+                      />
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
                       <Link to={`/multi-admin/edit-category/${category._id}`}>
@@ -232,10 +239,9 @@ const SoleAdminManageCategories: React.FC = () => {
         )}
 
         {/* Table and category listing */}
-
       </div>
     </div>
   );
-}
+};
 
 export default SoleAdminManageCategories;
