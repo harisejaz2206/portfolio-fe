@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import InputField from '../components/globals/inputField';
-import Button from '../components/globals/button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import ThemeBox from '../components/globals/themeBox';
@@ -10,7 +9,7 @@ import { selectError, selectLoading, selectMessage, selectUser } from "../app/fe
 import { resetpassword, forgotpassword } from '../app/features/auth/auth.thunk';
 import { handleApiResponse } from '../utils/handleApiResponse';
 import { handleError } from '../utils/catchErrorToast';
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';  // Importing from React Router
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';  // Importing from React Router
 import DynamicModal from '../components/globals/modal/DynamicModal';
 
 
@@ -36,7 +35,6 @@ const ResetPassword = () => {
     const userObject = useSelector(selectUser);
     const error = useSelector(selectError);
     const loading = useSelector(selectLoading);
-    // console.log(searchParams.get('token'));
 
 
     const [isModalOpen, setModalOpen] = useState(false);

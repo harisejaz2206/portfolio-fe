@@ -1,4 +1,4 @@
-// auth.service.ts
+// brand.service.ts
 
 // Importing base class
 import { HttpService } from "./base.service";
