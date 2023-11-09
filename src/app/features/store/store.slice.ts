@@ -39,10 +39,6 @@ const storeSlice = createSlice({
     });
 
     builder.addCase(getStores.fulfilled, (state, action) => {
-      console.log(
-        "action.payload.payload?.stores:",
-        action.payload.payload?.stores
-      );
       state.loading = false;
       state.store = action.payload.payload?.stores;
       state.message = action.payload.message;

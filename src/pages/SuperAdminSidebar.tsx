@@ -1,15 +1,16 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { AppThunkDispatch } from "../store/rootReducer";
 import { logout } from '../app/features/auth/auth.slice';
-import { FaHome, FaStore, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaStore, FaCog, FaSignOutAlt, FaEnvelope } from 'react-icons/fa';
 import { clearStoreData } from '../app/features/store/store.slice';
+import { selectUser } from '../app/features/auth/auth.selector';
 
 interface SuperAdminSidebarItemProps {
   icon: JSX.Element;
   text: string;
-  isActive: boolean; 
+  isActive: boolean;
   to?: string;
 }
 
@@ -17,6 +18,8 @@ const SuperAdminSidebar: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
   const location = useLocation();
+  const user = useSelector(selectUser);
+  const userEmail = user?.email;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -31,6 +34,10 @@ const SuperAdminSidebar: React.FC = () => {
           <span className="text-gray-800 text-lg font-bold ml-2">Dot Brand</span>
         </div>
         <div className="space-y-4 mt-8">
+          <div className="flex items-center"> {/* Use flex here */}
+            <FaEnvelope className="text-black-800 text-sm font-bold ml-2 mr-1" />
+            <span className="text-red-800 text-sm font-bold">{userEmail}</span>
+          </div>
           <Link to="/super-admin/">
             <SuperAdminSidebarItem
               icon={<FaHome />}
@@ -52,14 +59,14 @@ const SuperAdminSidebar: React.FC = () => {
             isActive={location.pathname === '/super-admin/settings'}
           />
           <div>
-        <button className="flex text-xs items-center text-white cursor-pointer bg-red-600 rounded-md py-2 px-2 w-40 mt-10" onClick={handleLogout}>
-          <FaSignOutAlt className="mr-2" />
-          Log Out
-        </button>
-      </div>
+            <button className="flex text-xs items-center text-white cursor-pointer bg-red-600 rounded-md py-2 px-2 w-40 mt-10" onClick={handleLogout}>
+              <FaSignOutAlt className="mr-2" />
+              Log Out
+            </button>
+          </div>
         </div>
       </div>
-      
+
     </div>
   );
 };

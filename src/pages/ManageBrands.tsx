@@ -25,9 +25,7 @@ const ManageBrands: React.FC = () => {
   const navigate = useNavigate();
   const brandState = useSelector(selectBrandData) || [];
   const loading = useSelector(selectBrandLoading);
-  console.log("Loading", loading);
   const [isModalOpen, setModalOpen] = useState(false);
-  console.log("brand state:", brandState);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +43,6 @@ const ManageBrands: React.FC = () => {
     fetchData()
   }, [dispatch]);
 
-  console.log("brand state:", brandState);
 
   const [searchBrandQuery, setSearchBrandQuery] = useState("");
   const [searchProductQuery, setSearchProductQuery] = useState("");

@@ -6,7 +6,6 @@ export const addCategory = createAsyncThunk(
   "category/addCategory",
   async (credentials: ICategory, { rejectWithValue }) => {
     try {
-      console.log("inside");
       const response = await categoryService.addCategoryHandler(credentials);
       return response;
     } catch (error: any) {

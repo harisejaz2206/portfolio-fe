@@ -35,7 +35,6 @@ const categorySlice = createSlice({
       state.loading = false;
       state.message = action.payload.message;
       state.category = action.payload.payload?.categories;
-      console.log("state.category:", state.category);
     });
 
     builder.addCase(getCategories.rejected, (state, action) => {
@@ -50,7 +49,6 @@ const categorySlice = createSlice({
     builder.addCase(deleteCategory.fulfilled, (state, action) => {
       state.loading = false;
       const id = action.payload.payload?.id!;
-      console.log(id);
       state.category = state.category?.filter(
         (category) => category._id !== id
       );

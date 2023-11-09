@@ -1,36 +1,37 @@
-// auth.service.ts
+// product.service.ts
 
 // Importing base class
 import { HttpService } from "./base.service";
 
 // Importing interfaces
 import { IResponseInterface } from "../interfaces/api-response.interface";
-import { IProduct } from "../interfaces/product.interface";
+import {
+  IAddProductBody,
+  IAddProductCatalogItemResponse,
+  IGetProductResponse,
+} from "../features/product/interfaces/product.interface";
+import { IOutlet } from "../features/outlet/interfaces/outlet.interface";
 
 class ProductService extends HttpService {
-  private readonly prefix: string = "api/v1/multiadmin";
+  private readonly prefix: string = "api/v1/solechain";
 
-  addProductHander = (
-    data: IProduct
-  ): Promise<IResponseInterface<{ product: IProduct }>> =>
-    this.post(`${this.prefix}/product`, data);
+  addProductHandler = (
+    data: IAddProductBody
+  ): Promise<
+    IResponseInterface<{
+      outlet: IOutlet;
+      catalogItem: IAddProductCatalogItemResponse;
+    }>
+  > => this.post(`${this.prefix}/product`, data);
 
-  //   getProductsOfOutletHandler = (): Promise<
-  //     IResponseInterface<{ products: IProduct[] }>
-  //   > => this.get(`${this.prefix}/product`);
-
-  getAllBrandsHandler = (query?: {
-    outletName?: string;
-  }): Promise<IResponseInterface<{ products: IProduct[] }>> => {
-    let url = `${this.prefix}/product`;
-
-    // Append the query string to the URL if an outletName is provided
-    if (query && query.outletName) {
-      url += `?outletName=${query.outletName}`;
-    }
-
-    return this.get(url);
-  };
+  getAllProductsHandler = (): Promise<
+    IResponseInterface<{ products: IGetProductResponse[] }>
+  > => this.get(`${this.prefix}/product`);
 }
 
 export const productService = new ProductService();
+
+// deleteProductHandler = (
+//   id: string
+// ): Promise<IResponseInterface<{ id: string }>> =>
+//   this.delete(`${this.prefix}/product/${id}`);

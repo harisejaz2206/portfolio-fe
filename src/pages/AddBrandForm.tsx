@@ -102,7 +102,6 @@ const AddBrandForm: React.FC = () => {
                         icon: "success",
                         title: "Outlet successfully created",
                     });
-                    console.log(result.meta.requestStatus == "fulfilled");
                     handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik })
                 })
                 .catch((error) => {

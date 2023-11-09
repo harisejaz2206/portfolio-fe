@@ -67,13 +67,11 @@ const RequestEmail = () => {
     initialValues: { email: '' },
     validationSchema: RequestEmailSchema,
     onSubmit: async (values) => {
-      console.log(values);
       await dispatch(forgotpassword(values))
         .then((result) => {
           if (result.meta.requestStatus === "fulfilled") {
             setModalOpen(true);
           }
-          console.log(result.meta.requestStatus === "fulfilled");
           handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik })
         })
         .catch((error) => {

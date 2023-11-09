@@ -6,7 +6,6 @@ export const addBrand = createAsyncThunk(
   "brand/addBrand",
   async (credentials: IBrand, { rejectWithValue }) => {
     try {
-      console.log("inside");
       const response = await brandService.addBrandHander(credentials);
       return response;
     } catch (error: any) {
@@ -22,7 +21,6 @@ export const getBrands = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await brandService.getAllBrandsHandler();
-      console.log("response", response);
       return response;
     } catch (error: any) {
       return rejectWithValue(

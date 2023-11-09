@@ -59,12 +59,13 @@ import AddBrandForm from "./pages/AddBrandForm";
 import ManageBrands from "./pages/ManageBrands";
 import AddCatalogForm from "./pages/AddCatalogForm";
 import ManageCatalog from "./pages/ManageCatalog";
-import SoleAdminManageCatalogue from "./pages/SoleAdminManageCatalogue"
+import SoleAdminManageCatalogue from "./pages/SoleAdminManageCatalogue";
 import SoleAdminManageCategories from "./pages/SoleAdminManageCategories";
 import SoleAdminManageBrands from "./pages/SoleAdminManageBrands";
 import SoleAdminUser from "./pages/SoleAdminUsers";
 import SoleAdminManageOrders from "./pages/SoleAdminManageOrders";
 import SoleAdminViewOrderDetails from "./pages/SoleAdminViewOrderDetails";
+import SoleAdminManageProducts from "./pages/SoleAdminManageProducts";
 
 function App() {
   const token = useSelector(selectToken);
@@ -333,16 +334,26 @@ function App() {
               <div className="flex-1">
                 <Routes>
                   <Route path="/" element={<SoleChainDashboard />} />
-                  <Route path="/catalogue" element={<SoleAdminManageCatalogue />} />
+                  <Route
+                    path="/catalogue"
+                    element={<SoleAdminManageCatalogue />}
+                  />
                   <Route path="/brands" element={<SoleAdminManageBrands />} />
-                  <Route path="/categories" element={<SoleAdminManageCategories />} />
-                  <Route path="/users" element={<SoleAdminUser/>} />
-                  <Route path="/orders" element={<SoleAdminManageOrders/>} />
+                  <Route
+                    path="/categories"
+                    element={<SoleAdminManageCategories />}
+                  />
+                  <Route
+                    path="/products"
+                    element={<SoleAdminManageProducts />}
+                  />
+                  <Route path="/users" element={<SoleAdminUser />} />
+                  <Route path="/orders" element={<SoleAdminManageOrders />} />
                   <Route
                     path="/view-orderdetails/:orderId"
                     element={<SoleAdminViewOrderDetails />}
                   />
-                   <Route
+                  <Route
                     path="/view-account/:userId"
                     element={<UserDetails />}
                   />

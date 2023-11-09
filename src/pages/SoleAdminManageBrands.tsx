@@ -25,9 +25,7 @@ const SoleAdminManageBrands: React.FC = () => {
   const navigate = useNavigate();
   const brandState = useSelector(selectBrandData) || [];
   const loading = useSelector(selectBrandLoading);
-  console.log("Loading", loading);
   const [isModalOpen, setModalOpen] = useState(false);
-  console.log("brand state:", brandState);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,18 +43,17 @@ const SoleAdminManageBrands: React.FC = () => {
     fetchData()
   }, [dispatch]);
 
-  console.log("brand state:", brandState);
 
   const [searchBrandQuery, setSearchBrandQuery] = useState("");
   const [searchProductQuery, setSearchProductQuery] = useState("");
-  
+
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
 
   const filteredBrands = brandState.filter((brand) =>
-  brand.name.toLowerCase().includes(searchBrandQuery.toLowerCase())
-);
+    brand.name.toLowerCase().includes(searchBrandQuery.toLowerCase())
+  );
 
   const handleFileSelect = (e: any) => {
     const files = e.target.files;
@@ -179,7 +176,7 @@ const SoleAdminManageBrands: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-              {brandState && filteredBrands.filter(Boolean).map((brand) => (
+                {brandState && filteredBrands.filter(Boolean).map((brand) => (
                   <tr key={brand._id}>
                     <td className="px-6 py-3 whitespace-no-wrap">
                       {brand.name}

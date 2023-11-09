@@ -14,7 +14,6 @@ import Pagination from "../components/Pagination";
 
 const ManageOutlets: React.FC = () => {
   const token = useSelector(selectToken);
-  console.log(token);
   HttpService.setToken(token!);
 
   const dispatch = useDispatch<AppThunkDispatch>();
@@ -32,7 +31,6 @@ const ManageOutlets: React.FC = () => {
       try {
         await dispatch(getOutlets()).then((result: any) => {
           if ('message' in result.payload) {
-            console.log(result.payload.message);
             Toast.fire({
               icon: "success",
               title: result.payload.message,

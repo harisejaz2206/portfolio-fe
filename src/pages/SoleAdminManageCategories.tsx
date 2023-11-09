@@ -28,13 +28,12 @@ const SoleAdminManageCategories: React.FC = () => {
   const categories = useSelector(selectCategoryData) || [];
   const loading = useSelector(selectCategoryLoading);
   const categoryState = useSelector(selectCategoryData);
-  console.log("catalogState", categoryState)
 
   // State variables for DeleteModal
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState<string | null>(null);
 
-  
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,8 +69,8 @@ const SoleAdminManageCategories: React.FC = () => {
   };
 
   const filteredCategories = categories.filter((category) =>
-  category.name.toLowerCase().includes(searchCategoryNameQuery.toLowerCase())
-);
+    category.name.toLowerCase().includes(searchCategoryNameQuery.toLowerCase())
+  );
 
   const uploadSelectedFiles = () => {
     // Check if files were selected
@@ -139,7 +138,7 @@ const SoleAdminManageCategories: React.FC = () => {
                     onChange={(e) => setSearchProductQuery(e.target.value)}
                   />
                  </div> */
-                 }
+                }
                 <div className="relative ml-4 text-sm">
                   <button
                     className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-2 rounded-md focus:outline-none flex items-center"
@@ -185,7 +184,7 @@ const SoleAdminManageCategories: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-              {filteredCategories.map((category) => (
+                {filteredCategories.map((category) => (
                   <tr key={category._id}>
                     <td className="px-6 py-4 whitespace-no-wrap">
                       {category.name}
@@ -202,12 +201,12 @@ const SoleAdminManageCategories: React.FC = () => {
                           <FaEdit className=" -ml-20" />
                         </button>
                       </Link>
-                      
+
                       <button
                         className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
                         onClick={() => handleDeleteClick(category._id!)}
                       >
-                        <FaTrash className="-ml-16"/>
+                        <FaTrash className="-ml-16" />
                       </button>
                     </td>
                   </tr>

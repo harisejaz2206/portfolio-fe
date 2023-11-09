@@ -34,7 +34,6 @@ const catalogSlice = createSlice({
       state.loading = false;
       state.getCatalog = action.payload.payload?.catalogItems;
       state.message = action.payload.message;
-      console.log(state.getCatalog);
     });
 
     builder.addCase(getCatalogs.rejected, (state, action) => {
@@ -49,7 +48,6 @@ const catalogSlice = createSlice({
     builder.addCase(deleteCatalog.fulfilled, (state, action) => {
       state.loading = false;
       const id = action.payload.payload?.id!;
-      console.log(id);
       state.catalog = state.catalog?.filter((catalog) => catalog._id !== id);
       state.message = action.payload.message;
     });

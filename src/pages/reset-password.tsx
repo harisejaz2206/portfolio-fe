@@ -63,7 +63,6 @@ const ResetPassword = () => {
                 if (result.meta.requestStatus === "fulfilled") {
                     setModalOpen(true);
                 }
-                console.log(result.meta.requestStatus === "fulfilled");
                 handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik });
                 setModalOpen(true);
             } catch (error) {
@@ -116,7 +115,7 @@ const ResetPassword = () => {
                                     type="submit"
                                     className="w-full bg-red-900 text-white font-medium rounded-lg text-sm px-4 py-2.5 mt-4 text-center"
                                 >
-                                    Login
+                                    Reset Password
                                 </button>
                             </form>
                         </div>

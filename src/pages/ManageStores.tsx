@@ -63,7 +63,6 @@ const ManageStores: React.FC = () => {
       try {
         await dispatch(toggleStoreStatus(activeStoreId)).then((result: any) => {
           if ('message' in result.payload) {
-            console.log(result.payload.message);
             Toast.fire({
               icon: "success",
               title: result.payload.message,

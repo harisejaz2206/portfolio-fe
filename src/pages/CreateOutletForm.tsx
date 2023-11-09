@@ -72,7 +72,6 @@ const CreateOutletForm: React.FC = () => {
 
   const handleSuccess = (result: any) => {
     const status = result.meta.requestStatus == "fulfilled" ? true : false;
-    console.log("status", status);
     navigate(status ? '/multi-admin/outlets' : '/haris');
     Toast.fire({
       icon: "success",
@@ -96,11 +95,8 @@ const CreateOutletForm: React.FC = () => {
     validationSchema: CreateOutletSchema,
     validateOnBlur: true,
     onSubmit: values => {
-      console.log("Submitting form with values: ", values);  // Debug line 1
       dispatch(addOutlet(values))
         .then((result) => {
-          console.log("result: ", result);
-          console.log('API call successful', result);  // Debug line
           Toast.fire({
             icon: "success",
             title: "Outlet successfully created",
@@ -141,7 +137,7 @@ const CreateOutletForm: React.FC = () => {
           {/* Outlet Admin Details */}
           <div className="border p-4 rounded-lg shadow-lg bg-slate-50">
             <h2 className="text-lg font-semibold text-gray-800 mb-2">
-              Multi Admin Details
+              Sole Admin Details
             </h2>
             <div className="grid grid-cols-2 gap-4">
               {/* Admin Name */}

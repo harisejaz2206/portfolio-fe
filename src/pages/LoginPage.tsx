@@ -35,9 +35,7 @@ const LoginPage: React.FC = () => {
   const loading = useSelector(selectLoading);
 
   const handleSuccess = (result: any) => {
-    console.log("result", result);
     const token = result.payload.payload.token.accessToken;
-    console.log("token", token);
     HttpService.setToken(token);
     localStorage.setItem('token', token);
 

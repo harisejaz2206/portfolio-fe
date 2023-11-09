@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 // import { FaHome, FaStore, FaChartBar, FaLifeRing, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { AppThunkDispatch } from "../store/rootReducer";
 import { logout } from '../app/features/auth/auth.slice';
 import { clearOutletData } from "../app/features/outlet/outlet.slice"
 // import { Link } from 'react-router-dom';
-import { FaHome, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight } from 'react-icons/fa';
+import { FaHome, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight, FaEnvelope } from 'react-icons/fa';
 import { clearStoreData } from '../app/features/store/store.slice';
+import { selectUser } from '../app/features/auth/auth.selector';
 
 interface SidebarItemProps {
   icon: JSX.Element;
@@ -26,6 +27,8 @@ const Sidebar: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
   const location = useLocation();
+  const user = useSelector(selectUser);
+  const userEmail = user?.email;
 
   const toggleInventory = () => {
     setInventoryOpen(!isInventoryOpen);
@@ -45,6 +48,10 @@ const Sidebar: React.FC = () => {
           <span className="text-gray-800 text-lg font-bold ml-2">Dot Brand</span>
         </div>
         <div className="space-y-4 mt-8">
+          <div className="flex items-center"> {/* Use flex here */}
+            <FaEnvelope className="text-black-800 text-sm font-bold ml-2 mr-1" />
+            <span className="text-red-800 text-sm font-bold">{userEmail}</span>
+          </div>
           <Link to={"/multi-admin/"}>
             <SidebarItem
               icon={<FaHome />}
@@ -66,7 +73,7 @@ const Sidebar: React.FC = () => {
           </div>
           {isInventoryOpen && (
             <div className="pl-6">
-             {/* <Link to="/multi-admin/products">
+              {/* <Link to="/multi-admin/products">
                 <SidebarSubItem
                   text="Products"
                   isActive={location.pathname === '/multi-admin/products'}
@@ -86,9 +93,9 @@ const Sidebar: React.FC = () => {
               </Link>
               <Link to="/multi-admin/brands">
 
-                <SidebarSubItem 
-                text="Brands" 
-                isActive={location.pathname === '/multi-admin/brands'}
+                <SidebarSubItem
+                  text="Brands"
+                  isActive={location.pathname === '/multi-admin/brands'}
                 />
               </Link>
             </div>

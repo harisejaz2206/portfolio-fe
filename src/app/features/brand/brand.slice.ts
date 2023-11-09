@@ -34,9 +34,7 @@ const brandSlice = createSlice({
     builder.addCase(getBrands.fulfilled, (state, action) => {
       state.loading = false;
       state.brand = action.payload.payload?.brands;
-      // console.log(action.payload.payload);
       state.message = action.payload.message;
-      console.log(state.brand);
     });
 
     builder.addCase(getBrands.rejected, (state, action) => {
@@ -52,7 +50,6 @@ const brandSlice = createSlice({
       state.loading = false;
       // Remove the brand by its ID
       const id = action.payload.payload?.id!;
-      console.log(id);
       state.brand = state.brand?.filter((brand) => brand._id !== id);
       state.message = action.payload.message;
     });

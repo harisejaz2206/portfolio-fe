@@ -41,7 +41,6 @@ export class HttpService {
       withCredentials: true,
       cancelToken: this.source.token,
     });
-    // console.log("base service response:", res);
     return res.data;
   };
 
@@ -56,7 +55,6 @@ export class HttpService {
     body?: any,
     options = {}
   ): Promise<any> => {
-    console.log(Config);
     const res = await axios.post(`${Config}/${url}`, body, {
       ...options,
       withCredentials: true,

@@ -6,7 +6,6 @@ export const addCatalog = createAsyncThunk(
   "catalog/addCatalog",
   async (credentials: ICatalog, { rejectWithValue }) => {
     try {
-      console.log("inside");
       const response = await catalogService.addCatalogHander(credentials);
       return response;
     } catch (error: any) {
@@ -22,7 +21,6 @@ export const getCatalogs = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await catalogService.getAllCatalogsHandler();
-      console.log("response", response);
       return response;
     } catch (error: any) {
       return rejectWithValue(

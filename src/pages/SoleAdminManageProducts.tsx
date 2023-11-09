@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSearch, FaPlusCircle, FaShoppingCart, FaEye, FaTrash } from "react-icons/fa"; // Import icons
+import { FaSearch, FaPlusCircle, FaShoppingCart, FaEye } from "react-icons/fa"; // Import icons
 import Toggle from "react-toggle"; // Import the Toggle component
 import "react-toggle/style.css"; // Import the styles for the Toggle component
 import { useDispatch, useSelector } from "react-redux";
@@ -9,18 +9,21 @@ import { selectCatalogData, selectCatalogLoading, selectGetCatalogData } from ".
 import { getCatalogs } from "../app/features/catalog/catalog.thunk";
 import { Toast } from "../utils/toast";
 import { PropagateLoader } from "react-spinners";
+import { selectProductData, selectProductLoading } from "../app/features/product/product.selector";
+import { getProducts } from "../app/features/product/product.thunk";
 
-const ManageCatalog: React.FC = () => {
+const SoleAdminManageProducts: React.FC = () => {
     const dispatch = useDispatch<AppThunkDispatch>();
     const navigate = useNavigate();
-    const loading = useSelector(selectCatalogLoading)
-    const catalogState = useSelector(selectGetCatalogData);
-
+    const loading = useSelector(selectProductLoading)
+    const productState = useSelector(selectProductData);
+    // const [selectedCatalogId, setSelectedCatalogId] = useState<string | null>(null);
+    const [showAddQuantityForm, setShowAddQuantityForm] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await dispatch(getCatalogs()).then((result: any) => {
+                await dispatch(getProducts()).then((result: any) => {
                     Toast.fire({
                         icon: "success",
                         title: result.payload.message,
@@ -33,14 +36,16 @@ const ManageCatalog: React.FC = () => {
         fetchData()
     }, [dispatch]);
 
-    const [catalog, setCatalog] = useState(catalogState);
     const [searchQuery, setSearchQuery] = useState("");
     const itemsPerPage = 10; // Number of items per page
     const [currentPage, setCurrentPage] = useState(0);
 
+
+    const [quantity, setQuantity] = useState(0);
+
     // Function to filter products based on search query
-    const filteredCatalog = (catalogState || []).filter(
-        (catalog) => catalog.name.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredCatalog = (productState || []).filter(
+        (product) => product.catalogItem.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
 
@@ -50,9 +55,12 @@ const ManageCatalog: React.FC = () => {
     const endIndex = (currentPage + 1) * itemsPerPage;
     const currentItems = filteredCatalog.slice(startIndex, endIndex);
 
+
+
     const handlePageChange = (page: any) => {
         setCurrentPage(page);
     };
+
 
     return (
         <div className="bg-gray-100 min-h-screen p-4">
@@ -63,9 +71,9 @@ const ManageCatalog: React.FC = () => {
             ) : (
                 <>
                     <div className="bg-white rounded-lg shadow p-6">
-                        <h1 className="text-xl font-semibold text-gray-800 mb-4">Catalog</h1>
+                        <h1 className="text-xl font-semibold text-gray-800 mb-4">Products</h1>
 
-                        <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center mb-4">
                             <div className="relative flex items-center">
                                 <span className="absolute left-3 top-2 text-gray-400">
                                     <FaSearch />
@@ -78,13 +86,9 @@ const ManageCatalog: React.FC = () => {
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
                             </div>
-                            <Link
-                                to="/multi-admin/create-catalogue"
-                                className="bg-indigo-600 text-white px-3 py-2 text-sm rounded-md"
-                            >
-                                Add Catalog
-                            </Link>
+
                         </div>
+
                         <table className="min-w-full divide-y divide-gray-200 text-sm">
                             <thead>
                                 <tr>
@@ -95,52 +99,46 @@ const ManageCatalog: React.FC = () => {
                                         Original Price
                                     </th>
                                     <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Sales Price
+                                        Sale Price
                                     </th>
                                     <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Quantity
                                     </th>
                                     <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Brand
+                                        Brand ID
                                     </th>
                                     <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Category
+                                        Category ID
                                     </th>
-                                    <th className="px-4 py-3 bg-gray-50 font-medium text-xs text-gray-500 uppercase tracking-wider">
+                                    {/* <th className="px-4 py-3 bg-gray-50 font-medium text-xs text-gray-500 uppercase tracking-wider">
                                         Action
-                                    </th>
+                                    </th> */}
                                 </tr>
                             </thead>
 
                             <tbody className="bg-white divide-y divide-gray-200">
-                                {currentItems.map((catalog) => (
-                                    <tr key={catalog._id}>
-                                        <td className="px-4 py-2 whitespace-no-wrap">{catalog.name}</td>
+                                {currentItems.map((product) => (
+                                    <tr key={product.catalogItem._id}>
+                                        <td className="px-4 py-2 whitespace-no-wrap">{product.catalogItem.name}</td>
                                         <td className="px-4 py-2 whitespace-no-wrap">
-                                            ${catalog.originalPrice}
+                                            ${product.catalogItem.originalPrice}
                                         </td>
                                         <td className="px-4 py-2 whitespace-no-wrap">
-                                            ${catalog.salePrice}
+                                            ${product.catalogItem.salePrice}
                                         </td>
                                         <td className="px-4 py-2 whitespace-no-wrap">
-                                            {catalog.quantity}
+                                            {product.quantity}
                                         </td>
                                         <td className="px-4 py-2 whitespace-no-wrap">
-                                            {catalog.brand ? catalog.brand.name : 'N/A'}
+                                            {product.catalogItem.brand ? product.catalogItem.brand : 'N/A'}
                                         </td>
                                         <td className="px-4 py-2 whitespace-no-wrap">
-                                            {catalog.category ? catalog.category.name : 'N/A'}
+                                            {product.catalogItem.category ? product.catalogItem.category : 'N/A'}
                                         </td>
 
-                                        <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
-                                            {/* Flex container for "Action" and trash icon */}
-                                            <div className="flex justify-between items-center">
-                                                <button
-                                                    className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-14"
-                                                    onClick={() => { }}
-                                                >
-                                                    <FaTrash />
-                                                </button>
+                                        <td className="px-4 py-2 whitespace-no-wrap text-right">
+                                            <div className="flex items-center ml-[23%]">
+
                                             </div>
                                         </td>
                                     </tr>
@@ -166,11 +164,26 @@ const ManageCatalog: React.FC = () => {
                             </ul>
                         </div>
                     </div>
+                    {/* Add Quantity Form */}
+                    {showAddQuantityForm && (
+                        <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-black">
+                            <div className="bg-white rounded-lg shadow p-6">
+                                <h2 className="text-xl font-semibold text-gray-800 mb-4">Add Quantity</h2>
+                                <input
+                                    type="number"
+                                    placeholder="Quantity"
+                                    className="border rounded-md pl-3 py-1 w-32 mb-4 focus:outline-none focus:ring focus:border-indigo-300"
+                                    value={quantity.toString()} // Convert the number to a string here
+                                    onChange={(e) => setQuantity(parseInt(e.target.value, 10))} // Parse the input value as an integer
+                                />
+
+                            </div>
+                        </div>
+                    )}
                 </>
             )}
-
         </div>
     );
 }
 
-export default ManageCatalog;
+export default SoleAdminManageProducts;

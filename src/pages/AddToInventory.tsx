@@ -31,7 +31,6 @@ const AddToInventory: React.FC = () => {
     },
     validationSchema: AddToInventorySchema,
     onSubmit: values => {
-      console.log("Submitting form with values: ", values);
       // Handle form submission here
     },
   });
@@ -94,8 +93,8 @@ const AddToInventory: React.FC = () => {
             />
           </div>
 
-           {/* Buttons */}
-           <div className="mt-6 space-x-4 flex justify-between">
+          {/* Buttons */}
+          <div className="mt-6 space-x-4 flex justify-between">
             <Link to="/multi-admin/catalogue">
               <button
                 type="button"

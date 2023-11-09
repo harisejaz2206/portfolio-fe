@@ -9,20 +9,27 @@ import { selectCatalogData, selectCatalogLoading, selectGetCatalogData } from ".
 import { getCatalogs } from "../app/features/catalog/catalog.thunk";
 import { Toast } from "../utils/toast";
 import { PropagateLoader } from "react-spinners";
+import { IAddProductBody } from "../app/features/product/interfaces/product.interface";
+import { addProduct } from "../app/features/product/product.thunk";
+import { selectProductLoading } from "../app/features/product/product.selector";
 
 const SoleAdminManageCatalogue: React.FC = () => {
     const dispatch = useDispatch<AppThunkDispatch>();
     const navigate = useNavigate();
     const loading = useSelector(selectCatalogLoading)
     const catalogState = useSelector(selectGetCatalogData);
-    console.log("catalogState", catalogState)
+    const [selectedCatalogId, setSelectedCatalogId] = useState<string | null>(null);
+
+    const [catalog, setCatalog] = useState(catalogState);
+    const [searchQuery, setSearchQuery] = useState("");
+    const itemsPerPage = 10; // Number of items per page
+    const [currentPage, setCurrentPage] = useState(0);
 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 await dispatch(getCatalogs()).then((result: any) => {
-                    console.log("result", result);
                     Toast.fire({
                         icon: "success",
                         title: result.payload.message,
@@ -35,10 +42,6 @@ const SoleAdminManageCatalogue: React.FC = () => {
         fetchData()
     }, [dispatch]);
 
-    const [catalog, setCatalog] = useState(catalogState);
-    const [searchQuery, setSearchQuery] = useState("");
-    const itemsPerPage = 10; // Number of items per page
-    const [currentPage, setCurrentPage] = useState(0);
 
     const [showAddQuantityForm, setShowAddQuantityForm] = useState(false);
     const [quantity, setQuantity] = useState(0);
@@ -55,22 +58,47 @@ const SoleAdminManageCatalogue: React.FC = () => {
     const endIndex = (currentPage + 1) * itemsPerPage;
     const currentItems = filteredCatalog.slice(startIndex, endIndex);
 
-   
 
     const handlePageChange = (page: any) => {
         setCurrentPage(page);
     };
 
     const handleAddToInventory = (catalogId: string) => {
+        setSelectedCatalogId(catalogId);
         setShowAddQuantityForm(true);
-        // Handle showing the form and storing the catalogId for reference
     };
 
-    const handleSubmitQuantity = () => {
-        // Handle the submission of quantity
-        setShowAddQuantityForm(false); // Hide the form after submission
-        navigate("/sole-admin/catalogue");
+    const handleSubmitQuantity = async () => {
+        if (selectedCatalogId && quantity > 0) {
+            try {
+                const credentials: IAddProductBody = {
+                    catalogItemId: selectedCatalogId,
+                    quantity: quantity,
+                };
+                await dispatch(addProduct(credentials)).then((result: any) => {
+                    if (result.payload.status === false) {
+                        Toast.fire({
+                            icon: "error",
+                            title: result.payload.message
+                        });
+                    }
+                    else {
+                        Toast.fire({
+                            icon: "success",
+                            title: result.payload.message
+                        });
+                    }
+                });
+            } catch (error) {
+                console.error("An error occurred while adding the product to inventory: ", error);
+            } finally {
+                setShowAddQuantityForm(false);
+                setSelectedCatalogId(null);
+                navigate("/sole-admin/catalogue");
+            }
+        }
     };
+
     return (
         <div className="bg-gray-100 min-h-screen p-4">
             {loading ? (
@@ -95,7 +123,7 @@ const SoleAdminManageCatalogue: React.FC = () => {
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
                             </div>
-                            
+
                         </div>
 
                         <table className="min-w-full divide-y divide-gray-200 text-sm">
@@ -109,6 +137,9 @@ const SoleAdminManageCatalogue: React.FC = () => {
                                     </th>
                                     <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Sale Price
+                                    </th>
+                                    <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Quantity
                                     </th>
                                     <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Brand
@@ -133,12 +164,15 @@ const SoleAdminManageCatalogue: React.FC = () => {
                                             ${catalog.salePrice}
                                         </td>
                                         <td className="px-4 py-2 whitespace-no-wrap">
+                                            {catalog.quantity}
+                                        </td>
+                                        <td className="px-4 py-2 whitespace-no-wrap">
                                             {catalog.brand ? catalog.brand.name : 'N/A'}
                                         </td>
                                         <td className="px-4 py-2 whitespace-no-wrap">
                                             {catalog.category ? catalog.category.name : 'N/A'}
                                         </td>
-                                       
+
                                         <td className="px-4 py-2 whitespace-no-wrap text-right">
                                             <div className="flex items-center ml-[23%]">
                                                 <button
@@ -172,8 +206,8 @@ const SoleAdminManageCatalogue: React.FC = () => {
                             </ul>
                         </div>
                     </div>
-                  {/* Add Quantity Form */}
-                  {showAddQuantityForm && (
+                    {/* Add Quantity Form */}
+                    {showAddQuantityForm && (
                         <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-black">
                             <div className="bg-white rounded-lg shadow p-6">
                                 <h2 className="text-xl font-semibold text-gray-800 mb-4">Add Quantity</h2>

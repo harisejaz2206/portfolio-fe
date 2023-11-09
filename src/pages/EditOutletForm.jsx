@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function EditOutletForm() {
   const [formData, setFormData] = useState({
-    outletName: '',
-    ownerName: '',
-    ownerEmail: '',
-    adminName: '',
-    adminEmail: '',
-    adminPassword: '',
-    branchName: '',
-    location: '',
-    membershipTime: '1-year', // Default value
+    outletName: "",
+    ownerName: "",
+    ownerEmail: "",
+    adminName: "",
+    adminEmail: "",
+    adminPassword: "",
+    branchName: "",
+    location: "",
+    membershipTime: "1-year", // Default value
   });
 
   const handleChange = (e) => {
@@ -25,17 +25,21 @@ function EditOutletForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    console.log(formData); // For testing purposes
   };
 
   return (
     <div className="bg-gray-100 min-h-screen flex justify-center items-center">
       <div className="bg-white rounded-lg shadow-md p-8 w-full">
-        <h1 className="text-2xl font-semibold text-gray-800 mb-6">Edit Outlet</h1>
+        <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+          Edit Outlet
+        </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Outlet Name */}
           <div>
-            <label htmlFor="outletName" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="outletName"
+              className="block text-sm font-medium text-gray-700"
+            >
               Outlet Name
             </label>
             <input
@@ -51,11 +55,16 @@ function EditOutletForm() {
 
           {/* Owner Details */}
           <div>
-            <h2 className="text-lg font-semibold text-gray-800 mb-2">Outlet Owner Details</h2>
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">
+              Outlet Owner Details
+            </h2>
             <div className="grid grid-cols-2 gap-4">
               {/* Owner Name */}
               <div>
-                <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="ownerName"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Owner Name
                 </label>
                 <input
@@ -71,7 +80,10 @@ function EditOutletForm() {
 
               {/* Owner Email */}
               <div>
-                <label htmlFor="ownerEmail" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="ownerEmail"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Owner Email
                 </label>
                 <input
@@ -89,11 +101,16 @@ function EditOutletForm() {
 
           {/* Admin Details */}
           <div>
-            <h2 className="text-lg font-semibold text-gray-800 mb-2">Outlet Admin Details</h2>
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">
+              Outlet Admin Details
+            </h2>
             <div className="grid grid-cols-2 gap-4">
               {/* Admin Name */}
               <div>
-                <label htmlFor="adminName" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="adminName"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Admin Name
                 </label>
                 <input
@@ -109,7 +126,10 @@ function EditOutletForm() {
 
               {/* Admin Email */}
               <div>
-                <label htmlFor="adminEmail" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="adminEmail"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Admin Email
                 </label>
                 <input
@@ -125,7 +145,10 @@ function EditOutletForm() {
 
               {/* Admin Password */}
               <div>
-                <label htmlFor="adminPassword" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="adminPassword"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Admin Password
                 </label>
                 <input
@@ -143,7 +166,10 @@ function EditOutletForm() {
 
           {/* Branch Name */}
           <div>
-            <label htmlFor="branchName" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="branchName"
+              className="block text-sm font-medium text-gray-700"
+            >
               Outlet Branch Name
             </label>
             <input
@@ -159,7 +185,10 @@ function EditOutletForm() {
 
           {/* Location */}
           <div>
-            <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="location"
+              className="block text-sm font-medium text-gray-700"
+            >
               Location
             </label>
             <input
@@ -175,7 +204,10 @@ function EditOutletForm() {
 
           {/* Membership Time */}
           <div>
-            <label htmlFor="membershipTime" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="membershipTime"
+              className="block text-sm font-medium text-gray-700"
+            >
               Outlet Membership Time
             </label>
             <select
@@ -193,15 +225,14 @@ function EditOutletForm() {
 
           {/* Submit Button */}
           <div className="mt-6">
-          <Link to="/multi-admin/outlets">  
-          <button
-          type="submit"
-          className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 flex items-center"
-          >
-          
-          <span >Update</span>
-          </button>
-         </Link>
+            <Link to="/multi-admin/outlets">
+              <button
+                type="submit"
+                className="text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 flex items-center"
+              >
+                <span>Update</span>
+              </button>
+            </Link>
           </div>
         </form>
       </div>

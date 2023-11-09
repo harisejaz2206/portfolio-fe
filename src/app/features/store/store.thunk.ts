@@ -7,7 +7,6 @@ export const addStore = createAsyncThunk(
   async (credentials: IStore, { rejectWithValue }) => {
     try {
       const response = await storeService.addStoreHandler(credentials);
-      console.log("response: ", response);
       return response;
     } catch (error: any) {
       return rejectWithValue(

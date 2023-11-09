@@ -64,7 +64,6 @@ const AddStore: React.FC = () => {
             icon: "success",
             title: "Store successfully created",
           });
-          console.log(result.meta.requestStatus === "fulfilled");
           handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik })
         })
         .catch((error) => {

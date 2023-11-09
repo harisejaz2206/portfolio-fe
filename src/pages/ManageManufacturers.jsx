@@ -1,29 +1,36 @@
-import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { FaSearch, FaEdit, FaFilter, FaPlusCircle, FaDownload, FaUpload } from 'react-icons/fa';
-import Pagination from '../components/Pagination';
+import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import {
+  FaSearch,
+  FaEdit,
+  FaFilter,
+  FaPlusCircle,
+  FaDownload,
+  FaUpload,
+} from "react-icons/fa";
+import Pagination from "../components/Pagination";
 
 function ManageManufacturers() {
   // Dummy data for manufacturers (replace with your actual data)
   const initialManufacturers = [
     {
       id: 1,
-      name: 'Manufacturer 1',
+      name: "Manufacturer 1",
       products: 20,
-      store: 'Store A',
+      store: "Store A",
     },
     {
       id: 2,
-      name: 'Manufacturer 2',
+      name: "Manufacturer 2",
       products: 15,
-      store: 'Store B',
+      store: "Store B",
     },
     // Add more manufacturers as needed
   ];
 
   const [manufacturers, setManufacturers] = useState(initialManufacturers);
-  const [searchStoreQuery, setSearchStoreQuery] = useState('');
-  const [searchProductQuery, setSearchProductQuery] = useState('');
+  const [searchStoreQuery, setSearchStoreQuery] = useState("");
+  const [searchProductQuery, setSearchProductQuery] = useState("");
   const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
@@ -44,21 +51,23 @@ function ManageManufacturers() {
   // Function to handle filter option selection
   const handleFilterOptionSelect = (option) => {
     // Implement filtering logic based on the selected option
-    console.log('Selected filter option:', option);
     // Close the filter dropdown after selecting an option
     setFilterOptionsVisible(false);
   };
 
   // Function to filter manufacturers based on search queries
-  const filteredManufacturers = manufacturers.filter((manufacturer) =>
-    manufacturer.store.toLowerCase().includes(searchStoreQuery.toLowerCase()) &&
-    manufacturer.products.toString().includes(searchProductQuery)
+  const filteredManufacturers = manufacturers.filter(
+    (manufacturer) =>
+      manufacturer.store
+        .toLowerCase()
+        .includes(searchStoreQuery.toLowerCase()) &&
+      manufacturer.products.toString().includes(searchProductQuery)
   );
 
   const uploadSelectedFiles = () => {
     // Check if files were selected
     if (selectedFiles.length === 0) {
-      alert('Please select one or more files.');
+      alert("Please select one or more files.");
       return;
     }
 
@@ -80,13 +89,15 @@ function ManageManufacturers() {
   return (
     <div className="bg-gray-100 min-h-screen p-4">
       <div className="bg-white rounded-lg shadow p-6">
-        <h1 className="text-xl font-semibold text-gray-800 mb-4">Manage Manufacturers</h1>
+        <h1 className="text-xl font-semibold text-gray-800 mb-4">
+          Manage Manufacturers
+        </h1>
 
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center space-x-4">
             <div className="relative">
               <span className="absolute left-3 top-2 text-gray-400">
-                <FaSearch className='text-sm' />
+                <FaSearch className="text-sm" />
               </span>
               <input
                 type="text"
@@ -98,7 +109,7 @@ function ManageManufacturers() {
             </div>
             <div className="relative">
               <span className="absolute left-3 top-2 text-gray-400">
-                <FaSearch className='text-sm' />
+                <FaSearch className="text-sm" />
               </span>
               <input
                 type="text"
@@ -124,7 +135,7 @@ function ManageManufacturers() {
           </div>
 
           <div className="flex items-center space-x-2 text-sm">
-          <Link
+            <Link
               to="/multi-admin/create-product"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-md flex items-center"
             >
@@ -144,7 +155,7 @@ function ManageManufacturers() {
               ref={fileInputRef}
               accept=".csv, .xlsx"
               multiple
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
               onChange={handleFileSelect}
             />
             {selectedFiles.length > 0 && (
@@ -152,7 +163,7 @@ function ManageManufacturers() {
                 className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
                 onClick={uploadSelectedFiles}
               >
-                <FaUpload className='mr-2'/> Upload
+                <FaUpload className="mr-2" /> Upload
               </button>
             )}
             <Link to={"/path-to-sample-sheet/sample-sheet.xlsx"}>
@@ -187,15 +198,21 @@ function ManageManufacturers() {
           <tbody className="bg-white divide-y divide-gray-200">
             {currentManufacturer.map((manufacturer) => (
               <tr key={manufacturer.id}>
-                <td className="px-6 py-4 whitespace-no-wrap">{manufacturer.name}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{manufacturer.products}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{manufacturer.store}</td>
+                <td className="px-6 py-4 whitespace-no-wrap">
+                  {manufacturer.name}
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap">
+                  {manufacturer.products}
+                </td>
+                <td className="px-6 py-4 whitespace-no-wrap">
+                  {manufacturer.store}
+                </td>
                 <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
-                  <Link to={`/multi-admin/edit-manufacturer/${manufacturer.id}`}>
-                    <button
-                      className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline"
-                    >
-                      <FaEdit className='-ml-20' />
+                  <Link
+                    to={`/multi-admin/edit-manufacturer/${manufacturer.id}`}
+                  >
+                    <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
+                      <FaEdit className="-ml-20" />
                     </button>
                   </Link>
                 </td>

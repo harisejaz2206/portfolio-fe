@@ -84,7 +84,6 @@ const AddCatalogForm: React.FC = () => {
 
     const handleSuccess = (result: any) => {
         const status = result.meta.requestStatus == "fulfilled" ? true : false;
-        console.log("status", status);
         navigate(status ? '/multi-admin/catalogue' : '/haris');
         Toast.fire({
             icon: "success",
@@ -105,13 +104,9 @@ const AddCatalogForm: React.FC = () => {
         validationSchema: AddCatalogSchema,
         validateOnBlur: true,
         onSubmit: values => {
-            console.log("Submitting form with values: ", values); // Debug line
 
             dispatch(addCatalog(values))
                 .then((result) => {
-                    console.log("result: ", result);
-                    console.log('API call successful', result);  // Debug line
-                    // Toast.fire or your notification system
                     handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik })
                 })
                 .catch((error) => {

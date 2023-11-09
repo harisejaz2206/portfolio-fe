@@ -43,9 +43,7 @@ const SignUpPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSuccess = (result: any) => {
-    console.log("result", result);
     const token = result.payload.payload.token.accessToken;
-    console.log("token", token);
     HttpService.setToken(token);
     localStorage.setItem('token', token);
     navigate(result.payload.payload.user ? '/' : '/haris');
@@ -86,22 +84,22 @@ const SignUpPage: React.FC = () => {
                 </div>
               </span>
               <span className="ml-4 text-md">
-              <TypeWriter
-        options={{
-          strings: [
-            "Manage your orders",
-            "Get Exclusive Deals and Offers",
-            "Get Personalized Recommendations",
-          ],
-          autoStart: true,
-          loop: true,
-          cursor: "|", // Use an underscore as the cursor
-          delay: 75, // Delay between typing each character
-          deleteSpeed: 20, // Speed of deleting characters
-        }}
-      />
+                <TypeWriter
+                  options={{
+                    strings: [
+                      "Manage your orders",
+                      "Get Exclusive Deals and Offers",
+                      "Get Personalized Recommendations",
+                    ],
+                    autoStart: true,
+                    loop: true,
+                    cursor: "|", // Use an underscore as the cursor
+                    delay: 75, // Delay between typing each character
+                    deleteSpeed: 20, // Speed of deleting characters
+                  }}
+                />
               </span>
-           
+
             </p>
           </div>
         </div>
