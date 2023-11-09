@@ -6,7 +6,7 @@ import { AppThunkDispatch } from "../store/rootReducer";
 import { logout } from '../app/features/auth/auth.slice';
 import { clearOutletData } from "../app/features/outlet/outlet.slice"
 // import { Link } from 'react-router-dom';
-import { FaHome, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight, FaEnvelope } from 'react-icons/fa';
+import { FaHome, FaStore, FaChartBar, FaBook, FaInbox, FaStar, FaShoppingCart, FaCog, FaUsers, FaSignOutAlt, FaCaretDown, FaCaretRight, FaEnvelope, FaUser } from 'react-icons/fa';
 import { clearStoreData } from '../app/features/store/store.slice';
 import { selectUser } from '../app/features/auth/auth.selector';
 
@@ -22,13 +22,29 @@ interface SidebarSubItemProps {
   isActive: boolean;
 }
 
+const UserProfileCard: React.FC<{ userIcon: JSX.Element, userEmail: string }> = ({ userIcon, userEmail }) => {
+  return (
+    <div className="bg-white p-2 ">
+      <div className="flex flex-col items-center space-y-2">
+        <div className="w-12 h-12 flex items-center justify-center text-white rounded-full bg-indigo-600 border border-white ">
+          {userIcon}
+        </div>
+        <div className="text-base font-semibold text-gray-700">Multi Admin</div>
+        <div className="flex items-center text-gray-500">
+          <span className="text-sm font-semibold">{userEmail}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Sidebar: React.FC = () => {
   const [isInventoryOpen, setInventoryOpen] = useState(false);
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
   const location = useLocation();
   const user = useSelector(selectUser);
-  const userEmail = user?.email;
+  const userEmail = user?.email || ""; 
 
   const toggleInventory = () => {
     setInventoryOpen(!isInventoryOpen);
@@ -43,15 +59,8 @@ const Sidebar: React.FC = () => {
 
   return (
     <div className="bg-white h-auto w-2/3 p-4 md:w-1/6 flex flex-col justify-between">
-      <div>
-        <div className="flex items-center justify-center mt-4">
-          <span className="text-gray-800 text-lg font-bold ml-2">Dot Brand</span>
-        </div>
-        <div className="space-y-4 mt-8">
-          <div className="flex items-center"> {/* Use flex here */}
-            <FaEnvelope className="text-black-800 text-sm font-bold ml-2 mr-1" />
-            <span className="text-red-800 text-sm font-bold">{userEmail}</span>
-          </div>
+      <UserProfileCard userIcon={<FaUser/>} userEmail={userEmail} /> 
+        <div className="space-y-4 mt-2">
           <Link to={"/multi-admin/"}>
             <SidebarItem
               icon={<FaHome />}
@@ -144,7 +153,7 @@ const Sidebar: React.FC = () => {
             </button>
           </div>
         </div>
-      </div>
+      
 
     </div>
   );
