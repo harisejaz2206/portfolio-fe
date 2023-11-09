@@ -16,7 +16,6 @@ import {
   FaEnvelope,
   FaUser,
 } from "react-icons/fa";
-import { GrUserAdmin } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { AppThunkDispatch } from "../store/rootReducer";
@@ -74,7 +73,7 @@ const SoleChainSidebar: React.FC = () => {
   };
 
   return (
-    <div className="bg-white h-screen w-1/5 p-4 md:w-1/6 flex flex-col justify-between">
+    <div className="bg-white h-screen w-1/5 p-4 md:w-1/6 flex flex-col ">
       <UserProfileCard userIcon={<FaUser />} userEmail={userEmail} />
       <Link to={"/sole-admin/"}>
         <SoleChainSidebarItem

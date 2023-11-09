@@ -156,6 +156,7 @@ const SoleAdminManageCategories: React.FC = () => {
                 </div>
               </div>
 
+              {/*
               <div className="flex items-center space-x-2 text-sm">
                 <Link to={"/path-to-sample-sheet/sample-sheet.xlsx"}>
                   <button
@@ -166,6 +167,8 @@ const SoleAdminManageCategories: React.FC = () => {
                   </button>
                 </Link>
               </div>
+
+                  */}
             </div>
 
             <table className="min-w-full divide-y divide-gray-200 mt-8 text-sm">
@@ -180,9 +183,11 @@ const SoleAdminManageCategories: React.FC = () => {
                   <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Image
                   </th>
+                  {/*
                   <th className="px-6 py-3 bg-gray-50 font-medium text-xs text-gray-500 uppercase tracking-wider">
                     Action
                   </th>
+                  */}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -202,6 +207,7 @@ const SoleAdminManageCategories: React.FC = () => {
                         height="80"
                       />
                     </td>
+                    {/*}
                     <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
                       <Link to={`/multi-admin/edit-category/${category._id}`}>
                         <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
@@ -216,6 +222,7 @@ const SoleAdminManageCategories: React.FC = () => {
                         <FaTrash className="-ml-16" />
                       </button>
                     </td>
+                */}
                   </tr>
                 ))}
               </tbody>

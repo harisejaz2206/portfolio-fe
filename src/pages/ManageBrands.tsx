@@ -158,6 +158,7 @@ const ManageBrands: React.FC = () => {
                   <FaPlusCircle className="mr-2" /> Add Brands
                 </Link>
 
+                {/*}
                 <button
                   className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
                   onClick={() => {
@@ -166,6 +167,8 @@ const ManageBrands: React.FC = () => {
                 >
                   <FaPlusCircle className="mr-2" /> Add Multiple Brands
                 </button>
+
+                */}
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -182,6 +185,8 @@ const ManageBrands: React.FC = () => {
                     <FaUpload className="mr-2" /> Upload
                   </button>
                 )}
+
+                {/*
                 <Link to={"/path-to-sample-sheet/sample-sheet.xlsx"}>
                   <button
                     className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
@@ -190,6 +195,7 @@ const ManageBrands: React.FC = () => {
                     <FaDownload className="mr-2" /> Download Sample Sheet
                   </button>
                 </Link>
+                */}
               </div>
             </div>
 
@@ -232,11 +238,13 @@ const ManageBrands: React.FC = () => {
                       </td>
 
                       <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium">
+                        {/*
                         <Link to={`/admin/edit-manufacturer/${brand._id}`}>
                           <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
                             <FaEdit className="-ml-24" />
                           </button>
                         </Link>
+                       */}
                         <button
                           className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
                           onClick={() => handleDeleteBrand(brand._id!)}
