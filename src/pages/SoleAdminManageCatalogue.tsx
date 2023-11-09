@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSearch, FaPlusCircle, FaShoppingCart, FaEye } from "react-icons/fa"; // Import icons
+import { FaSearch, FaPlusCircle, FaShoppingCart, FaEye, FaCheck, FaTimes } from "react-icons/fa"; // Import icons
 import Toggle from "react-toggle"; // Import the Toggle component
 import "react-toggle/style.css"; // Import the styles for the Toggle component
 import { useDispatch, useSelector } from "react-redux";
@@ -95,6 +95,7 @@ const SoleAdminManageCatalogue: React.FC = () => {
                 setShowAddQuantityForm(false);
                 setSelectedCatalogId(null);
                 navigate("/sole-admin/catalogue");
+                await dispatch(getCatalogs())
             }
         }
     };
@@ -210,23 +211,35 @@ const SoleAdminManageCatalogue: React.FC = () => {
                     {showAddQuantityForm && (
                         <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-black">
                             <div className="bg-white rounded-lg shadow p-6">
-                                <h2 className="text-xl font-semibold text-gray-800 mb-4">Add Quantity</h2>
-                                <input
-                                    type="number"
-                                    placeholder="Quantity"
-                                    className="border rounded-md pl-3 py-1 w-32 mb-4 focus:outline-none focus:ring focus:border-indigo-300"
-                                    value={quantity.toString()} // Convert the number to a string here
-                                    onChange={(e) => setQuantity(parseInt(e.target.value, 10))} // Parse the input value as an integer
-                                />
-                                <button
-                                    onClick={handleSubmitQuantity}
-                                    className="bg-indigo-600 text-white px-3 py-2 text-sm rounded-md"
-                                >
-                                    Submit
-                                </button>
+                                <div className="flex items-center justify-between mb-4">
+                                    <h2 className="text-2xl font-semibold text-gray-800">Add Quantity</h2>
+                                    <button onClick={() => setShowAddQuantityForm(false)}>
+                                        <FaTimes className="text-gray-500 hover:text-gray-700 cursor-pointer" />
+                                    </button>
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-sm font-medium text-gray-700">Quantity</label>
+                                    <div className="flex items-center">
+                                        <input
+                                            type="number"
+                                            placeholder="Enter quantity"
+                                            className="border rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-indigo-300"
+                                            value={quantity.toString()}
+                                            onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+                                        />
+                                        <button
+                                            onClick={handleSubmitQuantity}
+                                            className="bg-indigo-600 text-white px-4 py-2 ml-2 text-sm rounded-md flex items-center"
+                                        >
+                                            <FaCheck className="mr-2" />
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     )}
+
                 </>
             )}
         </div>
