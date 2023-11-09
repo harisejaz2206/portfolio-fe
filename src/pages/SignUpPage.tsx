@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { TiTick } from "react-icons/ti";
 import { FaFacebook, FaGoogle, FaPhone } from "react-icons/fa";
-import * as Yup from 'yup';
-import { Toast } from '../utils/toast';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { AppThunkDispatch } from '../store/rootReducer';
-import { login, signup } from '../app/features/auth/auth.thunk';
-import { handleApiResponse } from '../utils/handleApiResponse';
-import { handleError } from '../utils/catchErrorToast';
-import InputField from '../components/globals/inputField';
+import * as Yup from "yup";
+import { Toast } from "../utils/toast";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AppThunkDispatch } from "../store/rootReducer";
+import { login, signup } from "../app/features/auth/auth.thunk";
+import { handleApiResponse } from "../utils/handleApiResponse";
+import { handleError } from "../utils/catchErrorToast";
+import InputField from "../components/globals/inputField";
 import { useFormik } from "formik";
 import { HttpService } from "../app/services/base.service";
 import DynamicModal from "../components/globals/modal/DynamicModal";
@@ -20,20 +20,19 @@ type FormData = {
   name: string;
   email: string;
   password: string;
-}
+};
 
 const SignUpSchema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
-  email: Yup.string().email('Invalid email').required('Email is required'),
+  name: Yup.string().required("Name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
-    .min(8, 'Password must be at least 8 characters')
+    .min(8, "Password must be at least 8 characters")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])/,
-      'Password must contain an uppercase letter, a lowercase letter, and a special character'
+      "Password must contain an uppercase letter, a lowercase letter, and a special character"
     )
-    .required('Password is required'),
+    .required("Password is required"),
 });
-
 
 const SignUpPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("signup");
@@ -45,27 +44,31 @@ const SignUpPage: React.FC = () => {
   const handleSuccess = (result: any) => {
     const token = result.payload.payload.token.accessToken;
     HttpService.setToken(token);
-    localStorage.setItem('token', token);
-    navigate(result.payload.payload.user ? '/' : '/haris');
+    localStorage.setItem("token", token);
+    navigate(result.payload.payload.user ? "/" : "/haris");
     // setSignupPayload(result.payload.payload);
     setModalOpen(true);
   };
   const formik = useFormik<FormData>({
     initialValues: {
-      name: '',
-      email: '',
-      password: '',
+      name: "",
+      email: "",
+      password: "",
     },
     validationSchema: SignUpSchema,
     validateOnBlur: true,
-    onSubmit: values => {
+    onSubmit: (values) => {
       dispatch(signup(values))
-        .then((result) => handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik }))
-        .catch(handleError)
+        .then((result) =>
+          handleApiResponse({
+            result,
+            handleSuccess: () => handleSuccess(result),
+            formik,
+          })
+        )
+        .catch(handleError);
     },
   });
-
-
 
   return (
     <div className="flex justify-center items-center h-max ">
@@ -99,7 +102,6 @@ const SignUpPage: React.FC = () => {
                   }}
                 />
               </span>
-
             </p>
           </div>
         </div>
@@ -110,21 +112,26 @@ const SignUpPage: React.FC = () => {
           </h1>
           <div className="grid grid-cols-2 bg-white border border-gray-200 rounded p-1 mb-2">
             <button
-              className={`rounded p-1 ${activeTab === "login" ? "bg-red-900 text-white" : "text-black"
-                }`}
+              className={`rounded p-1 ${
+                activeTab === "login" ? "bg-red-900 text-white" : "text-black"
+              }`}
               onClick={() => setActiveTab("login")}
             >
               Login
             </button>
             <button
-              className={`rounded p-1 ${activeTab === "signup" ? "bg-red-900 text-white" : "text-black"
-                }`}
+              className={`rounded p-1 ${
+                activeTab === "signup" ? "bg-red-900 text-white" : "text-black"
+              }`}
               onClick={() => setActiveTab("signup")}
             >
               Sign Up
             </button>
           </div>
-          <form className="space-y-2 md:space-y-4 mt-14" onSubmit={formik.handleSubmit}>
+          <form
+            className="space-y-2 md:space-y-4 mt-14"
+            onSubmit={formik.handleSubmit}
+          >
             <div className="flex flex-col space-y-1">
               <label
                 htmlFor="name"
@@ -163,7 +170,7 @@ const SignUpPage: React.FC = () => {
                 Password
               </label>
               <InputField
-                size='sm'
+                size="sm"
                 type="password"
                 name="password"
                 placeholder="Please enter your password"
@@ -201,7 +208,7 @@ const SignUpPage: React.FC = () => {
                   open={isModalOpen}
                   setOpen={setModalOpen}
                   successIcon={true}
-                  routerPath="/login"  // or wherever you want to navigate
+                  routerPath="/login" // or wherever you want to navigate
                 />
               )}
             </a>

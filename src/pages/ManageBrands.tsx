@@ -7,18 +7,26 @@ import {
   FaPlusCircle,
   FaDownload,
   FaUpload,
-  FaTrash
+  FaTrash,
 } from "react-icons/fa";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
-import { selectBrandData, selectBrandLoading } from "../app/features/brand/brand.selector";
+import {
+  selectBrandData,
+  selectBrandLoading,
+} from "../app/features/brand/brand.selector";
 import { deleteBrand, getBrands } from "../app/features/brand/brand.thunk";
-import { BeatLoader, ClipLoader, PacmanLoader, ClimbingBoxLoader, PropagateLoader } from "react-spinners";
+import {
+  BeatLoader,
+  ClipLoader,
+  PacmanLoader,
+  ClimbingBoxLoader,
+  PropagateLoader,
+} from "react-spinners";
 import { selectCategoryLoading } from "../app/features/category/category.selector";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import { Toast } from "../utils/toast";
-
 
 const ManageBrands: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
@@ -33,16 +41,15 @@ const ManageBrands: React.FC = () => {
         await dispatch(getBrands()).then((result: any) => {
           Toast.fire({
             icon: "success",
-            title: result.payload.message
-          })
+            title: result.payload.message,
+          });
         }); // Using await with dispatch here
       } catch (error) {
         console.error("An error occurred while fetching data: ", error);
       }
     };
-    fetchData()
+    fetchData();
   }, [dispatch]);
-
 
   const [searchBrandQuery, setSearchBrandQuery] = useState("");
   const [searchProductQuery, setSearchProductQuery] = useState("");
@@ -81,15 +88,14 @@ const ManageBrands: React.FC = () => {
       await dispatch(deleteBrand(id)).then((result: any) => {
         Toast.fire({
           icon: "success",
-          title: result.payload.message
-        })
+          title: result.payload.message,
+        });
       });
       await dispatch(getBrands());
     } catch (error) {
       console.error("An error occurred while deleting the brand: ", error);
     }
   };
-
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
@@ -179,14 +185,13 @@ const ManageBrands: React.FC = () => {
                 <Link to={"/path-to-sample-sheet/sample-sheet.xlsx"}>
                   <button
                     className="bg-indigo-600 hover:bg-indigo-700  text-white font-semibold py-1 px-3 rounded-md flex items-center"
-                  // download
+                    // download
                   >
                     <FaDownload className="mr-2" /> Download Sample Sheet
                   </button>
                 </Link>
               </div>
             </div>
-
 
             {/* Table and manufacturer listing */}
             <table className="min-w-full divide-y divide-gray-200 mt-8 text-sm">
@@ -207,41 +212,47 @@ const ManageBrands: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {brandState && brandState.filter(Boolean).map((brand) => (
-                  <tr key={brand._id}>
-                    <td className="px-6 py-3 whitespace-no-wrap">
-                      {brand.name || "N/A"} {/* Display "N/A" if 'name' is undefined */}
-                    </td>
-                    <td className="px-6 py-3 whitespace-no-wrap">
-                      {brand.status ? 'Active' : 'Inactive'}
-                    </td>
-                    <td className="px-6 py-3 whitespace-no-wrap">
-                      <img src={brand.image} alt={brand.name || "No Name"} width="120" height="120" />
-                    </td>
+                {brandState &&
+                  brandState.filter(Boolean).map((brand) => (
+                    <tr key={brand._id}>
+                      <td className="px-6 py-3 whitespace-no-wrap">
+                        {brand.name || "N/A"}{" "}
+                        {/* Display "N/A" if 'name' is undefined */}
+                      </td>
+                      <td className="px-6 py-3 whitespace-no-wrap">
+                        {brand.status ? "Active" : "Inactive"}
+                      </td>
+                      <td className="px-6 py-3 whitespace-no-wrap">
+                        <img
+                          src={brand.image}
+                          alt={brand.name || "No Name"}
+                          width="120"
+                          height="120"
+                        />
+                      </td>
 
-                    <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium">
-                      <Link to={`/admin/edit-manufacturer/${brand._id}`}>
-                        <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
-                          <FaEdit className="-ml-24" />
+                      <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium">
+                        <Link to={`/admin/edit-manufacturer/${brand._id}`}>
+                          <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
+                            <FaEdit className="-ml-24" />
+                          </button>
+                        </Link>
+                        <button
+                          className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
+                          onClick={() => handleDeleteBrand(brand._id!)}
+                        >
+                          <FaTrash className="-ml-20" />
                         </button>
-                      </Link>
-                      <button
-                        className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
-                        onClick={() => handleDeleteBrand(brand._id!)}
-                      >
-                        <FaTrash className="-ml-20" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </>
         )}
-
       </div>
     </div>
   );
-}
+};
 
 export default ManageBrands;

@@ -60,7 +60,6 @@ const Sidebar: React.FC = () => {
   return (
     <div className="bg-white h-auto w-2/3 p-4 md:w-1/6 flex flex-col justify-between">
       <UserProfileCard userIcon={<FaUser/>} userEmail={userEmail} /> 
-        <div className="space-y-4 mt-2">
           <Link to={"/multi-admin/"}>
             <SidebarItem
               icon={<FaHome />}
@@ -152,7 +151,7 @@ const Sidebar: React.FC = () => {
               Log Out
             </button>
           </div>
-        </div>
+        
       
 
     </div>

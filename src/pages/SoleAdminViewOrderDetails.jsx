@@ -1,34 +1,37 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 function SoleAdminViewOrderDetails() {
-  const [orderStatus, setOrderStatus] = useState('Delivered');
+  const [orderStatus, setOrderStatus] = useState("Delivered");
   const { orderId } = useParams();
   const [products] = useState([
     {
       id: 1,
-      name: 'Product 1',
-      description: 'Description of Product 1',
-      brand: 'Brand A',
-      seller: 'Seller A',
-      image: '/Gaviscon.png',
+      name: "Product 1",
+      description: "Description of Product 1",
+      brand: "Brand A",
+      seller: "Seller A",
+      image: "/Gaviscon.png",
       quantity: 2,
       price: 25.0,
     },
     {
       id: 2,
-      name: 'Product 2',
-      description: 'Description of Product 2',
-      brand: 'Brand B',
-      seller: 'Seller B',
-      image: '/Panadol.png',
+      name: "Product 2",
+      description: "Description of Product 2",
+      brand: "Brand B",
+      seller: "Seller B",
+      image: "/Panadol.png",
       quantity: 1,
       price: 30.0,
     },
     // Add more products as needed
   ]);
 
-  const subTotal = products.reduce((total, product) => total + product.quantity * product.price, 0);
+  const subTotal = products.reduce(
+    (total, product) => total + product.quantity * product.price,
+    0
+  );
   const loyaltyPointsDiscount = 5;
   const couponDiscount = 10;
   const taxes = 5;
@@ -36,7 +39,7 @@ function SoleAdminViewOrderDetails() {
 
   return (
     <div className="order-details bg-gray-100 p-4 rounded-lg shadow-md text-sm">
-       <h2 className="text-base font-semibold mb-4">Order ID: {orderId}</h2>
+      <h2 className="text-base font-semibold mb-4">Order ID: {orderId}</h2>
       <div className="order-details-header flex justify-between items-center">
         <h2 className="text-base font-semibold">Order Details</h2>
         <div className="order-status-dropdown flex items-center space-x-4">
@@ -71,8 +74,15 @@ function SoleAdminViewOrderDetails() {
       </div>
       <div className="order-products mt-4 space-y-4">
         {products.map((product) => (
-          <div key={product.id} className="product-card bg-white p-4 rounded-lg shadow-md flex space-x-4">
-            <img src={product.image} alt={product.name} className="w-24 h-24 object-cover" />
+          <div
+            key={product.id}
+            className="product-card bg-white p-4 rounded-lg shadow-md flex space-x-4"
+          >
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-24 h-24 object-cover"
+            />
             <div className="product-details flex-1">
               <h3 className="text-base font-semibold">{product.name}</h3>
               <p className="text-gray-600 text-sm">{product.description}</p>
@@ -103,8 +113,8 @@ function SoleAdminViewOrderDetails() {
           <p>${taxes.toFixed(2)}</p>
         </div>
         <div className="order-summary-box flex justify-between items-center text-base font-bold">
-          <h3 >Total</h3>
-          <p >${total.toFixed(2)}</p>
+          <h3>Total</h3>
+          <p>${total.toFixed(2)}</p>
         </div>
       </div>
     </div>

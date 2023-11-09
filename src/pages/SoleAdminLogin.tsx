@@ -1,18 +1,18 @@
-import { useFormik } from 'formik';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import * as Yup from 'yup';
-import { AppThunkDispatch } from '../store/rootReducer';
-import { useNavigate } from 'react-router-dom';
-import { Toast } from '../utils/toast';
-import { login } from '../app/features/auth/auth.thunk';
-import { handleApiResponse } from '../utils/handleApiResponse';
-import { handleError } from '../utils/catchErrorToast';
-import InputField from '../components/globals/inputField';
-import { HttpService } from '../app/services/base.service';
-import Typewriter from 'typewriter-effect';
-import { ClockLoader } from 'react-spinners';
-import { selectLoading } from '../app/features/auth/auth.selector';
+import { useFormik } from "formik";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as Yup from "yup";
+import { AppThunkDispatch } from "../store/rootReducer";
+import { useNavigate } from "react-router-dom";
+import { Toast } from "../utils/toast";
+import { login } from "../app/features/auth/auth.thunk";
+import { handleApiResponse } from "../utils/handleApiResponse";
+import { handleError } from "../utils/catchErrorToast";
+import InputField from "../components/globals/inputField";
+import { HttpService } from "../app/services/base.service";
+import Typewriter from "typewriter-effect";
+import { ClockLoader } from "react-spinners";
+import { selectLoading } from "../app/features/auth/auth.selector";
 
 type FormData = {
   email: string;
@@ -21,42 +21,48 @@ type FormData = {
 };
 
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Email is required'),
-  password: Yup.string().required('Password is required'),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
 });
 
 const SoleAdminLogin: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
-  const loading = useSelector(selectLoading)
+  const loading = useSelector(selectLoading);
 
   const handleSuccess = (result: any) => {
     const token = result.payload.payload.token.accessToken;
     HttpService.setToken(token);
-    localStorage.setItem('token', token);
-    navigate(result.payload.payload.user ? '/sole-admin' : '/haris');
+    localStorage.setItem("token", token);
+    navigate(result.payload.payload.user ? "/sole-admin" : "/haris");
     Toast.fire({
-      icon: 'success',
-      title: 'Logged In Successfully',
+      icon: "success",
+      title: "Logged In Successfully",
     });
   };
 
   const handleForgotPasswordClick = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault(); // Prevent form submission
-    navigate('/request-email');
+    navigate("/request-email");
   };
 
   const formik = useFormik<FormData>({
     initialValues: {
-      email: '',
-      password: '',
-      role: 'sole-admin',
+      email: "",
+      password: "",
+      role: "sole-admin",
     },
     validationSchema: LoginSchema,
     validateOnBlur: true,
     onSubmit: (values) => {
       dispatch(login(values))
-        .then((result) => handleApiResponse({ result, handleSuccess: () => handleSuccess(result), formik }))
+        .then((result) =>
+          handleApiResponse({
+            result,
+            handleSuccess: () => handleSuccess(result),
+            formik,
+          })
+        )
         .catch(handleError);
     },
   });
@@ -76,7 +82,7 @@ const SoleAdminLogin: React.FC = () => {
             <span className="text-white">
               <Typewriter
                 options={{
-                  strings: ['Dot Brand ©', 'Sole-Chain Admin'],
+                  strings: ["Dot Brand ©", "Sole-Chain Admin"],
                   autoStart: true, // Start typing automatically
                   loop: true, // Loop the animation
                   delay: 100, // Delay between each character typing
@@ -104,7 +110,10 @@ const SoleAdminLogin: React.FC = () => {
           </div>
           <form onSubmit={formik.handleSubmit}>
             <div className="-mb-2">
-              <label htmlFor="email" className="block text-gray-700 text-sm font-bold">
+              <label
+                htmlFor="email"
+                className="block text-gray-700 text-sm font-bold"
+              >
                 Email Address:
               </label>
               <InputField
@@ -116,7 +125,10 @@ const SoleAdminLogin: React.FC = () => {
               />
             </div>
             <div className="-mb-4">
-              <label htmlFor="password" className="block text-gray-700 text-sm font-bold">
+              <label
+                htmlFor="password"
+                className="block text-gray-700 text-sm font-bold"
+              >
                 Password:
               </label>
               <InputField
@@ -134,7 +146,12 @@ const SoleAdminLogin: React.FC = () => {
               >
                 Forgot your password?
               </span> */}
-              <a href="/solelogin-forgotpassword" className="text-sm font-medium text-red-900 hover:underline">Forgot password?</a>
+              <a
+                href="/solelogin-forgotpassword"
+                className="text-sm font-medium text-red-900 hover:underline"
+              >
+                Forgot password?
+              </a>
               {/* <a className="text-red-700 underline" href="/request-email">
                 Forgot your password?
               </a> */}
@@ -148,7 +165,9 @@ const SoleAdminLogin: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading!} // Disable button while loading
-                  className={`bg-red-800 text-white rounded-lg py-2 hover:bg-red-600 focus:ring focus:ring-red-600 focus:ring-opacity-50 w-full transition-colors duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className={`bg-red-800 text-white rounded-lg py-2 hover:bg-red-600 focus:ring focus:ring-red-600 focus:ring-opacity-50 w-full transition-colors duration-300 ${
+                    loading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                 >
                   Log In
                 </button>

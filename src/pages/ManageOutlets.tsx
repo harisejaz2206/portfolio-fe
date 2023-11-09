@@ -3,14 +3,16 @@ import { Link } from "react-router-dom";
 import { FaSearch, FaPlusCircle, FaEdit } from "react-icons/fa"; // Import the FaEdit and FaTrash icons
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
-import { selectOutletData, selectOutletLoading } from "../app/features/outlet/outlet.selector";
+import {
+  selectOutletData,
+  selectOutletLoading,
+} from "../app/features/outlet/outlet.selector";
 import { getOutlets } from "../app/features/outlet/outlet.thunk";
 import { selectToken } from "../app/features/auth/auth.selector";
 import { HttpService } from "../app/services/base.service";
-import { PropagateLoader } from 'react-spinners'; // Import the loader
+import { PropagateLoader } from "react-spinners"; // Import the loader
 import { Toast } from "../utils/toast";
 import Pagination from "../components/Pagination";
-
 
 const ManageOutlets: React.FC = () => {
   const token = useSelector(selectToken);
@@ -30,13 +32,13 @@ const ManageOutlets: React.FC = () => {
     const fetchData = async () => {
       try {
         await dispatch(getOutlets()).then((result: any) => {
-          if ('message' in result.payload) {
+          if ("message" in result.payload) {
             Toast.fire({
               icon: "success",
               title: result.payload.message,
             });
           }
-        })
+        });
       } catch (error) {
         console.error("An error occurred while fetching data: ", error);
       }
@@ -51,11 +53,13 @@ const ManageOutlets: React.FC = () => {
   //     outlet.outletName.toLowerCase().includes(searchQuery.toLowerCase()) ||
   //     outlet.address.toLowerCase().includes(searchQuery.toLowerCase())
   // );
-  const filteredOutlets = outletData ? outletData.filter(
-    (outlet) =>
-      outlet.outletName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      outlet.address.toLowerCase().includes(searchQuery.toLowerCase())
-  ) : [];
+  const filteredOutlets = outletData
+    ? outletData.filter(
+        (outlet) =>
+          outlet.outletName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          outlet.address.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
 
   const start = currentPage * itemsPerPage;
   const end = (currentPage + 1) * itemsPerPage;
@@ -68,26 +72,30 @@ const ManageOutlets: React.FC = () => {
   return (
     <div className="bg-gray-100 min-h-screen p-4">
       {loading && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 9999,
-          backgroundColor: 'rgba(255, 255, 255, 0.8)'
-        }}>
-          <div style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)'
-          }}>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 9999,
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
             <PropagateLoader color="#000000" />
           </div>
         </div>
       )}
-      <div className={`bg-gray-100 min-h-screen p-4 ${loading ? 'blur' : ''}`}>
+      <div className={`bg-gray-100 min-h-screen p-4 ${loading ? "blur" : ""}`}>
         {loading && (
           <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-black bg-opacity-50">
             <PropagateLoader color={"#123abc"} loading={true} size={15} />
@@ -161,16 +169,26 @@ const ManageOutlets: React.FC = () => {
                 {displayedOutlets!.map((outlet) => (
                   <tr key={outlet._id}>
                     <td className="px-6 py-3 whitespace-no-wrap ">
-                      <div className="truncate max-w-xs">{outlet.outletName}</div>
+                      <div className="truncate max-w-xs">
+                        {outlet.outletName}
+                      </div>
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap w-[25%]">
-                      <div className="truncate max-w-xs"> {outlet.adminName}</div>
+                      <div className="truncate max-w-xs">
+                        {" "}
+                        {outlet.adminName}
+                      </div>
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap w-1/6">
-                      <div className="truncate max-w-xs"> {outlet.adminEmail}</div>
+                      <div className="truncate max-w-xs">
+                        {" "}
+                        {outlet.adminEmail}
+                      </div>
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap w-1/6">
-                      <div className="truncate max-w-xs">{outlet.adminNumber}</div>
+                      <div className="truncate max-w-xs">
+                        {outlet.adminNumber}
+                      </div>
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap w-[20%]">
                       {outlet.latitude}
@@ -185,8 +203,14 @@ const ManageOutlets: React.FC = () => {
                       <div className="truncate max-w-xs">{outlet.address}</div>
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap [30%]">
-                      <span className={` py-1 px-2 rounded ${outlet.isActive ? 'bg-green-500 text-white font-semibold px-3.5' : 'bg-red-500 text-white font-semibold py-1.5 '}`}>
-                        {outlet.isActive ? 'Active' : 'Inactive'}
+                      <span
+                        className={` py-1 px-2 rounded ${
+                          outlet.isActive
+                            ? "bg-green-500 text-white font-semibold px-3.5"
+                            : "bg-red-500 text-white font-semibold py-1.5 "
+                        }`}
+                      >
+                        {outlet.isActive ? "Active" : "Inactive"}
                       </span>
                     </td>
                     <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium w-1/6">
@@ -213,6 +237,6 @@ const ManageOutlets: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default ManageOutlets;
