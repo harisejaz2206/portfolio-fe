@@ -30,10 +30,8 @@ import { Toast } from "../utils/toast";
 
 const ManageBrands: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
-  const navigate = useNavigate();
   const brandState = useSelector(selectBrandData) || [];
   const loading = useSelector(selectBrandLoading);
-  const [isModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {

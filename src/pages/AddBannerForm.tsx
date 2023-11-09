@@ -15,16 +15,18 @@ import { addBrand } from "../app/features/brand/brand.thunk";
 import { handleApiResponse } from "../utils/handleApiResponse";
 import { addCategory } from "../app/features/category/category.thunk";
 import { ClipLoader } from "react-spinners";
+import { addBanner } from "../app/features/banner/banner.thunk";
+import { selectBannerData, selectBannerLoading } from "../app/features/banner/banner.selector";
 
-interface CategoryData {
+interface BannerData {
   name: string;
   status: boolean;
   image: string;
 }
 
-const CreateBrandSchema = Yup.object().shape({
+const CreateBannerSchema = Yup.object().shape({
   name: Yup.string()
-    .required('Brand name is required'),
+    .required('Banner name is required'),
   status: Yup.bool(),
   image: Yup.string()
     .required('You must upload at least one image.')
@@ -33,18 +35,37 @@ const CreateBrandSchema = Yup.object().shape({
 const AddBannerForm: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const navigate = useNavigate();
-  const loading = useSelector(selectBrandLoading);
+  const loading = useSelector(selectBannerLoading);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const bannerState = useSelector(selectBannerData) || [];
 
+  // const handleSuccess = (result: any) => {
+  //   const status = result.meta.requestStatus == "fulfilled" ? true : false;
+  //   navigate(status ? '/multi-admin/banners' : '/haris');
+  //   Toast.fire({
+  //     icon: "success",
+  //     title: "Category created successfully",
+  //   });
+  // };
   const handleSuccess = (result: any) => {
-    const status = result.meta.requestStatus == "fulfilled" ? true : false;
-    navigate(status ? '/multi-admin/categories' : '/haris');
-    Toast.fire({
-      icon: "success",
-      title: "Category created successfully",
-    });
+    const status = result.meta.requestStatus === "fulfilled";
+
+    if (status) {
+      // Filter out undefined elements from the state
+      const filteredBanners = bannerState.filter(banner => banner !== undefined);
+
+      navigate(filteredBanners.length > 0 ? '/multi-admin/banners' : '/haris');
+      Toast.fire({
+        icon: "success",
+        title: "Category created successfully",
+      });
+    } else {
+      // Handle error case
+      console.error("Error creating banner:", result.payload.error);
+    }
   };
+
 
   // Function to handle image upload
   const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,15 +107,15 @@ const AddBannerForm: React.FC = () => {
     }
   };
 
-  const formik = useFormik<CategoryData>({
+  const formik = useFormik<BannerData>({
     initialValues: {
       name: '',
       status: true,
       image: '',
     },
-    validationSchema: CreateBrandSchema,
+    validationSchema: CreateBannerSchema,
     onSubmit: async (values) => {
-      await dispatch(addCategory(values))
+      await dispatch(addBanner(values))
         .then((result) => {
           Toast.fire({
             icon: "success",
@@ -130,7 +151,7 @@ const AddBannerForm: React.FC = () => {
             </label>
             <InputField
               formik={formik}
-              placeholder="Enter Category name"
+              placeholder="Enter banner name"
               name="name"
               type="text"
               className="mt-2 sm:mt-0"
@@ -207,7 +228,16 @@ const AddBannerForm: React.FC = () => {
               className={`text-white bg-gradient-to-br from-indigo-600 to-indigo-800 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-2 ${isUploading || loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               style={{ display: "flex", alignItems: "center" }}
             >
-              {isUploading ? 'Uploading...' : loading ? <ClipLoader color="#ffffff" /> : 'Next'}
+              {isUploading ? (
+                <>
+                  <ClipLoader color="#ffffff" />
+                  Uploading...
+                </>
+              ) : loading ? (
+                <ClipLoader color="#ffffff" />
+              ) : (
+                'Next'
+              )}
               {!isUploading && !loading && <FaArrowRight className="ml-2" />}
             </button>
           </div>

@@ -37,7 +37,7 @@ const ResetPasswordSchema = Yup.object().shape({
 });
 
 const ResetPassword = () => {
-  const navigate = useNavigate(); // Replacing useRouter
+  const navigate = useNavigate();  // Replacing useRouter
   // const { token } = useSearchParams();  // If token is a URL parameter
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch<AppThunkDispatch>();
@@ -46,6 +46,7 @@ const ResetPassword = () => {
   const error = useSelector(selectError);
   const loading = useSelector(selectLoading);
   // console.log(searchParams.get('token'));
+
 
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -155,7 +156,7 @@ const ResetPassword = () => {
         action="OK"
         open={isModalOpen}
         setOpen={setModalOpen}
-        // routerPath="/login"
+      // routerPath="/login"
       />
     </>
   );
