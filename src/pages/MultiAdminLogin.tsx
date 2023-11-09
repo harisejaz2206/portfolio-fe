@@ -126,8 +126,11 @@ const MultiAdminLogin: React.FC = () => {
               />
             </div>
             <div className="mb-4 text-right mr-1 text-sm">
-              <a className="text-red-700 underline" href="/request-email" >
-                Forgot your password?
+              <a
+                href="/multilogin-forgotpassword"
+                className="text-md font-medium text-red-900 hover:underline"
+              >
+                Forgot password?
               </a>
             </div>
             <div className="mb-1">

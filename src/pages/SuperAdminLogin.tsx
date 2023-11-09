@@ -124,7 +124,7 @@ const SuperAdminLogin: React.FC = () => {
               />
             </div>
             <div className="mb-4 text-right mr-1 text-sm">
-              <a className="text-red-700 underline" href="/superlogin-forgotpassword">
+              <a className="text-md font-medium text-red-900 hover:underline" href="/superlogin-forgotpassword">
                 Forgot your password?
               </a>
             </div>
