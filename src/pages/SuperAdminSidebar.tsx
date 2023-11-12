@@ -31,7 +31,7 @@ const UserProfileCard: React.FC<{
         <div className="w-12 h-12 flex items-center justify-center text-white rounded-full bg-indigo-600 border border-white ">
           {userIcon}
         </div>
-        <div className="text-base font-semibold text-gray-700">Sole Admin</div>
+        <div className="text-base font-semibold text-gray-700">Super Admin</div>
         <div className="flex items-center text-gray-500">
           <span className="text-sm font-semibold">{userEmail}</span>
         </div>
@@ -97,9 +97,8 @@ const SuperAdminSidebarItem: React.FC<SuperAdminSidebarItemProps> = ({
 }) => {
   return (
     <div
-      className={`group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${
-        isActive ? "bg-indigo-500 text-white" : ""
-      }`}
+      className={`group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${isActive ? "bg-indigo-500 text-white" : ""
+        }`}
       title={text}
     >
       {icon}

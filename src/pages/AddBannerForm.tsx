@@ -50,12 +50,11 @@ const AddBannerForm: React.FC = () => {
   // };
   const handleSuccess = (result: any) => {
     const status = result.meta.requestStatus === "fulfilled";
+    console.log("status", status);
 
     if (status) {
       // Filter out undefined elements from the state
-      const filteredBanners = bannerState.filter(banner => banner !== undefined);
-
-      navigate(filteredBanners.length > 0 ? '/multi-admin/banners' : '/haris');
+      navigate(status ? '/multi-admin/banners' : '/haris');
       Toast.fire({
         icon: "success",
         title: "Category created successfully",
