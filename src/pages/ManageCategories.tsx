@@ -142,12 +142,12 @@ const ManageCategories: React.FC = () => {
                   />
                  </div> */}
                 <div className="relative ml-4 text-sm">
-                  <button
+                  {/* <button
                     className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-2 rounded-md focus:outline-none flex items-center"
                     onClick={toggleFilterOptions}
                   >
                     <FaFilter className="mr-1" />
-                  </button>
+                  </button> */}
                   {filterOptionsVisible && (
                     <div className="absolute mt-2 p-2 border rounded-lg bg-white text-sm">
                       {/* Your filter options here */}
