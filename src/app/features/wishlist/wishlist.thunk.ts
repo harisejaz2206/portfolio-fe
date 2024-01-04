@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { cartService } from "../../services/cart.service";
 import { wishlistService } from "../../services/wishlist.service";
 import { IAddWishlist, IDeleteWishlist } from "./interfaces/wishlist.interface";
 

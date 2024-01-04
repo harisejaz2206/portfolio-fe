@@ -58,7 +58,7 @@ const cartSlice = createSlice({
       state.error = action.error.message;
     });
 
-    builder.addCase(deleteFromCart.rejected, (state, action) => {
+    builder.addCase(deleteFromCart.pending, (state, action) => {
       state.loading = true;
     });
     builder.addCase(deleteFromCart.fulfilled, (state, action) => {

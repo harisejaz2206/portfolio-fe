@@ -42,7 +42,7 @@ const wishlistSlice = createSlice({
       state.error = action.error.message;
     });
 
-    builder.addCase(deleteFromWishlist.rejected, (state, action) => {
+    builder.addCase(deleteFromWishlist.pending, (state, action) => {
       state.loading = true;
     });
     builder.addCase(deleteFromWishlist.fulfilled, (state, action) => {
