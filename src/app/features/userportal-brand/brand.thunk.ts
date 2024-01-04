@@ -1,11 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { cartService } from "../../services/cart.service";
+import { brandService } from "../../services/brand.service";
+import { userBrandService } from "../../services/userportal.brands.service";
 
-export const getCartItems = createAsyncThunk(
-  "cart/getCartItems",
+export const getUserBrands = createAsyncThunk(
+  "user-brands/getUserBrands",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await cartService.getUserProductListingHandler();
+      const response = await userBrandService.getAllBrandsHandler();
       return response;
     } catch (error: any) {
       return rejectWithValue(

@@ -1,5 +1,3 @@
-import initialAuthState from "../auth/auth.initialstate";
-import { ICatalog } from "../catalog/interfaces/catalog.interface";
 import { IGetProductResponse } from "./interfaces/product.interface";
 
 interface IProductState {

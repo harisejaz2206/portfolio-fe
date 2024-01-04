@@ -8,6 +8,7 @@ import storeSlice from "../app/features/store/store.slice";
 import catalogSlice from "../app/features/catalog/catalog.slice";
 import productSlice from "../app/features/product/product.slice";
 import bannerSlice from "../app/features/banner/banner.slice";
+import cartSlice from "../app/features/cart/cart.slice";
 
 const rootReducer = combineReducers({
   auth: authSlice,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   catalog: catalogSlice,
   product: productSlice,
   banner: bannerSlice,
+  cart: cartSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

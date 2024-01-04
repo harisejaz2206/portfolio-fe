@@ -5,24 +5,24 @@ import { HttpService } from "./base.service";
 
 // Importing interfaces
 import { IResponseInterface } from "../interfaces/api-response.interface";
-import { ICategory } from "../features/category/interfaces/category.interface";
+import { IUserProductListing } from "../features/cart/interfaces/cartitems.interface";
 
-class CategoryService extends HttpService {
-  private readonly prefix: string = "api/v1/multiadmin";
+class CartService extends HttpService {
+  private readonly prefix: string = "api/v1/user";
 
-  addCategoryHandler = (
-    data: ICategory
-  ): Promise<IResponseInterface<{ category: ICategory }>> =>
-    this.post(`${this.prefix}/category`, data);
+  getUserProductListingHandler = (): Promise<
+    IResponseInterface<{ cartItems: IUserProductListing[] }>
+  > => this.get(`${this.prefix}/product-listing2`);
 
-  getAllCategoriesHandler = (): Promise<
-    IResponseInterface<{ categories: ICategory[] }>
-  > => this.get(`${this.prefix}/category`);
+  // addCategoryHandler = (
+  //   data: ICategory
+  // ): Promise<IResponseInterface<{ category: ICategory }>> =>
+  //   this.post(`${this.prefix}/category`, data);
 
-  deleteCategoryHandler = (
-    id: string
-  ): Promise<IResponseInterface<{ id: string }>> =>
-    this.delete(`${this.prefix}/category/${id}`);
+  // deleteCategoryHandler = (
+  //   id: string
+  // ): Promise<IResponseInterface<{ id: string }>> =>
+  // this.delete(`${this.prefix}/category/${id}`);
 }
 
-export const categoryService = new CategoryService();
+export const cartService = new CartService();
