@@ -10,4 +10,17 @@ export interface IUserProductListing {
   images: string[];
 }
 
-export interface ICart {}
+export interface IAddToCart {
+  productId: string;
+}
+export interface IDeleteFromCart {
+  productId: string;
+}
+
+export interface IUserCart {
+  productId: string;
+  productName: string;
+  quantity: number;
+  salePrice: number;
+  totalPrice: number;
+}

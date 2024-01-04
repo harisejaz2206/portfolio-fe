@@ -1,11 +1,15 @@
-import { ICart, IUserProductListing } from "./interfaces/cartitems.interface";
+import {
+  IUserCart,
+  IUserProductListing,
+} from "./interfaces/cartitems.interface";
 
 interface ICartState {
   loading: boolean | null;
   error?: string | null;
   message?: string | null;
   product?: IUserProductListing[] | null;
-  cart?: ICart[] | null;
+  cart?: IUserCart[] | null;
+  totalPrice?: number | null;
 }
 
 const initialCartState: ICartState = {
@@ -13,6 +17,7 @@ const initialCartState: ICartState = {
   error: null,
   message: null,
   product: [],
+  totalPrice: null,
 };
 
 export default initialCartState;
