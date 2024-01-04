@@ -31,7 +31,7 @@ class CartService extends HttpService {
     IResponseInterface<{ cartItems: IUserCart[]; totalPrice: number }>
   > => this.get(`${this.prefix}/cart`);
 
-  // Update user cart API
+  // TODO: Update user cart API
 }
 
 export const cartService = new CartService();

@@ -14,6 +14,9 @@ export const selectCartMessage = (state: RootState) => {
 export const selectCartData = (state: RootState) => {
   state.cart.cart;
 };
+export const selectCartTotalPrice = (state: RootState) => {
+  state.cart.totalPrice;
+};
 export const selectUserProductsListing = (state: RootState) => {
   state.cart.product;
 };

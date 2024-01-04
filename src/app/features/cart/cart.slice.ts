@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import initialCartState from "./cart.initialstate";
-import { getCartItems } from "./cart.thunk";
+import {
+  addToCart,
+  deleteFromCart,
+  getUserCart,
+  getUserProductListing,
+} from "./cart.thunk";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -11,17 +16,55 @@ const cartSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getCartItems.pending, (state) => {
+    builder.addCase(getUserProductListing.pending, (state) => {
       state.loading = true;
     });
 
-    builder.addCase(getCartItems.fulfilled, (state, action) => {
+    builder.addCase(getUserProductListing.fulfilled, (state, action) => {
       state.loading = false;
       state.message = action.payload.message;
-      //   state.cart = action.payload.payload?.cartItems;
     });
 
-    builder.addCase(getCartItems.rejected, (state, action) => {
+    builder.addCase(getUserProductListing.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
+    builder.addCase(getUserCart.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(getUserCart.fulfilled, (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+      state.totalPrice = action.payload.payload?.totalPrice;
+    });
+
+    builder.addCase(getUserCart.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
+    builder.addCase(addToCart.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(addToCart.fulfilled, (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    });
+    builder.addCase(addToCart.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
+    builder.addCase(deleteFromCart.rejected, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteFromCart.fulfilled, (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    });
+    builder.addCase(deleteFromCart.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });
