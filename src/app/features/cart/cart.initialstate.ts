@@ -10,6 +10,7 @@ interface ICartState {
   product?: IUserProductListing[] | null;
   cart?: IUserCart[] | null;
   totalPrice?: number | null;
+  totalQuantity?: number | null;
 }
 
 const initialCartState: ICartState = {
@@ -18,6 +19,7 @@ const initialCartState: ICartState = {
   message: null,
   product: [],
   totalPrice: null,
+  totalQuantity: null,
 };
 
 export default initialCartState;

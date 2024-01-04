@@ -38,6 +38,7 @@ const cartSlice = createSlice({
       state.loading = false;
       state.message = action.payload.message;
       state.totalPrice = action.payload.payload?.totalPrice;
+      state.totalQuantity = action.payload.payload?.totalQuantity;
     });
 
     builder.addCase(getUserCart.rejected, (state, action) => {

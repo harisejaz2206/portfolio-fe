@@ -28,7 +28,11 @@ class CartService extends HttpService {
     this.delete(`${this.prefix}/cart`, data);
 
   getUserCartHandler = (): Promise<
-    IResponseInterface<{ cartItems: IUserCart[]; totalPrice: number }>
+    IResponseInterface<{
+      cartItems: IUserCart[];
+      totalPrice: number;
+      totalQuantity: number;
+    }>
   > => this.get(`${this.prefix}/cart`);
 
   // TODO: Update user cart API
