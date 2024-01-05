@@ -5,6 +5,7 @@ import { selectCartLoading } from '../app/features/cart/cart.selector';
 import { ClipLoader } from 'react-spinners';
 import { AppThunkDispatch } from '../store/rootReducer';
 import { addToCart } from '../app/features/cart/cart.thunk';
+import { Toast } from '../utils/toast';
 
 interface IProductCardProps {
   // key: number
@@ -29,7 +30,13 @@ const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
 
   const handleAddToCart = () => {
     // Dispatch the addToCart action with the productId
-    dispatch(addToCart({ productId: _id }));
+    dispatch(addToCart({ productId: _id })).then((result) => {
+      console.log(result);
+      Toast.fire({
+        icon: "success",
+        title: "Product added to cart",
+      });
+    });
   };
 
 
