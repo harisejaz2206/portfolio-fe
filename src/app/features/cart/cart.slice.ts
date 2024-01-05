@@ -6,6 +6,7 @@ import {
   getUserCart,
   getUserProductListing,
 } from "./cart.thunk";
+import { stat } from "fs";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -23,6 +24,7 @@ const cartSlice = createSlice({
     builder.addCase(getUserProductListing.fulfilled, (state, action) => {
       state.loading = false;
       state.message = action.payload.message;
+      state.product = action.payload.payload?.products;
     });
 
     builder.addCase(getUserProductListing.rejected, (state, action) => {
@@ -37,6 +39,7 @@ const cartSlice = createSlice({
     builder.addCase(getUserCart.fulfilled, (state, action) => {
       state.loading = false;
       state.message = action.payload.message;
+      state.cart = action.payload.payload?.cartItems;
       state.totalPrice = action.payload.payload?.totalPrice;
       state.totalQuantity = action.payload.payload?.totalQuantity;
     });
