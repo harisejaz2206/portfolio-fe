@@ -18,6 +18,7 @@ const userBrandsSlice = createSlice({
     builder.addCase(getUserBrands.fulfilled, (state, action) => {
       state.loading = false;
       state.message = action.payload.message;
+      state.brands = action.payload.payload?.brands;
       console.log("Get user brands ", action.payload.payload?.brands);
       //   state.cart = action.payload.payload?.cartItems;
     });

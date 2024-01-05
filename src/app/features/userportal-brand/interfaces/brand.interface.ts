@@ -1,7 +1,7 @@
 export interface IUserBrandListing {
-  _id: string;
+  _id?: string;
   name: string;
   status: boolean;
   image: string;
-  storeId: string;
+  storeId?: string;
 }
