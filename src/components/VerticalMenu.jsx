@@ -1,12 +1,13 @@
-import React from 'react';
+import React from "react";
 
 const VerticalMenu = () => {
   const menuItems = [
-    { name: 'Home', url: '/' },
-    { name: 'Categories', url: '/categories' },
-    { name: 'Deals', url: '/deals' },
-    { name: 'Brands', url: '/brands' },
-    { name: 'Contact', url: '/contact' },
+    { name: "Home", url: "/" },
+    { name: "Shop", url: "/shop" },
+    { name: "Categories", url: "/categories" },
+    { name: "Brands", url: "/brands" },
+    { name: "Deals", url: "/deals" },
+    { name: "Contact", url: "/contact" },
   ];
 
   return (
