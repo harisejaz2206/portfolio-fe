@@ -18,6 +18,7 @@ const userCategoriesSlice = createSlice({
     builder.addCase(getUserCategories.fulfilled, (state, action) => {
       state.loading = false;
       state.message = action.payload.message;
+      state.categories = action.payload.payload?.categories;
       console.log("Get user categories ", action.payload.payload?.categories);
       //   state.cart = action.payload.payload?.cartItems;
     });

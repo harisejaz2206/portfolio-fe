@@ -10,6 +10,8 @@ import productSlice from "../app/features/product/product.slice";
 import bannerSlice from "../app/features/banner/banner.slice";
 import cartSlice from "../app/features/cart/cart.slice";
 import wishlistSlice from "../app/features/wishlist/wishlist.slice";
+import userBrandSlice from "../app/features/userportal-brand/brand.slice";
+import userCategoriesSlice from "../app/features/userportal-category/category.slice";
 
 const rootReducer = combineReducers({
   auth: authSlice,
@@ -22,6 +24,8 @@ const rootReducer = combineReducers({
   banner: bannerSlice,
   cart: cartSlice,
   wishlist: wishlistSlice,
+  usercategoryslice: userCategoriesSlice,
+  userbrandslice: userBrandSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -1,5 +1,5 @@
 export interface IUserCategoryListing {
-  _id: string;
+  _id?: string;
   name: string;
   status: boolean;
   image: string;

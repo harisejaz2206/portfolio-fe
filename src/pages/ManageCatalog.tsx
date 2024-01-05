@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   FaSearch,
-  FaPlusCircle,
-  FaShoppingCart,
-  FaEye,
   FaTrash,
 } from "react-icons/fa"; // Import icons
-import Toggle from "react-toggle"; // Import the Toggle component
 import "react-toggle/style.css"; // Import the styles for the Toggle component
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
 import {
-  selectCatalogData,
   selectCatalogLoading,
   selectGetCatalogData,
 } from "../app/features/catalog/catalog.selector";
@@ -22,7 +17,7 @@ import { PropagateLoader } from "react-spinners";
 
 const ManageCatalog: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const loading = useSelector(selectCatalogLoading);
   const catalogState = useSelector(selectGetCatalogData);
 
@@ -42,7 +37,7 @@ const ManageCatalog: React.FC = () => {
     fetchData();
   }, [dispatch]);
 
-  const [catalog, setCatalog] = useState(catalogState);
+  // const [catalog, setCatalog] = useState(catalogState);
   const [searchQuery, setSearchQuery] = useState("");
   const itemsPerPage = 10; // Number of items per page
   const [currentPage, setCurrentPage] = useState(0);

@@ -5,6 +5,7 @@ export const getUserCategories = createAsyncThunk(
   "user-categories/getUserCategories",
   async (_, { rejectWithValue }) => {
     try {
+      console.log("getUserCategories thunk called");
       const response = await userCategoryService.getAllCategoriesHandler();
       return response;
     } catch (error: any) {

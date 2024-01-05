@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import initialCartState from "./brand.initialstate";
 import { getUserBrands } from "./brand.thunk";
 import initialUserBrandsState from "./brand.initialstate";
 
