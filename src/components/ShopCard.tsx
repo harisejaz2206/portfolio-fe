@@ -69,6 +69,9 @@ const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
             <button className="bg-white text-red-900 border-red-900 border-2 font-semibold py-2 px-3 rounded-md hover:bg-red-800 hover:text-white w-full mt-2">
               View Product
             </button>
+            <button className="bg-white text-red-900 border-red-900 border-2 font-semibold py-2 px-3 rounded-md hover:bg-red-800 hover:text-white w-full mt-2">
+              Add to Wishlist
+            </button>
             <button
               onClick={handleAddToCart}
               className="bg-white text-red-900 border-red-900 border-2 font-semibold py-2 px-3 rounded-md hover:bg-red-800 hover:text-white w-full mt-2"

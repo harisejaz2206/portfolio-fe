@@ -69,6 +69,7 @@ import AddBannerForm from "./pages/AddBannerForm";
 import SoleChainManageBanner from "./pages/SoleChainManageBanner";
 import SoleChainAddBanner from "./pages/SoleChainAddBanner";
 import SoleAdminManageProducts from "./pages/SoleAdminManageProducts";
+import UserLogin from "./pages/UserLogin";
 
 function App() {
   const token = useSelector(selectToken);
@@ -171,14 +172,15 @@ function App() {
             </Layout>
           }
         />
-        <Route
+        {/* <Route
           path="/login"
           element={
             <Layout>
               <LoginPage />
             </Layout>
           }
-        />
+        /> */}
+        <Route path="/login" element={<UserLogin />} />
         <Route
           path="/signUp"
           element={
