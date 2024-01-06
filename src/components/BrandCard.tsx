@@ -6,12 +6,12 @@ interface CategoryCardProps {
 }
 const BrandCard: React.FC<CategoryCardProps> = ({ product }) => {
   const { _id, name, image, storeId } = product;
-  console.log(name, image, storeId)
+  console.log(name, image, storeId);
 
   return (
     <div className="w-64 h-64 bg-white border border-gray-200 rounded-xl shadow-2xl ">
       <p className="text-gray-800 text-sm px-6 pt-3 font-semibold">{name}</p>
-      <h2 className="font-semibold px-6 text-gray-800">{name}</h2>
+      {/* <h2 className="font-semibold px-6 text-gray-800">{name}</h2> */}
       <h2 className="font-semibold px-6 text-gray-800">{storeId}</h2>
       {/* <a href="/brand"> */}
       <a href={`/${_id}`}>

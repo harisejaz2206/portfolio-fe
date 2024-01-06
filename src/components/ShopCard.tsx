@@ -1,20 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { IAddProductCatalogItemResponse } from '../app/features/product/interfaces/product.interface';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCartLoading } from '../app/features/cart/cart.selector';
-import { ClipLoader } from 'react-spinners';
-import { AppThunkDispatch } from '../store/rootReducer';
-import { addToCart } from '../app/features/cart/cart.thunk';
-import { Toast } from '../utils/toast';
-import { addToWishlist } from '../app/features/wishlist/wishlist.thunk';
+import React, { useEffect, useState } from "react";
+import { IAddProductCatalogItemResponse } from "../app/features/product/interfaces/product.interface";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartLoading } from "../app/features/cart/cart.selector";
+import { ClipLoader } from "react-spinners";
+import { AppThunkDispatch } from "../store/rootReducer";
+import { addToCart } from "../app/features/cart/cart.thunk";
+import { Toast } from "../utils/toast";
+import { addToWishlist } from "../app/features/wishlist/wishlist.thunk";
 
 interface IProductCardProps {
   // key: number
-  products: IAddProductCatalogItemResponse
+  products: IAddProductCatalogItemResponse;
 }
 
 const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
-  const { _id, name, quantity, originalPrice, salePrice, category, brand, storeId, images } = products;
+  const {
+    _id,
+    name,
+    quantity,
+    originalPrice,
+    salePrice,
+    category,
+    brand,
+    storeId,
+    images,
+  } = products;
   const dispatch = useDispatch<AppThunkDispatch>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const loading = useSelector(selectCartLoading);
@@ -51,9 +61,8 @@ const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
     });
   };
 
-
   return (
-    <div className="border-2 p-2 rounded-lg shadow-md w-48 sm:w-56 md:w-64 bg-blue-50">
+    <div className="border-2 p-2 rounded-lg shadow-md w-48 sm:w-56 md:w-64 bg-white">
       {loading ? (
         <div className="flex items-center justify-center h-32 sm:h-36 md:h-40">
           <ClipLoader color="#123abc" loading={loading} size={30} />
@@ -69,8 +78,12 @@ const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
           </a>
           <div className="flex flex-col justify-between">
             <div className="flex items-center">
-              <p className="text-red-800 font-bold text-md mb-1">₹{salePrice}</p>
-              <p className="text-gray-600 text-sm mb-1 ml-1">{quantity} left in stock</p>
+              <p className="text-red-800 font-bold text-md mb-1">
+                ${salePrice}
+              </p>
+              <p className="text-gray-600 text-sm mb-1 ml-1">
+                {quantity} left in stock
+              </p>
             </div>
             <div className="flex flex-col">
               <p className="text-lg font-semibold text-gray-700">{name}</p>
@@ -78,17 +91,20 @@ const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
                 <span>({category})</span>
               </div>
             </div>
-            <button className="bg-white text-red-900 border-red-900 border-2 font-semibold py-2 px-3 rounded-md hover:bg-red-800 hover:text-white w-full mt-2">
+            <button className="bg-white text-red-900 border-red-900 border-2 font-semibold py-1 px-2 rounded-md hover:bg-red-800 hover:text-white w-full mt-2">
               View Product
             </button>
-            <button onClick={handleAddToWishlist} className="bg-white text-red-900 border-red-900 border-2 font-semibold py-2 px-3 rounded-md hover:bg-red-800 hover:text-white w-full mt-2">
+            <button
+              onClick={handleAddToWishlist}
+              className="bg-white text-red-900 border-red-900 border-2 font-semibold py-1 px-2 rounded-md hover:bg-red-800 hover:text-white w-full mt-2"
+            >
               Add to Wishlist
             </button>
             <button
               onClick={handleAddToCart}
-              className="bg-white text-red-900 border-red-900 border-2 font-semibold py-2 px-3 rounded-md hover:bg-red-800 hover:text-white w-full mt-2"
+              className="bg-white text-red-900 border-red-900 border-2 font-semibold py-1 px-2 rounded-md hover:bg-red-800 hover:text-white w-full mt-2"
             >
-              {loading ? 'Adding to Cart...' : 'Add to Cart'}
+              {loading ? "Adding to Cart..." : "Add to Cart"}
             </button>
           </div>
         </>

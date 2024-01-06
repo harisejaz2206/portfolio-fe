@@ -54,7 +54,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <a href="/wishlist">
+            {/* <a href="/wishlist">
               <AiFillHeart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
             </a>
             <a href="/notifications">
@@ -62,7 +62,7 @@ const Navbar = () => {
             </a>
             <a href="/cart">
               <FaShoppingCart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
-            </a>
+            </a> */}
             <button
               onClick={handleLoginClick}
               className="font-bold text-red-900 mr-3 ml-3 z-10"

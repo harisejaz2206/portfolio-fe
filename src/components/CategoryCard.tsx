@@ -13,15 +13,15 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ product }) => {
       {/* <p className="text-gray-700 text-sm px-6 pt-3 font-semibold">{items}</p> */}
       <p className="text-gray-700 text-sm px-6 pt-3 font-semibold">{name}</p>
       <h2 className="font-semibold px-6">{status}</h2>
-      <p className="font-semibold px-6">{_id}</p>
+      {/* <p className="font-semibold px-6">{_id}</p> */}
       {/* <a href="/medicine"> */}
-      <a href={`/${_id}`}>
-        <img
-          src={image}
-          alt={name}
-          className="w-40 h-32 object-fit mx-auto"
-        />
-      </a>
+      {/* <a href={`/${_id}`}> */}
+      <img
+        src={image}
+        alt={name}
+        className="w-40 h-32 mt-4 object-fit mx-auto"
+      />
+      {/* </a> */}
     </div>
   );
 };

@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
 import { selectUserProductsListing } from "../app/features/cart/cart.selector";
 import { getUserCategories } from "../app/features/userportal-category/category.thunk";
-import { addToCart, getUserProductListing } from "../app/features/cart/cart.thunk";
+import {
+  addToCart,
+  getUserProductListing,
+} from "../app/features/cart/cart.thunk";
 import { getUserBrands } from "../app/features/userportal-brand/brand.thunk";
 import { selectUserBrandData } from "../app/features/userportal-brand/brand.selector";
 import { selectUserCategoryData } from "../app/features/userportal-category/category.selector";
@@ -15,7 +18,7 @@ const ShopProducts: React.FC = () => {
   // const navigate = useNavigate();
   // const userCategories = useSelector(selectUserCategoryData);
   const userProductListing = useSelector(selectUserProductsListing) || [];
-  const userBrandsListing = useSelector(selectUserBrandData) || []
+  const userBrandsListing = useSelector(selectUserBrandData) || [];
   const userCategoriesListing = useSelector(selectUserCategoryData) || [];
 
   const [isSortingMenuOpen, setSortingMenuOpen] = useState(false);
@@ -25,26 +28,31 @@ const ShopProducts: React.FC = () => {
     const fetchData = async () => {
       try {
         console.log("About to dispatch getUserCategories");
-        await dispatch(getUserCategories())
-        await dispatch(getUserBrands())
-        await dispatch(getUserProductListing()).then((result) => {
-          console.log('user product listing result: ', result);
-        }).catch((error) => {
-          console.log('error: ', error);
-        });
+        await dispatch(getUserCategories());
+        await dispatch(getUserBrands());
+        await dispatch(getUserProductListing())
+          .then((result) => {
+            console.log("user product listing result: ", result);
+          })
+          .catch((error) => {
+            console.log("error: ", error);
+          });
       } catch (error) {
-        console.error("An error occurred while fetching user categories: ", error);
+        console.error(
+          "An error occurred while fetching user categories: ",
+          error
+        );
       }
     };
 
     fetchData();
   }, [dispatch]);
 
-  console.log("testing", userCategoriesListing)
+  console.log("testing", userCategoriesListing);
 
   return (
     <div className="flex items-center px-36 py-4 justify-between">
-      <div className="bg-blue-50 h-screen items-center rounded-lg px-4 pt-5">
+      <div className="bg-white shadow-2xl h-max items-center rounded-lg px-4 pt-5">
         <div className="relative ">
           <input
             type="search"
@@ -62,7 +70,7 @@ const ShopProducts: React.FC = () => {
           </button>
         </div>
 
-        <div className="mb-4 sm:mb-0">
+        <div className="mb-2 sm:mb-0">
           <h2 className="text-md font-bold my-4">CATEGORIES</h2>
           <form className="space-y-2 text-sm">
             {userCategoriesListing.map((category) => (
@@ -80,9 +88,9 @@ const ShopProducts: React.FC = () => {
           </form>
         </div>
 
-        <div className="mb-4 sm:mb-0">
+        <div className="mb-2 sm:mb-0">
           <h2 className="text-md font-bold my-4">BRANDS</h2>
-          <form className="space-y-2 text-sm">
+          <form className="space-y-1 text-sm mb-4">
             {userBrandsListing.map((brand) => (
               <label key={brand._id} className="flex items-center space-x-2">
                 <input
@@ -155,10 +163,12 @@ const ShopProducts: React.FC = () => {
             )}
           </div>
         </div>
-        <div className="container mx-auto grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
-          {userProductListing.map((product, index) => (
-            <ShopCard key={product._id} products={product} />
-          ))}
+        <div className="w-max p-4 overflow-auto">
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
+            {userProductListing.map((product, index) => (
+              <ShopCard key={product._id} products={product} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
