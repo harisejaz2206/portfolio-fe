@@ -10,6 +10,9 @@ export const selectCartMessage = (state: RootState) => state.cart.message;
 
 export const selectCartData = (state: RootState) => state.cart.cart;
 
+export const selectCartTotalItems = (state: RootState) =>
+  state.cart.totalQuantity;
+
 export const selectCartTotalPrice = (state: RootState) => state.cart.totalPrice;
 
 export const selectUserProductsListing = (state: RootState) =>

@@ -7,15 +7,16 @@ import { AppThunkDispatch } from "../store/rootReducer";
 import { selectUser } from "../app/features/auth/auth.selector";
 import { logout } from "../app/features/auth/auth.slice";
 import { clearStoreData } from "../app/features/store/store.slice";
+import { selectCartTotalItems } from "../app/features/cart/cart.selector";
 
 const LoggedInNavbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Set initial state to false
-  const [showLoginOptions, setShowLoginOptions] = useState(false); // Set initial state to false
   const dispatch = useDispatch<AppThunkDispatch>();
   const Navigate = useNavigate();
   const location = useLocation();
   const user = useSelector(selectUser);
   const userEmail = user?.email || "";
+  const cartItems = useSelector(selectCartTotalItems);
+  console.log("number of cart items", cartItems);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -23,13 +24,9 @@ const LoggedInNavbar = () => {
     Navigate("/");
   };
 
-  const toggleLoginOptions = () => {
-    setShowLoginOptions(!showLoginOptions);
-  };
   return (
-    <div className="flex items-center py-2 px-4">
+    <div className="flex items-center py-2 px-4 relative"> {/* Make the container relative */}
       <div className="flex items-center">
-        {/* Logo */}
         <a href="/" className="cursor-pointer">
           <img src="/logo.png" alt="Dot Brand Logo" className="w-12 h-12 " />
         </a>
@@ -47,7 +44,7 @@ const LoggedInNavbar = () => {
           placeholder="Search..."
         />
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center relative">
         <a href="/wishlist">
           <AiFillHeart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
         </a>
@@ -56,6 +53,11 @@ const LoggedInNavbar = () => {
         </a>
         <a href="/cart">
           <FaShoppingCart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
+          {cartItems! > 0 && (
+            <div className="absolute top-0 right-0 bg-red-700 text-white rounded-full px-2 mt-2 mr-2">
+              {cartItems}
+            </div>
+          )}
         </a>
         <button
           onClick={handleLogout}

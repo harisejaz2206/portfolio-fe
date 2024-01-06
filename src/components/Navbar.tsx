@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectToken } from "../app/features/auth/auth.selector";
 import LoggedInNavbar from "./LoggedInNavbar";
+import { selectCartTotalItems } from "../app/features/cart/cart.selector";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Set initial state to false
@@ -17,6 +18,8 @@ const Navbar = () => {
 
   const userToken = useSelector(selectToken);
   console.log(userToken);
+
+  const cartItems = useSelector(selectCartTotalItems);
 
   return (
     <>
