@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserCart } from '../app/features/cart/cart.thunk';
 import { selectCartData, selectCartLoading, selectCartTotalPrice } from '../app/features/cart/cart.selector';
 import { DotLoader } from 'react-spinners';
+import { selectToken, selectUser } from '../app/features/auth/auth.selector';
 
 interface CartItem {
   imageSrc: string;
@@ -21,6 +22,8 @@ interface SummaryProps {
 
 const Summary: React.FC<SummaryProps> = ({ subtotal, taxes, total }) => {
   const loading = useSelector(selectCartLoading)
+  const userToken = useSelector(selectToken);
+  console.log("user token: " + userToken);
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <h2 className="text-lg font-semibold mb-4">Summary</h2>
