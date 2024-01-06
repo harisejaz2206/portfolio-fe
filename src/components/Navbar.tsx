@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-import { AiFillHeart, AiFillBell, AiOutlineSearch } from "react-icons/ai";
-import { FaShoppingCart } from "react-icons/fa";
+import { AiOutlineSearch } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectToken } from "../app/features/auth/auth.selector";
 import LoggedInNavbar from "./LoggedInNavbar";
-import { selectCartTotalItems } from "../app/features/cart/cart.selector";
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Set initial state to false
   const Navigate = useNavigate();
 
   const handleLoginClick = () => {
@@ -18,8 +14,6 @@ const Navbar = () => {
 
   const userToken = useSelector(selectToken);
   console.log(userToken);
-
-  const cartItems = useSelector(selectCartTotalItems);
 
   return (
     <>
@@ -54,15 +48,6 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex items-center">
-            {/* <a href="/wishlist">
-              <AiFillHeart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
-            </a>
-            <a href="/notifications">
-              <AiFillBell className="text-xl mr-3 text-gray-400 hover:text-red-800" />
-            </a>
-            <a href="/cart">
-              <FaShoppingCart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
-            </a> */}
             <button
               onClick={handleLoginClick}
               className="font-bold text-red-900 mr-3 ml-3 z-10"

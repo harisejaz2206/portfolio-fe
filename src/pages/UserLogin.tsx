@@ -42,11 +42,6 @@ const UserLogin: React.FC = () => {
         });
     };
 
-    const handleForgotPasswordClick = (e: React.MouseEvent<HTMLSpanElement>) => {
-        e.preventDefault(); // Prevent form submission
-        navigate("/request-email");
-    };
-
     const formik = useFormik<FormData>({
         initialValues: {
             email: "",

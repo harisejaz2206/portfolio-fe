@@ -8,11 +8,8 @@ import { PropagateLoader } from "react-spinners";
 
 const Category: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
-  // const navigate = useNavigate();
-  // const userCategories = useSelector(selectUserCategoryData);
   const userCategories = useSelector(selectUserCategoryData) || [];
   const userCategoriesLoading = useSelector(selectUserCategoryLoading);
-  let userFirstCategories = [];
 
   useEffect(() => {
     const fetchData = async () => {

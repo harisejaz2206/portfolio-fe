@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
 import { selectWishlistData } from "../app/features/wishlist/wishlist.selector";
 import { getWishlistItems } from "../app/features/wishlist/wishlist.thunk";
-import { Toast } from "../utils/toast";
 
 const WishlistProducts: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();

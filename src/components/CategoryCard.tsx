@@ -5,8 +5,7 @@ interface CategoryCardProps {
   product: IUserCategoryListing;
 }
 const CategoryCard: React.FC<CategoryCardProps> = ({ product }) => {
-  // const { imageSrc, category, items } = product;
-  const { _id, image, name, status, storeId } = product;
+  const { image, name, status } = product;
 
   return (
     <div className="w-64 h-52 bg-white border border-gray-200 rounded-2xl shadow-lg dark:bg-white dark:border-gray-700">

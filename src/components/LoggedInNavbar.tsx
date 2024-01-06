@@ -1,10 +1,8 @@
-import React, { useState } from "react";
 import { AiFillHeart, AiFillBell, AiOutlineSearch } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AppThunkDispatch } from "../store/rootReducer";
-import { selectUser } from "../app/features/auth/auth.selector";
 import { logout } from "../app/features/auth/auth.slice";
 import { clearStoreData } from "../app/features/store/store.slice";
 import { selectCartTotalItems } from "../app/features/cart/cart.selector";
@@ -12,9 +10,6 @@ import { selectCartTotalItems } from "../app/features/cart/cart.selector";
 const LoggedInNavbar = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const Navigate = useNavigate();
-  const location = useLocation();
-  const user = useSelector(selectUser);
-  const userEmail = user?.email || "";
   const cartItems = useSelector(selectCartTotalItems);
   console.log("number of cart items", cartItems);
 

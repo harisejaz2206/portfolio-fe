@@ -6,7 +6,6 @@ import {
   getUserCart,
   getUserProductListing,
 } from "./cart.thunk";
-import { stat } from "fs";
 
 const cartSlice = createSlice({
   name: "cart",

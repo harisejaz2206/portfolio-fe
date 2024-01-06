@@ -6,7 +6,6 @@ import { AppThunkDispatch } from "../store/rootReducer";
 import { selectUserProductsListing } from "../app/features/cart/cart.selector";
 import { getUserCategories } from "../app/features/userportal-category/category.thunk";
 import {
-  addToCart,
   getUserProductListing,
 } from "../app/features/cart/cart.thunk";
 import { getUserBrands } from "../app/features/userportal-brand/brand.thunk";
@@ -15,8 +14,6 @@ import { selectUserCategoryData } from "../app/features/userportal-category/cate
 
 const ShopProducts: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
-  // const navigate = useNavigate();
-  // const userCategories = useSelector(selectUserCategoryData);
   const userProductListing = useSelector(selectUserProductsListing) || [];
   const userBrandsListing = useSelector(selectUserBrandData) || [];
   const userCategoriesListing = useSelector(selectUserCategoryData) || [];

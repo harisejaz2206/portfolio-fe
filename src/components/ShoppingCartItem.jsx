@@ -1,6 +1,12 @@
 import React from "react";
 
-const ShoppingCartItem = ({ productName, price, quantity }) => {
+const ShoppingCartItem = ({
+  productName,
+  price,
+  quantity,
+  addToCartHandler,
+  productId,
+}) => {
   return (
     <tr className="border-b">
       <td className="py-4">
@@ -16,7 +22,11 @@ const ShoppingCartItem = ({ productName, price, quantity }) => {
             -
           </button>
           <span className="text-center w-8">{quantity}</span>
-          <button className="border rounded-full py-1 px-3 ml-2 bg-green-600 text-white">
+          <button
+            // onClick={addToCartHandler}
+            onClick={() => addToCartHandler(productId)}
+            className="border rounded-full py-1 px-3 ml-2 bg-green-600 text-white"
+          >
             +
           </button>
         </div>

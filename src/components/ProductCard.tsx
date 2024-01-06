@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
 import { addToCart } from "../app/features/cart/cart.thunk";
 import { Toast } from "../utils/toast";
@@ -18,8 +18,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
   _id,
 }) => {
   const dispatch = useDispatch<AppThunkDispatch>();
-  // const { imageSrc, name, price, category, potency } = product;
-
   const addToCartHandler = () => {
     dispatch(addToCart({ productId: _id })).then((result) => {
       Toast.fire({

@@ -9,7 +9,6 @@ import { Toast } from "../utils/toast";
 import { addToWishlist } from "../app/features/wishlist/wishlist.thunk";
 
 interface IProductCardProps {
-  // key: number
   products: IAddProductCatalogItemResponse;
 }
 
@@ -18,11 +17,8 @@ const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
     _id,
     name,
     quantity,
-    originalPrice,
     salePrice,
     category,
-    brand,
-    storeId,
     images,
   } = products;
   const dispatch = useDispatch<AppThunkDispatch>();
