@@ -184,9 +184,9 @@ function App() {
         <Route
           path="/signUp"
           element={
-            <Layout>
-              <SignUpPage />
-            </Layout>
+            // <Layout>
+            <SignUpPage />
+            // </Layout>
           }
         />
         <Route
