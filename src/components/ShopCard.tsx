@@ -6,6 +6,7 @@ import { ClipLoader } from 'react-spinners';
 import { AppThunkDispatch } from '../store/rootReducer';
 import { addToCart } from '../app/features/cart/cart.thunk';
 import { Toast } from '../utils/toast';
+import { addToWishlist } from '../app/features/wishlist/wishlist.thunk';
 
 interface IProductCardProps {
   // key: number
@@ -35,6 +36,17 @@ const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
       Toast.fire({
         icon: "success",
         title: "Product added to cart",
+      });
+    });
+  };
+
+  const handleAddToWishlist = () => {
+    // Dispatch the addToCart action with the productId
+    dispatch(addToWishlist({ productId: _id })).then((result) => {
+      console.log(result);
+      Toast.fire({
+        icon: "success",
+        title: "Product added to wishlist",
       });
     });
   };
@@ -69,7 +81,7 @@ const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
             <button className="bg-white text-red-900 border-red-900 border-2 font-semibold py-2 px-3 rounded-md hover:bg-red-800 hover:text-white w-full mt-2">
               View Product
             </button>
-            <button className="bg-white text-red-900 border-red-900 border-2 font-semibold py-2 px-3 rounded-md hover:bg-red-800 hover:text-white w-full mt-2">
+            <button onClick={handleAddToWishlist} className="bg-white text-red-900 border-red-900 border-2 font-semibold py-2 px-3 rounded-md hover:bg-red-800 hover:text-white w-full mt-2">
               Add to Wishlist
             </button>
             <button

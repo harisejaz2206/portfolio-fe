@@ -10,6 +10,7 @@ interface IBrand {
 
 export interface IWishlist {
   _id: string;
+  name: string;
   productId: string;
   quantity: number;
   originalPrice: number;

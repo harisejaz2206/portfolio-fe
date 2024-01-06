@@ -22,7 +22,7 @@ const wishlistSlice = createSlice({
     builder.addCase(getWishlistItems.fulfilled, (state, action) => {
       state.loading = false;
       state.message = action.payload.message;
-      //   state.cart = action.payload.payload?.cartItems;
+      state.wishlist = action.payload.payload?.wishlist;
     });
 
     builder.addCase(getWishlistItems.rejected, (state, action) => {

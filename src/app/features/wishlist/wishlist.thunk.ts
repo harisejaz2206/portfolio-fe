@@ -7,6 +7,7 @@ export const getWishlistItems = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await wishlistService.getWishlistHandler();
+      console.log("Wishlist thunk data", response);
       return response;
     } catch (error: any) {
       return rejectWithValue(
