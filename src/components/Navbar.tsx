@@ -27,53 +27,53 @@ const Navbar = () => {
         <LoggedInNavbar />
       ) : (
         // Render the default navbar when the user is not logged in
-        <div className="flex items-center py-2 px-4">
-          <div className="flex items-center py-2 px-4">
-            <div className="flex items-center">
-              {/* Logo */}
-              <a href="/" className="cursor-pointer">
-                <img
-                  src="/logo.png"
-                  alt="Dot Brand Logo"
-                  className="w-12 h-12 "
-                />
-              </a>
-              <a href="/" className="cursor-pointer">
-                <h1 className="text-xl font-bold text-red-700">DotBrand</h1>
-              </a>
-            </div>
-            <div className="relative flex-grow ml-72 flex items-center">
-              <div className="absolute inset-y-0 left-5 flex items-center text-gray-400">
-                <AiOutlineSearch className="text-gray-400 text-xl" />
-              </div>
+        <div className="flex items-center py-2 px-4 justify-between">
+          <div className="flex items-center">
+            {/* Logo */}
+            <a href="/" className="cursor-pointer">
+              <img
+                src="/logo.png"
+                alt="Dot Brand Logo"
+                className="w-12 h-12 "
+              />
+            </a>
+            <a href="/" className="cursor-pointer">
+              <h1 className="text-xl font-bold text-red-700">DotBrand</h1>
+            </a>
+          </div>
+          <div className="relative flex-grow flex items-center justify-center">
+            <div className="relative ml-28">
               <input
-                className="pl-12 pr-16 py-2 w-3/4 border rounded-md border-gray-300 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-300"
+                className="pl-12 pr-16 py-2 w-80 border rounded-md border-gray-300 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-300"
                 type="text"
                 placeholder="Search..."
               />
+              <div className="absolute inset-y-0 left-3 flex items-center text-gray-400 pointer-events-none">
+                <AiOutlineSearch className="text-gray-400 text-xl" />
+              </div>
             </div>
-            <div className="flex items-center">
-              <a href="/wishlist">
-                <AiFillHeart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
-              </a>
-              <a href="/notifications">
-                <AiFillBell className="text-xl mr-3 text-gray-400 hover:text-red-800" />
-              </a>
-              <a href="/cart">
-                <FaShoppingCart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
-              </a>
-              <button
-                onClick={handleLoginClick}
-                className="font-bold text-red-900 mr-3 ml-3 z-10"
-              >
-                Log in
+          </div>
+          <div className="flex items-center">
+            <a href="/wishlist">
+              <AiFillHeart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
+            </a>
+            <a href="/notifications">
+              <AiFillBell className="text-xl mr-3 text-gray-400 hover:text-red-800" />
+            </a>
+            <a href="/cart">
+              <FaShoppingCart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
+            </a>
+            <button
+              onClick={handleLoginClick}
+              className="font-bold text-red-900 mr-3 ml-3 z-10"
+            >
+              Log in
+            </button>
+            <a href="/signUp">
+              <button className="bg-red-900 text-white border rounded-md py-2 px-4 mr-3 hover:bg-red-700 transition duration-300">
+                Sign Up
               </button>
-              <a href="/signUp">
-                <button className="bg-red-900 text-white border rounded-md py-2 px-4 mr-3 hover:bg-red-700 transition duration-300">
-                  Sign Up
-                </button>
-              </a>
-            </div>
+            </a>
           </div>
         </div>
       )}

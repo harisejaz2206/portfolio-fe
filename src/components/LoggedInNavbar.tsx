@@ -25,7 +25,9 @@ const LoggedInNavbar = () => {
   };
 
   return (
-    <div className="flex items-center py-2 px-4 relative"> {/* Make the container relative */}
+    <div className="flex items-center py-2 px-4 relative">
+      {" "}
+      {/* Make the container relative */}
       <div className="flex items-center">
         <a href="/" className="cursor-pointer">
           <img src="/logo.png" alt="Dot Brand Logo" className="w-12 h-12 " />
@@ -46,19 +48,21 @@ const LoggedInNavbar = () => {
       </div>
       <div className="flex items-center relative">
         <a href="/wishlist">
-          <AiFillHeart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
+          <AiFillHeart className="text-xl mr-8  text-gray-400 hover:text-red-800" />
         </a>
         <a href="/notifications">
-          <AiFillBell className="text-xl mr-3 text-gray-400 hover:text-red-800" />
+          <AiFillBell className="text-xl mr-8 text-gray-400 hover:text-red-800" />
         </a>
-        <a href="/cart">
-          <FaShoppingCart className="text-xl mr-3 text-gray-400 hover:text-red-800" />
-          {cartItems! > 0 && (
-            <div className="absolute top-0 right-0 bg-red-700 text-white rounded-full px-2 mt-2 mr-2">
-              {cartItems}
-            </div>
-          )}
-        </a>
+        <div className="relative">
+          <a href="/cart" className="relative">
+            <FaShoppingCart className="text-xl mr-8 text-gray-400 hover:text-red-800" />
+            {cartItems! > 0 && (
+              <div className="bg-red-700 text-white rounded-full w-5 h-5 flex items-center justify-center absolute -top-3 right-3 text-xs">
+                {cartItems}
+              </div>
+            )}
+          </a>
+        </div>
         <button
           onClick={handleLogout}
           className="bg-red-900 text-white border rounded-md py-2 px-4 mr-3 hover:bg-red-700 transition duration-300"
