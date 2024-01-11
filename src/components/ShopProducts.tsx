@@ -45,7 +45,7 @@ const ShopProducts: React.FC = () => {
     fetchData();
   }, [dispatch]);
 
-  console.log("testing", userCategoriesListing);
+  // console.log("testing", userCategoriesListing);
 
   return (
     <div className="flex items-center px-36 py-4 justify-between">

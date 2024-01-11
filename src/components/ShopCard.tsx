@@ -24,7 +24,7 @@ const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const loading = useSelector(selectCartLoading);
-  console.log("loading", loading);
+  // console.log("loading", loading);
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
