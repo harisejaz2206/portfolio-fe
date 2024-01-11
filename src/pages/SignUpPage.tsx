@@ -71,9 +71,9 @@ const SignUpPage: React.FC = () => {
   });
 
   return (
-    <div className="flex justify-center items-center h-max ">
-      <div className="bg-white rounded-lg mt-auto shadow-md flex w-full max-w-4xl mb-2 ">
-        <div className="w-1/3 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-600 via-red-900 to-red-900">
+    <div className="flex h-screen">
+      <div className="bg-white rounded-lg mt-auto shadow-md flex w-full ">
+        <div className="w-auto bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-600 via-red-900 to-red-900">
           <img src="/marijuana.png" alt="marijuana" className="ml-56" />
           <h1 className="text-4xl text-yellow-400 font-bold text-center">
             DotBrand
@@ -106,30 +106,15 @@ const SignUpPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="w-2/3 p-14 bg-gray-100">
-          <h1 className="text-4xl font-bold mb-4 text-red-900 text-center">
-            DotBrand
+        <div className="w-2/3 p-14 bg-white flex flex-col justify-center items-center">
+          <h1 className="text-4xl font-bold mb-2 text-red-900">
+            Welcome, User!
           </h1>
-          <div className="grid grid-cols-2 bg-white border border-gray-200 rounded p-1 mb-2">
-            <button
-              className={`rounded p-1 ${
-                activeTab === "login" ? "bg-red-900 text-white" : "text-black"
-              }`}
-              onClick={() => setActiveTab("login")}
-            >
-              Login
-            </button>
-            <button
-              className={`rounded p-1 ${
-                activeTab === "signup" ? "bg-red-900 text-white" : "text-black"
-              }`}
-              onClick={() => setActiveTab("signup")}
-            >
-              Sign Up
-            </button>
-          </div>
+          <h2 className="text-xl font-normal mb-6 text-red-900">
+            We feel honoured to have you on board!
+          </h2>
           <form
-            className="space-y-2 md:space-y-4 mt-14"
+            className="space-y-2 md:space-y-4 w-full max-w-md"
             onSubmit={formik.handleSubmit}
           >
             <div className="flex flex-col space-y-1">
@@ -143,7 +128,7 @@ const SignUpPage: React.FC = () => {
                 placeholder="Please enter your full name"
                 name="name"
                 type="text"
-                className="mt-2 sm:mt-0"
+                className="rounded-md border-gray-300 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 w-full p-2"
                 formik={formik}
               />
             </div>
@@ -158,7 +143,7 @@ const SignUpPage: React.FC = () => {
                 placeholder="Please enter your email e.g. example@email.com"
                 name="email"
                 type="email"
-                className="mt-2 sm:mt-0"
+                className="rounded-md border-gray-300 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 w-full p-2"
                 formik={formik}
               />
             </div>
@@ -174,23 +159,17 @@ const SignUpPage: React.FC = () => {
                 type="password"
                 name="password"
                 placeholder="Please enter your password"
-                className=""
+                className="rounded-md border-gray-300 focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50 w-full p-2"
                 formik={formik}
               />
             </div>
             <div className="flex items-center justify-between">
               <div>
-                <input type="checkbox" />
+                <input type="checkbox" className="ml-4" />
                 <label htmlFor="Remember" className="ml-2">
                   Remember Me
                 </label>
               </div>
-              <a
-                href="/request-email"
-                className="text-md font-medium text-red-900 hover:underline"
-              >
-                Forgot password?
-              </a>
             </div>
             <a href="/login">
               <button
@@ -212,7 +191,7 @@ const SignUpPage: React.FC = () => {
                 />
               )}
             </a>
-            <div className="text-center">
+            {/* <div className="text-center">
               <p>OR</p>
               <div className="flex space-x-4 mt-4 ml-32">
                 <p>Login With |</p>
@@ -226,7 +205,7 @@ const SignUpPage: React.FC = () => {
                   <FaPhone className="w-7 h-7 border border-gray-600 rounded-full p-1" />
                 </a>
               </div>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
