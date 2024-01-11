@@ -5,3 +5,7 @@ export interface IUserBrandListing {
   image: string;
   storeId?: string;
 }
+
+export interface IUserPostBrandProductListing {
+  brandId: string;
+}

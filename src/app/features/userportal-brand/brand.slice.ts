@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserBrands } from "./brand.thunk";
+import { getUserBrands, userBrandsProductListing } from "./brand.thunk";
 import initialUserBrandsState from "./brand.initialstate";
+import initialProductState from "../product/product.initialstate";
 
 const userBrandsSlice = createSlice({
   name: "user-brands",
@@ -9,8 +10,34 @@ const userBrandsSlice = createSlice({
     clearBrandData: (state) => {
       return initialUserBrandsState;
     },
+
+    clearBrandListing: (state) => {
+      return initialUserBrandsState;
+    },
+
+    clearProductData: (state) => {
+      return initialProductState;
+    },
   },
   extraReducers: (builder) => {
+    builder.addCase(userBrandsProductListing.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(userBrandsProductListing.fulfilled, (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+      state.products = action.payload.payload?.products;
+      // state.brands = action.payload.payload?.brands;
+      console.log("Get user brands ", action.payload.payload?.products);
+      //   state.cart = action.payload.payload?.cartItems;
+    });
+
+    builder.addCase(userBrandsProductListing.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
     builder.addCase(getUserBrands.pending, (state) => {
       state.loading = true;
     });

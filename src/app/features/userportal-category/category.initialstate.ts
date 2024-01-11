@@ -1,3 +1,4 @@
+import { IUserProductListing } from "../cart/interfaces/cartitems.interface";
 import { IUserCategoryListing } from "./interfaces/category.interface";
 
 interface ICategoriesState {
@@ -5,6 +6,7 @@ interface ICategoriesState {
   error?: string | null;
   message?: string | null;
   categories?: IUserCategoryListing[] | null;
+  products?: IUserProductListing[] | null;
 }
 
 const initialUserCategoriesState: ICategoriesState = {
@@ -12,6 +14,7 @@ const initialUserCategoriesState: ICategoriesState = {
   error: null,
   message: null,
   categories: [],
+  products: [],
 };
 
 export default initialUserCategoriesState;

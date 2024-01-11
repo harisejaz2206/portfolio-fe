@@ -12,3 +12,6 @@ export const selectUserCategoryMessage = (state: RootState) =>
 
 export const selectUserCategoryData = (state: RootState) =>
   state.usercategoryslice.categories;
+
+export const selectUserCategoryProducts = (state: RootState) =>
+  state.usercategoryslice.products;

@@ -9,3 +9,5 @@ export const selectUserBrandMessage = (state: RootState) =>
   state.userbrandslice.message;
 export const selectUserBrandData = (state: RootState) =>
   state.userbrandslice.brands;
+export const selectUserBrandProducts = (state: RootState) =>
+  state.userbrandslice.products;

@@ -5,3 +5,7 @@ export interface IUserCategoryListing {
   image: string;
   storeId: string;
 }
+
+export interface IUserPostCategoryProductListing {
+  categoryId: string;
+}
