@@ -1,4 +1,12 @@
-import { AiFillHeart, AiFillBell, AiOutlineSearch } from "react-icons/ai";
+import React, { useState } from "react";
+import {
+  AiFillHeart,
+  AiFillBell,
+  AiOutlineSearch,
+  AiOutlineOrderedList,
+  AiOutlineUser,
+  AiOutlineProfile,
+} from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -53,8 +61,9 @@ const LoggedInNavbar = () => {
         <a href="/wishlist">
           <AiFillHeart className="text-xl mr-8  text-gray-400 hover:text-red-800" />
         </a>
-        <a href="/notifications">
-          <AiFillBell className="text-xl mr-8 text-gray-400 hover:text-red-800" />
+        {/* Replace the notifications icon with orders icon */}
+        <a href="/order-listing">
+          <AiOutlineOrderedList className="text-xl mr-8 text-gray-400 hover:text-red-800" />
         </a>
         <div className="relative">
           <a href="/cart" className="relative">
@@ -66,6 +75,9 @@ const LoggedInNavbar = () => {
             )}
           </a>
         </div>
+        <a href="/profile">
+          <AiOutlineUser className="text-xl mr-8 text-gray-400 hover:text-red-800" />
+        </a>
         <button
           onClick={handleLogout}
           className="bg-red-900 text-white border rounded-md py-2 px-4 mr-3 hover:bg-red-700 transition duration-300"

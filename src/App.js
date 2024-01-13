@@ -71,6 +71,7 @@ import UserLogin from "./pages/UserLogin";
 import CategoryProducts from "./pages/CategoryProducts";
 import BrandProducts from "./pages/BrandProducts";
 import ProtectedRoute from "./app/routes/ProtectedRoute";
+import OrderListing from "./pages/OrderListing";
 
 function App() {
   const token = useSelector(selectToken);
@@ -259,13 +260,29 @@ function App() {
           }
         />
         <Route
-          path="/orderDetails"
+          path="/order-listing"
+          element={
+            <Layout>
+              <OrderListing />
+            </Layout>
+          }
+        />
+        <Route
+          path="/order-details"
           element={
             <Layout>
               <OrderDetails />
             </Layout>
           }
         />
+        {/* <Route
+          path="/orderDetails"
+          element={
+            <Layout>
+              <OrderDetails />
+            </Layout>
+          }
+        /> */}
         <Route
           path="/privacy"
           element={
