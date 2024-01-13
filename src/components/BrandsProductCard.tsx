@@ -8,6 +8,7 @@ import {
 } from "../app/features/userportal-brand/brand.selector";
 import { getUserBrands } from "../app/features/userportal-brand/brand.thunk";
 import { PropagateLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
 const BrandsProductCard: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
@@ -18,6 +19,7 @@ const BrandsProductCard: React.FC = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8; // Change the number of items per page as needed
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +62,14 @@ const BrandsProductCard: React.FC = () => {
       ) : (
         <div className="container mx-auto px-5 sm:px-11 md:px-24 px- grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
           {currentItems.map((brand, index) => (
-            <BrandCard key={index} product={brand} />
+            <div
+              onClick={() => {
+                navigate(`/brand/products/${brand._id}`)
+
+              }}
+            >
+              <BrandCard key={index} product={brand} />
+            </div>
           ))}
         </div>
       )}
@@ -72,11 +81,10 @@ const BrandsProductCard: React.FC = () => {
             <li key={index}>
               <button
                 onClick={() => paginate(index + 1)}
-                className={`px-3 py-1 rounded ${
-                  currentPage === index + 1
-                    ? "bg-red-800 text-white"
-                    : "bg-gray-200"
-                }`}
+                className={`px-3 py-1 rounded ${currentPage === index + 1
+                  ? "bg-red-800 text-white"
+                  : "bg-gray-200"
+                  }`}
               >
                 {index + 1}
               </button>

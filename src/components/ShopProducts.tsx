@@ -4,7 +4,7 @@ import ShopCard from "./ShopCard";
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
 import { selectUserProductsListing } from "../app/features/cart/cart.selector";
-import { getUserCategories } from "../app/features/userportal-category/category.thunk";
+import { getUserCategories, userCategoriesProductListing } from "../app/features/userportal-category/category.thunk";
 import {
   getUserProductListing,
 } from "../app/features/cart/cart.thunk";
@@ -38,12 +38,14 @@ const ShopProducts: React.FC = () => {
   // Handle page change
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("About to dispatch getUserCategories");
-        await dispatch(getUserCategories());
-        await dispatch(getUserBrands());
+        // console.log("About to dispatch getUserCategories");
+        // await dispatch(getUserCategories());
+        // await dispatch(getUserBrands());
         await dispatch(getUserProductListing())
           .then((result) => {
             console.log("user product listing result: ", result);
@@ -138,11 +140,10 @@ const ShopProducts: React.FC = () => {
               <li key={index}>
                 <button
                   onClick={() => paginate(index + 1)}
-                  className={`px-3 py-1 rounded ${
-                    currentPage === index + 1
-                      ? "bg-red-600 text-white"
-                      : "bg-gray-200"
-                  }`}
+                  className={`px-3 py-1 rounded ${currentPage === index + 1
+                    ? "bg-red-600 text-white"
+                    : "bg-gray-200"
+                    }`}
                 >
                   {index + 1}
                 </button>

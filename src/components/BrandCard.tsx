@@ -14,13 +14,13 @@ const BrandCard: React.FC<CategoryCardProps> = ({ product }) => {
       {/* <h2 className="font-semibold px-6 text-gray-800">{name}</h2> */}
       <h2 className="font-semibold px-6 text-gray-800">{storeId}</h2>
       {/* <a href="/brand"> */}
-      <a href={`/${_id}`}>
-        <img
-          src={image}
-          alt={name}
-          className="w-40 h-40 pt-4 object-fit mx-auto  rounded-lg mt-2"
-        />
-      </a>
+      {/* <a href={`/${_id}`}> */}
+      <img
+        src={image}
+        alt={name}
+        className="w-40 h-40 pt-4 object-fit mx-auto  rounded-lg mt-2"
+      />
+      {/* </a> */}
     </div>
   );
 };

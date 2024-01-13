@@ -68,6 +68,9 @@ import SoleChainManageBanner from "./pages/SoleChainManageBanner";
 import SoleChainAddBanner from "./pages/SoleChainAddBanner";
 import SoleAdminManageProducts from "./pages/SoleAdminManageProducts";
 import UserLogin from "./pages/UserLogin";
+import CategoryProducts from "./pages/CategoryProducts";
+import BrandProducts from "./pages/BrandProducts";
+import ProtectedRoute from "./app/routes/ProtectedRoute";
 
 function App() {
   const token = useSelector(selectToken);
@@ -101,9 +104,11 @@ function App() {
         <Route
           path="/wishlist"
           element={
-            <Layout>
-              <Wishlist />
-            </Layout>
+            <ProtectedRoute allowedRoles={["user"]}>
+              <Layout>
+                <Wishlist />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
@@ -157,8 +162,26 @@ function App() {
         <Route
           path="/shop"
           element={
+            <ProtectedRoute allowedRoles={["user"]}>
+              <Layout>
+                <Shop />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category/products/:categoryId"
+          element={
             <Layout>
-              <Shop />
+              <CategoryProducts />
+            </Layout>
+          }
+        />
+        <Route
+          path="/brand/products/:brandId"
+          element={
+            <Layout>
+              <BrandProducts />
             </Layout>
           }
         />
@@ -271,63 +294,71 @@ function App() {
         <Route
           path="/multi-admin/*"
           element={
-            <div className="flex">
-              <Sidebar />
-              <div className="flex-1">
-                <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/outlets" element={<ManageOutlets />} />
-                  <Route path="/create-outlet" element={<CreateOutletForm />} />
-                  <Route
-                    path="/edit-outlet/:outletId"
-                    element={<EditOutletForm />}
-                  />
-                  <Route path="/products" element={<ManageInventory />} />
-                  <Route path="/create-product" element={<AddProductForm />} />
-                  <Route path="/create-brand" element={<AddBrandForm />} />
-                  <Route
-                    path="/create-category"
-                    element={<AddCategoryForm />}
-                  />
-                  <Route
-                    path="/billing-and-inventory"
-                    element={<BillingAndInventoryForm />}
-                  />
-                  <Route path="/catalogue" element={<ManageCatalog />} />
-                  <Route
-                    path="/create-catalogue"
-                    element={<AddCatalogForm />}
-                  />
-                  <Route
-                    path="/add-to-inventory-1"
-                    element={<AddToInventoryForm />}
-                  />
-                  <Route
-                    path="/add-to-inventory-2"
-                    element={<InventoryBilling />}
-                  />
-                  <Route
-                    path="/view-product/:productId"
-                    element={<ProductDetails />}
-                  />
-                  <Route path="/categories" element={<ManageCategories />} />
-                  <Route path="/users" element={<User />} />
-                  <Route
-                    path="/view-account/:userId"
-                    element={<UserDetails />}
-                  />
-                  <Route path="/orders" element={<ViewOrders />} />
-                  <Route path="/banners" element={<BannerManagement />} />
-                  <Route path="/add-banner" element={<AddBannerForm />} />
-                  <Route path="/brands" element={<ManageBrands />} />
-                  <Route
-                    path="/view-orderdetails/:orderId"
-                    element={<ViewOrderDetails />}
-                  />
-                  <Route path="/chat" element={<Chat />} />
-                </Routes>
+            <ProtectedRoute allowedRoles={["multi-admin"]}>
+              <div className="flex">
+                <Sidebar />
+                <div className="flex-1">
+                  <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/outlets" element={<ManageOutlets />} />
+                    <Route
+                      path="/create-outlet"
+                      element={<CreateOutletForm />}
+                    />
+                    <Route
+                      path="/edit-outlet/:outletId"
+                      element={<EditOutletForm />}
+                    />
+                    <Route path="/products" element={<ManageInventory />} />
+                    <Route
+                      path="/create-product"
+                      element={<AddProductForm />}
+                    />
+                    <Route path="/create-brand" element={<AddBrandForm />} />
+                    <Route
+                      path="/create-category"
+                      element={<AddCategoryForm />}
+                    />
+                    <Route
+                      path="/billing-and-inventory"
+                      element={<BillingAndInventoryForm />}
+                    />
+                    <Route path="/catalogue" element={<ManageCatalog />} />
+                    <Route
+                      path="/create-catalogue"
+                      element={<AddCatalogForm />}
+                    />
+                    <Route
+                      path="/add-to-inventory-1"
+                      element={<AddToInventoryForm />}
+                    />
+                    <Route
+                      path="/add-to-inventory-2"
+                      element={<InventoryBilling />}
+                    />
+                    <Route
+                      path="/view-product/:productId"
+                      element={<ProductDetails />}
+                    />
+                    <Route path="/categories" element={<ManageCategories />} />
+                    <Route path="/users" element={<User />} />
+                    <Route
+                      path="/view-account/:userId"
+                      element={<UserDetails />}
+                    />
+                    <Route path="/orders" element={<ViewOrders />} />
+                    <Route path="/banners" element={<BannerManagement />} />
+                    <Route path="/add-banner" element={<AddBannerForm />} />
+                    <Route path="/brands" element={<ManageBrands />} />
+                    <Route
+                      path="/view-orderdetails/:orderId"
+                      element={<ViewOrderDetails />}
+                    />
+                    <Route path="/chat" element={<Chat />} />
+                  </Routes>
+                </div>
               </div>
-            </div>
+            </ProtectedRoute>
           }
         />
         <Route
@@ -347,10 +378,10 @@ function App() {
                     path="/categories"
                     element={<SoleAdminManageCategories />}
                   />
-                  <Route
+                  {/* <Route
                     path="/products"
                     element={<SoleAdminManageProducts />}
-                  />
+                  /> */}
                   <Route path="/users" element={<SoleAdminUser />} />
                   <Route path="/orders" element={<SoleAdminManageOrders />} />
                   <Route

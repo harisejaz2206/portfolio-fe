@@ -23,7 +23,7 @@ const userCategoriesSlice = createSlice({
       state.message = action.payload.message;
       // state.categories = action.payload.payload?.categories;
       state.products = action.payload.payload?.products;
-      // console.log("Get user categories ", action.payload.payload?.categories);
+      console.log("Get user categories ", action.payload.payload?.products);
       //   state.cart = action.payload.payload?.cartItems;
     });
 

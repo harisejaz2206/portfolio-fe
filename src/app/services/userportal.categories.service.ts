@@ -16,10 +16,24 @@ class UserCategoryService extends HttpService {
     IResponseInterface<{ categories: IUserCategoryListing[] }>
   > => this.get(`${this.prefix}/category-listing`);
 
-  getCategoryProductListingHandler = (
+  // getCategoryProductListingHandler = (
+  //   data: IUserPostCategoryProductListing
+  // ): Promise<IResponseInterface<{ products: IUserProductListing[] }>> => {
+  //   console.log("Request Payload:", data);
+  //   return this.post(`${this.prefix}/brand-product-listing`, data);
+  // };
+
+  getCategoryProductListingHandler = async (
     data: IUserPostCategoryProductListing
-  ): Promise<IResponseInterface<{ products: IUserProductListing[] }>> =>
-    this.post(`${this.prefix}/brand-product-listing`, data);
+  ): Promise<IResponseInterface<{ products: IUserProductListing[] }>> => {
+    console.log("Request Payload:", data);
+    const response = await this.post(
+      `${this.prefix}/category-product-listing`,
+      data
+    );
+    console.log("API Response:", response);
+    return response;
+  };
 }
 
 export const userCategoryService = new UserCategoryService();

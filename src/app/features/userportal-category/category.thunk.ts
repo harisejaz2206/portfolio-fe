@@ -23,6 +23,7 @@ export const userCategoriesProductListing = createAsyncThunk(
     try {
       const response =
         await userCategoryService.getCategoryProductListingHandler(credentials);
+      console.log("userCategoriesProductListing thunk", response);
       return response;
     } catch (error: any) {
       return rejectWithValue(

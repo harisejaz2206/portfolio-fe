@@ -6,12 +6,20 @@ import { AppThunkDispatch } from "../store/rootReducer";
 import { logout } from "../app/features/auth/auth.slice";
 import { clearStoreData } from "../app/features/store/store.slice";
 import { selectCartTotalItems } from "../app/features/cart/cart.selector";
+import { useEffect } from "react";
+import { getUserCart } from "../app/features/cart/cart.thunk";
 
 const LoggedInNavbar = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const Navigate = useNavigate();
   const cartItems = useSelector(selectCartTotalItems);
   console.log("number of cart items", cartItems);
+
+  useEffect(() => {
+    dispatch(getUserCart());
+  });
+
+
 
   const handleLogout = () => {
     dispatch(logout());

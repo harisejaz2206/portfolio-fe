@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { selectToken } from '../features/auth/auth.selector';
+import { selectToken, selectUser } from '../features/auth/auth.selector';
 import { Navigate, useLocation } from 'react-router-dom';
 
-interface Props {
-    component: FC;
-    [key: string]: any;
-}
+// interface Props {
+//     component: FC;
+//     [key: string]: any;
+// }
 
-const ProtectedRoute: FC<Props> = ({ component: Component, ...rest }) => {
+const ProtectedRoute: any = ({ children, allowedRoles }: any) => {
     const token = useSelector(selectToken);
+    const user = useSelector(selectUser);
     const location = useLocation();
     const publicPaths = ['/', '/login', '/superlogin', '/multilogin', '/solelogin', '/signUp'];
     const noAuthRedirectPaths = ['/login', '/superlogin', '/multilogin', '/solelogin', '/signUp'];
@@ -22,7 +23,11 @@ const ProtectedRoute: FC<Props> = ({ component: Component, ...rest }) => {
         return <Navigate to="/login" />;
     }
 
-    return <Component {...rest} />;
+    if (!allowedRoles.includes(user?.role)) {
+        return <Navigate to="/login" />;
+    }
+
+    return children
 };
 
 export default ProtectedRoute;

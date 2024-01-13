@@ -6,15 +6,17 @@ import {
   selectUserCategoryData,
   selectUserCategoryLoading,
 } from "../app/features/userportal-category/category.selector";
-import { getUserCategories } from "../app/features/userportal-category/category.thunk";
+import { getUserCategories, userCategoriesProductListing } from "../app/features/userportal-category/category.thunk";
 import { PropagateLoader } from "react-spinners";
+import CategoryDropdown from "./CategoryDropdown";
+import { useNavigate } from "react-router-dom";
+import { userBrandsProductListing } from "../app/features/userportal-brand/brand.thunk";
 
 const CategoryProductCard: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
-  // const navigate = useNavigate();
-  // const userCategories = useSelector(selectUserCategoryData);
   const userCategories = useSelector(selectUserCategoryData) || [];
   const userCategoriesLoading = useSelector(selectUserCategoryLoading);
+  const navigate = useNavigate()
 
   const itemsPerPage = 8; // Number of items per page
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,6 +32,14 @@ const CategoryProductCard: React.FC = () => {
   // Pagination change
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  // Fetch products for the selected category
+  const fetchCategoryProducts = (categoryId: string) => {
+    dispatch(userCategoriesProductListing({ categoryId }));
+  };
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,6 +51,7 @@ const CategoryProductCard: React.FC = () => {
           .catch((error) => {
             console.log("error: ", error);
           });
+
       } catch (error) {
         console.error(
           "An error occurred while fetching user categories: ",
@@ -56,9 +67,7 @@ const CategoryProductCard: React.FC = () => {
 
   return (
     <div className="py-8">
-      <div className="container mx-auto px-4 sm:px-8 md:px-16 py-4 flex items-center justify-between">
-        <h3 className="text-xl font-bold text-gray-800">Categories</h3>
-      </div>
+
       <hr className="mx-4 sm:mx-8 md:mx-16 border-gray-300 mb-10" />
 
       {userCategoriesLoading ? (
@@ -72,6 +81,7 @@ const CategoryProductCard: React.FC = () => {
           {/* Display current items */}
           {currentItems.map((category, index) => (
             <CategoryCard key={index} product={category} />
+
           ))}
         </div>
       )}
@@ -82,11 +92,10 @@ const CategoryProductCard: React.FC = () => {
           Array.from(Array(pageNumbers).keys()).map((pageNumber) => (
             <button
               key={pageNumber}
-              className={`mx-1 py-1 px-2 border rounded ${
-                currentPage === pageNumber + 1
-                  ? "bg-red-800 text-white"
-                  : "border-gray-300"
-              }`}
+              className={`mx-1 py-1 px-2 border rounded ${currentPage === pageNumber + 1
+                ? "bg-red-800 text-white"
+                : "border-gray-300"
+                }`}
               onClick={() => paginate(pageNumber + 1)}
             >
               {pageNumber + 1}

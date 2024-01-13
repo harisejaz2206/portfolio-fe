@@ -96,12 +96,12 @@ const SoleChainSidebar: React.FC = () => {
       </div>
       {isInventoryOpen && (
         <div className="pl-6">
-          <Link to="/sole-admin/products">
+          {/* <Link to="/sole-admin/products">
             <SoleChainSidebarSubItem
               text="Products"
               isActive={location.pathname === "/sole-admin/products"}
             />
-          </Link>
+          </Link> */}
           <Link to="/sole-admin/catalogue">
             <SoleChainSidebarSubItem
               text="Catalogue"
@@ -168,9 +168,8 @@ const SoleChainSidebarItem: React.FC<SoleChainSidebarItemProps> = ({
 }) => {
   return (
     <div
-      className={`group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${
-        isActive ? "bg-indigo-500 text-white" : ""
-      }`}
+      className={`group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${isActive ? "bg-indigo-500 text-white" : ""
+        }`}
       title={text}
     >
       {icon}
@@ -185,9 +184,8 @@ const SoleChainSidebarSubItem: React.FC<SoleChainSidebarSubItemProps> = ({
 }) => {
   return (
     <div
-      className={`group flex items-center py-2 px-2 mt-2 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${
-        isActive ? "bg-indigo-500 text-white" : ""
-      }`}
+      className={`group flex items-center py-2 px-2 mt-2 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${isActive ? "bg-indigo-500 text-white" : ""
+        }`}
       title={text}
     >
       <span className="text-xs">{text}</span>
