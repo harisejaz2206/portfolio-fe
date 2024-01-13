@@ -70,6 +70,7 @@ import SoleChainManageBanner from "./pages/SoleChainManageBanner";
 import SoleChainAddBanner from "./pages/SoleChainAddBanner";
 import SoleAdminManageProducts from "./pages/SoleAdminManageProducts";
 import UserLogin from "./pages/UserLogin";
+import OrderListing from "./pages/OrderListing";
 
 function App() {
   const token = useSelector(selectToken);
@@ -238,13 +239,29 @@ function App() {
           }
         />
         <Route
-          path="/orderDetails"
+          path="/order-listing"
+          element={
+            <Layout>
+              <OrderListing />
+            </Layout>
+          }
+        />
+        <Route
+          path="/order-details"
           element={
             <Layout>
               <OrderDetails />
             </Layout>
           }
         />
+        {/* <Route
+          path="/orderDetails"
+          element={
+            <Layout>
+              <OrderDetails />
+            </Layout>
+          }
+        /> */}
         <Route
           path="/privacy"
           element={
