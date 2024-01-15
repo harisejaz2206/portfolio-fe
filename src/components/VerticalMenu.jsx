@@ -6,7 +6,6 @@ const VerticalMenu = () => {
     { name: "Shop", url: "/shop" },
     { name: "Categories", url: "/categories" },
     { name: "Brands", url: "/brands" },
-    { name: "Deals", url: "/deals" },
     { name: "Contact", url: "/contact" },
   ];
 

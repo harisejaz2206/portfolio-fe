@@ -2,10 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
 import Wishlist from "./pages/Wishlist";
-import EmptyWishlist from "./pages/EmptyWishlist";
-import EmptyCart from "./pages/EmptyCart";
-import EmptyDeal from "./pages/EmptyDeal";
-import Deals from "./pages/Deals";
 import Brands from "./pages/Brands";
 import Contact from "./pages/Contact";
 import Shop from "./pages/Shop";
@@ -13,7 +9,6 @@ import SignUpPage from "./pages/SignUpPage";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
-import LoyaltyPoints from "./pages/LoyaltyPoints";
 import Orders from "./pages/Orders";
 import OrderDetails from "./pages/OrderDetails";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -113,38 +108,6 @@ function App() {
           }
         />
         <Route
-          path="/emptyWishlist"
-          element={
-            <Layout>
-              <EmptyWishlist />
-            </Layout>
-          }
-        />
-        <Route
-          path="/emptyCart"
-          element={
-            <Layout>
-              <EmptyCart />
-            </Layout>
-          }
-        />
-        <Route
-          path="/emptyDeal"
-          element={
-            <Layout>
-              <EmptyDeal />
-            </Layout>
-          }
-        />
-        <Route
-          path="/deals"
-          element={
-            <Layout>
-              <Deals />
-            </Layout>
-          }
-        />
-        <Route
           path="/brands"
           element={
             <Layout>
@@ -163,11 +126,11 @@ function App() {
         <Route
           path="/shop"
           element={
-            <ProtectedRoute allowedRoles={["user"]}>
-              <Layout>
-                <Shop />
-              </Layout>
-            </ProtectedRoute>
+            // <ProtectedRoute allowedRoles={["user"]}>
+            <Layout>
+              <Shop />
+            </Layout>
+            // </ProtectedRoute>
           }
         />
         <Route
@@ -189,9 +152,11 @@ function App() {
         <Route
           path="/cart"
           element={
-            <Layout>
-              <Cart />
-            </Layout>
+            <ProtectedRoute allowedRoles={["user"]}>
+              <Layout>
+                <Cart />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         {/* <Route
@@ -230,49 +195,51 @@ function App() {
         <Route
           path="/profile"
           element={
-            <Layout>
-              <Profile />
-            </Layout>
+            <ProtectedRoute allowedRoles={["user"]}>
+              <Layout>
+                <Profile />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
-          path="/editProfile"
+          path="/editprofile"
           element={
-            <Layout>
-              <EditProfile />
-            </Layout>
-          }
-        />
-        <Route
-          path="/loyaltyPoints"
-          element={
-            <Layout>
-              <LoyaltyPoints />
-            </Layout>
+            <ProtectedRoute allowedRoles={["user"]}>
+              <Layout>
+                <EditProfile />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/orders"
           element={
-            <Layout>
-              <Orders />
-            </Layout>
+            <ProtectedRoute allowedRoles={["user"]}>
+              <Layout>
+                <Orders />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/order-listing"
           element={
-            <Layout>
-              <OrderListing />
-            </Layout>
+            <ProtectedRoute allowedRoles={["user"]}>
+              <Layout>
+                <OrderListing />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/order-details"
           element={
-            <Layout>
-              <OrderDetails />
-            </Layout>
+            <ProtectedRoute allowedRoles={["user"]}>
+              <Layout>
+                <OrderDetails />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         {/* <Route
@@ -381,61 +348,71 @@ function App() {
         <Route
           path="/sole-admin/*"
           element={
-            <div className="flex">
-              <SoleChainSidebar />
-              <div className="flex-1">
-                <Routes>
-                  <Route path="/" element={<SoleChainDashboard />} />
-                  <Route
-                    path="/catalogue"
-                    element={<SoleAdminManageCatalogue />}
-                  />
-                  <Route path="/brands" element={<SoleAdminManageBrands />} />
-                  <Route
-                    path="/categories"
-                    element={<SoleAdminManageCategories />}
-                  />
-                  {/* <Route
-                    path="/products"
-                    element={<SoleAdminManageProducts />}
-                  /> */}
-                  <Route path="/users" element={<SoleAdminUser />} />
-                  <Route path="/orders" element={<SoleAdminManageOrders />} />
-                  <Route
-                    path="/categories"
-                    element={<SoleAdminManageCategories />}
-                  />
-                  <Route path="/users" element={<SoleAdminUser />} />
-                  <Route path="/orders" element={<SoleAdminManageOrders />} />
-                  <Route path="/banners" element={<SoleChainManageBanner />} />
-                  <Route path="/add-banner" element={<SoleChainAddBanner />} />
-                  <Route
-                    path="/view-orderdetails/:orderId"
-                    element={<SoleAdminViewOrderDetails />}
-                  />
-                  <Route
-                    path="/view-account/:userId"
-                    element={<UserDetails />}
-                  />
-                </Routes>
+            <ProtectedRoute allowedRoles={["sole-admin"]}>
+              <div className="flex">
+                <SoleChainSidebar />
+                <div className="flex-1">
+                  <Routes>
+                    <Route path="/" element={<SoleChainDashboard />} />
+                    <Route
+                      path="/catalogue"
+                      element={<SoleAdminManageCatalogue />}
+                    />
+                    <Route path="/brands" element={<SoleAdminManageBrands />} />
+                    <Route
+                      path="/categories"
+                      element={<SoleAdminManageCategories />}
+                    />
+                    <Route
+                      path="/products"
+                      element={<SoleAdminManageProducts />}
+                    />
+                    <Route path="/users" element={<SoleAdminUser />} />
+                    <Route path="/orders" element={<SoleAdminManageOrders />} />
+                    <Route
+                      path="/categories"
+                      element={<SoleAdminManageCategories />}
+                    />
+                    <Route path="/users" element={<SoleAdminUser />} />
+                    <Route path="/orders" element={<SoleAdminManageOrders />} />
+                    <Route
+                      path="/banners"
+                      element={<SoleChainManageBanner />}
+                    />
+                    <Route
+                      path="/add-banner"
+                      element={<SoleChainAddBanner />}
+                    />
+                    <Route
+                      path="/view-orderdetails/:orderId"
+                      element={<SoleAdminViewOrderDetails />}
+                    />
+                    <Route
+                      path="/view-account/:userId"
+                      element={<UserDetails />}
+                    />
+                  </Routes>
+                </div>
               </div>
-            </div>
+            </ProtectedRoute>
           }
         />
 
         <Route
           path="/super-admin/*"
           element={
-            <div className="flex">
-              <SuperAdminSidebar />
-              <div className="flex-1">
-                <Routes>
-                  <Route path="/" element={<SuperAdminDashboard />} />
-                  <Route path="/stores" element={<ManageStores />} />
-                  <Route path="/add-store" element={<AddStore />} />
-                </Routes>
+            <ProtectedRoute allowedRoles={["sole-admin"]}>
+              <div className="flex">
+                <SuperAdminSidebar />
+                <div className="flex-1">
+                  <Routes>
+                    <Route path="/" element={<SuperAdminDashboard />} />
+                    <Route path="/stores" element={<ManageStores />} />
+                    <Route path="/add-store" element={<AddStore />} />
+                  </Routes>
+                </div>
               </div>
-            </div>
+            </ProtectedRoute>
           }
         />
       </Routes>

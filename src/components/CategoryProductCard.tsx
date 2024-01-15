@@ -8,9 +8,7 @@ import {
 } from "../app/features/userportal-category/category.selector";
 import { getUserCategories, userCategoriesProductListing } from "../app/features/userportal-category/category.thunk";
 import { PropagateLoader } from "react-spinners";
-import CategoryDropdown from "./CategoryDropdown";
 import { useNavigate } from "react-router-dom";
-import { userBrandsProductListing } from "../app/features/userportal-brand/brand.thunk";
 
 const CategoryProductCard: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
@@ -67,7 +65,44 @@ const CategoryProductCard: React.FC = () => {
 
   return (
     <div className="py-8">
-
+      {/* <div className="container mx-auto px-4 sm:px-8 md:px-16 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+    
+        {userCategories.map((category, index) => (
+          <div key={index} className="relative">
+            <CategoryCard product={category} />
+            <div
+              className="absolute top-0 right-0 cursor-pointer p-2"
+              onClick={() => {
+                navigate(`/category/products/${category._id}`)
+               
+              }}
+            >
+              &#9660; 
+            </div>
+            {selectedCategory === category._id && (
+              <div className="absolute top-full left-0 mt-2 bg-white border border-gray-300 p-2">
+             
+                <CategoryDropdown
+                  categories={userCategories}
+                  onSelect={() => { }}
+                />
+             
+                <div>
+                 
+                  {userCategoriesLoading ? (
+                    <PropagateLoader color={"#123123"} loading={true} size={15} />
+                  ) : (
+                    <div>
+                    
+                      <p>Products will be displayed here...</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div> */}
       <hr className="mx-4 sm:mx-8 md:mx-16 border-gray-300 mb-10" />
 
       {userCategoriesLoading ? (

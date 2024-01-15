@@ -107,12 +107,12 @@ const Sidebar: React.FC = () => {
       </div>
       {isInventoryOpen && (
         <div className="pl-6">
-          {/* <Link to="/multi-admin/products">
-                <SidebarSubItem
-                  text="Products"
-                  isActive={location.pathname === '/multi-admin/products'}
-                />
-          </Link> */}
+          <Link to="/multi-admin/products">
+            <SidebarSubItem
+              text="Products"
+              isActive={location.pathname === '/multi-admin/products'}
+            />
+          </Link>
           <Link to="/multi-admin/catalogue">
             <SidebarSubItem
               text="Catalogue"
@@ -187,9 +187,8 @@ const Sidebar: React.FC = () => {
 const SidebarItem: React.FC<SidebarItemProps> = ({ icon, text, isActive }) => {
   return (
     <div
-      className={`group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${
-        isActive ? "bg-indigo-500 text-white" : ""
-      }`}
+      className={`group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${isActive ? "bg-indigo-500 text-white" : ""
+        }`}
       title={text}
     >
       {icon}
@@ -201,9 +200,8 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ icon, text, isActive }) => {
 const SidebarSubItem: React.FC<SidebarSubItemProps> = ({ text, isActive }) => {
   return (
     <div
-      className={`group flex items-center py-2 px-2 mt-2 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${
-        isActive ? "bg-indigo-500 text-white" : ""
-      }`}
+      className={`group flex items-center py-2 px-2 mt-2 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${isActive ? "bg-indigo-500 text-white" : ""
+        }`}
       title={text}
     >
       <span className="text-xs">{text}</span>

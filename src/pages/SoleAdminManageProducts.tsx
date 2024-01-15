@@ -31,6 +31,7 @@ const SoleAdminManageProducts: React.FC = () => {
     const fetchData = async () => {
       try {
         await dispatch(getProducts()).then((result: any) => {
+          console.log(result);
           Toast.fire({
             icon: "success",
             title: result.payload.message,
@@ -51,7 +52,7 @@ const SoleAdminManageProducts: React.FC = () => {
 
   // Function to filter products based on search query
   const filteredCatalog = (productState || []).filter((product) =>
-    product.catalogItem.name.toLowerCase().includes(searchQuery.toLowerCase())
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   // Function to handle pagination
@@ -107,12 +108,12 @@ const SoleAdminManageProducts: React.FC = () => {
                   <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Quantity
                   </th>
-                  <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  {/* <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Brand ID
                   </th>
                   <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Category ID
-                  </th>
+                  </th> */}
                   {/* <th className="px-4 py-3 bg-gray-50 font-medium text-xs text-gray-500 uppercase tracking-wider">
                                         Action
                                     </th> */}
@@ -121,20 +122,20 @@ const SoleAdminManageProducts: React.FC = () => {
 
               <tbody className="bg-white divide-y divide-gray-200">
                 {currentItems.map((product) => (
-                  <tr key={product.catalogItem._id}>
+                  <tr key={product.name}>
                     <td className="px-4 py-2 whitespace-no-wrap">
-                      {product.catalogItem.name}
+                      {product.name}
                     </td>
                     <td className="px-4 py-2 whitespace-no-wrap">
-                      ${product.catalogItem.originalPrice}
+                      ${product.originalPrice}
                     </td>
                     <td className="px-4 py-2 whitespace-no-wrap">
-                      ${product.catalogItem.salePrice}
+                      ${product.salePrice}
                     </td>
                     <td className="px-4 py-2 whitespace-no-wrap">
                       {product.quantity}
                     </td>
-                    <td className="px-4 py-2 whitespace-no-wrap">
+                    {/* <td className="px-4 py-2 whitespace-no-wrap">
                       {product.catalogItem.brand
                         ? product.catalogItem.brand
                         : "N/A"}
@@ -143,7 +144,7 @@ const SoleAdminManageProducts: React.FC = () => {
                       {product.catalogItem.category
                         ? product.catalogItem.category
                         : "N/A"}
-                    </td>
+                    </td> */}
 
                     <td className="px-4 py-2 whitespace-no-wrap text-right">
                       <div className="flex items-center ml-[23%]"></div>
@@ -158,11 +159,10 @@ const SoleAdminManageProducts: React.FC = () => {
                 {Array.from({ length: totalPages }, (_, i) => (
                   <li key={i}>
                     <button
-                      className={`px-3 py-1 ${
-                        i === currentPage
-                          ? "bg-indigo-600 text-white"
-                          : "bg-gray-300 hover:bg-gray-400 text-gray-600"
-                      } rounded-md`}
+                      className={`px-3 py-1 ${i === currentPage
+                        ? "bg-indigo-600 text-white"
+                        : "bg-gray-300 hover:bg-gray-400 text-gray-600"
+                        } rounded-md`}
                       onClick={() => handlePageChange(i)}
                     >
                       {i + 1}

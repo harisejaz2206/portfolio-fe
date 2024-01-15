@@ -1,57 +1,51 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
 import ShopCard from "./ShopCard";
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
-import { selectUserProductsListing } from "../app/features/cart/cart.selector";
-import { getUserCategories, userCategoriesProductListing } from "../app/features/userportal-category/category.thunk";
-import {
-    getUserProductListing,
-} from "../app/features/cart/cart.thunk";
-import { selectUserBrandData } from "../app/features/userportal-brand/brand.selector";
-import { selectUserCategoryData, selectUserCategoryProducts } from "../app/features/userportal-category/category.selector";
+import { userCategoriesProductListing } from "../app/features/userportal-category/category.thunk";
+import { selectUserCategoryProducts } from "../app/features/userportal-category/category.selector";
 import { useParams } from "react-router-dom";
 
 const ShopCategoryProducts: React.FC = () => {
-    const dispatch = useDispatch<AppThunkDispatch>();
-    const userProductListing = useSelector(selectUserCategoryProducts) || [];
+  const dispatch = useDispatch<AppThunkDispatch>();
+  const userProductListing = useSelector(selectUserCategoryProducts) || [];
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 6; // Change the number of items per page as needed
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6; // Change the number of items per page as needed
 
-    // Calculate current items to display
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = userProductListing.slice(
-        indexOfFirstItem,
-        indexOfLastItem
-    );
+  // Calculate current items to display
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = userProductListing.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
-    const { categoryId } = useParams();
-
-
-
-    // Calculate total number of pages
-    const pageNumbers = Math.ceil(userProductListing.length / itemsPerPage);
-
-    // Handle page change
-    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const { categoryId } = useParams();
 
 
 
-    useEffect(() => {
-        dispatch(userCategoriesProductListing({ categoryId: categoryId! }));
-    }, []);
+  // Calculate total number of pages
+  const pageNumbers = Math.ceil(userProductListing.length / itemsPerPage);
+
+  // Handle page change
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
 
-    console.log("categoryId: ", categoryId, userProductListing);
 
-    return (
-        <div className="flex items-center px-36 py-4 justify-between">
-            {/* <div className="h-screen w-auto flex flex-col mb-20"> */}
-            {/* <div className="flex items-center justify-items-center py-2"> */}
-            {/* Search bar */}
-            {/* <div className="relative flex items-center">
+  useEffect(() => {
+    dispatch(userCategoriesProductListing({ categoryId: categoryId! }));
+  }, []);
+
+
+  console.log("categoryId: ", categoryId, userProductListing);
+
+  return (
+    <div className="flex items-center px-36 py-4 justify-between">
+      {/* <div className="h-screen w-auto flex flex-col mb-20"> */}
+      {/* <div className="flex items-center justify-items-center py-2"> */}
+      {/* Search bar */}
+      {/* <div className="relative flex items-center">
           <input
             type="search"
             id="search-dropdown"
@@ -67,8 +61,8 @@ const ShopCategoryProducts: React.FC = () => {
           </button>
         </div> */}
 
-            {/* Dropdown menu */}
-            {/* <div className="ml-4 relative">
+      {/* Dropdown menu */}
+      {/* <div className="ml-4 relative">
           <button
             onClick={() => setSortingMenuOpen(!isSortingMenuOpen)}
             className="flex items-center px-3 py-2 rounded-lg text-gray-900"
@@ -104,37 +98,37 @@ const ShopCategoryProducts: React.FC = () => {
             </div>
           )}
         </div> */}
-            {/* </div> */}
-            <div className="w-max p-4 ">
-                <div className="grid gap-6 grid-cols-4 sm:grid-cols-4 md:grid-cols-4 ">
-                    {/* Display current items */}
-                    {currentItems.map((product, index) => (
-                        <ShopCard key={product._id} products={product} />
-                    ))}
-                </div>
-
-                {/* Pagination */}
-                <div className="mt-8 flex justify-center w-full">
-                    <ul className="flex space-x-2">
-                        {Array.from({ length: pageNumbers }, (_, index) => (
-                            <li key={index}>
-                                <button
-                                    onClick={() => paginate(index + 1)}
-                                    className={`px-3 py-1 rounded ${currentPage === index + 1
-                                        ? "bg-red-600 text-white"
-                                        : "bg-gray-200"
-                                        }`}
-                                >
-                                    {index + 1}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-            {/* </div> */}
+      {/* </div> */}
+      <div className="w-max p-4 ">
+        <div className="grid gap-6 grid-cols-4 sm:grid-cols-4 md:grid-cols-4 ">
+          {/* Display current items */}
+          {currentItems.map((product, index) => (
+            <ShopCard key={product._id} products={product} />
+          ))}
         </div>
-    );
+
+        {/* Pagination */}
+        <div className="mt-8 flex justify-center w-full">
+          <ul className="flex space-x-2">
+            {Array.from({ length: pageNumbers }, (_, index) => (
+              <li key={index}>
+                <button
+                  onClick={() => paginate(index + 1)}
+                  className={`px-3 py-1 rounded ${currentPage === index + 1
+                    ? "bg-red-600 text-white"
+                    : "bg-gray-200"
+                    }`}
+                >
+                  {index + 1}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      {/* </div> */}
+    </div>
+  );
 };
 
 export default ShopCategoryProducts;

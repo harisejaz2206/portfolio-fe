@@ -96,12 +96,12 @@ const SoleChainSidebar: React.FC = () => {
       </div>
       {isInventoryOpen && (
         <div className="pl-6">
-          {/* <Link to="/sole-admin/products">
+          <Link to="/sole-admin/products">
             <SoleChainSidebarSubItem
               text="Products"
               isActive={location.pathname === "/sole-admin/products"}
             />
-          </Link> */}
+          </Link>
           <Link to="/sole-admin/catalogue">
             <SoleChainSidebarSubItem
               text="Catalogue"

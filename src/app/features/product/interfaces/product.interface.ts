@@ -29,6 +29,10 @@ export interface IAddProductOutletResponse {
 // }
 
 export interface IGetProductResponse {
-  catalogItem: IAddProductCatalogItemResponse;
+  // catalogItem: IAddProductCatalogItemResponse;
+  // quantity: number;
+  name: string;
   quantity: number;
+  originalPrice: number;
+  salePrice: number;
 }

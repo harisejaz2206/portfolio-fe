@@ -160,9 +160,9 @@ const SoleAdminManageCatalogue: React.FC = () => {
                   <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Category
                   </th>
-                  {/* <th className="px-4 py-3 bg-gray-50 font-medium text-xs text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-3 bg-gray-50 font-medium text-xs text-gray-500 uppercase tracking-wider">
                     Action
-                  </th> */}
+                  </th>
                 </tr>
               </thead>
 
@@ -188,7 +188,7 @@ const SoleAdminManageCatalogue: React.FC = () => {
                       {catalog.category ? catalog.category.name : "N/A"}
                     </td>
 
-                    {/* <td className="px-4 py-2 whitespace-no-wrap text-right">
+                    <td className="px-4 py-2 whitespace-no-wrap text-right">
                       <div className="flex items-center ml-[23%]">
                         <button
                           onClick={() => handleAddToInventory(catalog._id)}
@@ -197,7 +197,7 @@ const SoleAdminManageCatalogue: React.FC = () => {
                           Add to Inventory
                         </button>
                       </div>
-                    </td> */}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -209,8 +209,8 @@ const SoleAdminManageCatalogue: React.FC = () => {
                   <li key={i}>
                     <button
                       className={`px-3 py-1 ${i === currentPage
-                          ? "bg-indigo-600 text-white"
-                          : "bg-gray-300 hover:bg-gray-400 text-gray-600"
+                        ? "bg-indigo-600 text-white"
+                        : "bg-gray-300 hover:bg-gray-400 text-gray-600"
                         } rounded-md`}
                       onClick={() => handlePageChange(i)}
                     >
