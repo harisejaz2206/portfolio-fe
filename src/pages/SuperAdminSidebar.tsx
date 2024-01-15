@@ -72,11 +72,11 @@ const SuperAdminSidebar: React.FC = () => {
           isActive={location.pathname === "/super-admin/stores"}
         />
       </Link>
-      <SuperAdminSidebarItem
+      {/* <SuperAdminSidebarItem
         icon={<FaCog />}
         text="Settings"
         isActive={location.pathname === "/super-admin/settings"}
-      />
+      /> */}
       <div>
         <button
           className="flex text-xs items-center text-white cursor-pointer bg-red-600 rounded-md py-2 px-2 w-40 mt-[10%]"
@@ -97,8 +97,9 @@ const SuperAdminSidebarItem: React.FC<SuperAdminSidebarItemProps> = ({
 }) => {
   return (
     <div
-      className={`group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${isActive ? "bg-indigo-500 text-white" : ""
-        }`}
+      className={`group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${
+        isActive ? "bg-indigo-500 text-white" : ""
+      }`}
       title={text}
     >
       {icon}

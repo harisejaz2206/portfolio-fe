@@ -160,9 +160,9 @@ const ManageOutlets: React.FC = () => {
                   <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  {/* <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Actions
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -213,7 +213,7 @@ const ManageOutlets: React.FC = () => {
                         {outlet.isActive ? "Active" : "Inactive"}
                       </span>
                     </td>
-                    <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium w-1/6">
+                    {/* <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium w-1/6">
                       <div className="flex space-x-4">
                         <Link to={`/multi-admin/edit-outlet/${outlet._id}`}>
                           <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
@@ -221,7 +221,7 @@ const ManageOutlets: React.FC = () => {
                           </button>
                         </Link>
                       </div>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

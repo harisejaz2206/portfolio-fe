@@ -10,16 +10,11 @@ import {
   FaHome,
   FaStore,
   FaChartBar,
-  FaBook,
   FaInbox,
   FaStar,
-  FaShoppingCart,
-  FaCog,
-  FaUsers,
   FaSignOutAlt,
   FaCaretDown,
   FaCaretRight,
-  FaEnvelope,
   FaUser,
 } from "react-icons/fa";
 import { clearStoreData } from "../app/features/store/store.slice";
@@ -76,7 +71,7 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="bg-white h-screen w-2/3 p-4 md:w-1/6 flex flex-col justify-between">
+    <div className="bg-white h-screen w-1/5 p-4 md:w-1/6 flex flex-col ">
       <UserProfileCard userIcon={<FaUser />} userEmail={userEmail} />
       <Link to={"/multi-admin/"}>
         <SidebarItem
@@ -107,12 +102,12 @@ const Sidebar: React.FC = () => {
       </div>
       {isInventoryOpen && (
         <div className="pl-6">
-          <Link to="/multi-admin/products">
+          {/* <Link to="/multi-admin/products">
             <SidebarSubItem
               text="Products"
               isActive={location.pathname === '/multi-admin/products'}
             />
-          </Link>
+          </Link> */}
           <Link to="/multi-admin/catalogue">
             <SidebarSubItem
               text="Catalogue"
@@ -133,20 +128,20 @@ const Sidebar: React.FC = () => {
           </Link>
         </div>
       )}
-      <Link to={"/multi-admin/users"}>
+      {/* <Link to={"/multi-admin/users"}>
         <SidebarItem
           icon={<FaUsers />}
           text="Users"
           isActive={location.pathname === "/multi-admin/users"}
         />
-      </Link>
-      <Link to={"/multi-admin/orders"}>
+      </Link> */}
+      {/* <Link to={"/multi-admin/orders"}>
         <SidebarItem
           icon={<FaShoppingCart />}
           text="Orders"
           isActive={location.pathname === "/multi-admin/orders"}
         />
-      </Link>
+      </Link> */}
       <Link to={"/multi-admin/banners"}>
         <SidebarItem
           icon={<FaStar />}
@@ -154,11 +149,11 @@ const Sidebar: React.FC = () => {
           isActive={location.pathname === "/multi-admin/banners"}
         />
       </Link>
-      <SidebarItem
+      {/* <SidebarItem
         icon={<FaBook />}
         text="Pages"
         isActive={location.pathname === ""}
-      />
+      /> */}
       <Link to={"/multi-admin/chat"}>
         <SidebarItem
           icon={<FaInbox />}
@@ -166,11 +161,11 @@ const Sidebar: React.FC = () => {
           isActive={location.pathname === "/multi-admin/chat"}
         />
       </Link>
-      <SidebarItem
+      {/* <SidebarItem
         icon={<FaCog />}
         text="Settings"
         isActive={location.pathname === ""}
-      />
+      /> */}
       <div>
         <button
           className="flex text-xs items-center text-white cursor-pointer bg-red-600 rounded-md py-2 px-2 w-40 mt-[10%]"
@@ -187,8 +182,9 @@ const Sidebar: React.FC = () => {
 const SidebarItem: React.FC<SidebarItemProps> = ({ icon, text, isActive }) => {
   return (
     <div
-      className={`group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${isActive ? "bg-indigo-500 text-white" : ""
-        }`}
+      className={`group flex items-center py-2 px-2 mt-4 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${
+        isActive ? "bg-indigo-500 text-white" : ""
+      }`}
       title={text}
     >
       {icon}
@@ -200,8 +196,9 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ icon, text, isActive }) => {
 const SidebarSubItem: React.FC<SidebarSubItemProps> = ({ text, isActive }) => {
   return (
     <div
-      className={`group flex items-center py-2 px-2 mt-2 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${isActive ? "bg-indigo-500 text-white" : ""
-        }`}
+      className={`group flex items-center py-2 px-2 mt-2 text-gray-600 cursor-pointer transition-bg rounded-md hover:bg-indigo-500 hover:rounded-md hover:text-white ${
+        isActive ? "bg-indigo-500 text-white" : ""
+      }`}
       title={text}
     >
       <span className="text-xs">{text}</span>

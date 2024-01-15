@@ -12,7 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
 import { deleteBanner, getBanners } from "../app/features/banner/banner.thunk";
 import { Toast } from "../utils/toast";
-import { selectBannerData, selectBannerLoading } from "../app/features/banner/banner.selector";
+import {
+  selectBannerData,
+  selectBannerLoading,
+} from "../app/features/banner/banner.selector";
 import { IBanner } from "../app/features/banner/interfaces/banner.interface";
 
 export interface Banner {
@@ -24,10 +27,9 @@ export interface Banner {
 }
 
 const BannerManagement: React.FC = () => {
-
   const dispatch = useDispatch<AppThunkDispatch>();
   const bannerState = useSelector(selectBannerData) || [];
-  console.log("bannerState", bannerState)
+  console.log("bannerState", bannerState);
   const loading = useSelector(selectBannerLoading);
 
   useEffect(() => {
@@ -36,32 +38,29 @@ const BannerManagement: React.FC = () => {
         await dispatch(getBanners()).then((result: any) => {
           Toast.fire({
             icon: "success",
-            title: result.payload.message
-          })
+            title: result.payload.message,
+          });
         }); // Using await with dispatch here
       } catch (error) {
         console.error("An error occurred while fetching data: ", error);
       }
     };
-    fetchData()
+    fetchData();
   }, [dispatch]);
 
-
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [filterOptionsVisible, setFilterOptionsVisible] = useState<boolean>(false);
   const itemsPerPage: number = 10;
   const [currentPage, setCurrentPage] = useState<number>(0);
-
-
-  const toggleFilterOptions = () => {
-    setFilterOptionsVisible(!filterOptionsVisible);
-  };
 
   const totalPages: number = Math.ceil(bannerState.length / itemsPerPage);
   const startIndex: number = currentPage * itemsPerPage;
   const endIndex: number = startIndex + itemsPerPage;
-  const currentBanners = bannerState.slice(startIndex, endIndex);
 
+  const filteredBanners = bannerState.filter((banner) =>
+    banner.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const currentBanners = filteredBanners.slice(startIndex, endIndex);
 
   const handlePageChange = (page: any) => {
     setCurrentPage(page);
@@ -72,8 +71,8 @@ const BannerManagement: React.FC = () => {
       await dispatch(deleteBanner(id)).then((result: any) => {
         Toast.fire({
           icon: "success",
-          title: result.payload.message
-        })
+          title: result.payload.message,
+        });
       });
       await dispatch(getBanners());
     } catch (error) {
@@ -90,7 +89,7 @@ const BannerManagement: React.FC = () => {
 
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center">
-            <div className="relative">
+            {/* <div className="relative">
               <span className="absolute left-3 top-2 text-gray-400">
                 <FaSearch />
               </span>
@@ -101,20 +100,7 @@ const BannerManagement: React.FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-            </div>
-            <div className="relative ml-4">
-              <button
-                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-2 rounded-md focus:outline-none flex items-center"
-                onClick={toggleFilterOptions}
-              >
-                <FaFilter className="mr-1" />
-              </button>
-              {filterOptionsVisible && (
-                <div className="absolute mt-2 p-2 border rounded-lg bg-white">
-                  {/* Filter options here */}
-                </div>
-              )}
-            </div>
+            </div> */}
           </div>
 
           <div className="flex items-center space-x-2">
@@ -139,7 +125,7 @@ const BannerManagement: React.FC = () => {
               <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Status
               </th>
-              <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Actions
               </th>
             </tr>
@@ -150,24 +136,28 @@ const BannerManagement: React.FC = () => {
                 <tr key={banner._id}>
                   <td className="px-6 py-4 whitespace-no-wrap">
                     <img
-                      src={banner.image || ''}
-                      alt={banner.name || ''}
+                      src={banner.image || ""}
+                      alt={banner.name || ""}
                       className="w-16 h-10 object-cover rounded-lg"
                     />
                   </td>
-                  <td className="px-6 py-4 whitespace-no-wrap">{banner.name}</td>
                   <td className="px-6 py-4 whitespace-no-wrap">
-                    <span className={`text-${banner.status ? 'green' : 'red'}-600`}>
-                      {banner.status ? 'Active' : 'Non-Active'}
+                    {banner.name}
+                  </td>
+                  <td className="px-6 py-4 whitespace-no-wrap">
+                    <span
+                      className={`text-${banner.status ? "green" : "red"}-600`}
+                    >
+                      {banner.status ? "Active" : "Non-Active"}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-no-wrap text-center">
-                    <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
+                    {/* <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
                       <FaEdit />
-                    </button>
+                    </button> */}
                     <button
                       className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-4"
-                      onClick={() => handleDeleteBanner(banner._id || '')}
+                      onClick={() => handleDeleteBanner(banner._id || "")}
                     >
                       <FaTrash className="-ml-20" />
                     </button>
@@ -191,6 +181,6 @@ const BannerManagement: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default BannerManagement;

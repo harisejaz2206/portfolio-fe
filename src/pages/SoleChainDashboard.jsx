@@ -25,7 +25,7 @@ const SoleChainDashboard = () => {
   }, []);
 
   return (
-    <div className="bg-gray-100 h-screen p-4">
+    <div className="bg-gray-100 h-full p-4">
       {/* Greeting and Dashboard title */}
       <div className="mb-4">
         <h1 className="text-xl font-semibold text-gray-800">
