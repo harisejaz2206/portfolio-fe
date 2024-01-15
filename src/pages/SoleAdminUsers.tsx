@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaSearch, FaFilter, FaEye } from "react-icons/fa";
 import Pagination from "../components/Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { AppThunkDispatch } from "../store/rootReducer";
+import { getUsers } from "../app/features/users/users.thunk";
+import { Toast } from "../utils/toast";
+import { selectUsersData } from "../app/features/users/users.selectors";
 
-function SoleAdminUser() {
+
+const SoleAdminUser: React.FC = () => {
   // Dummy data for users (replace with your actual data)
   const initialUsers = [
     {
@@ -118,15 +124,35 @@ function SoleAdminUser() {
       user.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const dispatch = useDispatch<AppThunkDispatch>();
+  const usersData = useSelector(selectUsersData)
+  console.log("users data:", usersData)
+
   // Function to handle pagination
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
   const startIndex = currentPage * itemsPerPage;
   const endIndex = (currentPage + 1) * itemsPerPage;
   const currentUsers = filteredUsers.slice(startIndex, endIndex);
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: any) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(getUsers()).then((result: any) => {
+          Toast.fire({
+            icon: "success",
+            title: result.payload.message,
+          });
+        }); // Using await with dispatch here
+      } catch (error) {
+        console.error("An error occurred while fetching data: ", error);
+      }
+    };
+    fetchData();
+  }, [dispatch]);
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
@@ -172,38 +198,36 @@ function SoleAdminUser() {
                 <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                   Last Activity
                 </th>
-                <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                {/* <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                   Status
                 </th>
                 <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                   Action
-                </th>
+                </th> */}
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {currentUsers.map((user) => (
-                <tr key={user.id}>
+              {usersData!.map((user) => (
+                <tr key={user._id}>
                   <td className="px-6 py-4 whitespace-no-wrap">{user.name}</td>
                   <td className="px-6 py-4 whitespace-no-wrap">{user.email}</td>
                   <td className="px-6 py-4 whitespace-no-wrap">
-                    {user.createdDate}
+                    {new Date(user.createdAt!).toLocaleString()}
+                    {user.createdAt}
                   </td>
                   <td className="px-6 py-4 whitespace-no-wrap">
-                    {user.lastActivity}
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap">
-                    {user.status}
+                    {user.provider}
                   </td>
                   <td className="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
                     <div className="flex items-center -ml-2 ">
-                      <Link
+                      {/* <Link
                         to={`/sole-admin/view-account/${user.id}`}
                         className="flex items-center justify-center px-2 py-1 rounded-md text-indigo-600 hover:underline focus:outline-none focus:underline text-sm"
                       >
                         {" "}
                         <FaEye className="mr-1 text-sm text-indigo-600" />
                         View Details
-                      </Link>
+                      </Link> */}
                     </div>
                   </td>
                 </tr>

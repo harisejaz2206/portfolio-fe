@@ -401,7 +401,7 @@ function App() {
         <Route
           path="/super-admin/*"
           element={
-            <ProtectedRoute allowedRoles={["sole-admin"]}>
+            <ProtectedRoute allowedRoles={["super-admin"]}>
               <div className="flex">
                 <SuperAdminSidebar />
                 <div className="flex-1">
