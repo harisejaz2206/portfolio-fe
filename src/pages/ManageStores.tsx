@@ -166,9 +166,9 @@ const ManageStores: React.FC = () => {
                   <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Active
                   </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  {/* <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Actions
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -207,7 +207,7 @@ const ManageStores: React.FC = () => {
                         }}
                       />
                     </td>
-                    <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium w-1/6">
+                    {/* <td className="px-6 py-3 whitespace-no-wrap text-right text-sm font-medium w-1/6">
                       <div className="flex space-x-4">
                         <Link to={`/path-to-edit-store/${store._id}`}>
                           <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
@@ -218,7 +218,7 @@ const ManageStores: React.FC = () => {
                           <FaTrash />
                         </button>
                       </div>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

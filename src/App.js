@@ -289,15 +289,15 @@ function App() {
                       path="/create-outlet"
                       element={<CreateOutletForm />}
                     />
-                    <Route
+                    {/* <Route
                       path="/edit-outlet/:outletId"
                       element={<EditOutletForm />}
-                    />
+                    /> */}
                     <Route path="/products" element={<ManageInventory />} />
-                    <Route
+                    {/* <Route
                       path="/create-product"
                       element={<AddProductForm />}
-                    />
+                    /> */}
                     <Route path="/create-brand" element={<AddBrandForm />} />
                     <Route
                       path="/create-category"
@@ -401,7 +401,7 @@ function App() {
         <Route
           path="/super-admin/*"
           element={
-            <ProtectedRoute allowedRoles={["sole-admin"]}>
+            <ProtectedRoute allowedRoles={["super-admin"]}>
               <div className="flex">
                 <SuperAdminSidebar />
                 <div className="flex-1">
