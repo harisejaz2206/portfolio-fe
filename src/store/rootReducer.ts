@@ -13,6 +13,7 @@ import wishlistSlice from "../app/features/wishlist/wishlist.slice";
 import userBrandSlice from "../app/features/userportal-brand/brand.slice";
 import userCategoriesSlice from "../app/features/userportal-category/category.slice";
 import userBrandsSlice from "../app/features/users/users.slice";
+import orderSlice from "../app/features/order/order.slice";
 
 const rootReducer = combineReducers({
   auth: authSlice,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   usercategoryslice: userCategoriesSlice,
   userbrandslice: userBrandSlice,
   users: userBrandsSlice,
+  order: orderSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -6,6 +6,7 @@ import { userCategoriesProductListing } from "../app/features/userportal-categor
 import { selectUserCategoryProducts } from "../app/features/userportal-category/category.selector";
 import { useParams } from "react-router-dom";
 
+
 const ShopCategoryProducts: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
   const userProductListing = useSelector(selectUserCategoryProducts) || [];

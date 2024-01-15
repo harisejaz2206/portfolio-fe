@@ -233,7 +233,7 @@ function App() {
           }
         />
         <Route
-          path="/order-details"
+          path="/order-listing/order-details/:orderid"
           element={
             <ProtectedRoute allowedRoles={["user"]}>
               <Layout>
