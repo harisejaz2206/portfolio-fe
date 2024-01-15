@@ -3,7 +3,7 @@ import initialUsersState from "./users.initialstate";
 import { getUsers } from "./users.thunk";
 
 const userBrandsSlice = createSlice({
-  name: "user-brands",
+  name: "users",
   initialState: initialUsersState,
   reducers: {
     clearUsersData: (state) => {

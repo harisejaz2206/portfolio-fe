@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaSearch,
   FaFilter,
@@ -8,8 +8,13 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Pagination from "../components/Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { AppThunkDispatch } from "../store/rootReducer";
+import { selectBannerData, selectBannerLoading } from "../app/features/banner/banner.selector";
+import { getBanners } from "../app/features/banner/banner.thunk";
+import { Toast } from "../utils/toast";
 
-function SoleChainManageBanner() {
+const SoleChainManageBanner: React.FC = () => {
   const initialBanners = [
     {
       id: 1,
@@ -119,9 +124,30 @@ function SoleChainManageBanner() {
   const endIndex = startIndex + itemsPerPage;
   const currentBanners = filteredBanners.slice(startIndex, endIndex);
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: any) => {
     setCurrentPage(page);
   };
+
+  const dispatch = useDispatch<AppThunkDispatch>();
+  const bannerState = useSelector(selectBannerData) || [];
+  console.log("bannerState", bannerState)
+  const loading = useSelector(selectBannerLoading);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(getBanners()).then((result: any) => {
+          Toast.fire({
+            icon: "success",
+            title: result.payload.message
+          })
+        }); // Using await with dispatch here
+      } catch (error) {
+        console.error("An error occurred while fetching data: ", error);
+      }
+    };
+    fetchData()
+  }, [dispatch]);
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
@@ -176,52 +202,38 @@ function SoleChainManageBanner() {
                 Image
               </th>
               <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                Title
-              </th>
-              <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                Promotions
+                Banner Name
               </th>
               <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Status
               </th>
-              <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                {/* Add an empty th for Action */}
-              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {currentBanners.map((banner) => (
-              <tr key={banner.id}>
+            {bannerState.map((banner) => (
+              <tr key={banner._id}>
                 <td className="px-6 py-4 whitespace-no-wrap">
                   <img
                     src={banner.image}
-                    alt={banner.title}
+                    alt={banner.name}
                     className="w-16 h-10 object-cover rounded-lg"
                   />
                 </td>
-                <td className="px-6 py-4 whitespace-no-wrap">{banner.title}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">
-                  {banner.promotions}
-                </td>
+                <td className="px-6 py-4 whitespace-no-wrap">{banner.name}</td>
+                {/* <td className="px-6 py-4 whitespace-no-wrap">
+                  {banner.}
+                </td> */}
                 <td className="px-6 py-4 whitespace-no-wrap">
                   <span
-                    className={`px-2 py-1 text-xs rounded-full ${
-                      banner.status === "Published"
-                        ? "text-green-400"
-                        : "text-yellow-400"
-                    }`}
+                    className={`px-2 py-1 text-xs rounded-full ${banner.status
+                      ? "text-green-400"
+                      : "text-yellow-400"
+                      }`}
                   >
-                    {banner.status}
+                    Active
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-no-wrap text-center">
-                  <button className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
-                    <FaEdit />
-                  </button>
-                  <button className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-2">
-                    <FaTrash />
-                  </button>
-                </td>
+                {/* <td className="px-6 py-4 whitespace-no-wrap">{banner.status}</td> */}
               </tr>
             ))}
           </tbody>
