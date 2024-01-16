@@ -22,6 +22,7 @@ import {
 import { PropagateLoader } from "react-spinners";
 import { Toast } from "../utils/toast";
 import DeleteModal from "../components/globals/modal/DeleteModal";
+import Pagination from "../components/Pagination";
 
 interface ResponsePayload {
   message: string;
@@ -34,6 +35,8 @@ const SoleAdminManageCategories: React.FC = () => {
   const categories = useSelector(selectCategoryData) || [];
   const loading = useSelector(selectCategoryLoading);
   const categoryState = useSelector(selectCategoryData);
+  const itemsPerPage: number = 10;
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
   // State variables for DeleteModal
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -56,20 +59,8 @@ const SoleAdminManageCategories: React.FC = () => {
   }, [dispatch]);
 
   const [searchCategoryNameQuery, setSearchCategoryNameQuery] = useState("");
-  const [searchProductQuery, setSearchProductQuery] = useState("");
-  const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
-
-  const handleFileSelect = (e: any) => {
-    const files = e.target.files;
-    setSelectedFiles(files);
-  };
-
-  // Function to toggle the filter dropdown
-  const toggleFilterOptions = () => {
-    setFilterOptionsVisible(!filterOptionsVisible);
-  };
 
   const filteredCategories = categories.filter((category) =>
     category.name.toLowerCase().includes(searchCategoryNameQuery.toLowerCase())
@@ -101,6 +92,18 @@ const SoleAdminManageCategories: React.FC = () => {
     } catch (error) {
       console.error("An error occurred while deleting the category: ", error);
     }
+  };
+
+  const totalPages: number = Math.ceil(
+    filteredCategories.length / itemsPerPage
+  );
+  const startIndex: number = currentPage * itemsPerPage;
+  const endIndex: number = startIndex + itemsPerPage;
+  const currentCategories = filteredCategories.slice(startIndex, endIndex);
+
+  // Pagination handler
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -141,19 +144,6 @@ const SoleAdminManageCategories: React.FC = () => {
                     onChange={(e) => setSearchProductQuery(e.target.value)}
                   />
                  </div> */}
-                <div className="relative ml-4 text-sm">
-                  <button
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-2 rounded-md focus:outline-none flex items-center"
-                    onClick={toggleFilterOptions}
-                  >
-                    <FaFilter className="mr-1" />
-                  </button>
-                  {filterOptionsVisible && (
-                    <div className="absolute mt-2 p-2 border rounded-lg bg-white text-sm">
-                      {/* Your filter options here */}
-                    </div>
-                  )}
-                </div>
               </div>
 
               {/*
@@ -191,7 +181,7 @@ const SoleAdminManageCategories: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredCategories.map((category) => (
+                {currentCategories.map((category) => (
                   <tr key={category._id}>
                     <td className="px-6 py-4 whitespace-no-wrap">
                       {category.name}
@@ -227,6 +217,11 @@ const SoleAdminManageCategories: React.FC = () => {
                 ))}
               </tbody>
             </table>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           </>
         )}
 

@@ -49,7 +49,7 @@ const BannerManagement: React.FC = () => {
   }, [dispatch]);
 
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const itemsPerPage: number = 10;
+  const itemsPerPage: number = 5;
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const totalPages: number = Math.ceil(bannerState.length / itemsPerPage);
@@ -132,7 +132,7 @@ const BannerManagement: React.FC = () => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {bannerState && bannerState.length > 0 ? (
-              bannerState.map((banner) => (
+              currentBanners.map((banner) => (
                 <tr key={banner._id}>
                   <td className="px-6 py-4 whitespace-no-wrap">
                     <img

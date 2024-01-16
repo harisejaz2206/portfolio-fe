@@ -17,13 +17,7 @@ import {
   selectBrandLoading,
 } from "../app/features/brand/brand.selector";
 import { deleteBrand, getBrands } from "../app/features/brand/brand.thunk";
-import {
-  BeatLoader,
-  ClipLoader,
-  PacmanLoader,
-  ClimbingBoxLoader,
-  PropagateLoader,
-} from "react-spinners";
+import { PropagateLoader } from "react-spinners";
 import { selectCategoryLoading } from "../app/features/category/category.selector";
 import Modal from "react-modal";
 import { Toast } from "../utils/toast";
@@ -34,6 +28,7 @@ const SoleAdminManageBrands: React.FC = () => {
   const brandState = useSelector(selectBrandData) || [];
   const loading = useSelector(selectBrandLoading);
   const [isModalOpen, setModalOpen] = useState(false);
+  const itemsPerPage: number = 10;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,9 +47,7 @@ const SoleAdminManageBrands: React.FC = () => {
   }, [dispatch]);
 
   const [searchBrandQuery, setSearchBrandQuery] = useState("");
-  const [searchProductQuery, setSearchProductQuery] = useState("");
 
-  const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
 
@@ -62,40 +55,29 @@ const SoleAdminManageBrands: React.FC = () => {
     brand.name.toLowerCase().includes(searchBrandQuery.toLowerCase())
   );
 
-  const handleFileSelect = (e: any) => {
-    const files = e.target.files;
-    setSelectedFiles(files);
-  };
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
-  // Function to toggle the filter dropdown
-  const toggleFilterOptions = () => {
-    setFilterOptionsVisible(!filterOptionsVisible);
-  };
+  const totalPages: number = Math.ceil(brandState.length / itemsPerPage);
+  const startIndex: number = currentPage * itemsPerPage;
+  const endIndex: number = startIndex + itemsPerPage;
+  const currentBrands = filteredBrands.slice(startIndex, endIndex);
 
-  const uploadSelectedFiles = () => {
-    // Check if files were selected
-    if (selectedFiles.length === 0) {
-      alert("Please select one or more files.");
-      return;
-    }
-
-    // Clear the selected files
-    setSelectedFiles([]);
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
-
-  const handleDeleteBrand = async (id: string) => {
-    try {
-      await dispatch(deleteBrand(id)).then((result: any) => {
-        Toast.fire({
-          icon: "success",
-          title: result.payload.message,
-        });
-      });
-      await dispatch(getBrands());
-    } catch (error) {
-      console.error("An error occurred while deleting the brand: ", error);
-    }
-  };
+  // const handleDeleteBrand = async (id: string) => {
+  //   try {
+  //     await dispatch(deleteBrand(id)).then((result: any) => {
+  //       Toast.fire({
+  //         icon: "success",
+  //         title: result.payload.message,
+  //       });
+  //     });
+  //     await dispatch(getBrands());
+  //   } catch (error) {
+  //     console.error("An error occurred while deleting the brand: ", error);
+  //   }
+  // };
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
@@ -135,19 +117,6 @@ const SoleAdminManageBrands: React.FC = () => {
                     onChange={(e) => setSearchProductQuery(e.target.value)}
                   />
         </div> */}
-                <div className="relative ml-4 text-sm">
-                  <button
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-2 rounded-md focus:outline-none flex items-center"
-                    onClick={toggleFilterOptions}
-                  >
-                    <FaFilter className="mr-1" />
-                  </button>
-                  {filterOptionsVisible && (
-                    <div className="absolute mt-2 p-2 border rounded-lg bg-white text-sm">
-                      {/* Your filter options here */}
-                    </div>
-                  )}
-                </div>
               </div>
 
               {/*
@@ -186,7 +155,7 @@ const SoleAdminManageBrands: React.FC = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {brandState &&
-                  filteredBrands.filter(Boolean).map((brand) => (
+                  currentBrands.filter(Boolean).map((brand) => (
                     <tr key={brand._id}>
                       <td className="px-6 py-3 whitespace-no-wrap">
                         {brand.name}
@@ -223,6 +192,11 @@ const SoleAdminManageBrands: React.FC = () => {
                   ))}
               </tbody>
             </table>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           </>
         )}
       </div>

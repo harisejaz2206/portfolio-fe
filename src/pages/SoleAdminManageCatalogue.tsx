@@ -188,8 +188,8 @@ const SoleAdminManageCatalogue: React.FC = () => {
                       {catalog.category ? catalog.category.name : "N/A"}
                     </td>
 
-                    <td className="px-4 py-2 whitespace-no-wrap text-right">
-                      <div className="flex items-center ml-[23%]">
+                    <td className="px-4 py-2 whitespace-no-wrap ">
+                      <div className="flex items-center ">
                         <button
                           onClick={() => handleAddToInventory(catalog._id)}
                           className="bg-indigo-600 text-white px-2 py-1 text-sm rounded-md mr-2 hover:bg-indigo-700"
@@ -208,10 +208,11 @@ const SoleAdminManageCatalogue: React.FC = () => {
                 {Array.from({ length: totalPages }, (_, i) => (
                   <li key={i}>
                     <button
-                      className={`px-3 py-1 ${i === currentPage
-                        ? "bg-indigo-600 text-white"
-                        : "bg-gray-300 hover:bg-gray-400 text-gray-600"
-                        } rounded-md`}
+                      className={`px-3 py-1 ${
+                        i === currentPage
+                          ? "bg-indigo-600 text-white"
+                          : "bg-gray-300 hover:bg-gray-400 text-gray-600"
+                      } rounded-md`}
                       onClick={() => handlePageChange(i)}
                     >
                       {i + 1}

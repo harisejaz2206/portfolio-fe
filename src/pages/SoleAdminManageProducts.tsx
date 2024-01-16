@@ -105,7 +105,7 @@ const SoleAdminManageProducts: React.FC = () => {
                   <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Sale Price
                   </th>
-                  <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-1 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Quantity
                   </th>
                   {/* <th className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -159,10 +159,11 @@ const SoleAdminManageProducts: React.FC = () => {
                 {Array.from({ length: totalPages }, (_, i) => (
                   <li key={i}>
                     <button
-                      className={`px-3 py-1 ${i === currentPage
-                        ? "bg-indigo-600 text-white"
-                        : "bg-gray-300 hover:bg-gray-400 text-gray-600"
-                        } rounded-md`}
+                      className={`px-3 py-1 ${
+                        i === currentPage
+                          ? "bg-indigo-600 text-white"
+                          : "bg-gray-300 hover:bg-gray-400 text-gray-600"
+                      } rounded-md`}
                       onClick={() => handlePageChange(i)}
                     >
                       {i + 1}
