@@ -13,14 +13,7 @@ interface IProductCardProps {
 }
 
 const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
-  const {
-    _id,
-    name,
-    quantity,
-    salePrice,
-    category,
-    images,
-  } = products;
+  const { _id, name, quantity, salePrice, category, images } = products;
   const dispatch = useDispatch<AppThunkDispatch>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const loading = useSelector(selectCartLoading);
@@ -87,9 +80,9 @@ const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
                 <span className="text-xs">({category})</span>
               </div>
             </div>
-            <button className="bg-white text-red-900 border border-red-900 font-semibold py-1 px-2 rounded-md hover:bg-red-800 hover:text-white w-full mt-2">
+            {/* <button className="bg-white text-red-900 border border-red-900 font-semibold py-1 px-2 rounded-md hover:bg-red-800 hover:text-white w-full mt-2">
               View Product
-            </button>
+            </button> */}
             <button
               onClick={handleAddToWishlist}
               className="bg-white text-red-900 border border-red-900 font-semibold py-1 px-2 rounded-md hover:bg-red-800 hover:text-white w-full mt-2"

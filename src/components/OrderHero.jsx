@@ -1,13 +1,13 @@
 import React from "react";
 import SubHero from "./SubHero";
 
-const OrdersHero = () => {
+const OrderHero = () => {
   return (
     <div>
-      <SubHero title="Orders" subTitle="Home / Orders" />
+      <SubHero title="Order Listing" subTitle="Home / Order Listing" />
       {/* Other content */}
     </div>
   );
 };
 
-export default OrdersHero;
+export default OrderHero;
