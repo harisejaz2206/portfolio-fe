@@ -22,6 +22,7 @@ import {
 import { PropagateLoader } from "react-spinners";
 import { Toast } from "../utils/toast";
 import DeleteModal from "../components/globals/modal/DeleteModal";
+import Pagination from "../components/Pagination";
 
 interface ResponsePayload {
   message: string;
@@ -101,6 +102,20 @@ const ManageCategories: React.FC = () => {
     } catch (error) {
       console.error("An error occurred while deleting the category: ", error);
     }
+  };
+
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const itemsPerPage: number = 10; // Adjust this based on your preference
+
+  const totalPages: number = Math.ceil(
+    filteredCategories.length / itemsPerPage
+  );
+  const startIndex: number = currentPage * itemsPerPage;
+  const endIndex: number = startIndex + itemsPerPage;
+  const currentCategories = filteredCategories.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: any) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -216,7 +231,7 @@ const ManageCategories: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredCategories.map((category) => (
+                {currentCategories.map((category) => (
                   <tr key={category._id}>
                     <td className="px-6 py-4 whitespace-no-wrap">
                       {category.name}
@@ -251,6 +266,12 @@ const ManageCategories: React.FC = () => {
                 ))}
               </tbody>
             </table>
+            {/* Pagination */}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           </>
         )}
 

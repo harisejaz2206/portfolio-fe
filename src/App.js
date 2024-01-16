@@ -67,6 +67,8 @@ import CategoryProducts from "./pages/CategoryProducts";
 import BrandProducts from "./pages/BrandProducts";
 import ProtectedRoute from "./app/routes/ProtectedRoute";
 import OrderListing from "./pages/OrderListing";
+import ManageOrders from "./pages/ManageOrders";
+import ManageOrderDetails from "./pages/ManageOrderDetails";
 
 function App() {
   const token = useSelector(selectToken);
@@ -227,7 +229,7 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={["user"]}>
               <Layout>
-                <OrderListing />
+                <ManageOrders />
               </Layout>
             </ProtectedRoute>
           }
@@ -237,7 +239,7 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={["user"]}>
               <Layout>
-                <OrderDetails />
+                <ManageOrderDetails />
               </Layout>
             </ProtectedRoute>
           }

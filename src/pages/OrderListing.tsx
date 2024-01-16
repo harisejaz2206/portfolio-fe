@@ -11,7 +11,7 @@ const OrderListing: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppThunkDispatch>();
   const orders = useSelector(selectOrdersListingData);
-  const orderIds = orders!.map(order => order._id);
+  const orderIds = orders!.map((order) => order._id);
   console.log("order Ids", orderIds);
 
   const handleViewDetails = (orderid: string) => {
@@ -37,14 +37,15 @@ const OrderListing: React.FC = () => {
   return (
     <div className="container mx-auto my-8 p-4">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6 text-center">Order Listing</h1>
+        {/* <h1 className="text-4xl font-bold mb-6 text-center">Order Listing</h1> */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {orders!.map((order) => (
             <div key={order._id} className="bg-white shadow-md rounded-md p-6">
               <div className="flex justify-between items-center mb-4">
                 <span
-                  className={`text-lg font-semibold ${order.status === "paid" ? "text-green-500" : "text-red-500"
-                    }`}
+                  className={`text-lg font-semibold ${
+                    order.status === "paid" ? "text-green-500" : "text-red-500"
+                  }`}
                 >
                   {order.status}
                 </span>

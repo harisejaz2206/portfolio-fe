@@ -72,7 +72,7 @@ const SignUpPage: React.FC = () => {
 
   return (
     <div className="flex h-screen">
-      <div className="bg-white rounded-lg mt-auto shadow-md flex w-full ">
+      <div className="bg-white rounded-lg h-screen mt-auto shadow-md flex w-full ">
         <div className="w-auto bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-600 via-red-900 to-red-900">
           <img src="/marijuana.png" alt="marijuana" className="ml-56" />
           <h1 className="text-4xl text-yellow-400 font-bold text-center">
@@ -106,7 +106,7 @@ const SignUpPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="w-2/3 p-14 bg-white flex flex-col justify-center items-center">
+        <div className="w-2/3 p-14 bg-white flex flex-col h-screen justify-center items-center">
           <h1 className="text-4xl font-bold mb-2 text-red-900">
             Welcome, User!
           </h1>

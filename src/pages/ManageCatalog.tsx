@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  FaSearch,
-  FaTrash,
-} from "react-icons/fa"; // Import icons
+import { FaSearch, FaTrash } from "react-icons/fa"; // Import icons
 import "react-toggle/style.css"; // Import the styles for the Toggle component
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch } from "../store/rootReducer";
@@ -144,7 +141,7 @@ const ManageCatalog: React.FC = () => {
                       <div className="flex justify-between items-center">
                         <button
                           className="text-red-600 hover:text-red-900 focus:outline-none focus:underline ml-14"
-                          onClick={() => { }}
+                          onClick={() => {}}
                         >
                           <FaTrash />
                         </button>
@@ -160,10 +157,11 @@ const ManageCatalog: React.FC = () => {
                 {Array.from({ length: totalPages }, (_, i) => (
                   <li key={i}>
                     <button
-                      className={`px-3 py-1 ${i === currentPage
-                        ? "bg-indigo-600 text-white"
-                        : "bg-gray-300 hover:bg-gray-400 text-gray-600"
-                        } rounded-md`}
+                      className={`px-3 py-1 ${
+                        i === currentPage
+                          ? "bg-indigo-600 text-white"
+                          : "bg-gray-300 hover:bg-gray-400 text-gray-600"
+                      } rounded-md`}
                       onClick={() => handlePageChange(i)}
                     >
                       {i + 1}

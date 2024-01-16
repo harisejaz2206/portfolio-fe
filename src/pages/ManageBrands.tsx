@@ -87,7 +87,7 @@ const ManageBrands: React.FC = () => {
     }
   };
 
-  const itemsPerPage = 10; // Adjust as needed
+  const itemsPerPage = 20; // Adjust as needed
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastBrand = currentPage * itemsPerPage;
@@ -174,7 +174,7 @@ const ManageBrands: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredBrands.map((brand) => (
+                {currentBrands.map((brand) => (
                   <tr key={brand._id}>
                     <td className="px-6 py-3 whitespace-no-wrap">
                       {brand.name || "N/A"}{" "}

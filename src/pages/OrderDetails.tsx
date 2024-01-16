@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppThunkDispatch } from "../store/rootReducer";
 import { getOrderDetails } from "../app/features/order/order.thunk";
-import { selectOrdersDetailsData, selectOrdersLoading } from "../app/features/order/order.selectors";
+import {
+  selectOrdersDetailsData,
+  selectOrdersLoading,
+} from "../app/features/order/order.selectors";
 
 const OrderDetails: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>();
@@ -13,27 +16,26 @@ const OrderDetails: React.FC = () => {
 
   console.log("order details", orderDetails, isLoading);
 
-
   useEffect(() => {
-    console.log("orderid", orderid)
+    console.log("orderid", orderid);
     dispatch(getOrderDetails(orderid!)).then((result) => {
-      console.log("inside!!!")
-      console.log("result: ", result)
-    }
-    );
+      console.log("inside!!!");
+      console.log("result: ", result);
+    });
   }, []);
 
-  if (isLoading || !orderDetails) return <p>loading...</p>
+  if (isLoading || !orderDetails) return <p>loading...</p>;
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <div className="container mx-auto mt-8">
-        <h1 className="text-3xl font-semibold mb-6 text-center">
-          Order Details
-        </h1>
-        <div className="bg-white shadow-2xl rounded-md p-6 max-w-2xl mx-auto mb-4">
+      <div className="container mx-auto mt-8 flex flex-col">
+        <div className="bg-white shadow-2xl rounded-md p-6 max-w-2xl mx-auto mb-4 max-h-[500px] overflow-y-auto">
           <div className="flex justify-between items-center mb-4">
             <span
-              className={`text-lg font-semibold ${orderDetails!.status === "paid" ? "text-green-500" : "text-red-500"}`}
+              className={`text-lg font-semibold ${
+                orderDetails!.status === "paid"
+                  ? "text-green-500"
+                  : "text-red-500"
+              }`}
             >
               {orderDetails!.status}
             </span>
