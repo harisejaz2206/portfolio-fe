@@ -43,7 +43,7 @@ export const authSlice = createSlice({
       state.loading = false;
       // state.user = action.payload?.payload?.user;
       // state.token = action.payload?.payload?.token.accessToken;
-      state.user!.role = action.payload!.payload!.user.role; // not sure about this line...
+      state.user = action.payload!.payload!.user;
       state.message = action.payload?.message;
     });
 

@@ -49,6 +49,7 @@ const SignUpPage: React.FC = () => {
     // setSignupPayload(result.payload.payload);
     setModalOpen(true);
   };
+
   const formik = useFormik<FormData>({
     initialValues: {
       name: "",

@@ -12,8 +12,10 @@ export const signup = createAsyncThunk(
   async (credentials: ISignUpInterface, { rejectWithValue }) => {
     try {
       const response = await authService.signupHandler(credentials);
+      // debugger;
       return response;
     } catch (error: any) {
+      // debugger;
       return rejectWithValue(
         error.response?.data || "An error occurred while registering"
       );
