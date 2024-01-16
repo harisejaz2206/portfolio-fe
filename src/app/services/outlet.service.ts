@@ -18,6 +18,10 @@ class OutletService extends HttpService {
   getAllOutletsHandler = (): Promise<
     IResponseInterface<{ outlets: IOutlet[] }>
   > => this.get(`${this.prefix}/outlet`);
+
+  purchaseOrderHandler = (): Promise<
+    IResponseInterface<{ sessionId: string }>
+  > => this.get(`${this.prefix}/outlet`);
 }
 
 export const outletService = new OutletService();

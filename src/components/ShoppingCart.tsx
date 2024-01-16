@@ -10,6 +10,10 @@ import {
 } from "../app/features/cart/cart.selector";
 import { DotLoader } from "react-spinners";
 import { Toast } from "../utils/toast";
+import { selectOrderSessionId } from "../app/features/order/order.selectors";
+import { purchaseOrder } from "../app/features/order/order.thunk";
+import { loadStripe } from '@stripe/stripe-js';
+
 
 interface SummaryProps {
   subtotal: number | never[];
@@ -19,6 +23,50 @@ interface SummaryProps {
 
 const Summary: React.FC<SummaryProps> = ({ subtotal, taxes, total }) => {
   const loading = useSelector(selectCartLoading);
+  const sessionId = useSelector(selectOrderSessionId);
+  const dispatch = useDispatch<AppThunkDispatch>();
+
+
+  const handleCheckout = async () => {
+    try {
+      // Dispatch purchaseOrder action to get the sessionId
+      const resultAction = await dispatch(purchaseOrder());
+
+      const publicKey = "pk_test_51NqDB7FUtqiloGGLtEWyVRgvWcwHw3JV21EB9FRIudrkCSPMCiJJRAImyKuZ45dcGpy3N6ZYkNBgpBiORto2IrA900R4CNW06K";
+
+      // Redirect to Stripe Checkout using the session ID
+      const stripe = window.Stripe!(publicKey);
+
+      // Check if the purchaseOrder action was successful
+      if (purchaseOrder.fulfilled.match(resultAction)) {
+        const sessionId = resultAction.payload.payload?.sessionId;
+
+        if (sessionId) {
+          const stripe = await loadStripe('pk_test_51NqDB7FUtqiloGGLtEWyVRgvWcwHw3JV21EB9FRIudrkCSPMCiJJRAImyKuZ45dcGpy3N6ZYkNBgpBiORto2IrA900R4CNW06K');
+
+          // Redirect to Stripe Checkout
+          const { error } = await stripe!.redirectToCheckout({
+            sessionId,
+          });
+
+          if (error) {
+            console.error('Error redirecting to Checkout:', error);
+            // Handle error if needed
+          }
+        } else {
+          console.error('No sessionId available for Checkout');
+          // Handle error if needed
+        }
+      } else {
+        console.error('Error during purchaseOrder:', resultAction.error.message);
+        // Handle error if needed
+      }
+    } catch (error) {
+      console.error('Error during checkout:', error);
+      // Handle error if needed
+    }
+  };
+
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
@@ -46,7 +94,7 @@ const Summary: React.FC<SummaryProps> = ({ subtotal, taxes, total }) => {
             <span className="font-semibold">Total</span>
             <span className="font-semibold">${total}</span>
           </div>
-          <button className="bg-red-900 text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-red-800 transition duration-300">
+          <button onClick={handleCheckout} className="bg-red-900 text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-red-800 transition duration-300">
             Checkout
           </button>
         </>

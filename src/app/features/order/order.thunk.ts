@@ -28,3 +28,16 @@ export const getOrderDetails = createAsyncThunk(
     }
   }
 );
+export const purchaseOrder = createAsyncThunk(
+  "order/purchaseOrder",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await orderService.purchaseOrderHandler();
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data || "An error occurred while fetching outlets"
+      );
+    }
+  }
+);

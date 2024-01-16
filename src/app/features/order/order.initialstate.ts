@@ -6,14 +6,16 @@ interface IOrderState {
   message?: string | null;
   orderListing?: IOrderListing[] | null;
   orderDetails?: IOrderDetails | null;
+  sessionId?: string | null;
 }
 
 const initialOrdersState: IOrderState = {
-  loading: true,
+  loading: false,
   error: null,
   message: null,
   orderListing: [],
   orderDetails: null,
+  sessionId: null,
 };
 
 export default initialOrdersState;

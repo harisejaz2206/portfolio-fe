@@ -8,38 +8,38 @@ import {
   FaAddressCard,
   FaCreditCard,
 } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { AppThunkDispatch } from "../store/rootReducer";
+import { selectCatalogLoading } from "../app/features/catalog/catalog.selector";
+import { selectUser } from "../app/features/auth/auth.selector";
 
-const Profile = () => {
-  const user = {
-    firstName: "John",
-    lastName: "Doe",
-    username: "johndoe123",
-    email: "john.doe@example.com",
-    phoneNumber: "+1234567890",
-    // Add more user details as needed
-  };
+const Profile: React.FC = () => {
+  const dispatch = useDispatch<AppThunkDispatch>();
+  // const navigate = useNavigate();
+  const user = useSelector(selectUser);
+  // const user = {
+  //   firstName: "John",
+  //   lastName: "Doe",
+  //   username: "johndoe123",
+  //   email: "john.doe@example.com",
+  //   phoneNumber: "+1234567890",
+  //   // Add more user details as needed
+  // };
 
   return (
     <div className="container mx-auto mt-8 mb-8">
       <div className="bg-white shadow-md rounded-md p-8 max-w-md mx-auto">
         <div className="flex items-center justify-center mb-6">
-          <div className="w-16 h-16 rounded-full overflow-hidden mr-4">
-            <img
-              src="https://randomuser.me/api/portraits/men/1.jpg"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
           <div>
             <h1 className="text-2xl font-semibold">
-              {user.firstName} {user.lastName}
+              {user?.username}
             </h1>
-            <p className="text-gray-500">@{user.username}</p>
+            <p className="text-gray-500">@{user!.username}</p>
           </div>
         </div>
         <div className="mb-4">
-          <p className="text-gray-700">Email: {user.email}</p>
-          <p className="text-gray-700">Phone: {user.phoneNumber}</p>
+          <p className="text-gray-700">Email: {user!.email}</p>
+          <p className="text-gray-700">Phone: {user!.role}</p>
         </div>
         <div className="flex flex-col space-y-4">
           <div className="flex items-center space-x-2 border-t pt-4">

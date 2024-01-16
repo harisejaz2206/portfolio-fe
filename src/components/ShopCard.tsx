@@ -77,7 +77,7 @@ const ShopCard: React.FC<IProductCardProps> = ({ products }) => {
             <div className="flex flex-col">
               <p className="text-md font-semibold text-gray-700">{name}</p>
               <div className="text-gray-600">
-                <span className="text-xs">({category})</span>
+                {/* <span className="text-xs">({category})</span> */}
               </div>
             </div>
             {/* <button className="bg-white text-red-900 border border-red-900 font-semibold py-1 px-2 rounded-md hover:bg-red-800 hover:text-white w-full mt-2">

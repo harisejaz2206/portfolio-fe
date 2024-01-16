@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import initialOrdersState from "./order.initialstate";
-import { getOrderDetails, getOrderListing } from "./order.thunk";
+import { getOrderDetails, getOrderListing, purchaseOrder } from "./order.thunk";
 
 const orderSlice = createSlice({
   name: "order",
@@ -38,6 +38,21 @@ const orderSlice = createSlice({
     });
 
     builder.addCase(getOrderListing.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
+    builder.addCase(purchaseOrder.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(purchaseOrder.fulfilled, (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+      state.sessionId = action.payload.payload?.sessionId;
+    });
+
+    builder.addCase(purchaseOrder.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });

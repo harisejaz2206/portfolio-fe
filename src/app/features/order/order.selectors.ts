@@ -12,3 +12,5 @@ export const selectOrdersListingData = (state: RootState) =>
 
 export const selectOrdersDetailsData = (state: RootState) =>
   state.order.orderDetails;
+
+export const selectOrderSessionId = (state: RootState) => state.order.sessionId;

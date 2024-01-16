@@ -22,7 +22,7 @@ const ShopProducts: React.FC = () => {
   const [sortingOption, setSortingOption] = useState("az");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // Change the number of items per page as needed
+  const itemsPerPage = 8; // Change the number of items per page as needed
 
   // Calculate current items to display
   const indexOfLastItem = currentPage * itemsPerPage;

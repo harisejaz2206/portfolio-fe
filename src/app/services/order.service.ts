@@ -16,6 +16,10 @@ class OrderService extends HttpService {
     orderId: string
   ): Promise<IResponseInterface<{ order: IOrderDetails }>> =>
     this.get(`${this.prefix}/order-details/${orderId}`);
+
+  purchaseOrderHandler = (): Promise<
+    IResponseInterface<{ sessionId: string }>
+  > => this.post(`${this.prefix}/order`);
 }
 
 export const orderService = new OrderService();
