@@ -12,9 +12,9 @@ const Home = () => {
       <VerticalMenu />
       <Hero />
       <Category />
-      <Products />
+      {/* <Products /> */}
       <Center />
-      <PopularToday />
+      {/* <PopularToday /> */}
     </div>
   );
 };
