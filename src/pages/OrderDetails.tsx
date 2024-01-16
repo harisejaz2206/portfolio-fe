@@ -60,7 +60,6 @@ const OrderDetails: React.FC = () => {
                   <p>Quantity: {item.quantity}</p>
                 </div>
               </div>
-              <p>Original Price: ${item.productId.originalPrice}</p>
               <p>Sale Price: ${item.productId.salePrice}</p>
             </div>
           ))}
