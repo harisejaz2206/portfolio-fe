@@ -71,6 +71,7 @@ import ManageOrders from "./pages/ManageOrders";
 import ManageOrderDetails from "./pages/ManageOrderDetails";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import PaymentFailurePage from "./pages/PaymentFailurePage";
+import Example from "./pages/split_with_screenshot";
 
 function App() {
   const token = useSelector(selectToken);
@@ -186,6 +187,14 @@ function App() {
             <Layout>
               <RequestEmail />
             </Layout>
+          }
+        />
+        <Route
+          path="/tailwind"
+          element={
+            // <Layout>
+            <Example />
+            // </Layout>
           }
         />
         <Route

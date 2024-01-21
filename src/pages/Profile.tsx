@@ -45,7 +45,7 @@ const Profile: React.FC = () => {
           <div className="flex items-center space-x-2 border-t pt-4">
             <FaHistory className="text-blue-500" />
             <a
-              href="/order-history"
+              href="/order-listing"
               className="text-blue-500 hover:underline ml-2"
             >
               Order History
